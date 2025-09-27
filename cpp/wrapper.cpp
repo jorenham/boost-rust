@@ -1,10 +1,14 @@
 #include "wrapper.h"
 
+#include <boost/math/special_functions/bessel.hpp>
+#include <boost/math/special_functions/beta.hpp>
+#include <boost/math/special_functions/digamma.hpp>
+#include <boost/math/special_functions/erf.hpp>
+#include <boost/math/special_functions/gamma.hpp>
+
 #include <cmath>
 #include <limits>
 #include <stdexcept>
-
-#include <boost/math/special_functions.hpp>
 
 extern "C" {
 

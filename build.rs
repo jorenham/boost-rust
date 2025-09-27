@@ -54,7 +54,6 @@ fn main() {
         .cpp(true)
         .flag_if_supported(if cfg!(debug_assertions) { "-O0" } else { "-O3" })
         .include(locate_boost())
-        .include("cpp")
         .file(WRAPPER_SRC);
 
     if build.get_compiler().is_like_msvc() {
