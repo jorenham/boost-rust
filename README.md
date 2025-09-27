@@ -6,7 +6,7 @@
 
 Rust interface for the [Boost](https://github.com/boostorg/boost) C++ library.
 
-> [!INFO]
+> [!NOTE]
 > This project is in the early development stage, and should probably not be used in production.
 
 ## Project goals
