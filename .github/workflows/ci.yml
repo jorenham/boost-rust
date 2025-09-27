@@ -24,14 +24,14 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 5
     steps:
+      - uses: actions/checkout@v5.0.0
+
       - name: install boost
         uses: MarkusJx/install-boost@v2.5.1
         id: boost
         with:
           boost_version: ${{ env.BOOST_VERSION }}
           platform_version: 22.04
-
-      - uses: actions/checkout@v5.0.0
 
       - name: dprint
         uses: dprint/check@v2.3
