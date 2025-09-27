@@ -9,7 +9,7 @@ fn locate_boost() -> PathBuf {
     if let Ok(boost_root) = std::env::var(BOOST_ROOT) {
         let path = Path::new(&boost_root);
         return if path.join("boost/version.hpp").is_file() {
-            Path::new(&boost_root).to_path_buf()
+            path.to_path_buf()
         } else if path.ends_with("boost") && path.join("version.hpp").is_file() {
             path.parent().unwrap().to_path_buf()
         } else if !path.is_dir() {
