@@ -42,7 +42,7 @@ jobs:
       - name: clippy
         run: cargo clippy -rv --locked --all-targets --all-features
         env:
-          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}
+          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}/include
 
   test-ubuntu:
     runs-on: ubuntu-22.04
@@ -57,10 +57,13 @@ jobs:
           boost_version: ${{ env.BOOST_VERSION }}
           platform_version: 22.04
 
+      - name: ls ${{ steps.boost.outputs.boost_root }}/include
+        run: ls -la ${{ steps.boost.outputs.boost_root }}/include
+
       - name: cargo test
-        run: cargo test -rv
+        run: cargo test -v
         env:
-          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}
+          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}/include
 
   test-macos:
     runs-on: macos-14
@@ -77,10 +80,13 @@ jobs:
           toolset: clang
           arch: aarch64
 
+      - name: ls ${{ steps.boost.outputs.boost_root }}/include
+        run: ls -la ${{ steps.boost.outputs.boost_root }}/include
+
       - name: cargo test
-        run: cargo test -rv
+        run: cargo test -v
         env:
-          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}
+          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}/include
 
   test-windows:
     runs-on: windows-2022
@@ -100,7 +106,10 @@ jobs:
           platform_version: 2022
           toolset: ${{ matrix.toolset }}
 
+      - name: ls ${{ steps.boost.outputs.boost_root }}/include
+        run: ls -la ${{ steps.boost.outputs.boost_root }}/include
+
       - name: cargo test
-        run: cargo test -rv
+        run: cargo test -v
         env:
-          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}
+          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}/include
