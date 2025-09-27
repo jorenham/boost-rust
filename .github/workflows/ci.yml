@@ -15,9 +15,12 @@ env:
   BOOST_VERSION: 1.83.0
   CARGO_TERM_COLOR: always
 
+# For the available Boost versions per platform, see:
+# https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
+
 jobs:
   lint:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
     timeout-minutes: 5
     steps:
       - name: install boost
@@ -25,7 +28,7 @@ jobs:
         id: boost
         with:
           boost_version: ${{ env.BOOST_VERSION }}
-          platform_version: 24.04
+          platform_version: 22.04
 
       - uses: actions/checkout@v5.0.0
 
@@ -45,7 +48,7 @@ jobs:
         uses: actions-rust-lang/rustfmt@v1.1.1
 
   test-ubuntu:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v5.0.0
@@ -55,7 +58,7 @@ jobs:
         id: boost
         with:
           boost_version: ${{ env.BOOST_VERSION }}
-          platform_version: 24.04
+          platform_version: 22.04
 
       - name: cargo build
         run: cargo build -rv
@@ -68,7 +71,7 @@ jobs:
           BOOST_ROOT: ${{ steps.boost.outputs.BOOST_ROOT }}
 
   test-macos:
-    runs-on: macos-15
+    runs-on: macos-14
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v5.0.0
@@ -78,7 +81,7 @@ jobs:
         id: boost
         with:
           boost_version: ${{ env.BOOST_VERSION }}
-          platform_version: 15
+          platform_version: 14
           toolset: clang
           arch: aarch64
 
@@ -93,8 +96,12 @@ jobs:
           BOOST_ROOT: ${{ steps.boost.outputs.BOOST_ROOT }}
 
   test-windows:
-    runs-on: windows-2025
+    runs-on: windows-2022
     timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        toolset: [mingw, msvc]
     steps:
       - uses: actions/checkout@v5.0.0
 
@@ -103,8 +110,8 @@ jobs:
         id: boost
         with:
           boost_version: ${{ env.BOOST_VERSION }}
-          platform_version: 2025
-          toolset: msvc
+          platform_version: 2022
+          toolset: ${{ matrix.toolset }}
 
       - name: cargo build
         run: cargo build -rv
