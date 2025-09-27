@@ -41,6 +41,8 @@ jobs:
 
       - name: clippy
         run: cargo clippy -rv --locked --all-targets --all-features
+        env:
+          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}
 
   test-ubuntu:
     runs-on: ubuntu-22.04
@@ -56,7 +58,9 @@ jobs:
           platform_version: 22.04
 
       - name: cargo test
-        run: cargo test -r
+        run: cargo test -rv
+        env:
+          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}
 
   test-macos:
     runs-on: macos-14
@@ -75,6 +79,8 @@ jobs:
 
       - name: cargo test
         run: cargo test -rv
+        env:
+          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}
 
   test-windows:
     runs-on: windows-2022
@@ -96,3 +102,5 @@ jobs:
 
       - name: cargo test
         run: cargo test -rv
+        env:
+          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}
