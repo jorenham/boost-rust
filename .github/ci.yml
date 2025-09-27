@@ -1,0 +1,96 @@
+name: CI
+permissions: read-all
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+env:
+  BOOST_VERSION: 1.83.0
+  CARGO_TERM_COLOR: always
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint (rust)
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5.0.0
+
+      - name: dprint
+        uses: dprint/check@v2.3
+
+      - uses: actions-rust-lang/setup-rust-toolchain@v1.15.0
+        with:
+          components: clippy, rustfmt
+
+      - name: clippy
+        run: cargo clippy --all-targets --all-features
+
+      - name: rustfmt Check
+        uses: actions-rust-lang/rustfmt@v1.1.1
+
+  test-ubuntu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: install boost
+        uses: MarkusJx/install-boost@v2.5.1
+        id: install-boost
+        with:
+          boost_version: ${{ env.BOOST_VERSION }}
+          platform_version: 22.04
+
+      - uses: actions/checkout@v5.0.0
+
+      - name: cargo build
+        run: cargo build -rv
+
+      - name: cargo test
+        run: cargo test -rv
+
+  test-macos:
+    runs-on: macos-latest
+    timeout-minutes: 5
+    steps:
+      - name: install boost
+        uses: MarkusJx/install-boost@v2.5.1
+        id: install-boost
+        with:
+          boost_version: ${{ env.BOOST_VERSION }}
+          platform_version: 13
+          toolset: clang
+
+      - uses: actions/checkout@v5.0.0
+
+      - name: cargo build
+        run: cargo build -rv
+
+      - name: cargo test
+        run: cargo test -rv
+
+  test-windows:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - name: install boost
+        uses: MarkusJx/install-boost@v2.5.1
+        id: install-boost
+        with:
+          boost_version: ${{ env.BOOST_VERSION }}
+          platform_version: 2022
+          toolset: msvc
+
+      - uses: actions/checkout@v5.0.0
+
+      - name: cargo build
+        run: cargo build -rv
+
+      - name: cargo test
+        run: cargo test -rv
