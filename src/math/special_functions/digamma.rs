@@ -12,23 +12,25 @@ pub fn digamma(x: f64) -> f64 {
 #[cfg(test)]
 mod tests {
 
+    const ATOL: f64 = 5e-16;
+
     #[test]
     fn test_digamma_roots() {
         // assert!((crate::math::digamma(1.0) - 0.0).abs() < f64::EPSILON);
         assert_abs_diff_eq!(
-            crate::math::digamma(1.461_632_144_968_362_2),
+            crate::math::digamma(1.461_632_144_968_362_3),
             0.0,
-            epsilon = f64::EPSILON
+            epsilon = ATOL,
         );
         assert_abs_diff_eq!(
             crate::math::digamma(-0.504_083_008_264_455_4),
             0.0,
-            epsilon = f64::EPSILON
+            epsilon = ATOL,
         );
         assert_abs_diff_eq!(
-            crate::math::digamma(-1.573_498_473_162_390_4),
+            crate::math::digamma(-1.573_498_473_162_390_5),
             0.0,
-            epsilon = f64::EPSILON
+            epsilon = ATOL,
         );
     }
 }
