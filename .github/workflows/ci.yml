@@ -14,6 +14,7 @@ concurrency:
 env:
   BOOST_VERSION: 1.83.0
   CARGO_TERM_COLOR: always
+  RUSTFLAGS: "-Dwarnings"
 
 # For the available Boost versions per platform, see:
 # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
@@ -35,17 +36,11 @@ jobs:
       - name: dprint
         uses: dprint/check@v2.3
 
-      - uses: actions-rust-lang/setup-rust-toolchain@v1.15.0
-        with:
-          components: clippy, rustfmt
+      - name: rustfmt
+        run: cargo fmt -v --check --all
 
       - name: clippy
-        run: cargo clippy --locked --all-targets --all-features
-        env:
-          BOOST_ROOT: ${{ steps.boost.outputs.BOOST_ROOT }}
-
-      - name: rustfmt Check
-        uses: actions-rust-lang/rustfmt@v1.1.1
+        run: cargo clippy -rv --locked --all-targets --all-features
 
   test-ubuntu:
     runs-on: ubuntu-22.04
@@ -60,15 +55,8 @@ jobs:
           boost_version: ${{ env.BOOST_VERSION }}
           platform_version: 22.04
 
-      - name: cargo build
-        run: cargo build -rv
-        env:
-          BOOST_ROOT: ${{ steps.boost.outputs.BOOST_ROOT }}
-
       - name: cargo test
-        run: cargo test -rv
-        env:
-          BOOST_ROOT: ${{ steps.boost.outputs.BOOST_ROOT }}
+        run: cargo test -r
 
   test-macos:
     runs-on: macos-14
@@ -85,15 +73,8 @@ jobs:
           toolset: clang
           arch: aarch64
 
-      - name: cargo build
-        run: cargo build -rv
-        env:
-          BOOST_ROOT: ${{ steps.boost.outputs.BOOST_ROOT }}
-
       - name: cargo test
         run: cargo test -rv
-        env:
-          BOOST_ROOT: ${{ steps.boost.outputs.BOOST_ROOT }}
 
   test-windows:
     runs-on: windows-2022
@@ -113,12 +94,5 @@ jobs:
           platform_version: 2022
           toolset: ${{ matrix.toolset }}
 
-      - name: cargo build
-        run: cargo build -rv
-        env:
-          BOOST_ROOT: ${{ steps.boost.outputs.BOOST_ROOT }}
-
       - name: cargo test
         run: cargo test -rv
-        env:
-          BOOST_ROOT: ${{ steps.boost.outputs.BOOST_ROOT }}
