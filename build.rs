@@ -8,7 +8,7 @@ fn locate_boost() -> PathBuf {
 
     if let Ok(boost_root) = std::env::var(BOOST_ROOT) {
         let path = Path::new(&boost_root);
-        return if path.join("boost/version.hpp").is_file() {
+        return if path.join("boost").join("version.hpp").is_file() {
             path.to_path_buf()
         } else if path.ends_with("boost") && path.join("version.hpp").is_file() {
             path.parent().unwrap().to_path_buf()
@@ -16,7 +16,9 @@ fn locate_boost() -> PathBuf {
             panic!("{BOOST_ROOT} is set but does not point to a valid directory");
         } else {
             panic!("{BOOST_ROOT} is set but does not point to a valid Boost installation");
-        };
+        }
+        .canonicalize()
+        .unwrap();
     }
 
     let search_paths = if cfg!(target_os = "windows") {
@@ -35,7 +37,7 @@ fn locate_boost() -> PathBuf {
         }
 
         if path.join("boost/version.hpp").exists() {
-            return path.to_path_buf();
+            return path.canonicalize().unwrap();
         }
     }
 
@@ -50,7 +52,7 @@ fn main() {
 
     build
         .cpp(true)
-        .flag(if cfg!(debug_assertions) { "-O0" } else { "-O3" })
+        .flag_if_supported(if cfg!(debug_assertions) { "-O0" } else { "-O3" })
         .include("cpp")
         .include(locate_boost())
         .file(WRAPPER_SRC);
