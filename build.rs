@@ -1,4 +1,3 @@
-const BOOST_ROOT: Option<&'static str> = option_env!("BOOST_ROOT");
 const CXX_STANDARD: &str = "c++14";
 const WRAPPER_FILE: &str = "cpp/wrapper.cpp";
 
@@ -17,8 +16,21 @@ fn main() {
         build.std(CXX_STANDARD);
     }
 
-    if let Some(boost_root) = BOOST_ROOT {
+    if let Ok(boost_root) = std::env::var("BOOST_ROOT") {
         build.include(boost_root);
+    } else {
+        let search_paths = if cfg!(target_os = "windows") {
+            &["C:/local/include", "C:/vcpkg/installed/x64-windows/include"][..]
+        } else {
+            &["/usr/include", "/usr/local/include", "/opt/local/include"][..]
+        };
+
+        for path in search_paths {
+            if std::path::Path::new(&format!("{path}/boost/version.hpp")).exists() {
+                build.include(path);
+                break;
+            }
+        }
     }
 
     build.compile("boost_math_wrapper");
