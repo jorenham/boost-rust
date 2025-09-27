@@ -1,0 +1,4 @@
+{
+  "rust-analyzer.imports.preferNoStd": true,
+  "C_Cpp.default.cppStandard": "c++14",
+}
