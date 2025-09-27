@@ -4,7 +4,6 @@
 #include <limits>
 #include <stdexcept>
 
-#include <boost/math/constants/constants.hpp>
 #include <boost/math/special_functions.hpp>
 
 extern "C" {
