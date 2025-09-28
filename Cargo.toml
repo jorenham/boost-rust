@@ -5,10 +5,10 @@ authors = ["Joren Hammudoglu <jhammudoglu@gmail.com>"]
 categories = ["api-bindings", "mathematics", "science"]
 edition = "2024"
 include = [
-    "*.rs",
-    "cpp/*",
-    "subprojects/*/*/include/**/*",
-    "subprojects/*/*/src/**/*",
+  "*.rs",
+  "cpp/*",
+  "subprojects/*/*/include/**/*",
+  "subprojects/*/*/src/**/*",
 ]
 keywords = ["ffi", "bindings", "math", "boost"]
 license = "BSD-3-Clause AND BSL-1.0"
