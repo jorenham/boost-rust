@@ -1,4 +1,3 @@
-mod ffi;
 mod special_functions;
 
 pub use special_functions::bessel::*;

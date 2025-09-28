@@ -1,4 +1,4 @@
-use super::super::ffi;
+use crate::ffi;
 
 /// Digamma function *ψ(x) = Γ'(x) / Γ(x)*
 ///

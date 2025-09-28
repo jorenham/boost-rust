@@ -8,3 +8,5 @@ extern crate approx;
 
 /// Bindings for [Boost Math](https://github.com/boostorg/math) C++ library
 pub mod math;
+
+mod ffi;

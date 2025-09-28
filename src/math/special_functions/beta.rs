@@ -1,4 +1,4 @@
-use super::super::ffi;
+use crate::ffi;
 
 /// Beta function *B(a,b) = Γ(a) Γ(b) / Γ(a + b)*
 ///
