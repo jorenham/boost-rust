@@ -6,6 +6,10 @@
 //! - `tgamma_delta_ratio`
 //! - `tgamma_ratio`
 //! - `gamma_p_derivative`
+//! - `gamma_p_inv`
+//! - `gamma_p_inva`
+//! - `gamma_q_inv`
+//! - `gamma_q_inva`
 
 use crate::ffi;
 
@@ -13,28 +17,28 @@ use crate::ffi;
 ///
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/tgamma.html>
 pub fn tgamma(x: f64) -> f64 {
-    unsafe { ffi::boost_math_tgamma(x) }
+    unsafe { ffi::math_tgamma(x) }
 }
 
 /// Log-Gamma function *ln |Γ(x)|*
 ///
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/lgamma.html>
 pub fn lgamma(x: f64) -> f64 {
-    unsafe { ffi::boost_math_lgamma(x) }
+    unsafe { ffi::math_lgamma(x) }
 }
 
 /// Incomplete gamma function *P(a,x) = γ(a,x) / Γ(a)*
 ///
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/igamma.html>
 pub fn gamma_p(a: f64, x: f64) -> f64 {
-    unsafe { ffi::boost_math_gamma_p(a, x) }
+    unsafe { ffi::math_gamma_p(a, x) }
 }
 
 /// Incomplete gamma function *Q(a,x) = Γ(a,x) / Γ(a)*
 ///
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/igamma.html>
 pub fn gamma_q(a: f64, x: f64) -> f64 {
-    unsafe { ffi::boost_math_gamma_q(a, x) }
+    unsafe { ffi::math_gamma_q(a, x) }
 }
 
 #[cfg(test)]
