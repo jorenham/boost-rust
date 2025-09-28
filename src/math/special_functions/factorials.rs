@@ -5,12 +5,16 @@ use core::ffi::{c_int, c_uint};
 
 /// Returns *n!* (factorial)
 ///
+/// See also: [`double_factorial`], [`falling_factorial`], [`rising_factorial`]
+///
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/factorials/sf_factorial.html>
 pub fn factorial(n: u32) -> f64 {
     unsafe { ffi::math_factorial(n as c_uint) }
 }
 
 /// Returns *n!!* (double factorial)
+///
+/// See also: [`factorial`], [`falling_factorial`], [`rising_factorial`]
 ///
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/factorials/sf_double_factorial.html>
 pub fn double_factorial(n: u32) -> f64 {
@@ -19,12 +23,16 @@ pub fn double_factorial(n: u32) -> f64 {
 
 /// Falling factorial *x!/(x-n)! = x(x-1)(x-2)...(x-n+1)*
 ///
+/// See also: [`factorial`], [`double_factorial`], [`rising_factorial`]
+///
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/factorials/sf_falling_factorial.html>
 pub fn falling_factorial(x: f64, n: u32) -> f64 {
     unsafe { ffi::math_falling_factorial(x, n as c_uint) }
 }
 
 /// Rising factorial *x(x+1)(x+2)...(x+n-1)*
+///
+/// See also: [`factorial`], [`double_factorial`], [`falling_factorial`]
 ///
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/factorials/sf_rising_factorial.html>
 pub fn rising_factorial(x: f64, n: i32) -> f64 {
