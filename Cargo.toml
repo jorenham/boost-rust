@@ -6,7 +6,7 @@ categories = ["api-bindings", "mathematics", "science"]
 edition = "2024"
 include = [
   "*.rs",
-  "cpp/*",
+  "wrapper.cpp",
   "subprojects/*/*/include/**/*",
   # "subprojects/*/*/src/**/*",
 ]
