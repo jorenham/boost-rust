@@ -1,8 +1,8 @@
 use super::super::ffi;
 
-/// Digamma function ψ(x) = Γ'(x) / Γ(x)
+/// Digamma function *ψ(x) = Γ'(x) / Γ(x)*
 ///
-/// https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/digamma.html
+/// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/digamma.html>
 ///
 /// Defined in `boost/math/special_functions/digamma.hpp`
 pub fn digamma(x: f64) -> f64 {
@@ -11,12 +11,10 @@ pub fn digamma(x: f64) -> f64 {
 
 #[cfg(test)]
 mod tests {
-
     const ATOL: f64 = 5e-16;
 
     #[test]
     fn test_digamma_roots() {
-        // assert!((crate::math::digamma(1.0) - 0.0).abs() < f64::EPSILON);
         assert_abs_diff_eq!(
             crate::math::digamma(1.461_632_144_968_362_3),
             0.0,

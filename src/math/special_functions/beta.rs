@@ -1,8 +1,8 @@
 use super::super::ffi;
 
-/// Beta function B(a,b) = Γ(a) Γ(b) / Γ(a + b)
+/// Beta function *B(a,b) = Γ(a) Γ(b) / Γ(a + b)*
 ///
-/// https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_beta/beta_function.html
+/// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_beta/beta_function.html>
 ///
 /// Defined in `boost/math/special_functions/beta.hpp`
 pub fn beta(a: f64, b: f64) -> f64 {
