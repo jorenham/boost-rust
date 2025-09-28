@@ -1,4 +1,5 @@
 {
+  "C_Cpp.default.cppStandard": "c++23",
+  "files.readonlyInclude": { "subprojects/**/*": true },
   "rust-analyzer.imports.preferNoStd": true,
-  "C_Cpp.default.cppStandard": "c++14",
 }
