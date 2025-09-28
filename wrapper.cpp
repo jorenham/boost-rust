@@ -3,16 +3,16 @@
 // Boost static config, see
 // https://www.boost.org/doc/libs/latest/boost/math/tools/user.hpp
 #ifndef BOOST_MATH_TOOLS_USER_HPP
-#define BOOST_MATH_TOOLS_USER_HPP
-#define BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS
-#define BOOST_MATH_DOMAIN_ERROR_POLICY errno_on_error
-#define BOOST_MATH_POLE_ERROR_POLICY errno_on_error
-#define BOOST_MATH_OVERFLOW_ERROR_POLICY errno_on_error
-#define BOOST_MATH_EVALUATION_ERROR_POLICY throw_on_error
-#define BOOST_MATH_UNDERFLOW_ERROR_POLICY ignore_error
-#define BOOST_MATH_DENORM_ERROR_POLICY ignore_error
-#define BOOST_MATH_ASSERT_UNDEFINED_POLICY true
-#define BOOST_MATH_DISABLE_FLOAT128
+    #define BOOST_MATH_TOOLS_USER_HPP
+    #define BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS
+    #define BOOST_MATH_DOMAIN_ERROR_POLICY errno_on_error
+    #define BOOST_MATH_POLE_ERROR_POLICY errno_on_error
+    #define BOOST_MATH_OVERFLOW_ERROR_POLICY errno_on_error
+    #define BOOST_MATH_EVALUATION_ERROR_POLICY throw_on_error
+    #define BOOST_MATH_UNDERFLOW_ERROR_POLICY ignore_error
+    #define BOOST_MATH_DENORM_ERROR_POLICY ignore_error
+    #define BOOST_MATH_ASSERT_UNDEFINED_POLICY true
+    #define BOOST_MATH_DISABLE_FLOAT128
 #endif
 
 #include <boost/math/special_functions/bessel.hpp>
@@ -54,8 +54,8 @@ double math_gamma_q(double a, double x) { return gamma_q(a, x); }
 double math_legendre_p(int l, double x) { return legendre_p(l, x); }
 double math_legendre_p_assoc(int l, int m, double x) { return legendre_p(l, m, x); }
 double math_legendre_p_prime(int l, double x) { return legendre_p_prime(l, x); }
-void math_legendre_p_zeros(int l, double *out) {
-    // out is assumed to be of size l.div_ceil(2)
+void math_legendre_p_zeros(int l, double* out) {
+    // `out` must be of size `l.div_ceil(2)`
     auto vec = legendre_p_zeros<double>(l);
     for (size_t i = 0; i < vec.size(); i++) {
         out[i] = vec[i];
