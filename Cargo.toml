@@ -4,9 +4,14 @@ version = "0.0.1"
 authors = ["Joren Hammudoglu <jhammudoglu@gmail.com>"]
 categories = ["api-bindings", "mathematics", "science"]
 edition = "2024"
-include = ["*.rs", "cpp/*"]
+include = [
+  "*.rs",
+  "cpp/*",
+  "subprojects/*/*/include/**/*",
+  # "subprojects/*/*/src/**/*",
+]
 keywords = ["ffi", "bindings", "math", "boost"]
-license = "BSD-3-Clause"
+license = "BSD-3-Clause AND BSL-1.0"
 repository = "https://github.com/jorenham/boost-rust"
 rust-version = "1.85.1"
 description = "Rust bindings for the Boost C++ Math Library"

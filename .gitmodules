@@ -1,0 +1,4 @@
+[submodule "subprojects/boost_math/math"]
+	path = subprojects/boost_math/math
+	url = https://github.com/boostorg/math.git
+    tag = v1.89.0

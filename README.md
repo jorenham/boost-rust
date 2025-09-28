@@ -19,59 +19,7 @@ functions.
 ## Requirements
 
 - Rust 1.85.1+
-- Modern C++ compiler with C++14 support
-- Boost Math library headers (tested against 1.83)
-
-### Installing Boost
-
-#### Ubuntu/Debian
-
-```bash
-sudo apt-get install libboost-all-dev
-```
-
-#### macOS (Homebrew)
-
-```bash
-brew install boost
-```
-
-#### Arch Linux
-
-```bash
-sudo pacman -S boost
-```
-
-#### From Source
-
-Download and extract Boost from <https://www.boost.org/releases/latest/>.
-Since Boost Math is header-only, you don't need to compile it—just make sure the headers are accessible.
-
-## Usage
-
-Add this to your `Cargo.toml`:
-
-```toml
-[dependencies]
-boost = "*"
-```
-
-## Build Configuration
-
-If Boost is installed in a non-standard location, set the `BOOST_ROOT` environment variable:
-
-```bash
-export BOOST_ROOT=/path/to/boost
-cargo build
-```
-
-## Testing
-
-Run the test suite:
-
-```bash
-cargo test
-```
+- Modern C++ compiler with C++23 support
 
 ## Contributing
 

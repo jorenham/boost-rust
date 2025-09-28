@@ -12,98 +12,38 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  BOOST_VERSION: 1.83.0
   CARGO_TERM_COLOR: always
   RUSTFLAGS: "-Dwarnings"
 
-# For the available Boost versions per platform, see:
-# https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
-
 jobs:
   lint:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v5.0.0
+        with:
+          submodules: recursive
 
       - name: dprint
         uses: dprint/check@v2.3
-
-      - name: install boost
-        uses: MarkusJx/install-boost@v2.5.1
-        id: boost
-        with:
-          boost_version: ${{ env.BOOST_VERSION }}
-          platform_version: 22.04
 
       - name: rustfmt
         run: cargo fmt -v --check --all
 
       - name: clippy
         run: cargo clippy -rv --locked --all-targets --all-features
-        env:
-          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}
 
-  test-ubuntu:
-    runs-on: ubuntu-22.04
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v5.0.0
-
-      - name: install boost
-        uses: MarkusJx/install-boost@v2.5.1
-        id: boost
-        with:
-          boost_version: ${{ env.BOOST_VERSION }}
-          platform_version: 22.04
-
-      - name: cargo test
-        run: cargo test -v
-        env:
-          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}
-
-  test-macos:
-    runs-on: macos-14
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v5.0.0
-
-      - name: install boost
-        uses: MarkusJx/install-boost@v2.5.1
-        id: boost
-        with:
-          boost_version: ${{ env.BOOST_VERSION }}
-          platform_version: 14
-          toolset: clang
-          arch: aarch64
-
-      - name: cargo test
-        run: cargo test -v
-        env:
-          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}
-
-  test-windows:
-    runs-on: windows-2022
+  test:
+    runs-on: ${{ matrix.runner }}
     timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
-        toolset: [mingw, msvc]
+        runner: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - uses: actions/checkout@v5.0.0
-
-      - name: install boost
-        uses: MarkusJx/install-boost@v2.5.1
-        id: boost
         with:
-          boost_version: ${{ env.BOOST_VERSION }}
-          platform_version: 2022
-          toolset: ${{ matrix.toolset }}
-
-      - name: dir ${{ steps.boost.outputs.boost_root }}/include
-        run: dir ${{ steps.boost.outputs.boost_root }}/include
+          submodules: recursive
 
       - name: cargo test
-        run: cargo test -v
-        env:
-          BOOST_ROOT: "./boost/boost"
+        run: cargo test -rv
