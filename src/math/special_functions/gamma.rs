@@ -1,35 +1,35 @@
 use super::super::ffi;
 
-/// Gamma function Γ(x)
+/// Gamma function *Γ(x)*
 ///
-/// https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/tgamma.html
+/// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/tgamma.html>
 ///
 /// Defined in `boost/math/special_functions/gamma.hpp`
 pub fn tgamma(x: f64) -> f64 {
     unsafe { ffi::boost_math_tgamma(x) }
 }
 
-/// Log-Gamma function ln |Γ(x)|
+/// Log-Gamma function *ln |Γ(x)|*
 ///
-/// https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/lgamma.html
+/// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/lgamma.html>
 ///
 /// Defined in `boost/math/special_functions/gamma.hpp`
 pub fn lgamma(x: f64) -> f64 {
     unsafe { ffi::boost_math_lgamma(x) }
 }
 
-/// Incomplete gamma function P(a,x) = γ(a,x) / Γ(a)
+/// Incomplete gamma function *P(a,x) = γ(a,x) / Γ(a)*
 ///
-/// https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/igamma.html
+/// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/igamma.html>
 ///
 /// Defined in `boost/math/special_functions/gamma.hpp`
 pub fn gamma_p(a: f64, x: f64) -> f64 {
     unsafe { ffi::boost_math_gamma_p(a, x) }
 }
 
-/// Incomplete gamma function Q(a,x) = Γ(a,x) / Γ(a)
+/// Incomplete gamma function *Q(a,x) = Γ(a,x) / Γ(a)*
 ///
-/// https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/igamma.html
+/// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/igamma.html>
 ///
 /// Defined in `boost/math/special_functions/gamma.hpp`
 pub fn gamma_q(a: f64, x: f64) -> f64 {
