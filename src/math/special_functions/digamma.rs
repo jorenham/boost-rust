@@ -6,7 +6,7 @@ use crate::ffi;
 ///
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/digamma.html>
 pub fn digamma(x: f64) -> f64 {
-    unsafe { ffi::boost_math_digamma(x) }
+    unsafe { ffi::math_digamma(x) }
 }
 
 #[cfg(test)]

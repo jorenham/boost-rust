@@ -6,14 +6,14 @@ use crate::ffi;
 ///
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_erf/error_function.html>
 pub fn erf(x: f64) -> f64 {
-    unsafe { ffi::boost_math_erf(x) }
+    unsafe { ffi::math_erf(x) }
 }
 
 /// Complementary error function *erfc(x)*
 ///
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_erf/error_function.html>
 pub fn erfc(x: f64) -> f64 {
-    unsafe { ffi::boost_math_erfc(x) }
+    unsafe { ffi::math_erfc(x) }
 }
 
 #[cfg(test)]

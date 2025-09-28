@@ -15,7 +15,7 @@ use crate::ffi;
 ///
 /// Defined in `boost/math/special_functions/beta.hpp`
 pub fn beta(a: f64, b: f64) -> f64 {
-    unsafe { ffi::boost_math_beta(a, b) }
+    unsafe { ffi::math_beta(a, b) }
 }
 
 #[cfg(test)]
