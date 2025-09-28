@@ -19,6 +19,7 @@
 #include <boost/math/special_functions/beta.hpp>
 #include <boost/math/special_functions/digamma.hpp>
 #include <boost/math/special_functions/erf.hpp>
+#include <boost/math/special_functions/factorials.hpp>
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/math/special_functions/jacobi.hpp>
 #include <boost/math/special_functions/legendre.hpp>
@@ -44,6 +45,12 @@ double math_digamma(double x) { return digamma(x); }
 // boost/math/special_functions/erf.hpp
 double math_erf(double x) { return erf(x); }
 double math_erfc(double x) { return erfc(x); }
+
+// boost/math/special_functions/factorials.hpp
+double math_factorial(unsigned i) { return factorial<double>(i); }
+double math_double_factorial(unsigned i) { return double_factorial<double>(i); }
+double math_falling_factorial(double x, unsigned n) { return falling_factorial(x, n); }
+double math_rising_factorial(double x, int n) { return rising_factorial(x, n); }
 
 // boost/math/special_functions/gamma.hpp
 double math_tgamma(double x) { return tgamma(x); }

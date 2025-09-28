@@ -21,6 +21,12 @@ unsafe extern "C" {
     pub fn math_erf(x: f64) -> f64;
     pub fn math_erfc(x: f64) -> f64;
 
+    // boost/math/special_functions/factorials.hpp
+    pub fn math_factorial(i: c_uint) -> f64;
+    pub fn math_double_factorial(i: c_uint) -> f64;
+    pub fn math_falling_factorial(x: f64, n: c_uint) -> f64;
+    pub fn math_rising_factorial(x: f64, n: c_int) -> f64;
+
     // boost/math/special_functions/gamma.hpp
     pub fn math_tgamma(x: f64) -> f64;
     pub fn math_lgamma(x: f64) -> f64;
