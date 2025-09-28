@@ -1,4 +1,4 @@
-use super::super::ffi;
+use crate::ffi;
 
 /// Error function *erf(x)*
 ///

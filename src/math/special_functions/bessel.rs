@@ -1,4 +1,4 @@
-use super::super::ffi;
+use crate::ffi;
 
 /// Cylindrical Bessel function of the 1st kind *J<sub>ν</sub>(x)*
 ///
