@@ -61,22 +61,11 @@ double boost_math_sph_neumann(unsigned n, double x) {
 // - ibetac
 // - ibeta_derivative
 
-double boost_math_beta(double a, double b) {
-  try {
-    return boost::math::beta(a, b);
-  } catch (const std::domain_error &e) {
-    return std::numeric_limits<double>::quiet_NaN();
-  } catch (const std::overflow_error &e) {
-    return std::numeric_limits<double>::infinity();
-  } catch (const std::underflow_error &e) {
-    return 0.0;
-  } catch (...) {
-    return std::numeric_limits<double>::quiet_NaN();
-  }
-}
+double boost_math_beta(double a, double b) { return boost::math::beta(a, b); }
 
 // <boost/math/special_functions/digamma.hpp>
 // https://www.boost.org/doc/libs/1_89_0/libs/math/doc/html/math_toolkit/sf_gamma/digamma.html
+
 double boost_math_digamma(double x) { return boost::math::digamma(x); }
 
 // <boost/math/special_functions/erf.hpp>
@@ -100,6 +89,7 @@ double boost_math_erfc(double x) { return boost::math::erfc(x); }
 // - gamma_p_inva
 // - gamma_q_inv
 // - gamma_q_inva
+
 double boost_math_tgamma(double x) { return boost::math::tgamma(x); }
 double boost_math_lgamma(double x) { return boost::math::lgamma(x); }
 
