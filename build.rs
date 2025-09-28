@@ -7,18 +7,16 @@ fn locate_boost() -> PathBuf {
     const BOOST_ROOT: &str = "BOOST_ROOT";
 
     if let Ok(boost_root) = std::env::var(BOOST_ROOT) {
-        let path = Path::new(&boost_root);
+        let path = Path::new(&boost_root).canonicalize().unwrap();
         return if path.join("include").is_dir() {
             // path is the Boost root directory
             path.join("include")
-        } else if path.join("boost/version.hpp").is_file() {
+        } else if path.join("boost").join("version.hpp").is_file() {
             // path is the `include` directory
             path.to_path_buf()
         } else if path.ends_with("boost") && path.join("version.hpp").is_file() {
             // path is the `include/boost` directory
             path.parent().unwrap().to_path_buf()
-        } else if !path.is_dir() {
-            panic!("{BOOST_ROOT} is set but does not point to a valid directory");
         } else {
             panic!("{BOOST_ROOT} is set but does not point to a valid Boost installation");
         }
@@ -27,7 +25,10 @@ fn locate_boost() -> PathBuf {
     }
 
     let search_paths = if cfg!(target_os = "windows") {
-        &["C:/local/include", "C:/vcpkg/installed/x64-windows/include"][..]
+        &[
+            r"C:\local\include",
+            r"C:\vcpkg\installed\x64-windows\include",
+        ][..]
     } else {
         &["/usr/include", "/usr/local/include", "/opt/local/include"][..]
     };
@@ -36,13 +37,13 @@ fn locate_boost() -> PathBuf {
     for path_str in search_paths.iter() {
         let path = Path::new(path_str);
         if path.is_dir() {
-            valid_search_paths.push(path_str);
+            valid_search_paths.push(path.display());
         } else {
             continue;
         }
 
-        if path.join("boost/version.hpp").exists() {
-            return path.canonicalize().unwrap();
+        if path.join("boost").join("version.hpp").exists() {
+            return path.to_path_buf();
         }
     }
 
