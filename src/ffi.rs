@@ -1,4 +1,4 @@
-//! Raw FFI declarations for cpp/wrapper.h
+//! Raw FFI declarations for wrapper.h
 
 use core::ffi::{c_int, c_uint};
 
@@ -26,6 +26,10 @@ unsafe extern "C" {
     pub fn math_lgamma(x: f64) -> f64;
     pub fn math_gamma_p(a: f64, x: f64) -> f64;
     pub fn math_gamma_q(a: f64, x: f64) -> f64;
+
+    // boost/math/special_functions/jacobi.hpp
+    pub fn math_jacobi(n: c_uint, alpha: f64, beta: f64, x: f64) -> f64;
+    pub fn math_jacobi_derivative(n: c_uint, alpha: f64, beta: f64, x: f64, k: c_uint) -> f64;
 
     // boost/math/special_functions/legendre.hpp
     pub fn math_legendre_p(l: c_int, x: f64) -> f64;
