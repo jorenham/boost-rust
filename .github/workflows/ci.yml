@@ -14,11 +14,14 @@ concurrency:
 env:
   BOOST_VERSION: 1.83.0
   CARGO_TERM_COLOR: always
+  RUSTFLAGS: "-Dwarnings"
+
+# For the available Boost versions per platform, see:
+# https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
-    name: Lint (rust)
+    runs-on: ubuntu-22.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v5.0.0
@@ -26,71 +29,81 @@ jobs:
       - name: dprint
         uses: dprint/check@v2.3
 
-      - uses: actions-rust-lang/setup-rust-toolchain@v1.15.0
-        with:
-          components: clippy, rustfmt
-
-      - name: clippy
-        run: cargo clippy --all-targets --all-features
-
-      - name: rustfmt Check
-        uses: actions-rust-lang/rustfmt@v1.1.1
-
-  test-ubuntu:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
       - name: install boost
         uses: MarkusJx/install-boost@v2.5.1
-        id: install-boost
+        id: boost
         with:
           boost_version: ${{ env.BOOST_VERSION }}
           platform_version: 22.04
 
-      - uses: actions/checkout@v5.0.0
+      - name: rustfmt
+        run: cargo fmt -v --check --all
 
-      - name: cargo build
-        run: cargo build -rv
+      - name: clippy
+        run: cargo clippy -rv --locked --all-targets --all-features
+        env:
+          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}
 
-      - name: cargo test
-        run: cargo test -rv
-
-  test-macos:
-    runs-on: macos-latest
+  test-ubuntu:
+    runs-on: ubuntu-22.04
     timeout-minutes: 5
     steps:
-      - name: install boost
-        uses: MarkusJx/install-boost@v2.5.1
-        id: install-boost
-        with:
-          boost_version: ${{ env.BOOST_VERSION }}
-          platform_version: 13
-          toolset: clang
-
       - uses: actions/checkout@v5.0.0
 
-      - name: cargo build
-        run: cargo build -rv
-
-      - name: cargo test
-        run: cargo test -rv
-
-  test-windows:
-    runs-on: windows-latest
-    timeout-minutes: 10
-    steps:
       - name: install boost
         uses: MarkusJx/install-boost@v2.5.1
-        id: install-boost
+        id: boost
+        with:
+          boost_version: ${{ env.BOOST_VERSION }}
+          platform_version: 22.04
+
+      - name: cargo test
+        run: cargo test -v
+        env:
+          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}
+
+  test-macos:
+    runs-on: macos-14
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5.0.0
+
+      - name: install boost
+        uses: MarkusJx/install-boost@v2.5.1
+        id: boost
+        with:
+          boost_version: ${{ env.BOOST_VERSION }}
+          platform_version: 14
+          toolset: clang
+          arch: aarch64
+
+      - name: cargo test
+        run: cargo test -v
+        env:
+          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}
+
+  test-windows:
+    runs-on: windows-2022
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        toolset: [mingw, msvc]
+    steps:
+      - uses: actions/checkout@v5.0.0
+
+      - name: install boost
+        uses: MarkusJx/install-boost@v2.5.1
+        id: boost
         with:
           boost_version: ${{ env.BOOST_VERSION }}
           platform_version: 2022
-          toolset: msvc
+          toolset: ${{ matrix.toolset }}
 
-      - uses: actions/checkout@v5.0.0
-
-      - name: cargo build
-        run: cargo build -rv
+      - name: dir ${{ steps.boost.outputs.boost_root }}/include
+        run: dir ${{ steps.boost.outputs.boost_root }}/include
 
       - name: cargo test
-        run: cargo test -rv
+        run: cargo test -v
+        env:
+          BOOST_ROOT: "./boost/boost"
