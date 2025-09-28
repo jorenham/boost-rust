@@ -1,14 +1,25 @@
-#include "wrapper.h"
+// Simple C++ wrappers for the Boost Math functions
+
+// Boost static config, see
+// https://www.boost.org/doc/libs/latest/boost/math/tools/user.hpp
+#ifndef BOOST_MATH_TOOLS_USER_HPP
+#define BOOST_MATH_TOOLS_USER_HPP
+#define BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS
+#define BOOST_MATH_DOMAIN_ERROR_POLICY errno_on_error
+#define BOOST_MATH_POLE_ERROR_POLICY errno_on_error
+#define BOOST_MATH_OVERFLOW_ERROR_POLICY errno_on_error
+#define BOOST_MATH_EVALUATION_ERROR_POLICY throw_on_error
+#define BOOST_MATH_UNDERFLOW_ERROR_POLICY ignore_error
+#define BOOST_MATH_DENORM_ERROR_POLICY ignore_error
+#define BOOST_MATH_ASSERT_UNDEFINED_POLICY true
+#define BOOST_MATH_DISABLE_FLOAT128
+#endif
 
 #include <boost/math/special_functions/bessel.hpp>
 #include <boost/math/special_functions/beta.hpp>
 #include <boost/math/special_functions/digamma.hpp>
 #include <boost/math/special_functions/erf.hpp>
 #include <boost/math/special_functions/gamma.hpp>
-
-#include <cmath>
-#include <limits>
-#include <stdexcept>
 
 extern "C" {
 
@@ -19,51 +30,27 @@ extern "C" {
 // - cyl_neumann_zero
 
 double boost_math_cyl_bessel_j(double nu, double x) {
-  try {
-    return boost::math::cyl_bessel_j(nu, x);
-  } catch (...) {
-    return std::numeric_limits<double>::quiet_NaN();
-  }
+  return boost::math::cyl_bessel_j(nu, x);
 }
 
 double boost_math_cyl_neumann(double nu, double x) {
-  try {
-    return boost::math::cyl_neumann(nu, x);
-  } catch (...) {
-    return std::numeric_limits<double>::quiet_NaN();
-  }
+  return boost::math::cyl_neumann(nu, x);
 }
 
 double boost_math_cyl_bessel_i(double nu, double x) {
-  try {
-    return boost::math::cyl_bessel_i(nu, x);
-  } catch (...) {
-    return std::numeric_limits<double>::quiet_NaN();
-  }
+  return boost::math::cyl_bessel_i(nu, x);
 }
 
 double boost_math_cyl_bessel_k(double nu, double x) {
-  try {
-    return boost::math::cyl_bessel_k(nu, x);
-  } catch (...) {
-    return std::numeric_limits<double>::quiet_NaN();
-  }
+  return boost::math::cyl_bessel_k(nu, x);
 }
 
 double boost_math_sph_bessel(unsigned n, double x) {
-  try {
-    return boost::math::sph_bessel(n, x);
-  } catch (...) {
-    return std::numeric_limits<double>::quiet_NaN();
-  }
+  return boost::math::sph_bessel(n, x);
 }
 
 double boost_math_sph_neumann(unsigned n, double x) {
-  try {
-    return boost::math::sph_neumann(n, x);
-  } catch (...) {
-    return std::numeric_limits<double>::quiet_NaN();
-  }
+  return boost::math::sph_neumann(n, x);
 }
 
 // <boost/math/special_functions/beta.hpp>
@@ -90,13 +77,7 @@ double boost_math_beta(double a, double b) {
 
 // <boost/math/special_functions/digamma.hpp>
 // https://www.boost.org/doc/libs/1_89_0/libs/math/doc/html/math_toolkit/sf_gamma/digamma.html
-double boost_math_digamma(double x) {
-  try {
-    return boost::math::digamma(x);
-  } catch (...) {
-    return std::numeric_limits<double>::quiet_NaN();
-  }
-}
+double boost_math_digamma(double x) { return boost::math::digamma(x); }
 
 // <boost/math/special_functions/erf.hpp>
 // https://www.boost.org/doc/libs/1_89_0/libs/math/doc/html/math_toolkit/sf_erf.html
@@ -104,21 +85,8 @@ double boost_math_digamma(double x) {
 // - erf_inv
 // - erfc_inv
 
-double boost_math_erf(double x) {
-  try {
-    return boost::math::erf(x);
-  } catch (...) {
-    return std::numeric_limits<double>::quiet_NaN();
-  }
-}
-
-double boost_math_erfc(double x) {
-  try {
-    return boost::math::erfc(x);
-  } catch (...) {
-    return std::numeric_limits<double>::quiet_NaN();
-  }
-}
+double boost_math_erf(double x) { return boost::math::erf(x); }
+double boost_math_erfc(double x) { return boost::math::erfc(x); }
 
 // <boost/math/special_functions/gamma.hpp>
 // https://www.boost.org/doc/libs/1_89_0/libs/math/doc/html/math_toolkit/sf_gamma.html
@@ -132,36 +100,15 @@ double boost_math_erfc(double x) {
 // - gamma_p_inva
 // - gamma_q_inv
 // - gamma_q_inva
-double boost_math_tgamma(double x) {
-  try {
-    return boost::math::tgamma(x);
-  } catch (...) {
-    return std::numeric_limits<double>::quiet_NaN();
-  }
-}
-
-double boost_math_lgamma(double x) {
-  try {
-    return boost::math::lgamma(x);
-  } catch (...) {
-    return std::numeric_limits<double>::quiet_NaN();
-  }
-}
+double boost_math_tgamma(double x) { return boost::math::tgamma(x); }
+double boost_math_lgamma(double x) { return boost::math::lgamma(x); }
 
 double boost_math_gamma_p(double a, double x) {
-  try {
-    return boost::math::gamma_p(a, x);
-  } catch (...) {
-    return std::numeric_limits<double>::quiet_NaN();
-  }
+  return boost::math::gamma_p(a, x);
 }
 
 double boost_math_gamma_q(double a, double x) {
-  try {
-    return boost::math::gamma_q(a, x);
-  } catch (...) {
-    return std::numeric_limits<double>::quiet_NaN();
-  }
+  return boost::math::gamma_q(a, x);
 }
 
 } // extern "C"
