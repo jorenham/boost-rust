@@ -1,5 +1,5 @@
 {
-  "excludes": ["**/*-lock.json", "**/*.lock", "target/"],
+  "excludes": ["**/*-lock.json", "**/*.lock", "subprojects/", "target/"],
   "lineWidth": 100,
   "json": {
     "array.preferSingleLine": true,
