@@ -7,4 +7,5 @@ pub use special_functions::beta::*;
 pub use special_functions::digamma::*;
 pub use special_functions::erf::*;
 pub use special_functions::gamma::*;
+pub use special_functions::jacobi::*;
 pub use special_functions::legendre::*;

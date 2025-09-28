@@ -20,6 +20,7 @@
 #include <boost/math/special_functions/digamma.hpp>
 #include <boost/math/special_functions/erf.hpp>
 #include <boost/math/special_functions/gamma.hpp>
+#include <boost/math/special_functions/jacobi.hpp>
 #include <boost/math/special_functions/legendre.hpp>
 
 using namespace boost::math;
@@ -49,6 +50,14 @@ double math_tgamma(double x) { return tgamma(x); }
 double math_lgamma(double x) { return lgamma(x); }
 double math_gamma_p(double a, double x) { return gamma_p(a, x); }
 double math_gamma_q(double a, double x) { return gamma_q(a, x); }
+
+// boost/math/special_functions/jacobi.hpp
+double math_jacobi(unsigned n, double alpha, double beta, double x) {
+    return jacobi(n, alpha, beta, x);
+}
+double math_jacobi_derivative(unsigned n, double alpha, double beta, double x, unsigned k) {
+    return jacobi_derivative(n, alpha, beta, x, k);
+}
 
 // boost/math/special_functions/legendre.hpp
 double math_legendre_p(int l, double x) { return legendre_p(l, x); }
