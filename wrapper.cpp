@@ -20,6 +20,7 @@
 #include <boost/math/special_functions/digamma.hpp>
 #include <boost/math/special_functions/erf.hpp>
 #include <boost/math/special_functions/gamma.hpp>
+#include <boost/math/special_functions/legendre.hpp>
 
 using namespace boost::math;
 
@@ -48,5 +49,13 @@ double math_tgamma(double x) { return tgamma(x); }
 double math_lgamma(double x) { return lgamma(x); }
 double math_gamma_p(double a, double x) { return gamma_p(a, x); }
 double math_gamma_q(double a, double x) { return gamma_q(a, x); }
+
+// boost/math/special_functions/legendre.hpp
+double math_legendre_p(int l, double x) { return legendre_p(l, x); }
+double math_legendre_p_assoc(int l, int m, double x) {
+  return legendre_p(l, m, x);
+}
+double math_legendre_p_prime(int l, double x) { return legendre_p_prime(l, x); }
+double math_legendre_q(unsigned l, double x) { return legendre_q(l, x); }
 
 } // extern "C"
