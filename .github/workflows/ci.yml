@@ -16,9 +16,22 @@ env:
   RUSTFLAGS: "-Dwarnings"
 
 jobs:
-  lint:
+  lint_cpp:
+    name: lint (c++)
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 1
+    steps:
+      - uses: actions/checkout@v5.0.0 # no submodules needed here
+
+      - name: clang-format
+        uses: jidicula/clang-format-action@v4.15.0
+        with:
+          clang-format-version: 20
+
+  lint_rust:
+    name: lint (rust)
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
     steps:
       - uses: actions/checkout@v5.0.0
         with:
@@ -35,7 +48,7 @@ jobs:
 
   test:
     runs-on: ${{ matrix.runner }}
-    timeout-minutes: 10
+    timeout-minutes: 5
     strategy:
       fail-fast: false
       matrix:
