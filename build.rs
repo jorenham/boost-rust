@@ -7,7 +7,7 @@ fn locate_boost() -> PathBuf {
     const BOOST_ROOT: &str = "BOOST_ROOT";
 
     if let Ok(boost_root) = std::env::var(BOOST_ROOT) {
-        let path = Path::new(&boost_root).canonicalize().unwrap();
+        let path = Path::new(&boost_root);
         return if path.join("include").is_dir() {
             // path is the Boost root directory
             path.join("include")
@@ -19,9 +19,7 @@ fn locate_boost() -> PathBuf {
             path.parent().unwrap().to_path_buf()
         } else {
             panic!("{BOOST_ROOT} is set but does not point to a valid Boost installation");
-        }
-        .canonicalize()
-        .unwrap();
+        };
     }
 
     let search_paths = if cfg!(target_os = "windows") {
@@ -59,7 +57,7 @@ fn main() {
     build
         .cpp(true)
         .flag_if_supported(if cfg!(debug_assertions) { "-O0" } else { "-O3" })
-        .include(locate_boost())
+        .include(locate_boost().display().to_string())
         .file(WRAPPER_SRC);
 
     if build.get_compiler().is_like_msvc() {

@@ -100,10 +100,10 @@ jobs:
           platform_version: 2022
           toolset: ${{ matrix.toolset }}
 
-      - name: dir ${{ steps.boost.outputs.boost_root }}
-        run: dir ${{ steps.boost.outputs.boost_root }}
+      - name: dir ${{ steps.boost.outputs.boost_root }}/include
+        run: dir ${{ steps.boost.outputs.boost_root }}/include
 
       - name: cargo test
         run: cargo test -v
         env:
-          BOOST_ROOT: ${{ steps.boost.outputs.boost_root }}
+          BOOST_ROOT: "./boost/boost"
