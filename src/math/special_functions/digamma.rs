@@ -1,10 +1,10 @@
+//! boost/math/special_functions/digamma.hpp
+
 use crate::ffi;
 
 /// Digamma function *ψ(x) = Γ'(x) / Γ(x)*
 ///
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/digamma.html>
-///
-/// Defined in `boost/math/special_functions/digamma.hpp`
 pub fn digamma(x: f64) -> f64 {
     unsafe { ffi::boost_math_digamma(x) }
 }

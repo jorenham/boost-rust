@@ -1,3 +1,12 @@
+//! boost/math/special_functions/beta.hpp
+//!
+//! # TODO:
+//! - `ibeta`
+//! - `ibetac`
+//! - `ibeta_derivative`
+//! - `beta` (3-parameter version)
+//! - `betac`
+
 use crate::ffi;
 
 /// Beta function *B(a,b) = Γ(a) Γ(b) / Γ(a + b)*
