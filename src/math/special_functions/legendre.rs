@@ -35,9 +35,9 @@ pub fn legendre_p_prime(l: i32, x: f64) -> f64 {
     unsafe { ffi::math_legendre_p_prime(l as c_int, x) }
 }
 
-/// Zeros of the Legendre Polynomial of the 1st kind *P<sub>l</sub>(x)*
+/// Zeros (roots) of [`legendre_p`] on *[0, 1]*.
 ///
-/// Note that only the non-negative zeros are returned, of which there are `ceil(l / 2)`.
+/// Note that only the non-negative zeros are returned, of which there are `l.div_ceil(2)`.
 ///
 /// Corresponds to `boost::math::legendre_p_zeros<double>(l)`.
 ///
