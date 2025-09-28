@@ -7,5 +7,7 @@
 #[macro_use]
 extern crate approx;
 
+extern crate alloc;
+
 mod ffi;
 pub mod math;
