@@ -1,14 +1,14 @@
 [package]
 name = "boost"
-version = "0.0.1+1.89.0"
+version = "0.0.2+1.89.0"
 authors = ["Joren Hammudoglu <jhammudoglu@gmail.com>"]
 categories = ["api-bindings", "mathematics", "science"]
 edition = "2024"
 include = [
-  "*.rs",
-  "wrapper.cpp",
-  "subprojects/*/*/include/**/*",
-  # "subprojects/*/*/src/**/*",
+    "*.rs",
+    "wrapper.cpp",
+    "subprojects/*/*/include/**/*",
+    # "subprojects/*/*/src/**/*",
 ]
 keywords = ["ffi", "bindings", "math", "boost"]
 license = "BSD-3-Clause AND BSL-1.0"
