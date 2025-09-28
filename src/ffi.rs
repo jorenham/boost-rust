@@ -1,4 +1,4 @@
-//! Raw FFI declarations for wrapper.h
+//! Raw FFI declarations for wrapper.cpp
 
 use core::ffi::{c_int, c_uint};
 
