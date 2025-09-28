@@ -3,9 +3,9 @@
 //! # TODO:
 //! - `double legendre_next(unsigned l, double x, double Pl, double Plm1)`
 //! - `double legendre_next(unsigned l, unsigned m, double x, double Pl, double Plm1)`
-//! - `std::vector<T> legendre_p_zeros(int l)`
 
 use crate::ffi;
+use alloc::{vec, vec::Vec};
 use core::ffi::{c_int, c_uint};
 
 /// Legendre Polynomial of the 1st kind *P<sub>l</sub>(x)* on *[-1, 1]*
@@ -35,6 +35,22 @@ pub fn legendre_p_prime(l: i32, x: f64) -> f64 {
     unsafe { ffi::math_legendre_p_prime(l as c_int, x) }
 }
 
+/// Zeros of the Legendre Polynomial of the 1st kind *P<sub>l</sub>(x)*
+///
+/// Note that only the non-negative zeros are returned, of which there are `ceil(l / 2)`.
+///
+/// Corresponds to `boost::math::legendre_p_zeros<double>(l)`.
+///
+/// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_poly/legendre.html>
+pub fn legendre_p_zeros(l: i32) -> Vec<f64> {
+    // total number of zeros
+    let k = (if l < 0 { -l - 1 } else { l }) as usize;
+    // number of positive zeros
+    let mut out = vec![f64::NAN; k.div_ceil(2)];
+    unsafe { ffi::math_legendre_p_zeros(l as c_int, out.as_mut_ptr()) };
+    out
+}
+
 /// Legendre Polynomial of the 2nd kind *Q<sub>l</sub>(x)* on *[-1, 1]*
 ///
 /// Corresponds to `boost::math::legendre_q(l, x)`.
@@ -49,8 +65,11 @@ mod tests {
     use super::*;
 
     const ATOL: f64 = f64::EPSILON;
-    const SQRT_3: f64 = 1.732_050_807_568_877_2;
-    const LN_3: f64 = 1.098_612_288_668_109_8;
+
+    const LN_3: f64 = 1.098_612_288_668_109_8; // ln(3)
+    const SQRT_3: f64 = 1.732_050_807_568_877_2; // sqrt(3)
+    const FRAC_1_SQRT_3: f64 = 0.577_350_269_189_625_7; // 1/sqrt(3)
+    const SQRT_FRAC_3_5: f64 = 0.774_596_669_241_483_4; // sqrt(3/5)
 
     #[test]
     fn test_legendre_p() {
@@ -80,6 +99,18 @@ mod tests {
         assert_eq!(legendre_p_prime(-2, 0.5), 1.0);
         assert_eq!(legendre_p_prime(2, 0.5), 1.5);
         assert_eq!(legendre_p_prime(-3, 0.5), 1.5);
+    }
+
+    #[test]
+    fn test_legendre_p_zeros() {
+        assert_eq!(legendre_p_zeros(0), vec![]);
+        assert_eq!(legendre_p_zeros(-1), vec![]);
+        assert_eq!(legendre_p_zeros(1), vec![0.0]);
+        assert_eq!(legendre_p_zeros(-2), vec![0.0]);
+        assert_eq!(legendre_p_zeros(2), vec![FRAC_1_SQRT_3]);
+        assert_eq!(legendre_p_zeros(-3), vec![FRAC_1_SQRT_3]);
+        assert_eq!(legendre_p_zeros(3), vec![0.0, SQRT_FRAC_3_5]);
+        assert_eq!(legendre_p_zeros(-4), vec![0.0, SQRT_FRAC_3_5]);
     }
 
     #[test]

@@ -52,10 +52,15 @@ double math_gamma_q(double a, double x) { return gamma_q(a, x); }
 
 // boost/math/special_functions/legendre.hpp
 double math_legendre_p(int l, double x) { return legendre_p(l, x); }
-double math_legendre_p_assoc(int l, int m, double x) {
-  return legendre_p(l, m, x);
-}
+double math_legendre_p_assoc(int l, int m, double x) { return legendre_p(l, m, x); }
 double math_legendre_p_prime(int l, double x) { return legendre_p_prime(l, x); }
+void math_legendre_p_zeros(int l, double *out) {
+    // out is assumed to be of size l.div_ceil(2)
+    auto vec = legendre_p_zeros<double>(l);
+    for (size_t i = 0; i < vec.size(); i++) {
+        out[i] = vec[i];
+    }
+}
 double math_legendre_q(unsigned l, double x) { return legendre_q(l, x); }
 
 } // extern "C"
