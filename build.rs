@@ -10,7 +10,7 @@ fn main() {
         .flag_if_supported(format!("/std:{CXX_STANDARD}"))
         .includes([
             format!("{BOOST_MATH_DIR}/include"),
-            format!("{BOOST_MATH_DIR}/src"),
+            // format!("{BOOST_MATH_DIR}/src"),
         ])
         .warnings(true)
         .file(WRAPPER_CPP)

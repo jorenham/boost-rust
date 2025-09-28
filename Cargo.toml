@@ -8,7 +8,7 @@ include = [
   "*.rs",
   "cpp/*",
   "subprojects/*/*/include/**/*",
-  "subprojects/*/*/src/**/*",
+  # "subprojects/*/*/src/**/*",
 ]
 keywords = ["ffi", "bindings", "math", "boost"]
 license = "BSD-3-Clause AND BSL-1.0"
