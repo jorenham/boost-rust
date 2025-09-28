@@ -1,10 +1,10 @@
+//! boost/math/special_functions/erf.hpp
+
 use crate::ffi;
 
 /// Error function *erf(x)*
 ///
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_erf/error_function.html>
-///
-/// Defined in `boost/math/special_functions/erf.hpp`
 pub fn erf(x: f64) -> f64 {
     unsafe { ffi::boost_math_erf(x) }
 }
@@ -12,8 +12,6 @@ pub fn erf(x: f64) -> f64 {
 /// Complementary error function *erfc(x)*
 ///
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_erf/error_function.html>
-///
-/// Defined in `boost/math/special_functions/erf.hpp`
 pub fn erfc(x: f64) -> f64 {
     unsafe { ffi::boost_math_erfc(x) }
 }

@@ -1,3 +1,5 @@
+//! Bindings for [Boost Math](https://github.com/boostorg/math) C++ library
+
 mod special_functions;
 
 pub use special_functions::bessel::*;
