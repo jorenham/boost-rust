@@ -1,6 +1,6 @@
 [package]
 name = "boost"
-version = "0.0.1"
+version = "0.0.1+1.89.0"
 authors = ["Joren Hammudoglu <jhammudoglu@gmail.com>"]
 categories = ["api-bindings", "mathematics", "science"]
 edition = "2024"
