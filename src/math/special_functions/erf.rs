@@ -28,7 +28,7 @@ pub fn erf_inv(p: f64) -> f64 {
 
 /// Inverse of [`erfc`]
 ///
-/// Corresponds to `boost::math::erfc_inv(x)` in C++.
+/// Corresponds to `boost::math::erfc_inv(q)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_erf/error_inv.html>
 pub fn erfc_inv(q: f64) -> f64 {
     unsafe { ffi::math_erfc_inv(q) }
