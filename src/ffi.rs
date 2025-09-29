@@ -25,6 +25,9 @@ unsafe extern "C" {
     pub fn math_ibetac_inva(b: f64, x: f64, q: f64) -> f64;
     pub fn math_ibetac_invb(a: f64, x: f64, q: f64) -> f64;
 
+    // boost/math/special_functions/binomial.hpp
+    pub fn math_binomial_coefficient(n: c_uint, k: c_uint) -> f64;
+
     // boost/math/special_functions/digamma.hpp
     pub fn math_digamma(x: f64) -> f64;
 

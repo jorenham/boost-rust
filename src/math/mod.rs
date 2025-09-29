@@ -47,7 +47,7 @@
 //! - [x] [`double_factorial`]
 //! - [x] [`rising_factorial`]
 //! - [x] [`falling_factorial`]
-//! - [ ] Binomial Coefficients
+//! - [x] [`binomial_coefficient`]
 //!
 //! ### Beta Functions
 //!
@@ -214,6 +214,7 @@ mod special_functions;
 
 pub use special_functions::bessel::*;
 pub use special_functions::beta::*;
+pub use special_functions::binomial::*;
 pub use special_functions::digamma::*;
 pub use special_functions::erf::*;
 pub use special_functions::factorials::*;

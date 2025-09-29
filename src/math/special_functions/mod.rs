@@ -1,5 +1,6 @@
 pub mod bessel;
 pub mod beta;
+pub mod binomial;
 pub mod digamma;
 pub mod erf;
 pub mod factorials;
