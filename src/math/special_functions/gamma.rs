@@ -3,9 +3,6 @@
 //! Note that we deviate from the original "tgamma" names by dropping the "t" prefix.
 //!
 //! # TODO:
-//! - `tgamma_delta_ratio`
-//! - `tgamma_ratio`
-//! - `gamma_p_derivative`
 //! - `gamma_p_inv`
 //! - `gamma_p_inva`
 //! - `gamma_q_inv`
@@ -89,6 +86,21 @@ pub fn gamma_upper(a: f64, x: f64) -> f64 {
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/igamma.html>
 pub fn gamma_p(a: f64, x: f64) -> f64 {
     unsafe { ffi::math_gamma_p(a, x) }
+}
+
+/// Derivative of the normalized lower incomplete gamma function
+///
+/// *P'(a,x) = e<sup>-x</sup> x<sup>a-1</sup> / Γ(a)*
+///
+/// Note that the derivative of the function [`gamma_q`] can be obtained by negating the result of
+/// this function, i.e., *Q'(a,x) = -P'(a,x)*.
+///
+/// See [`gamma_p`] for the normalized lower incomplete gamma function.
+///
+/// Corresponds to `boost::math::gamma_p_derivative(a, x)` in C++.
+/// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/gamma_derivatives.html>
+pub fn gamma_p_derivative(a: f64, x: f64) -> f64 {
+    unsafe { ffi::math_gamma_p_derivative(a, x) }
 }
 
 /// Normalized upper incomplete gamma function *Q(a,x)*
@@ -188,6 +200,11 @@ mod tests {
     #[test]
     fn test_gamma_p() {
         assert!(gamma_p(4.2, 0.5).is_finite());
+    }
+
+    #[test]
+    fn test_gamma_p_derivative() {
+        assert!(gamma_p_derivative(4.2, 0.5).is_finite());
     }
 
     #[test]

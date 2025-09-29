@@ -69,6 +69,7 @@ double math_lgamma(double x, int* sign) { return lgamma(x, sign); }
 double math_tgamma_lower(double a, double x) { return tgamma_lower(a, x); }
 double math_tgamma_(double a, double x) { return tgamma(a, x); }
 double math_gamma_p(double a, double x) { return gamma_p(a, x); }
+double math_gamma_p_derivative(double a, double x) { return gamma_p_derivative(a, x); }
 double math_gamma_q(double a, double x) { return gamma_q(a, x); }
 double math_tgamma_ratio(double a, double b) { return tgamma_ratio(a, b); }
 double math_tgamma_delta_ratio(double x, double delta) { return tgamma_delta_ratio(x, delta); }
