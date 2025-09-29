@@ -65,7 +65,7 @@ double math_rising_factorial(double x, int n) { return rising_factorial(x, n); }
 // boost/math/special_functions/gamma.hpp
 double math_tgamma(double x) { return tgamma(x); }
 double math_tgamma1pm1(double x) { return tgamma1pm1(x); }
-double math_lgamma(double x) { return lgamma(x); }
+double math_lgamma(double x, int* sign) { return lgamma(x, sign); }
 double math_gamma_p(double a, double x) { return gamma_p(a, x); }
 double math_gamma_q(double a, double x) { return gamma_q(a, x); }
 

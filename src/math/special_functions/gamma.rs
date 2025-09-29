@@ -11,9 +11,11 @@
 //! - `gamma_q_inva`
 
 use crate::ffi;
+use core::ffi::c_int;
 
 /// Gamma function *Γ(x)*
 ///
+/// Corresponds to `boost::math::tgamma(x)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/tgamma.html>
 pub fn tgamma(x: f64) -> f64 {
     unsafe { ffi::math_tgamma(x) }
@@ -24,27 +26,44 @@ pub fn tgamma(x: f64) -> f64 {
 /// Internally the implementation does not make use of the addition and subtraction implied by the
 /// definition, leading to accurate results even for very small `x`.
 ///
+/// See also: [`tgamma`]
+///
+/// Corresponds to `boost::math::tgamma1pm1(x)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/tgamma.html>
 pub fn tgamma1pm1(x: f64) -> f64 {
     unsafe { ffi::math_tgamma1pm1(x) }
 }
 
-/// Log-Gamma function *ln |Γ(x)|*
+/// Natural logarithm of the absolute value of the gamma function
 ///
+/// The integer part of the tuple indicates the sign of the gamma function.
+///
+/// See also: [`tgamma`]
+///
+/// Corresponds to `boost::math::lgamma(x, *sign)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/lgamma.html>
-pub fn lgamma(x: f64) -> f64 {
-    unsafe { ffi::math_lgamma(x) }
+pub fn lgamma(x: f64) -> (f64, i32) {
+    let mut sign: c_int = 0;
+    let out = unsafe { ffi::math_lgamma(x, &mut sign) };
+    assert_ne!(sign, 0);
+    (out, sign)
 }
 
-/// Incomplete gamma function *P(a,x) = γ(a,x) / Γ(a)*
+/// Normalized lower incomplete gamma function *P(a,x)*
 ///
+/// *P(a,x) = γ(a,x) / Γ(a)*
+///
+/// Corresponds to `boost::math::gamma_p(a, x)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/igamma.html>
 pub fn gamma_p(a: f64, x: f64) -> f64 {
     unsafe { ffi::math_gamma_p(a, x) }
 }
 
-/// Incomplete gamma function *Q(a,x) = Γ(a,x) / Γ(a)*
+/// Normalized upper incomplete gamma function *Q(a,x)*
 ///
+/// *Q(a,x) = Γ(a,x) / Γ(a)*
+///
+/// Corresponds to `boost::math::gamma_q(a, x)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/igamma.html>
 pub fn gamma_q(a: f64, x: f64) -> f64 {
     unsafe { ffi::math_gamma_q(a, x) }
@@ -88,7 +107,15 @@ mod tests {
 
     #[test]
     fn test_lgamma() {
-        assert_relative_eq!(lgamma(1.0), 0.0, epsilon = RTOL);
+        let (val, sign) = lgamma(0.5);
+        assert!(val.is_finite());
+        assert!(val > 0.0);
+        assert_eq!(sign, 1);
+
+        let (val, sign) = lgamma(-0.5);
+        assert!(val.is_finite());
+        assert!(val > 0.0);
+        assert_eq!(sign, -1);
     }
 
     #[test]
