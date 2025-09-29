@@ -55,6 +55,8 @@ double math_digamma(double x) { return digamma(x); }
 // boost/math/special_functions/erf.hpp
 double math_erf(double x) { return erf(x); }
 double math_erfc(double x) { return erfc(x); }
+double math_erf_inv(double p) { return erf_inv(p); }
+double math_erfc_inv(double q) { return erfc_inv(q); }
 
 // boost/math/special_functions/factorials.hpp
 double math_factorial(unsigned i) { return factorial<double>(i); }
