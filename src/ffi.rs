@@ -13,6 +13,17 @@ unsafe extern "C" {
 
     // boost/math/special_functions/beta.hpp
     pub fn math_beta(a: f64, b: f64) -> f64;
+    pub fn math_beta_(a: f64, b: f64, x: f64) -> f64;
+    pub fn math_betac(a: f64, b: f64, x: f64) -> f64;
+    pub fn math_ibeta(a: f64, b: f64, x: f64) -> f64;
+    pub fn math_ibeta_derivative(a: f64, b: f64, x: f64) -> f64;
+    pub fn math_ibeta_inv(a: f64, b: f64, p: f64) -> f64;
+    pub fn math_ibeta_inva(b: f64, x: f64, p: f64) -> f64;
+    pub fn math_ibeta_invb(a: f64, x: f64, p: f64) -> f64;
+    pub fn math_ibetac(a: f64, b: f64, x: f64) -> f64;
+    pub fn math_ibetac_inv(a: f64, b: f64, q: f64) -> f64;
+    pub fn math_ibetac_inva(b: f64, x: f64, q: f64) -> f64;
+    pub fn math_ibetac_invb(a: f64, x: f64, q: f64) -> f64;
 
     // boost/math/special_functions/digamma.hpp
     pub fn math_digamma(x: f64) -> f64;

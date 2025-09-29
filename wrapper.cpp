@@ -38,6 +38,17 @@ double math_sph_neumann(unsigned n, double x) { return sph_neumann(n, x); }
 
 // boost/math/special_functions/beta.hpp
 double math_beta(double a, double b) { return beta(a, b); }
+double math_beta_(double a, double b, double x) { return beta(a, b, x); }
+double math_betac(double a, double b, double x) { return betac(a, b, x); }
+double math_ibeta(double a, double b, double x) { return ibeta(a, b, x); }
+double math_ibeta_derivative(double a, double b, double x) { return ibeta_derivative(a, b, x); }
+double math_ibeta_inv(double a, double b, double p) { return ibeta_inv(a, b, p); }
+double math_ibeta_inva(double b, double x, double p) { return ibeta_inva(b, x, p); }
+double math_ibeta_invb(double a, double x, double p) { return ibeta_invb(a, x, p); }
+double math_ibetac(double a, double b, double x) { return ibetac(a, b, x); }
+double math_ibetac_inv(double a, double b, double q) { return ibetac_inv(a, b, q); }
+double math_ibetac_inva(double b, double x, double q) { return ibetac_inva(b, x, q); }
+double math_ibetac_invb(double a, double x, double q) { return ibetac_invb(a, x, q); }
 
 // boost/math/special_functions/digamma.hpp
 double math_digamma(double x) { return digamma(x); }
