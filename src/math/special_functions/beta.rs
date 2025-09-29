@@ -106,26 +106,26 @@ pub fn ibetac(a: f64, b: f64, x: f64) -> f64 {
 
 /// Inverse of [`ibetac`] w.r.t. `x`
 ///
-/// Corresponds to `boost::math::ibetac_inv(a, b, p)` in C++.
+/// Corresponds to `boost::math::ibetac_inv(a, b, q)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_beta/ibeta_inv_function.html>
-pub fn ibetac_inv(a: f64, b: f64, p: f64) -> f64 {
-    unsafe { ffi::math_ibetac_inv(a, b, p) }
+pub fn ibetac_inv(a: f64, b: f64, q: f64) -> f64 {
+    unsafe { ffi::math_ibetac_inv(a, b, q) }
 }
 
 /// Inverse of [`ibetac`] w.r.t. `a`
 ///
-/// Corresponds to `boost::math::ibetac_inva(b, x, p)` in C++.
+/// Corresponds to `boost::math::ibetac_inva(b, x, q)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_beta/ibeta_inv_function.html>
-pub fn ibetac_inva(b: f64, x: f64, p: f64) -> f64 {
-    unsafe { ffi::math_ibetac_inva(b, x, p) }
+pub fn ibetac_inva(b: f64, x: f64, q: f64) -> f64 {
+    unsafe { ffi::math_ibetac_inva(b, x, q) }
 }
 
 /// Inverse of [`ibetac`] w.r.t. `b`
 ///
-/// Corresponds to `boost::math::ibetac_invb(a, x, p)` in C++.
+/// Corresponds to `boost::math::ibetac_invb(a, x, q)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_beta/ibeta_inv_function.html>
-pub fn ibetac_invb(a: f64, x: f64, p: f64) -> f64 {
-    unsafe { ffi::math_ibetac_invb(a, x, p) }
+pub fn ibetac_invb(a: f64, x: f64, q: f64) -> f64 {
+    unsafe { ffi::math_ibetac_invb(a, x, q) }
 }
 
 #[cfg(test)]
