@@ -189,7 +189,7 @@ mod tests {
         assert_relative_eq!(gamma1pm1(0.0), 0.0, epsilon = RTOL);
         assert_relative_eq!(gamma1pm1(1.0), 0.0, epsilon = RTOL);
         assert_relative_eq!(gamma1pm1(2.0), 1.0, epsilon = RTOL);
-        // results from Wolphram Alpha
+        // results from Wolfram Alpha
         assert_abs_diff_eq!(
             gamma1pm1(-1e-14),
             5.772_156_649_015_427_5e-15,
