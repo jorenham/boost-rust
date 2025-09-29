@@ -23,6 +23,7 @@
 #include <boost/math/special_functions/jacobi.hpp>
 #include <boost/math/special_functions/legendre.hpp>
 #include <boost/math/special_functions/prime.hpp>
+#include <boost/math/special_functions/zeta.hpp>
 
 using namespace boost::math;
 
@@ -104,5 +105,8 @@ double math_legendre_q(unsigned l, double x) { return legendre_q(l, x); }
 
 // boost/math/special_functions/prime.hpp
 std::uint32_t math_prime(unsigned n) { return prime(n); }
+
+// boost/math/special_functions/zeta.hpp
+double math_zeta(double s) { return zeta(s); }
 
 } // extern "C"

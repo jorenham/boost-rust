@@ -69,4 +69,7 @@ unsafe extern "C" {
 
     // boost/math/special_functions/prime.hpp
     pub fn math_prime(n: c_uint) -> u32;
+
+    // boost/math/special_functions/zeta.hpp
+    pub fn math_zeta(s: f64) -> f64;
 }
