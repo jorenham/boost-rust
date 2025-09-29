@@ -19,7 +19,7 @@ functions.
 ## Requirements
 
 - Rust 1.85.1+
-- Modern C++ compiler with C++23 support
+- Modern C++ compiler with C++20 support
 
 ## Contributing
 

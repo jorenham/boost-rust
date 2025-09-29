@@ -1,4 +1,4 @@
-const CXX_STANDARD: &str = "c++23";
+const CXX_STANDARD: &str = "c++20";
 
 const BOOST_MATH_DIR: &str = "subprojects/boost_math/math";
 const WRAPPER_CPP: &str = "wrapper.cpp";
@@ -8,10 +8,7 @@ fn main() {
         .cpp(true)
         .std(CXX_STANDARD)
         .flag_if_supported(format!("/std:{CXX_STANDARD}"))
-        .includes([
-            format!("{BOOST_MATH_DIR}/include"),
-            // format!("{BOOST_MATH_DIR}/src"),
-        ])
+        .include(format!("{BOOST_MATH_DIR}/include"))
         .warnings(true)
         .file(WRAPPER_CPP)
         .compile("wrapper");
