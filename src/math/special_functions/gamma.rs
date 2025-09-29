@@ -106,6 +106,26 @@ pub fn gamma_q(a: f64, x: f64) -> f64 {
     unsafe { ffi::math_gamma_q(a, x) }
 }
 
+/// Ratio of two gamma functions *Γ(a) / Γ(b)*
+///
+/// See [`gamma`] for the gamma function itself.
+///
+/// Corresponds to `boost::math::tgamma_ratio(a, b)` in C++.
+/// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/gamma_ratios.html>
+pub fn gamma_ratio(a: f64, b: f64) -> f64 {
+    unsafe { ffi::math_tgamma_ratio(a, b) }
+}
+
+/// Ratio of two gamma functions *Γ(x) / Γ(x + δ)*
+///
+/// See [`gamma`] for the gamma function itself.
+///
+/// Corresponds to `boost::math::tgamma_delta_ratio(x, delta)` in C++.
+/// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/gamma_ratios.html>
+pub fn gamma_delta_ratio(x: f64, delta: f64) -> f64 {
+    unsafe { ffi::math_tgamma_delta_ratio(x, delta) }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -173,5 +193,15 @@ mod tests {
     #[test]
     fn test_gamma_q() {
         assert!(gamma_q(4.2, 0.5).is_finite());
+    }
+
+    #[test]
+    fn test_gamma_ratio() {
+        assert_relative_eq!(gamma_ratio(4.0, 6.0), 0.05, epsilon = RTOL);
+    }
+
+    #[test]
+    fn test_gamma_delta_ratio() {
+        assert_relative_eq!(gamma_delta_ratio(4.0, 2.0), 0.05, epsilon = RTOL);
     }
 }
