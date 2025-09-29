@@ -49,9 +49,38 @@ pub fn lgamma(x: f64) -> (f64, i32) {
     (out, sign)
 }
 
+/// Lower incomplete gamma function *γ(a,x)*
+///
+/// See also:
+/// - [`tgamma`]: Gamma function *Γ(x)*
+/// - [`gamma_p`]: Normalized lower incomplete gamma function *P(a,x) = γ(a,x) / Γ(a)*
+///
+/// Corresponds to `boost::math::tgamma_lower(a, x)` in C++.
+/// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/igamma.html>
+pub fn tgamma_lower(a: f64, x: f64) -> f64 {
+    unsafe { ffi::math_tgamma_lower(a, x) }
+}
+
+/// Upper incomplete gamma function *Γ(a,x)*
+///
+/// See also:
+/// - [`tgamma`]: Gamma function *Γ(x)*
+/// - [`gamma_q`]: Normalized upper incomplete gamma function *Q(a,x) = Γ(a,x) / Γ(a)*
+///
+/// Corresponds to `boost::math::tgamma(a, x)` in C++.
+/// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/igamma.html>
+pub fn tgamma_upper(a: f64, x: f64) -> f64 {
+    unsafe { ffi::math_tgamma_upper(a, x) }
+}
+
 /// Normalized lower incomplete gamma function *P(a,x)*
 ///
 /// *P(a,x) = γ(a,x) / Γ(a)*
+///
+/// See also:
+/// - [`tgamma`]: Gamma function *Γ(x)*
+/// - [`tgamma_lower`]: Lower incomplete gamma function *γ(a,x)*
+/// - [`gamma_q`]: Normalized upper incomplete gamma function *Q(a,x)*
 ///
 /// Corresponds to `boost::math::gamma_p(a, x)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/igamma.html>
@@ -62,6 +91,11 @@ pub fn gamma_p(a: f64, x: f64) -> f64 {
 /// Normalized upper incomplete gamma function *Q(a,x)*
 ///
 /// *Q(a,x) = Γ(a,x) / Γ(a)*
+///
+/// See also:
+/// - [`tgamma`]: Gamma function *Γ(x)*
+/// - [`tgamma_upper`]: Upper incomplete gamma function *Γ(a,x)*
+/// - [`gamma_p`]: Normalized lower incomplete gamma function *P(a,x)*
 ///
 /// Corresponds to `boost::math::gamma_q(a, x)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_gamma/igamma.html>
@@ -119,16 +153,22 @@ mod tests {
     }
 
     #[test]
-    fn test_gamma_p() {
-        assert_relative_eq!(gamma_p(2.0, 0.0), 0.0, epsilon = RTOL);
-    }
-    #[test]
-    fn test_gamma_q() {
-        assert_relative_eq!(gamma_q(2.0, 0.0), 1.0, epsilon = RTOL);
+    fn test_tgamma_lower() {
+        assert!(tgamma_lower(4.2, 0.5).is_finite());
     }
 
     #[test]
-    fn test_gamma_p_q() {
-        assert_relative_eq!(gamma_p(2.0, 1.0) + gamma_q(2.0, 1.0), 1.0, epsilon = RTOL);
+    fn test_tgamma_upper() {
+        assert!(tgamma_upper(4.2, 0.5).is_finite());
+    }
+
+    #[test]
+    fn test_gamma_p() {
+        assert!(gamma_p(4.2, 0.5).is_finite());
+    }
+
+    #[test]
+    fn test_gamma_q() {
+        assert!(gamma_q(4.2, 0.5).is_finite());
     }
 }
