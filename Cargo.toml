@@ -7,8 +7,31 @@ edition = "2024"
 include = [
   "*.rs",
   "wrapper.cpp",
-  "subprojects/*/*/include/**/*",
-  # "subprojects/*/*/src/**/*",
+  #
+  "subprojects/boost_math/math/include/boost/math/ccmath/detail",
+  "subprojects/boost_math/math/include/boost/math/policies",
+  #
+  "subprojects/boost_math/math/include/boost/math/special_functions",
+  "!subprojects/boost_math/math/include/boost/math/special_functions/detail/airy_ai_bi_zero.hpp",
+  "!subprojects/boost_math/math/include/boost/math/special_functions/detail/bernoulli_details.hpp",
+  "!subprojects/boost_math/math/include/boost/math/special_functions/detail/daubechies_scaling_integer_grid.hpp",
+  "!subprojects/boost_math/math/include/boost/math/special_functions/detail/lambert_w_lookup_table.hpp",
+  "!subprojects/boost_math/math/include/boost/math/special_functions/detail/lanczos_sse2.hpp",
+  "!subprojects/boost_math/math/include/boost/math/special_functions/detail/t_distribution_inv.hpp",
+  "!subprojects/boost_math/math/include/boost/math/special_functions/detail/unchecked_bernoulli.hpp",
+  "!subprojects/boost_math/math/include/boost/math/special_functions/lanczos.hpp",
+  "!subprojects/boost_math/math/include/boost/math/special_functions/math_fwd.hpp",
+  #
+  "subprojects/boost_math/math/include/boost/math/tools",
+  "!subprojects/boost_math/math/include/boost/math/tools/detail",
+  "!subprojects/boost_math/math/include/boost/math/tools/*_statistics.hpp",
+  "!subprojects/boost_math/math/include/boost/math/tools/*_continued_fraction.hpp",
+  "!subprojects/boost_math/math/include/boost/math/tools/*_roots.hpp",
+  "!subprojects/boost_math/math/include/boost/math/tools/*_expansion.hpp",
+  "!subprojects/boost_math/math/include/boost/math/tools/color_maps.hpp",
+  "!subprojects/boost_math/math/include/boost/math/tools/norms.hpp",
+  "!subprojects/boost_math/math/include/boost/math/tools/polynomial*.hpp",
+  "!subprojects/boost_math/math/include/boost/math/tools/ulps_plot.hpp",
 ]
 keywords = ["ffi", "bindings", "math", "boost"]
 license = "BSD-3-Clause AND BSL-1.0"
@@ -23,3 +46,13 @@ cc = "1.2.39"
 
 [dev-dependencies]
 approx = "0.5.1"
+
+[profile.dev]
+opt-level = 2
+strip = true
+
+[profile.release]
+strip = true
+# lto = true
+# codegen-units = 1
+# panic = "abort"
