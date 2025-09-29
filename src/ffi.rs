@@ -43,7 +43,7 @@ unsafe extern "C" {
     pub fn math_tgamma1pm1(x: f64) -> f64;
     pub fn math_lgamma(x: f64, sign: *mut c_int) -> f64;
     pub fn math_tgamma_lower(a: f64, x: f64) -> f64;
-    pub fn math_tgamma_upper(a: f64, x: f64) -> f64;
+    pub fn math_tgamma_(a: f64, x: f64) -> f64;
     pub fn math_gamma_p(a: f64, x: f64) -> f64;
     pub fn math_gamma_q(a: f64, x: f64) -> f64;
 
