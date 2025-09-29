@@ -70,7 +70,7 @@
 //!
 //! ### Error Functions
 //!
-//! - [x] Error Function *erf* and and complement *erfc*
+//! - [x] Error Function *erf* and complement *erfc*
 //!   - [`erf`]
 //!   - [`erfc`]
 //! - [x] Error Function Inverses
