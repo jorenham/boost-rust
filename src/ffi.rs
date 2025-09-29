@@ -31,6 +31,8 @@ unsafe extern "C" {
     // boost/math/special_functions/erf.hpp
     pub fn math_erf(x: f64) -> f64;
     pub fn math_erfc(x: f64) -> f64;
+    pub fn math_erf_inv(p: f64) -> f64;
+    pub fn math_erfc_inv(q: f64) -> f64;
 
     // boost/math/special_functions/factorials.hpp
     pub fn math_factorial(i: c_uint) -> f64;
