@@ -22,6 +22,7 @@
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/math/special_functions/jacobi.hpp>
 #include <boost/math/special_functions/legendre.hpp>
+#include <boost/math/special_functions/prime.hpp>
 
 using namespace boost::math;
 
@@ -100,5 +101,8 @@ void math_legendre_p_zeros(int l, double* out) {
     }
 }
 double math_legendre_q(unsigned l, double x) { return legendre_q(l, x); }
+
+// boost/math/special_functions/prime.hpp
+std::uint32_t math_prime(unsigned n) { return prime(n); }
 
 } // extern "C"

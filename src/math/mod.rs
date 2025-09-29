@@ -10,3 +10,4 @@ pub use special_functions::factorials::*;
 pub use special_functions::gamma::*;
 pub use special_functions::jacobi::*;
 pub use special_functions::legendre::*;
+pub use special_functions::prime::*;

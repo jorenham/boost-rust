@@ -66,4 +66,7 @@ unsafe extern "C" {
     pub fn math_legendre_p_prime(l: c_int, x: f64) -> f64;
     pub fn math_legendre_p_zeros(l: c_int, out: *mut f64);
     pub fn math_legendre_q(l: c_uint, x: f64) -> f64;
+
+    // boost/math/special_functions/prime.hpp
+    pub fn math_prime(n: c_uint) -> u32;
 }
