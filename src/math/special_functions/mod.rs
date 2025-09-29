@@ -5,6 +5,7 @@ pub mod digamma;
 pub mod erf;
 pub mod factorials;
 pub mod gamma;
+pub mod hypergeometric;
 pub mod jacobi;
 pub mod legendre;
 pub mod prime;

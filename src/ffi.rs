@@ -59,6 +59,20 @@ unsafe extern "C" {
     pub fn math_gamma_p_inva(x: f64, p: f64) -> f64;
     pub fn math_gamma_p_derivative(a: f64, x: f64) -> f64;
 
+    // boost/math/special_functions/hypergeometric_0F1.hpp
+    pub fn math_hypergeometric_0F1(b: f64, x: f64) -> f64;
+
+    // boost/math/special_functions/hypergeometric_1F0.hpp
+    pub fn math_hypergeometric_1F0(a: f64, x: f64) -> f64;
+
+    // boost/math/special_functions/hypergeometric_1F1.hpp
+    pub fn math_hypergeometric_1F1(a: f64, b: f64, x: f64) -> f64;
+    pub fn math_hypergeometric_1F1_regularized(a: f64, b: f64, x: f64) -> f64;
+    pub fn math_log_hypergeometric_1F1(a: f64, b: f64, x: f64, sign: *mut c_int) -> f64;
+
+    // boost/math/special_functions/hypergeometric_2F0.hpp
+    pub fn math_hypergeometric_2F0(a1: f64, a2: f64, x: f64) -> f64;
+
     // boost/math/special_functions/jacobi.hpp
     pub fn math_jacobi(n: c_uint, alpha: f64, beta: f64, x: f64) -> f64;
     pub fn math_jacobi_derivative(n: c_uint, alpha: f64, beta: f64, x: f64, k: c_uint) -> f64;
