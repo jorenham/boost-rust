@@ -41,14 +41,18 @@ unsafe extern "C" {
     // boost/math/special_functions/gamma.hpp
     pub fn math_tgamma(x: f64) -> f64;
     pub fn math_tgamma1pm1(x: f64) -> f64;
-    pub fn math_lgamma(x: f64, sign: *mut c_int) -> f64;
-    pub fn math_tgamma_lower(a: f64, x: f64) -> f64;
     pub fn math_tgamma_(a: f64, x: f64) -> f64;
-    pub fn math_gamma_p(a: f64, x: f64) -> f64;
-    pub fn math_gamma_p_derivative(a: f64, x: f64) -> f64;
-    pub fn math_gamma_q(a: f64, x: f64) -> f64;
+    pub fn math_tgamma_lower(a: f64, x: f64) -> f64;
     pub fn math_tgamma_ratio(a: f64, b: f64) -> f64;
     pub fn math_tgamma_delta_ratio(x: f64, delta: f64) -> f64;
+    pub fn math_lgamma(x: f64, sign: *mut c_int) -> f64;
+    pub fn math_gamma_q(a: f64, x: f64) -> f64;
+    pub fn math_gamma_q_inv(a: f64, q: f64) -> f64;
+    pub fn math_gamma_q_inva(x: f64, q: f64) -> f64;
+    pub fn math_gamma_p(a: f64, x: f64) -> f64;
+    pub fn math_gamma_p_inv(a: f64, p: f64) -> f64;
+    pub fn math_gamma_p_inva(x: f64, p: f64) -> f64;
+    pub fn math_gamma_p_derivative(a: f64, x: f64) -> f64;
 
     // boost/math/special_functions/jacobi.hpp
     pub fn math_jacobi(n: c_uint, alpha: f64, beta: f64, x: f64) -> f64;
