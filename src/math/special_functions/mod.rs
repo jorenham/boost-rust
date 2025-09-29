@@ -7,3 +7,4 @@ pub mod gamma;
 pub mod jacobi;
 pub mod legendre;
 pub mod prime;
+pub mod zeta;
