@@ -2,4 +2,12 @@
   "C_Cpp.default.cppStandard": "c++23",
   "files.readonlyInclude": { "subprojects/**/*": true },
   "rust-analyzer.imports.preferNoStd": true,
+  "files.associations": {
+    "*.jinja": "jinja-html",
+    "*.prysma": "python",
+    "*.toml": "toml",
+    ".mypyignore": "plaintext",
+    "LICENSE": "plaintext",
+    "cmath": "cpp",
+  },
 }

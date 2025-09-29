@@ -1,8 +1,7 @@
-// Simple C++ wrappers for the Boost Math functions
+// Simple C++ wrappers for the Boost Math functions for https://github.com/jorenham/boost-rust
 
-// Boost static config, see
-// https://www.boost.org/doc/libs/latest/boost/math/tools/user.hpp
 #ifndef BOOST_MATH_TOOLS_USER_HPP
+    // https://www.boost.org/doc/libs/latest/boost/math/tools/user.hpp
     #define BOOST_MATH_TOOLS_USER_HPP
     #define BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS
     #define BOOST_MATH_DOMAIN_ERROR_POLICY errno_on_error
@@ -65,6 +64,7 @@ double math_rising_factorial(double x, int n) { return rising_factorial(x, n); }
 
 // boost/math/special_functions/gamma.hpp
 double math_tgamma(double x) { return tgamma(x); }
+double math_tgamma1pm1(double x) { return tgamma1pm1(x); }
 double math_lgamma(double x) { return lgamma(x); }
 double math_gamma_p(double a, double x) { return gamma_p(a, x); }
 double math_gamma_q(double a, double x) { return gamma_q(a, x); }
