@@ -2,7 +2,7 @@
 name = "boost"
 version = "0.0.3+1.89.0"
 authors = ["Joren Hammudoglu <jhammudoglu@gmail.com>"]
-categories = ["api-bindings", "mathematics", "science"]
+categories = ["api-bindings", "mathematics", "science", "no-std"]
 edition = "2024"
 include = [
   "*.rs",
