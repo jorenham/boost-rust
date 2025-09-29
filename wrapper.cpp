@@ -39,7 +39,7 @@ double math_sph_neumann(unsigned n, double x) { return sph_neumann(n, x); }
 // boost/math/special_functions/beta.hpp
 double math_beta(double a, double b) { return beta(a, b); }
 double math_beta_(double a, double b, double x) { return beta(a, b, x); }
-double math_betac(double a, double b, double x) { return beta(a, b, x); }
+double math_betac(double a, double b, double x) { return betac(a, b, x); }
 double math_ibeta(double a, double b, double x) { return ibeta(a, b, x); }
 double math_ibeta_derivative(double a, double b, double x) { return ibeta_derivative(a, b, x); }
 double math_ibeta_inv(double a, double b, double p) { return ibeta_inv(a, b, p); }
