@@ -6,3 +6,4 @@ pub mod factorials;
 pub mod gamma;
 pub mod jacobi;
 pub mod legendre;
+pub mod prime;
