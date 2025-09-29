@@ -16,6 +16,7 @@
 
 #include <boost/math/special_functions/bessel.hpp>
 #include <boost/math/special_functions/beta.hpp>
+#include <boost/math/special_functions/binomial.hpp>
 #include <boost/math/special_functions/digamma.hpp>
 #include <boost/math/special_functions/erf.hpp>
 #include <boost/math/special_functions/factorials.hpp>
@@ -50,6 +51,11 @@ double math_ibetac(double a, double b, double x) { return ibetac(a, b, x); }
 double math_ibetac_inv(double a, double b, double q) { return ibetac_inv(a, b, q); }
 double math_ibetac_inva(double b, double x, double q) { return ibetac_inva(b, x, q); }
 double math_ibetac_invb(double a, double x, double q) { return ibetac_invb(a, x, q); }
+
+// boost/math/special_functions/binomial.hpp
+double math_binomial_coefficient(unsigned n, unsigned k) {
+    return binomial_coefficient<double>(n, k);
+}
 
 // boost/math/special_functions/digamma.hpp
 double math_digamma(double x) { return digamma(x); }
