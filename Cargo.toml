@@ -42,17 +42,13 @@ description = "Rust bindings for the Boost C++ Math Library"
 [build-dependencies]
 cc = "1.2.39"
 
-[dependencies]
-
 [dev-dependencies]
 approx = "0.5.1"
 
+[dependencies]
+
 [profile.dev]
 opt-level = 2
-strip = true
 
 [profile.release]
 strip = true
-# lto = true
-# codegen-units = 1
-# panic = "abort"
