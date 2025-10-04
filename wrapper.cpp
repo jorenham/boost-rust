@@ -30,6 +30,7 @@
 #include <boost/math/special_functions/hypergeometric_2F0.hpp>
 #include <boost/math/special_functions/jacobi.hpp>
 #include <boost/math/special_functions/legendre.hpp>
+#include <boost/math/special_functions/logsumexp.hpp>
 #include <boost/math/special_functions/polygamma.hpp>
 #include <boost/math/special_functions/prime.hpp>
 #include <boost/math/special_functions/trigamma.hpp>
@@ -176,7 +177,7 @@ double math_jacobi_derivative(unsigned n, double alpha, double beta, double x, u
 double math_legendre_p(int l, double x) { return legendre_p(l, x); }
 double math_legendre_p_assoc(int l, int m, double x) { return legendre_p(l, m, x); }
 double math_legendre_p_prime(int l, double x) { return legendre_p_prime(l, x); }
-void math_legendre_p_zeros(int l, double* out) {
+void math_legendre_p_zeros(int l, double out[]) {
     // `out` must be of size `l.div_ceil(2)`
     auto vec = legendre_p_zeros<double>(l);
     for (size_t i = 0; i < vec.size(); i++) {
@@ -184,6 +185,10 @@ void math_legendre_p_zeros(int l, double* out) {
     }
 }
 double math_legendre_q(unsigned l, double x) { return legendre_q(l, x); }
+
+// boost/math/special_functions/logasumexp.hpp>
+double math_logaddexp(double x1, double x2) { return logaddexp(x1, x2); }
+double math_logsumexp(const double args[], size_t len) { return logsumexp(args, args + len); }
 
 // boost/math/special_functions/polygamma.hpp
 double math_polygamma(const int n, double x) { return ::detail::polygamma(n, x); }

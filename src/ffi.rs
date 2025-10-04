@@ -84,6 +84,10 @@ unsafe extern "C" {
     pub fn math_legendre_p_zeros(l: c_int, out: *mut f64);
     pub fn math_legendre_q(l: c_uint, x: f64) -> f64;
 
+    // boost/math/special_functions/logasumexp.hpp
+    pub fn math_logaddexp(x1: f64, x2: f64) -> f64;
+    pub fn math_logsumexp(arr: *const f64, len: usize) -> f64;
+
     // boost/math/special_functions/polygamma.hpp
     pub fn math_polygamma(n: c_int, x: f64) -> f64;
 
