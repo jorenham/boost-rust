@@ -28,6 +28,9 @@ unsafe extern "C" {
     // boost/math/special_functions/binomial.hpp
     pub fn math_binomial_coefficient(n: c_uint, k: c_uint) -> f64;
 
+    // boost/math/special_functions/cbrt.hpp
+    pub fn math_cbrt(x: f64) -> f64;
+
     // boost/math/special_functions/digamma.hpp
     pub fn math_digamma(x: f64) -> f64;
 
@@ -97,6 +100,9 @@ unsafe extern "C" {
     // boost/math/special_functions/rsqrt.hpp
     pub fn math_sqrt(x: f64) -> f64;
     pub fn math_rsqrt(x: f64) -> f64;
+
+    // boost/math/special_functions/sqrt1pm1.hpp
+    pub fn math_sqrt1pm1(x: f64) -> f64;
 
     // boost/math/special_functions/trigamma.hpp
     pub fn math_trigamma(x: f64) -> f64;

@@ -1,6 +1,7 @@
 pub mod bessel;
 pub mod beta;
 pub mod binomial;
+pub mod cbrt;
 pub mod digamma;
 pub mod erf;
 pub mod factorials;
@@ -11,6 +12,6 @@ pub mod legendre;
 pub mod logsumexp;
 pub mod polygamma;
 pub mod prime;
-pub mod rsqrt;
+pub mod sqrt;
 pub mod trigamma;
 pub mod zeta;
