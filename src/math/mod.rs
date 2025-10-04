@@ -185,7 +185,7 @@
 //!   - [`hypergeometric_1f1`]
 //!   - [`hypergeometric_1f1_regularized`]
 //!   - [`log_hypergeometric_1f1`]
-//! - [ ] Hypergeometric *<sub>p</sub>F<sub>q</sub>*
+//! - [ ] ~Hypergeometric *<sub>p</sub>F<sub>q</sub>*~ (not included due to bugs in Boost)
 //!
 //! <h4>Basic Functions</h4>
 //!
