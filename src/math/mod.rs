@@ -191,13 +191,14 @@
 //!
 //! - [ ] `sin_pi`
 //! - [ ] `cos_pi`
-//! - [ ] `log1p`
-//! - [ ] `expm1`
-//! - [ ] `cbrt`
-//! - [ ] `sqrt1pm1`
 //! - [ ] `powm1`
-//! - [ ] `hypot`
-//! - [ ] Reciprocal square root
+//! - [x] [`sqrt`]
+//! - [x] [`rsqrt`]
+//! - [x] [`sqrt1pm1`]
+//! - [x] [`cbrt`]
+//! - [x] [`hypot`]
+//! - [ ] `expm1`
+//! - [ ] `log1p`
 //! - [x] [`logaddexp`] and [`logsumexp`]
 //!
 //! <h4>Sinus Cardinal and Hyperbolic Sinus Cardinal Functions</h4>
@@ -221,15 +222,18 @@ mod special_functions;
 pub use special_functions::bessel::*;
 pub use special_functions::beta::*;
 pub use special_functions::binomial::*;
+pub use special_functions::cbrt::*;
 pub use special_functions::digamma::*;
 pub use special_functions::erf::*;
 pub use special_functions::factorials::*;
 pub use special_functions::gamma::*;
 pub use special_functions::hypergeometric::*;
+pub use special_functions::hypot::*;
 pub use special_functions::jacobi::*;
 pub use special_functions::legendre::*;
 pub use special_functions::logsumexp::*;
 pub use special_functions::polygamma::*;
 pub use special_functions::prime::*;
+pub use special_functions::sqrt::*;
 pub use special_functions::trigamma::*;
 pub use special_functions::zeta::*;

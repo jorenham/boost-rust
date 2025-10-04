@@ -28,6 +28,9 @@ unsafe extern "C" {
     // boost/math/special_functions/binomial.hpp
     pub fn math_binomial_coefficient(n: c_uint, k: c_uint) -> f64;
 
+    // boost/math/special_functions/cbrt.hpp
+    pub fn math_cbrt(x: f64) -> f64;
+
     // boost/math/special_functions/digamma.hpp
     pub fn math_digamma(x: f64) -> f64;
 
@@ -73,6 +76,9 @@ unsafe extern "C" {
     // boost/math/special_functions/hypergeometric_2F0.hpp
     pub fn math_hypergeometric_2F0(a1: f64, a2: f64, x: f64) -> f64;
 
+    // boost/math/special_functions/hypot.hpp
+    pub fn math_hypot(x: f64, y: f64) -> f64;
+
     // boost/math/special_functions/jacobi.hpp
     pub fn math_jacobi(n: c_uint, alpha: f64, beta: f64, x: f64) -> f64;
     pub fn math_jacobi_derivative(n: c_uint, alpha: f64, beta: f64, x: f64, k: c_uint) -> f64;
@@ -93,6 +99,13 @@ unsafe extern "C" {
 
     // boost/math/special_functions/prime.hpp
     pub fn math_prime(n: c_uint) -> u32;
+
+    // boost/math/special_functions/rsqrt.hpp
+    pub fn math_sqrt(x: f64) -> f64;
+    pub fn math_rsqrt(x: f64) -> f64;
+
+    // boost/math/special_functions/sqrt1pm1.hpp
+    pub fn math_sqrt1pm1(x: f64) -> f64;
 
     // boost/math/special_functions/trigamma.hpp
     pub fn math_trigamma(x: f64) -> f64;

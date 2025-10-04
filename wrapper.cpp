@@ -20,6 +20,7 @@
 #include <boost/math/special_functions/bessel.hpp>
 #include <boost/math/special_functions/beta.hpp>
 #include <boost/math/special_functions/binomial.hpp>
+#include <boost/math/special_functions/cbrt.hpp>
 #include <boost/math/special_functions/digamma.hpp>
 #include <boost/math/special_functions/erf.hpp>
 #include <boost/math/special_functions/factorials.hpp>
@@ -28,11 +29,14 @@
 #include <boost/math/special_functions/hypergeometric_1F0.hpp>
 #include <boost/math/special_functions/hypergeometric_1F1.hpp>
 #include <boost/math/special_functions/hypergeometric_2F0.hpp>
+#include <boost/math/special_functions/hypot.hpp>
 #include <boost/math/special_functions/jacobi.hpp>
 #include <boost/math/special_functions/legendre.hpp>
 #include <boost/math/special_functions/logsumexp.hpp>
 #include <boost/math/special_functions/polygamma.hpp>
 #include <boost/math/special_functions/prime.hpp>
+#include <boost/math/special_functions/rsqrt.hpp>
+#include <boost/math/special_functions/sqrt1pm1.hpp>
 #include <boost/math/special_functions/trigamma.hpp>
 #include <boost/math/special_functions/zeta.hpp>
 
@@ -114,6 +118,9 @@ double math_binomial_coefficient(unsigned n, unsigned k) {
     return binomial_coefficient<double>(n, k);
 }
 
+// boost/math/special_functions/cbrt.hpp
+double math_cbrt(double x) { return cbrt(x); }
+
 // boost/math/special_functions/digamma.hpp
 double math_digamma(double x) { return ::detail::polygamma(0, x); }
 
@@ -165,6 +172,9 @@ double math_hypergeometric_2F0(double a1, double a2, double x) {
     return hypergeometric_2F0(a1, a2, x);
 }
 
+// boost/math/special_functions/hypot.hpp
+double math_hypot(double x, double y) { return boost::math::hypot(x, y); }
+
 // boost/math/special_functions/jacobi.hpp
 double math_jacobi(unsigned n, double alpha, double beta, double x) {
     return jacobi(n, alpha, beta, x);
@@ -195,6 +205,13 @@ double math_polygamma(const int n, double x) { return ::detail::polygamma(n, x);
 
 // boost/math/special_functions/prime.hpp
 std::uint32_t math_prime(unsigned n) { return prime(n); }
+
+// boost/math/special_functions/rsqrt.hpp
+double math_sqrt(double x) { return sqrt(x); }
+double math_rsqrt(double x) { return rsqrt(x); }
+
+// boost/math/special_functions/sqrt1pm1.hpp
+double math_sqrt1pm1(double x) { return sqrt1pm1(x); }
 
 // boost/math/special_functions/trigamma.hpp
 double math_trigamma(double x) { return ::detail::polygamma(1, x); }
