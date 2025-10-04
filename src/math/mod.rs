@@ -21,10 +21,10 @@
 //!   - [`gamma1pm1`]
 //! - [x] Log Gamma
 //!   - [`lgamma`]
-//! - [x] Digamma
+//! - [x] Polygamma
 //!   - [`digamma`]
-//! - [ ] Trigamma
-//! - [ ] Polygamma
+//!   - [`trigamma`]
+//!   - [`polygamma`]
 //! - [x] Ratios of Gamma Functions
 //!   - [`gamma_ratio`]
 //!   - [`gamma_delta_ratio`]
@@ -85,7 +85,7 @@
 //!   - [`legendre_p_zeros`]
 //!   - [`legendre_p_assoc`]
 //!   - [`legendre_q`]
-//! - [ ] Legendre-Stieltjes Polynomials
+//! - [ ] ~Legendre-Stieltjes Polynomials~
 //! - [ ] Laguerre (and Associated) Polynomials
 //! - [ ] Hermite Polynomials
 //! - [ ] Chebyshev Polynomials
@@ -173,7 +173,7 @@
 //! - [ ] Exponential Integral *En*
 //! - [ ] Exponential Integral *Ei*
 //!
-//! <h4>Hypergeometric Functions</h4>
+//! ### Hypergeometric Functions
 //!
 //! - [x] Hypergeometric *<sub>1</sub>F<sub>0</sub>*
 //!   - [`hypergeometric_1f0`]
@@ -228,5 +228,7 @@ pub use special_functions::gamma::*;
 pub use special_functions::hypergeometric::*;
 pub use special_functions::jacobi::*;
 pub use special_functions::legendre::*;
+pub use special_functions::polygamma::*;
 pub use special_functions::prime::*;
+pub use special_functions::trigamma::*;
 pub use special_functions::zeta::*;

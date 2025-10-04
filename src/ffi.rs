@@ -84,8 +84,14 @@ unsafe extern "C" {
     pub fn math_legendre_p_zeros(l: c_int, out: *mut f64);
     pub fn math_legendre_q(l: c_uint, x: f64) -> f64;
 
+    // boost/math/special_functions/polygamma.hpp
+    pub fn math_polygamma(n: c_int, x: f64) -> f64;
+
     // boost/math/special_functions/prime.hpp
     pub fn math_prime(n: c_uint) -> u32;
+
+    // boost/math/special_functions/trigamma.hpp
+    pub fn math_trigamma(x: f64) -> f64;
 
     // boost/math/special_functions/zeta.hpp
     pub fn math_zeta(s: f64) -> f64;

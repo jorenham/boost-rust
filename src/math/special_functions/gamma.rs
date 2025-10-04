@@ -72,7 +72,7 @@ pub fn gamma_delta_ratio(x: f64, delta: f64) -> f64 {
     unsafe { ffi::math_tgamma_delta_ratio(x, delta) }
 }
 
-/// Natural logarithm of the absolute value of the gamma function
+/// Natural logarithm of the absolute value of the gamma function *ln |Γ(x)|*
 ///
 /// The integer part of the tuple indicates the sign of the gamma function.
 ///
