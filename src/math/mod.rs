@@ -175,11 +175,17 @@
 //!
 //! <h4>Hypergeometric Functions</h4>
 //!
-//! - [ ] Hypergeometric *<sub>1</sub>F<sub>0</sub>*
-//! - [ ] Hypergeometric *<sub>0</sub>F<sub>1</sub>*
-//! - [ ] Hypergeometric *<sub>2</sub>F<sub>0</sub>*
-//! - [ ] Hypergeometric *<sub>1</sub>F<sub>1</sub>*
-//! - [ ] Hypergeometric *<sub>p</sub>F<sub>q</sub>*
+//! - [x] Hypergeometric *<sub>1</sub>F<sub>0</sub>*
+//!   - [`hypergeometric_1f0`]
+//! - [x] Hypergeometric *<sub>0</sub>F<sub>1</sub>*
+//!   - [`hypergeometric_0f1`]
+//! - [x] Hypergeometric *<sub>2</sub>F<sub>0</sub>*
+//!   - [`hypergeometric_2f0`]
+//! - [x] Hypergeometric *<sub>1</sub>F<sub>1</sub>*
+//!   - [`hypergeometric_1f1`]
+//!   - [`hypergeometric_1f1_regularized`]
+//!   - [`log_hypergeometric_1f1`]
+//! - [ ] ~Hypergeometric *<sub>p</sub>F<sub>q</sub>*~ (not included due to bugs in Boost)
 //!
 //! <h4>Basic Functions</h4>
 //!
@@ -219,6 +225,7 @@ pub use special_functions::digamma::*;
 pub use special_functions::erf::*;
 pub use special_functions::factorials::*;
 pub use special_functions::gamma::*;
+pub use special_functions::hypergeometric::*;
 pub use special_functions::jacobi::*;
 pub use special_functions::legendre::*;
 pub use special_functions::prime::*;

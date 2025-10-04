@@ -21,6 +21,10 @@
 #include <boost/math/special_functions/erf.hpp>
 #include <boost/math/special_functions/factorials.hpp>
 #include <boost/math/special_functions/gamma.hpp>
+#include <boost/math/special_functions/hypergeometric_0F1.hpp>
+#include <boost/math/special_functions/hypergeometric_1F0.hpp>
+#include <boost/math/special_functions/hypergeometric_1F1.hpp>
+#include <boost/math/special_functions/hypergeometric_2F0.hpp>
 #include <boost/math/special_functions/jacobi.hpp>
 #include <boost/math/special_functions/legendre.hpp>
 #include <boost/math/special_functions/prime.hpp>
@@ -87,6 +91,26 @@ double math_gamma_p(double a, double x) { return gamma_p(a, x); }
 double math_gamma_p_inv(double a, double p) { return gamma_p_inv(a, p); }
 double math_gamma_p_inva(double x, double p) { return gamma_p_inva(x, p); }
 double math_gamma_p_derivative(double a, double x) { return gamma_p_derivative(a, x); }
+
+// boost/math/special_functions/hypergeometric_0F1.hpp
+double math_hypergeometric_0F1(double b, double x) { return hypergeometric_0F1(b, x); }
+
+// boost/math/special_functions/hypergeometric_1F0.hpp
+double math_hypergeometric_1F0(double a, double x) { return hypergeometric_1F0(a, x); }
+
+// boost/math/special_functions/hypergeometric_1F1.hpp
+double math_hypergeometric_1F1(double a, double b, double x) { return hypergeometric_1F1(a, b, x); }
+double math_hypergeometric_1F1_regularized(double a, double b, double x) {
+    return hypergeometric_1F1_regularized(a, b, x);
+}
+double math_log_hypergeometric_1F1(double a, double b, double x, int* sign) {
+    return log_hypergeometric_1F1(a, b, x, sign);
+}
+
+// boost/math/special_functions/hypergeometric_2F0.hpp
+double math_hypergeometric_2F0(double a1, double a2, double x) {
+    return hypergeometric_2F0(a1, a2, x);
+}
 
 // boost/math/special_functions/jacobi.hpp
 double math_jacobi(unsigned n, double alpha, double beta, double x) {
