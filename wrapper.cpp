@@ -17,6 +17,7 @@
     #define BOOST_MATH_DISABLE_FLOAT128
 #endif
 
+#include <boost/math/ccmath/sqrt.hpp>
 #include <boost/math/special_functions/bessel.hpp>
 #include <boost/math/special_functions/beta.hpp>
 #include <boost/math/special_functions/binomial.hpp>
@@ -90,6 +91,9 @@ inline double polygamma(const int n, double x) noexcept {
 using namespace boost::math;
 
 extern "C" {
+
+// boost/math/ccmath/sqrt.hpp
+double math_ccmath_sqrt(double x) { return ccmath::sqrt(x); }
 
 // boost/math/special_functions/bessel.hpp
 double math_cyl_bessel_j(double nu, double x) { return cyl_bessel_j(nu, x); }
@@ -207,7 +211,6 @@ double math_polygamma(const int n, double x) { return ::detail::polygamma(n, x);
 std::uint32_t math_prime(unsigned n) { return prime(n); }
 
 // boost/math/special_functions/rsqrt.hpp
-double math_sqrt(double x) { return sqrt(x); }
 double math_rsqrt(double x) { return rsqrt(x); }
 
 // boost/math/special_functions/sqrt1pm1.hpp
