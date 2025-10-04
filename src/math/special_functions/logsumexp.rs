@@ -25,7 +25,7 @@ pub fn logaddexp(x: f64, y: f64) -> f64 {
 #[doc(alias = "lse")]
 pub fn logsumexp(x: &[f64]) -> f64 {
     if x.is_empty() {
-        // special causing to avoid undefined behavior in Boost
+        // special casing to avoid undefined behavior in Boost
         f64::NEG_INFINITY
     } else {
         unsafe { ffi::math_logsumexp(x.as_ptr(), x.len()) }

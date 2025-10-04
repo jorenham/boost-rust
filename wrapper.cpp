@@ -186,7 +186,7 @@ void math_legendre_p_zeros(int l, double out[]) {
 }
 double math_legendre_q(unsigned l, double x) { return legendre_q(l, x); }
 
-// boost/math/special_functions/logasumexp.hpp>
+// boost/math/special_functions/logsumexp.hpp
 double math_logaddexp(double x1, double x2) { return logaddexp(x1, x2); }
 double math_logsumexp(const double args[], size_t len) { return logsumexp(args, args + len); }
 
