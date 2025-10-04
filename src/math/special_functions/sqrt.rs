@@ -5,8 +5,7 @@ use crate::ffi;
 
 /// Square root *√x*
 ///
-/// Corresponds to `boost::math::sqrt(x)` in C++.
-/// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/powers/rsqrt.html>
+/// Corresponds to `std::sqrt` in C++.
 pub fn sqrt(x: f64) -> f64 {
     unsafe { ffi::math_sqrt(x) }
 }

@@ -76,6 +76,9 @@ unsafe extern "C" {
     // boost/math/special_functions/hypergeometric_2F0.hpp
     pub fn math_hypergeometric_2F0(a1: f64, a2: f64, x: f64) -> f64;
 
+    // boost/math/special_functions/hypot.hpp
+    pub fn math_hypot(x: f64, y: f64) -> f64;
+
     // boost/math/special_functions/jacobi.hpp
     pub fn math_jacobi(n: c_uint, alpha: f64, beta: f64, x: f64) -> f64;
     pub fn math_jacobi_derivative(n: c_uint, alpha: f64, beta: f64, x: f64, k: c_uint) -> f64;

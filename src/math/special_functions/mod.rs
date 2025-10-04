@@ -7,6 +7,7 @@ pub mod erf;
 pub mod factorials;
 pub mod gamma;
 pub mod hypergeometric;
+pub mod hypot;
 pub mod jacobi;
 pub mod legendre;
 pub mod logsumexp;

@@ -29,6 +29,7 @@
 #include <boost/math/special_functions/hypergeometric_1F0.hpp>
 #include <boost/math/special_functions/hypergeometric_1F1.hpp>
 #include <boost/math/special_functions/hypergeometric_2F0.hpp>
+#include <boost/math/special_functions/hypot.hpp>
 #include <boost/math/special_functions/jacobi.hpp>
 #include <boost/math/special_functions/legendre.hpp>
 #include <boost/math/special_functions/logsumexp.hpp>
@@ -170,6 +171,9 @@ double math_log_hypergeometric_1F1(double a, double b, double x, int* sign) {
 double math_hypergeometric_2F0(double a1, double a2, double x) {
     return hypergeometric_2F0(a1, a2, x);
 }
+
+// boost/math/special_functions/hypot.hpp
+double math_hypot(double x, double y) { return boost::math::hypot(x, y); }
 
 // boost/math/special_functions/jacobi.hpp
 double math_jacobi(unsigned n, double alpha, double beta, double x) {
