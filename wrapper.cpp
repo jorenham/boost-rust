@@ -33,6 +33,7 @@
 #include <boost/math/special_functions/logsumexp.hpp>
 #include <boost/math/special_functions/polygamma.hpp>
 #include <boost/math/special_functions/prime.hpp>
+#include <boost/math/special_functions/rsqrt.hpp>
 #include <boost/math/special_functions/trigamma.hpp>
 #include <boost/math/special_functions/zeta.hpp>
 
@@ -195,6 +196,10 @@ double math_polygamma(const int n, double x) { return ::detail::polygamma(n, x);
 
 // boost/math/special_functions/prime.hpp
 std::uint32_t math_prime(unsigned n) { return prime(n); }
+
+// boost/math/special_functions/rsqrt.hpp
+double math_sqrt(double x) { return sqrt(x); }
+double math_rsqrt(double x) { return rsqrt(x); }
 
 // boost/math/special_functions/trigamma.hpp
 double math_trigamma(double x) { return ::detail::polygamma(1, x); }

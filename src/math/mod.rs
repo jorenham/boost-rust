@@ -197,7 +197,9 @@
 //! - [ ] `sqrt1pm1`
 //! - [ ] `powm1`
 //! - [ ] `hypot`
-//! - [ ] Reciprocal square root
+//! - [x] Reciprocal square root
+//!   - [`sqrt`]
+//!   - [`rsqrt`]
 //! - [x] [`logaddexp`] and [`logsumexp`]
 //!
 //! <h4>Sinus Cardinal and Hyperbolic Sinus Cardinal Functions</h4>
@@ -231,5 +233,6 @@ pub use special_functions::legendre::*;
 pub use special_functions::logsumexp::*;
 pub use special_functions::polygamma::*;
 pub use special_functions::prime::*;
+pub use special_functions::rsqrt::*;
 pub use special_functions::trigamma::*;
 pub use special_functions::zeta::*;

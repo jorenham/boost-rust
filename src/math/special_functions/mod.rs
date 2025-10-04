@@ -11,5 +11,6 @@ pub mod legendre;
 pub mod logsumexp;
 pub mod polygamma;
 pub mod prime;
+pub mod rsqrt;
 pub mod trigamma;
 pub mod zeta;

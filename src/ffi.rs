@@ -94,6 +94,10 @@ unsafe extern "C" {
     // boost/math/special_functions/prime.hpp
     pub fn math_prime(n: c_uint) -> u32;
 
+    // boost/math/special_functions/rsqrt.hpp
+    pub fn math_sqrt(x: f64) -> f64;
+    pub fn math_rsqrt(x: f64) -> f64;
+
     // boost/math/special_functions/trigamma.hpp
     pub fn math_trigamma(x: f64) -> f64;
 
