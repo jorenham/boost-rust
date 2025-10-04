@@ -8,5 +8,7 @@ pub mod gamma;
 pub mod hypergeometric;
 pub mod jacobi;
 pub mod legendre;
+pub mod polygamma;
 pub mod prime;
+pub mod trigamma;
 pub mod zeta;

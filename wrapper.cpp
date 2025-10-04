@@ -4,13 +4,16 @@
     // https://www.boost.org/doc/libs/latest/boost/math/tools/user.hpp
     #define BOOST_MATH_TOOLS_USER_HPP
     #define BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS
-    #define BOOST_MATH_DOMAIN_ERROR_POLICY errno_on_error
-    #define BOOST_MATH_POLE_ERROR_POLICY errno_on_error
-    #define BOOST_MATH_OVERFLOW_ERROR_POLICY errno_on_error
-    #define BOOST_MATH_EVALUATION_ERROR_POLICY throw_on_error
+    #define BOOST_MATH_DOMAIN_ERROR_POLICY ignore_error
+    #define BOOST_MATH_POLE_ERROR_POLICY ignore_error
+    #define BOOST_MATH_EVALUATION_ERROR_POLICY ignore_error
+    #define BOOST_MATH_OVERFLOW_ERROR_POLICY ignore_error
     #define BOOST_MATH_UNDERFLOW_ERROR_POLICY ignore_error
     #define BOOST_MATH_DENORM_ERROR_POLICY ignore_error
+    // #define BOOST_MATH_PROMOTE_FLOAT_POLICY false
+    #define BOOST_MATH_PROMOTE_DOUBLE_POLICY false
     #define BOOST_MATH_ASSERT_UNDEFINED_POLICY true
+    #define BOOST_MATH_MAX_ROOT_ITERATION_POLICY 400
     #define BOOST_MATH_DISABLE_FLOAT128
 #endif
 
@@ -27,8 +30,61 @@
 #include <boost/math/special_functions/hypergeometric_2F0.hpp>
 #include <boost/math/special_functions/jacobi.hpp>
 #include <boost/math/special_functions/legendre.hpp>
+#include <boost/math/special_functions/polygamma.hpp>
 #include <boost/math/special_functions/prime.hpp>
+#include <boost/math/special_functions/trigamma.hpp>
 #include <boost/math/special_functions/zeta.hpp>
+
+namespace detail {
+
+inline double polygamma(const int n, double x) {
+    // workaround for incorrect boost::math::polygamma values for infinities and NaNs
+    if (std::isinf(x)) {
+        if (x < 0) {
+            // polygamma does not converge in the limit for negative infinity
+            return std::numeric_limits<double>::quiet_NaN();
+        } else if (n == 0) {
+            // polygamma(0, ∞) = ∞ in the limit
+            return std::numeric_limits<double>::infinity();
+        } else {
+            // polygamma(n, ∞) = 0 in the limit for n > 0
+            if (n % 2) {
+                return 0.0; // even
+            } else {
+                return -0.0; // odd
+            }
+        }
+    } else if (x <= 0 && floor(x) == x) {
+        if (n % 2) {
+            // polygamma(n, -m) = +∞ for `n` odd and `m` a non-negative integer
+            return std::numeric_limits<double>::infinity();
+        } else {
+            // polygamma(n, -m) is singular for `n` even and `m` a non-negative integer
+            return std::numeric_limits<double>::quiet_NaN();
+        }
+    }
+
+    // workaround for n>=2 throwing exceptions for NaN inputs
+    if (std::isnan(x)) {
+        return std::numeric_limits<double>::quiet_NaN();
+    }
+
+    if (n == -1) {
+        // special case: polygamma(-1, x) = log(gamma(x))
+        return boost::math::lgamma(x);
+    } else if (n < -1) {
+        // analytical continuation not implemented by boost::math::polygamma
+        return std::numeric_limits<double>::quiet_NaN();
+    }
+
+    try {
+        return boost::math::polygamma(n, x);
+    } catch (...) {
+        return std::numeric_limits<double>::quiet_NaN();
+    }
+}
+
+} // namespace detail
 
 using namespace boost::math;
 
@@ -62,7 +118,7 @@ double math_binomial_coefficient(unsigned n, unsigned k) {
 }
 
 // boost/math/special_functions/digamma.hpp
-double math_digamma(double x) { return digamma(x); }
+double math_digamma(double x) { return ::detail::polygamma(0, x); }
 
 // boost/math/special_functions/erf.hpp
 double math_erf(double x) { return erf(x); }
@@ -133,8 +189,14 @@ void math_legendre_p_zeros(int l, double* out) {
 }
 double math_legendre_q(unsigned l, double x) { return legendre_q(l, x); }
 
+// boost/math/special_functions/polygamma.hpp
+double math_polygamma(const int n, double x) { return ::detail::polygamma(n, x); }
+
 // boost/math/special_functions/prime.hpp
 std::uint32_t math_prime(unsigned n) { return prime(n); }
+
+// boost/math/special_functions/trigamma.hpp
+double math_trigamma(double x) { return ::detail::polygamma(1, x); }
 
 // boost/math/special_functions/zeta.hpp
 double math_zeta(double s) { return zeta(s); }
