@@ -95,9 +95,9 @@ mod tests {
         ); // +0
 
         for x in [0.0, -1.0, -2.0] {
-            assert!(polygamma(0, x).is_nan()); // intedeterminate
+            assert!(polygamma(0, x).is_nan()); // indeterminate
             assert!(is_pinf(polygamma(1, x))); // +∞
-            assert!(polygamma(2, 0.0).is_nan()); // intedeterminate
+            assert!(polygamma(2, 0.0).is_nan()); // indeterminate
             assert!(is_pinf(polygamma(3, x))); // +∞
         }
     }

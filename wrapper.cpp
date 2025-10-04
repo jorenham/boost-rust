@@ -49,9 +49,9 @@ inline double polygamma(const int n, double x) {
         } else {
             // polygamma(n, ∞) = 0 in the limit for n > 0
             if (n % 2) {
-                return 0.0; // even
+                return 0.0; // odd
             } else {
-                return -0.0; // odd
+                return -0.0; // even
             }
         }
     } else if (x <= 0 && floor(x) == x) {
