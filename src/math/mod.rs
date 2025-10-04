@@ -187,7 +187,7 @@
 //!   - [`log_hypergeometric_1f1`]
 //! - [ ] ~Hypergeometric *<sub>p</sub>F<sub>q</sub>*~ (not included due to bugs in Boost)
 //!
-//! <h4>Basic Functions</h4>
+//! ### Basic Functions
 //!
 //! - [ ] `sin_pi`
 //! - [ ] `cos_pi`
@@ -198,7 +198,7 @@
 //! - [ ] `powm1`
 //! - [ ] `hypot`
 //! - [ ] Reciprocal square root
-//! - [ ] `logaddexp` and `logsumexp`
+//! - [x] [`logaddexp`] and [`logsumexp`]
 //!
 //! <h4>Sinus Cardinal and Hyperbolic Sinus Cardinal Functions</h4>
 //!
@@ -228,6 +228,7 @@ pub use special_functions::gamma::*;
 pub use special_functions::hypergeometric::*;
 pub use special_functions::jacobi::*;
 pub use special_functions::legendre::*;
+pub use special_functions::logsumexp::*;
 pub use special_functions::polygamma::*;
 pub use special_functions::prime::*;
 pub use special_functions::trigamma::*;
