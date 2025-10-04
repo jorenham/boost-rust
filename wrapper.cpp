@@ -37,7 +37,7 @@
 
 namespace detail {
 
-inline double polygamma(const int n, double x) {
+inline double polygamma(const int n, double x) noexcept {
     // workaround for incorrect boost::math::polygamma values for infinities and NaNs
     if (std::isinf(x)) {
         if (x < 0) {
@@ -77,11 +77,7 @@ inline double polygamma(const int n, double x) {
         return std::numeric_limits<double>::quiet_NaN();
     }
 
-    try {
-        return boost::math::polygamma(n, x);
-    } catch (...) {
-        return std::numeric_limits<double>::quiet_NaN();
-    }
+    return boost::math::polygamma(n, x);
 }
 
 } // namespace detail
