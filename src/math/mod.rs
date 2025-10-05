@@ -85,18 +85,19 @@
 //!   - [`legendre_p_zeros`]
 //!   - [`legendre_p_assoc`]
 //!   - [`legendre_q`]
-//! - [ ] ~Legendre-Stieltjes Polynomials~
-//! - [ ] Laguerre (and Associated) Polynomials
-//! - [ ] Hermite Polynomials
-//! - [ ] Chebyshev Polynomials
-//! - [ ] Spherical Harmonics
-//! - [ ] Cardinal B-splines
-//! - [ ] Gegenbauer Polynomials
 //! - [x] Jacobi Polynomials
 //!   - [`jacobi`]
 //!   - [`jacobi_derivative`]
 //!   - ~`jacobi_prime`~
 //!   - ~`jacobi_double_prime`~
+//! - [x] Laguerre (and Associated) Polynomials
+//!   - [`laguerre`]
+//!   - [`laguerre_assoc`]
+//! - [ ] Hermite Polynomials
+//! - [ ] Chebyshev Polynomials
+//! - [ ] Gegenbauer Polynomials
+//! - [ ] Spherical Harmonics
+//! - [ ] Cardinal B-splines
 //!
 //! ### Bessel Functions
 //! - [x] Bessel Functions of the First and Second Kinds
@@ -234,6 +235,7 @@ pub use special_functions::gamma::*;
 pub use special_functions::hypergeometric::*;
 pub use special_functions::hypot::*;
 pub use special_functions::jacobi::*;
+pub use special_functions::laguerre::*;
 pub use special_functions::legendre::*;
 pub use special_functions::log1p::*;
 pub use special_functions::logsumexp::*;

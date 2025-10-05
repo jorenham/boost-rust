@@ -92,6 +92,10 @@ unsafe extern "C" {
     pub fn math_jacobi(n: c_uint, alpha: f64, beta: f64, x: f64) -> f64;
     pub fn math_jacobi_derivative(n: c_uint, alpha: f64, beta: f64, x: f64, k: c_uint) -> f64;
 
+    // boost/math/special_functions/laguerre.hpp
+    pub fn math_laguerre(n: c_uint, x: f64) -> f64;
+    pub fn math_laguerre_assoc(n: c_uint, m: c_uint, x: f64) -> f64;
+
     // boost/math/special_functions/legendre.hpp
     pub fn math_legendre_p(l: c_int, x: f64) -> f64;
     pub fn math_legendre_p_assoc(l: c_int, m: c_int, x: f64) -> f64;
