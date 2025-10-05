@@ -19,6 +19,7 @@ pub fn cyl_bessel_j(nu: f64, x: f64) -> f64 {
 /// Corresponds to `boost::math::cyl_bessel_j_zero` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/bessel/bessel_root.html>
 pub fn cyl_bessel_j_zero(nu: f64, k: u32) -> f64 {
+    assert!(k < c_int::MAX as u32);
     // The +1 is because Boost uses 1-based indexing
     unsafe { ffi::math_cyl_bessel_j_zero(nu, (k + 1) as c_int) }
 }
@@ -39,6 +40,7 @@ pub fn cyl_neumann(nu: f64, x: f64) -> f64 {
 /// Corresponds to `boost::math::cyl_neumann_zero` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/bessel/bessel_root.html>
 pub fn cyl_neumann_zero(nu: f64, k: u32) -> f64 {
+    assert!(k < c_int::MAX as u32);
     // The +1 is because Boost uses 1-based indexing
     unsafe { ffi::math_cyl_neumann_zero(nu, (k + 1) as c_int) }
 }
