@@ -23,6 +23,62 @@ pub fn laguerre_assoc(n: u32, m: u32, x: f64) -> f64 {
     unsafe { ffi::math_laguerre_assoc(n as c_uint, m as c_uint, x) }
 }
 
+/// Recurrence relation for [`laguerre`]
+///
+/// *(n+1)L<sub>n+1</sub>(x) = (2n+1-x)L<sub>n</sub>(x) - nL<sub>n-1</sub>(x)*
+///
+/// # Examples
+///
+/// ```
+/// # use boost::math::{laguerre, laguerre_next};
+/// let x = 0.42;
+/// let l0 = laguerre(0, x); // 1
+/// let l1 = laguerre(1, x); // -x + 1
+/// let l2 = laguerre(2, x); // (x² - -4x + 2) / 2
+/// let l3 = laguerre(3, x); // (-x³ + 9x² - 18x + 6) / 6
+/// assert_eq!(laguerre_next(1, &x, &l1, &l0), l2);
+/// assert_eq!(laguerre_next(2, &x, &l2, &l1), l3);
+/// ```
+///
+/// # See also
+///
+/// - [`laguerre`]
+/// - [`laguerre_assoc_next`]
+#[allow(non_snake_case)]
+#[inline(always)]
+pub fn laguerre_next(n: u32, x: &f64, Ln: &f64, Ln_1: &f64) -> f64 {
+    laguerre_assoc_next(n, 0, x, Ln, Ln_1)
+}
+
+/// Recurrence relation for [`laguerre_assoc`]
+///
+/// *(n+1)L<sub>n+1</sub><sup>m</sup>(x)
+/// = (2n+m+1-x)L<sub>n</sub><sup>m</sup>(x) - (n+m)L<sub>n-1</sub><sup>m</sup>(x)*
+///
+/// # Examples
+///
+/// ```
+/// # use boost::math::{laguerre_assoc, laguerre_assoc_next};
+/// let m = 3;
+/// let x = 0.42;
+/// let l0 = laguerre_assoc(0, m, x);
+/// let l1 = laguerre_assoc(1, m, x);
+/// let l2 = laguerre_assoc(2, m, x);
+/// let l3 = laguerre_assoc(3, m, x);
+/// assert_eq!(laguerre_assoc_next(1, m, &x, &l1, &l0), l2);
+/// assert_eq!(laguerre_assoc_next(2, m, &x, &l2, &l1), l3);
+/// ```
+///
+/// # See also
+///
+/// - [`laguerre_assoc`]
+/// - [`laguerre_next`]
+#[allow(non_snake_case)]
+#[inline(always)]
+pub fn laguerre_assoc_next(n: u32, m: u32, x: &f64, Ln: &f64, Ln_1: &f64) -> f64 {
+    (((2 * n + m + 1) as f64 - x) * Ln - (n + m) as f64 * Ln_1) / (n + 1) as f64
+}
+
 #[cfg(test)]
 mod tests {
     use crate::math::{laguerre, laguerre_assoc};
