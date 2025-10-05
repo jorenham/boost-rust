@@ -28,6 +28,7 @@
 #include <boost/math/special_functions/expm1.hpp>
 #include <boost/math/special_functions/factorials.hpp>
 #include <boost/math/special_functions/gamma.hpp>
+#include <boost/math/special_functions/hermite.hpp>
 #include <boost/math/special_functions/hypergeometric_0F1.hpp>
 #include <boost/math/special_functions/hypergeometric_1F0.hpp>
 #include <boost/math/special_functions/hypergeometric_1F1.hpp>
@@ -165,6 +166,9 @@ double math_gamma_p(double a, double x) { return gamma_p(a, x); }
 double math_gamma_p_inv(double a, double p) { return gamma_p_inv(a, p); }
 double math_gamma_p_inva(double x, double p) { return gamma_p_inva(x, p); }
 double math_gamma_p_derivative(double a, double x) { return gamma_p_derivative(a, x); }
+
+// boost/math/special_functions/hermite.hpp
+double math_hermite(unsigned n, double x) { return hermite(n, x); }
 
 // boost/math/special_functions/hypergeometric_0F1.hpp
 double math_hypergeometric_0F1(double b, double x) { return hypergeometric_0F1(b, x); }

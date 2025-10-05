@@ -71,6 +71,9 @@ unsafe extern "C" {
     pub fn math_gamma_p_inva(x: f64, p: f64) -> f64;
     pub fn math_gamma_p_derivative(a: f64, x: f64) -> f64;
 
+    // boost/math/special_functions/hermite.hpp
+    pub fn math_hermite(n: c_uint, x: f64) -> f64;
+
     // boost/math/special_functions/hypergeometric_0F1.hpp
     pub fn math_hypergeometric_0F1(b: f64, x: f64) -> f64;
 
