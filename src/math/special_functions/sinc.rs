@@ -1,4 +1,4 @@
-//! boost/math/special_functions/sin_pi.hpp
+//! boost/math/special_functions/sinc.hpp
 
 use crate::ffi;
 
