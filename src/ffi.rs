@@ -23,7 +23,9 @@ unsafe extern "C" {
 
     // boost/math/special_functions/bessel.hpp
     pub fn math_cyl_bessel_j(nu: f64, x: f64) -> f64;
+    pub fn math_cyl_bessel_j_zero(nu: f64, k: c_int) -> f64;
     pub fn math_cyl_neumann(nu: f64, x: f64) -> f64;
+    pub fn math_cyl_neumann_zero(nu: f64, k: c_int) -> f64;
     pub fn math_cyl_bessel_i(nu: f64, x: f64) -> f64;
     pub fn math_cyl_bessel_k(nu: f64, x: f64) -> f64;
     pub fn math_sph_bessel(n: c_uint, x: f64) -> f64;

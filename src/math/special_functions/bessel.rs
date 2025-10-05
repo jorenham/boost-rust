@@ -1,24 +1,46 @@
 //! boost/math/special_functions/bessel.hpp
-//!
-//! # TODO:
-//! - `cyl_bessel_j_zero`
-//! - `cyl_neumann_zero`
+
+use core::ffi::c_int;
 
 use crate::ffi;
 
 /// Cylindrical Bessel function of the 1st kind *J<sub>ν</sub>(x)*
 ///
+/// Coorresponds to `boost::math::cyl_bessel_j` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/bessel/bessel_first.html>
 pub fn cyl_bessel_j(nu: f64, x: f64) -> f64 {
     unsafe { ffi::math_cyl_bessel_j(nu, x) }
 }
 
+/// The *k*<sup>th</sup> positive zero of [`cyl_bessel_j`]
+///
+/// Zero-based indexing: `cyl_bessel_j_zero(nu, 0)` is the first zero.
+///
+/// Coorresponds to `boost::math::cyl_bessel_j_zero` in C++.
+/// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/bessel/bessel_root.html>
+pub fn cyl_bessel_j_zero(nu: f64, k: u32) -> f64 {
+    // The +1 is because Boost uses 1-based indexing
+    unsafe { ffi::math_cyl_bessel_j_zero(nu, (k + 1) as c_int) }
+}
+
 /// Cylindrical Bessel function of the 2nd kind *Y<sub>ν</sub>(x)* (Neumann function)
 ///
+/// Coorresponds to `boost::math::cyl_neumann` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/bessel/bessel_first.html>
 #[doc(alias = "cyl_bessel_y")]
 pub fn cyl_neumann(nu: f64, x: f64) -> f64 {
     unsafe { ffi::math_cyl_neumann(nu, x) }
+}
+
+/// The *k*<sup>th</sup> positive zero of [`cyl_neumann`]
+///
+/// Zero-based indexing: `cyl_neumann_zero(nu, 0)` is the first zero.
+///
+/// Coorresponds to `boost::math::cyl_neumann_zero` in C++.
+/// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/bessel/bessel_root.html>
+pub fn cyl_neumann_zero(nu: f64, k: u32) -> f64 {
+    // The +1 is because Boost uses 1-based indexing
+    unsafe { ffi::math_cyl_neumann_zero(nu, (k + 1) as c_int) }
 }
 
 /// Modified cylindrical Bessel function of the 1st kind *I<sub>ν</sub>(x)*
@@ -61,8 +83,18 @@ mod tests {
     }
 
     #[test]
+    fn test_cyl_bessel_j_zero() {
+        assert_relative_eq!(cyl_bessel_j_zero(0.0, 0), 2.404_825_557_695_773);
+    }
+
+    #[test]
     fn test_cyl_neumann() {
         assert_abs_diff_eq!(cyl_neumann(-1.0, 0.781078), 1.0, epsilon = 1e-7);
+    }
+
+    #[test]
+    fn test_cyl_neumann_zero() {
+        assert_relative_eq!(cyl_neumann_zero(0.0, 0), 0.893_576_966_279_167_5);
     }
 
     #[test]
