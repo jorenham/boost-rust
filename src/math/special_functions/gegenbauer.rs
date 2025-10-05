@@ -1,4 +1,4 @@
-//! boost/math/special_functions/laguerre.hpp
+//! boost/math/special_functions/gegenbauer.hpp
 
 use crate::ffi;
 use core::ffi::c_uint;
