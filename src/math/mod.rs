@@ -90,6 +90,8 @@
 //!   - [`legendre_p_zeros`]
 //!   - [`legendre_p_assoc`]
 //!   - [`legendre_q`]
+//!   - [`legendre_next`]
+//!   - [`legendre_assoc_next`]
 //! - [x] Laguerre (and Associated) Polynomials
 //!   - [`laguerre`]
 //!   - [`laguerre_assoc`]
