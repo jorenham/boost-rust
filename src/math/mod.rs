@@ -189,7 +189,7 @@
 //!
 //! ### Basic Functions
 //!
-//! - [ ] `sin_pi` and `cos_pi`
+//! - [x] [`sin_pi`] and [`cos_pi`]
 //! - [x] [`log1p`] and [`expm1`]
 //! - [x] [`powm1`]
 //! - [x] [`rsqrt`]
@@ -225,6 +225,7 @@ pub use special_functions::bessel::*;
 pub use special_functions::beta::*;
 pub use special_functions::binomial::*;
 pub use special_functions::cbrt::*;
+pub use special_functions::cos_pi::*;
 pub use special_functions::digamma::*;
 pub use special_functions::erf::*;
 pub use special_functions::expm1::*;
@@ -240,6 +241,7 @@ pub use special_functions::polygamma::*;
 pub use special_functions::powm1::*;
 pub use special_functions::prime::*;
 pub use special_functions::rsqrt::*;
+pub use special_functions::sin_pi::*;
 pub use special_functions::sqrt1pm1::*;
 pub use special_functions::trigamma::*;
 pub use special_functions::zeta::*;

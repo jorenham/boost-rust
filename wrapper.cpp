@@ -23,6 +23,7 @@
 #include <boost/math/special_functions/beta.hpp>
 #include <boost/math/special_functions/binomial.hpp>
 #include <boost/math/special_functions/cbrt.hpp>
+#include <boost/math/special_functions/cos_pi.hpp>
 #include <boost/math/special_functions/erf.hpp>
 #include <boost/math/special_functions/expm1.hpp>
 #include <boost/math/special_functions/factorials.hpp>
@@ -40,6 +41,7 @@
 #include <boost/math/special_functions/powm1.hpp>
 #include <boost/math/special_functions/prime.hpp>
 #include <boost/math/special_functions/rsqrt.hpp>
+#include <boost/math/special_functions/sin_pi.hpp>
 #include <boost/math/special_functions/sqrt1pm1.hpp>
 #include <boost/math/special_functions/zeta.hpp>
 
@@ -126,6 +128,9 @@ double math_binomial_coefficient(unsigned n, unsigned k) {
 
 // boost/math/special_functions/cbrt.hpp
 double math_cbrt(double x) { return boost::math::cbrt(x); }
+
+// boost/math/special_functions/cos_pi.hpp
+double math_cos_pi(double x) { return boost::math::cos_pi(x); }
 
 // boost/math/special_functions/erf.hpp
 double math_erf(double x) { return boost::math::erf(x); }
@@ -222,6 +227,9 @@ std::uint32_t math_prime(unsigned n) { return prime(n); }
 
 // boost/math/special_functions/rsqrt.hpp
 double math_rsqrt(double x) { return rsqrt(x); }
+
+// boost/math/special_functions/sin_pi.hpp
+double math_sin_pi(double x) { return sin_pi(x); }
 
 // boost/math/special_functions/sqrt1pm1.hpp
 double math_sqrt1pm1(double x) { return sqrt1pm1(x); }
