@@ -18,12 +18,13 @@
 #endif
 
 #include <boost/math/ccmath/sqrt.hpp>
+
 #include <boost/math/special_functions/bessel.hpp>
 #include <boost/math/special_functions/beta.hpp>
 #include <boost/math/special_functions/binomial.hpp>
 #include <boost/math/special_functions/cbrt.hpp>
-#include <boost/math/special_functions/digamma.hpp>
 #include <boost/math/special_functions/erf.hpp>
+#include <boost/math/special_functions/expm1.hpp>
 #include <boost/math/special_functions/factorials.hpp>
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/math/special_functions/hypergeometric_0F1.hpp>
@@ -33,12 +34,13 @@
 #include <boost/math/special_functions/hypot.hpp>
 #include <boost/math/special_functions/jacobi.hpp>
 #include <boost/math/special_functions/legendre.hpp>
+#include <boost/math/special_functions/log1p.hpp>
 #include <boost/math/special_functions/logsumexp.hpp>
 #include <boost/math/special_functions/polygamma.hpp>
+#include <boost/math/special_functions/powm1.hpp>
 #include <boost/math/special_functions/prime.hpp>
 #include <boost/math/special_functions/rsqrt.hpp>
 #include <boost/math/special_functions/sqrt1pm1.hpp>
-#include <boost/math/special_functions/trigamma.hpp>
 #include <boost/math/special_functions/zeta.hpp>
 
 namespace detail {
@@ -123,16 +125,16 @@ double math_binomial_coefficient(unsigned n, unsigned k) {
 }
 
 // boost/math/special_functions/cbrt.hpp
-double math_cbrt(double x) { return cbrt(x); }
-
-// boost/math/special_functions/digamma.hpp
-double math_digamma(double x) { return ::detail::polygamma(0, x); }
+double math_cbrt(double x) { return boost::math::cbrt(x); }
 
 // boost/math/special_functions/erf.hpp
-double math_erf(double x) { return erf(x); }
-double math_erfc(double x) { return erfc(x); }
+double math_erf(double x) { return boost::math::erf(x); }
+double math_erfc(double x) { return boost::math::erfc(x); }
 double math_erf_inv(double p) { return erf_inv(p); }
 double math_erfc_inv(double q) { return erfc_inv(q); }
+
+// boost/math/special_functions/expm1.hpp
+double math_expm1(double x) { return boost::math::expm1(x); }
 
 // boost/math/special_functions/factorials.hpp
 double math_factorial(unsigned i) { return factorial<double>(i); }
@@ -141,9 +143,9 @@ double math_falling_factorial(double x, unsigned n) { return falling_factorial(x
 double math_rising_factorial(double x, int n) { return rising_factorial(x, n); }
 
 // boost/math/special_functions/gamma.hpp
-double math_tgamma(double x) { return tgamma(x); }
+double math_tgamma(double x) { return boost::math::tgamma(x); }
+double math_tgamma_(double a, double x) { return boost::math::tgamma(a, x); }
 double math_tgamma1pm1(double x) { return tgamma1pm1(x); }
-double math_tgamma_(double a, double x) { return tgamma(a, x); }
 double math_tgamma_lower(double a, double x) { return tgamma_lower(a, x); }
 double math_tgamma_ratio(double a, double b) { return tgamma_ratio(a, b); }
 double math_tgamma_delta_ratio(double x, double delta) { return tgamma_delta_ratio(x, delta); }
@@ -200,12 +202,20 @@ void math_legendre_p_zeros(int l, double out[]) {
 }
 double math_legendre_q(unsigned l, double x) { return legendre_q(l, x); }
 
+// boost/math/special_functions/log1p.hpp
+double math_log1p(double x) { return boost::math::log1p(x); }
+
 // boost/math/special_functions/logsumexp.hpp
 double math_logaddexp(double x1, double x2) { return logaddexp(x1, x2); }
 double math_logsumexp(const double args[], size_t len) { return logsumexp(args, args + len); }
 
 // boost/math/special_functions/polygamma.hpp
+double math_digamma(double x) { return ::detail::polygamma(0, x); }
+double math_trigamma(double x) { return ::detail::polygamma(1, x); }
 double math_polygamma(const int n, double x) { return ::detail::polygamma(n, x); }
+
+// boost/math/special_functions/powm1.hpp
+double math_powm1(double x, double y) { return powm1(x, y); }
 
 // boost/math/special_functions/prime.hpp
 std::uint32_t math_prime(unsigned n) { return prime(n); }
@@ -215,9 +225,6 @@ double math_rsqrt(double x) { return rsqrt(x); }
 
 // boost/math/special_functions/sqrt1pm1.hpp
 double math_sqrt1pm1(double x) { return sqrt1pm1(x); }
-
-// boost/math/special_functions/trigamma.hpp
-double math_trigamma(double x) { return ::detail::polygamma(1, x); }
 
 // boost/math/special_functions/zeta.hpp
 double math_zeta(double s) { return zeta(s); }
