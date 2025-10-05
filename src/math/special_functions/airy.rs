@@ -30,7 +30,7 @@ pub fn airy_ai_prime(x: f64) -> f64 {
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/airy/ai.html>
 pub fn airy_ai_zero(k: u32) -> f64 {
     // The +1 is because Boost uses 1-based indexing
-    unsafe { ffi::math_airy_ai_zero(k as c_int + 1) }
+    unsafe { ffi::math_airy_ai_zero((k + 1) as c_int) }
 }
 
 /// Airy function *Bi(x)*
@@ -57,7 +57,7 @@ pub fn airy_bi_prime(x: f64) -> f64 {
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/airy/bi.html>
 pub fn airy_bi_zero(k: u32) -> f64 {
     // The +1 is because Boost uses 1-based indexing
-    unsafe { ffi::math_airy_bi_zero(k as c_int + 1) }
+    unsafe { ffi::math_airy_bi_zero((k + 1) as c_int) }
 }
 
 #[cfg(test)]
