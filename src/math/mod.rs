@@ -179,10 +179,12 @@
 //! - [x] Riemann zeta function
 //!   - [`zeta`]
 //!
-//! <h4>Exponential Integrals</h4>
+//! ### Exponential Integrals
 //!
-//! - [ ] Exponential Integral *En*
-//! - [ ] Exponential Integral *Ei*
+//! - [x] Exponential Integral *Ei(x)*
+//!   - [`expint_i`]
+//! - [x] Exponential Integral *E<sub>n</sub>(x)*
+//!   - [`expint_n`]
 //!
 //! ### Hypergeometric Functions
 //!
@@ -240,6 +242,7 @@ pub use special_functions::chebyshev::*;
 pub use special_functions::cos_pi::*;
 pub use special_functions::digamma::*;
 pub use special_functions::erf::*;
+pub use special_functions::expint::*;
 pub use special_functions::expm1::*;
 pub use special_functions::factorials::*;
 pub use special_functions::gamma::*;

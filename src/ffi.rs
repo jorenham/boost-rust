@@ -51,6 +51,10 @@ unsafe extern "C" {
     pub fn math_erf_inv(p: f64) -> f64;
     pub fn math_erfc_inv(q: f64) -> f64;
 
+    // boost/math/special_functions/expint.hpp
+    pub fn math_expint_i(x: f64) -> f64;
+    pub fn math_expint_n(n: c_uint, x: f64) -> f64;
+
     // boost/math/special_functions/expm1.hpp
     pub fn math_expm1(x: f64) -> f64;
 
