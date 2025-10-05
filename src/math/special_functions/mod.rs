@@ -1,4 +1,7 @@
+pub mod acosh;
 pub mod airy;
+pub mod asinh;
+pub mod atanh;
 pub mod bessel;
 pub mod beta;
 pub mod binomial;

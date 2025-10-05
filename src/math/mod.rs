@@ -221,11 +221,11 @@
 //! - [x] [`sinc_pi`]
 //! - [x] [`sinhc_pi`]
 //!
-//! <h4>Inverse Hyperbolic Functions</h4>
+//! ### Inverse Hyperbolic Functions
 //!
-//! - [ ] `acosh`
-//! - [ ] `asinh`
-//! - [ ] `atanh`
+//! - [x] [`acosh`]
+//! - [x] [`asinh`]
+//! - [x] [`atanh`]
 //!
 //! ### Owen's T Function
 //!
@@ -239,7 +239,10 @@
 pub mod ccmath;
 mod special_functions;
 
+pub use special_functions::acosh::*;
 pub use special_functions::airy::*;
+pub use special_functions::asinh::*;
+pub use special_functions::atanh::*;
 pub use special_functions::bessel::*;
 pub use special_functions::beta::*;
 pub use special_functions::binomial::*;
