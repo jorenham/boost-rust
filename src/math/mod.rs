@@ -192,7 +192,6 @@
 //! - [ ] `sin_pi`
 //! - [ ] `cos_pi`
 //! - [ ] `powm1`
-//! - [x] [`sqrt`]
 //! - [x] [`rsqrt`]
 //! - [x] [`sqrt1pm1`]
 //! - [x] [`cbrt`]
@@ -216,7 +215,12 @@
 //!
 //! - [ ] `owens_t`
 //!
+//! ### Constexpr CMath
+//!
+//! [`ccmath`]
+//!
 
+pub mod ccmath;
 mod special_functions;
 
 pub use special_functions::bessel::*;
@@ -234,6 +238,7 @@ pub use special_functions::legendre::*;
 pub use special_functions::logsumexp::*;
 pub use special_functions::polygamma::*;
 pub use special_functions::prime::*;
-pub use special_functions::sqrt::*;
+pub use special_functions::rsqrt::*;
+pub use special_functions::sqrt1pm1::*;
 pub use special_functions::trigamma::*;
 pub use special_functions::zeta::*;

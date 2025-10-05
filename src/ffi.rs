@@ -3,6 +3,9 @@
 use core::ffi::{c_int, c_uint};
 
 unsafe extern "C" {
+    // boost/math/ccmath/sqrt.hpp
+    pub fn math_ccmath_sqrt(x: f64) -> f64;
+
     // boost/math/special_functions/bessel.hpp
     pub fn math_cyl_bessel_j(nu: f64, x: f64) -> f64;
     pub fn math_cyl_neumann(nu: f64, x: f64) -> f64;
@@ -101,7 +104,6 @@ unsafe extern "C" {
     pub fn math_prime(n: c_uint) -> u32;
 
     // boost/math/special_functions/rsqrt.hpp
-    pub fn math_sqrt(x: f64) -> f64;
     pub fn math_rsqrt(x: f64) -> f64;
 
     // boost/math/special_functions/sqrt1pm1.hpp
