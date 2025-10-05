@@ -129,7 +129,9 @@ double math_airy_bi_zero(int m) { return airy_bi_zero<double>(m); }
 
 // boost/math/special_functions/bessel.hpp
 double math_cyl_bessel_j(double nu, double x) { return cyl_bessel_j(nu, x); }
+double math_cyl_bessel_j_zero(double nu, int k) { return cyl_bessel_j_zero(nu, k); }
 double math_cyl_neumann(double nu, double x) { return cyl_neumann(nu, x); }
+double math_cyl_neumann_zero(double nu, int k) { return cyl_neumann_zero(nu, k); }
 double math_cyl_bessel_i(double nu, double x) { return cyl_bessel_i(nu, x); }
 double math_cyl_bessel_k(double nu, double x) { return cyl_bessel_k(nu, x); }
 double math_sph_bessel(unsigned n, double x) { return sph_bessel(n, x); }

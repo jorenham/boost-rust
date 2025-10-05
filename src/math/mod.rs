@@ -110,16 +110,19 @@
 //! - [ ] Cardinal B-splines
 //!
 //! ### Bessel Functions
-//! - [x] Bessel Functions of the First and Second Kinds
+//! - [x] Bessel Functions
 //!   - [`cyl_bessel_j`]
 //!   - [`cyl_neumann`]
-//! - [x] Modified Bessel Functions of the First and Second Kinds
+//! - [x] Zeros of Bessel Functions
+//!   - [`cyl_bessel_j_zero`]
+//!   - [`cyl_neumann_zero`]
+//! - [x] Modified Bessel Functions
 //!   - [`cyl_bessel_i`]
 //!   - [`cyl_bessel_k`]
-//! - [x] Spherical Bessel Functions of the First and Second Kinds
+//! - [x] Spherical Bessel Functions
 //!   - [`sph_bessel`]
 //!   - [`sph_neumann`]
-//! - [ ] Derivatives of the Bessel Functions
+//! - [ ] Derivatives of Bessel Functions
 //!
 //! <h4>Hankel Functions</h4>
 //!
@@ -139,6 +142,7 @@
 //! - [x] Finding Zeros of Airy Functions
 //!   - [`airy_ai_zero`]
 //!   - [`airy_bi_zero`]
+//!
 //! <h4>Elliptic Integrals</h4>
 //!
 //! - [ ] Elliptic Integrals - Carlson Form
@@ -231,7 +235,7 @@
 //!
 //! - [x] [`owens_t`]
 //!
-//! ### Constexpr CMath
+//! ## Constexpr CMath
 //!
 //! See [`ccmath`]
 //!
