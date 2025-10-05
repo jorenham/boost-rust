@@ -72,35 +72,45 @@ mod tests {
         sph_bessel_prime, sph_neumann_prime,
     };
 
+    const EPS: f64 = 1e-15;
+
     // values from Wolfram Alpha
 
     #[test]
     fn test_cyl_bessel_j_prime() {
-        assert_relative_eq!(cyl_bessel_j_prime(0.0, 1.0), -0.440_050_585_744_933_5);
+        assert_abs_diff_eq!(cyl_bessel_j_prime(0.0, 1.0), -0.440_050_585_744_933_5);
     }
 
     #[test]
     fn test_cyl_neumann_prime() {
-        assert_relative_eq!(cyl_neumann_prime(0.0, 1.0), 0.781_212_821_300_288_7);
+        assert_abs_diff_eq!(cyl_neumann_prime(0.0, 1.0), 0.781_212_821_300_288_7);
     }
 
     #[test]
     fn test_cyl_bessel_i_prime() {
-        assert_relative_eq!(cyl_bessel_i_prime(0.0, 1.0), 0.565_159_103_992_485);
+        assert_abs_diff_eq!(cyl_bessel_i_prime(0.0, 1.0), 0.565_159_103_992_485);
     }
 
     #[test]
     fn test_cyl_bessel_k_prime() {
-        assert_relative_eq!(cyl_bessel_k_prime(0.0, 1.0), -0.601_907_230_197_234_6);
+        assert_abs_diff_eq!(cyl_bessel_k_prime(0.0, 1.0), -0.601_907_230_197_234_6);
     }
 
     #[test]
     fn test_sph_bessel_prime() {
-        assert_relative_eq!(sph_bessel_prime(0, 1.0), -0.301_168_678_939_756_8);
+        assert_abs_diff_eq!(
+            sph_bessel_prime(0, 1.0),
+            -0.301_168_678_939_756_8,
+            epsilon = EPS,
+        );
     }
 
     #[test]
     fn test_sph_neumann_prime() {
-        assert_relative_eq!(sph_neumann_prime(0, 1.0), 1.381_773_290_676_036_3);
+        assert_abs_diff_eq!(
+            sph_neumann_prime(0, 1.0),
+            1.381_773_290_676_036_3,
+            epsilon = EPS,
+        );
     }
 }
