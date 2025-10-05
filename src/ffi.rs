@@ -128,6 +128,9 @@ unsafe extern "C" {
     pub fn math_logaddexp(x1: f64, x2: f64) -> f64;
     pub fn math_logsumexp(arr: *const f64, len: usize) -> f64;
 
+    // boost/math/special_functions/owens_t.hpp
+    pub fn math_owens_t(h: f64, a: f64) -> f64;
+
     // boost/math/special_functions/polygamma.hpp
     pub fn math_polygamma(n: c_int, x: f64) -> f64;
 

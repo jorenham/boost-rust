@@ -19,6 +19,7 @@ pub mod lambert_w;
 pub mod legendre;
 pub mod log1p;
 pub mod logsumexp;
+pub mod owens_t;
 pub mod polygamma;
 pub mod powm1;
 pub mod prime;
