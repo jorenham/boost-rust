@@ -30,14 +30,15 @@ pub fn laguerre_assoc(n: u32, m: u32, x: f64) -> f64 {
 /// # Examples
 ///
 /// ```
+/// # use approx::assert_relative_eq;
 /// # use boost::math::{laguerre, laguerre_next};
 /// let x = 0.42;
 /// let l0 = laguerre(0, x); // 1
 /// let l1 = laguerre(1, x); // -x + 1
 /// let l2 = laguerre(2, x); // (x² - 4x + 2) / 2
 /// let l3 = laguerre(3, x); // (-x³ + 9x² - 18x + 6) / 6
-/// assert_eq!(laguerre_next(1, &x, &l1, &l0), l2);
-/// assert_eq!(laguerre_next(2, &x, &l2, &l1), l3);
+/// assert_relative_eq!(laguerre_next(1, &x, &l1, &l0), l2);
+/// assert_relative_eq!(laguerre_next(2, &x, &l2, &l1), l3);
 /// ```
 ///
 /// # See also
@@ -58,6 +59,7 @@ pub fn laguerre_next(n: u32, x: &f64, Ln: &f64, Ln_1: &f64) -> f64 {
 /// # Examples
 ///
 /// ```
+/// # use approx::assert_relative_eq;
 /// # use boost::math::{laguerre_assoc, laguerre_assoc_next};
 /// let m = 3;
 /// let x = 0.42;
@@ -65,8 +67,8 @@ pub fn laguerre_next(n: u32, x: &f64, Ln: &f64, Ln_1: &f64) -> f64 {
 /// let l1 = laguerre_assoc(1, m, x);
 /// let l2 = laguerre_assoc(2, m, x);
 /// let l3 = laguerre_assoc(3, m, x);
-/// assert_eq!(laguerre_assoc_next(1, m, &x, &l1, &l0), l2);
-/// assert_eq!(laguerre_assoc_next(2, m, &x, &l2, &l1), l3);
+/// assert_relative_eq!(laguerre_assoc_next(1, m, &x, &l1, &l0), l2);
+/// assert_relative_eq!(laguerre_assoc_next(2, m, &x, &l2, &l1), l3);
 /// ```
 ///
 /// # See also

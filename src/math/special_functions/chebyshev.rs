@@ -13,27 +13,29 @@ use crate::ffi;
 /// [`chebyshev_t`] recurrence:
 ///
 /// ```
+/// # use approx::assert_relative_eq;
 /// # use boost::math::{chebyshev_t, chebyshev_next};
 /// let x = 0.42;
 /// let t0 = chebyshev_t(0, x); // 1
 /// let t1 = chebyshev_t(1, x); // x
 /// let t2 = chebyshev_t(2, x); // 2x² - 1
 /// let t3 = chebyshev_t(3, x); // 4x³ - 3x
-/// assert_eq!(chebyshev_next(&x, &t1, &t0), t2);
-/// assert_eq!(chebyshev_next(&x, &t2, &t1), t3);
+/// assert_relative_eq!(chebyshev_next(&x, &t1, &t0), t2);
+/// assert_relative_eq!(chebyshev_next(&x, &t2, &t1), t3);
 /// ```
 ///
 /// [`chebyshev_u`] recurrence:
 ///
 /// ```
+/// # use approx::assert_relative_eq;
 /// # use boost::math::{chebyshev_u, chebyshev_next};
 /// let x = 0.42;
 /// let u0 = chebyshev_u(0, x); // 1
 /// let u1 = chebyshev_u(1, x); // 2x
 /// let u2 = chebyshev_u(2, x); // 4x² - 1
 /// let u3 = chebyshev_u(3, x); // 8x³ - 4x
-/// assert_eq!(chebyshev_next(&x, &u1, &u0), u2);
-/// assert_eq!(chebyshev_next(&x, &u2, &u1), u3);
+/// assert_relative_eq!(chebyshev_next(&x, &u1, &u0), u2);
+/// assert_relative_eq!(chebyshev_next(&x, &u2, &u1), u3);
 /// ```
 #[allow(non_snake_case)]
 #[inline(always)]

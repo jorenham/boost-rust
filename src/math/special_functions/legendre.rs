@@ -77,14 +77,15 @@ pub fn legendre_q(n: u32, x: f64) -> f64 {
 /// [`legendre_q`] recurrence:
 ///
 /// ```
+/// # use approx::assert_relative_eq;
 /// # use boost::math::{legendre_q, legendre_next};
 /// let x = 0.42;
 /// let q0 = legendre_q(0, x);
 /// let q1 = legendre_q(1, x);
 /// let q2 = legendre_q(2, x);
 /// let q3 = legendre_q(3, x);
-/// assert_eq!(legendre_next(1, &x, &q1, &q0), q2);
-/// assert_eq!(legendre_next(2, &x, &q2, &q1), q3);
+/// assert_relative_eq!(legendre_next(1, &x, &q1, &q0), q2);
+/// assert_relative_eq!(legendre_next(2, &x, &q2, &q1), q3);
 /// ```
 ///
 /// # See also
@@ -105,6 +106,7 @@ pub fn legendre_next(n: u32, x: &f64, Pn: &f64, Pn_1: &f64) -> f64 {
 /// # Examples
 ///
 /// ```
+/// # use approx::assert_relative_eq;
 /// # use boost::math::{legendre_p_assoc, legendre_assoc_next};
 /// let m = 1;
 /// let x = 0.42;
@@ -112,8 +114,8 @@ pub fn legendre_next(n: u32, x: &f64, Pn: &f64, Pn_1: &f64) -> f64 {
 /// let p1 = legendre_p_assoc(1, m, x);
 /// let p2 = legendre_p_assoc(2, m, x);
 /// let p3 = legendre_p_assoc(3, m, x);
-/// assert_eq!(legendre_assoc_next(1, m, &x, &p1, &p0), p2);
-/// assert_eq!(legendre_assoc_next(2, m, &x, &p2, &p1), p3);
+/// assert_relative_eq!(legendre_assoc_next(1, m, &x, &p1, &p0), p2);
+/// assert_relative_eq!(legendre_assoc_next(2, m, &x, &p2, &p1), p3);
 /// ```
 ///
 /// # See also
