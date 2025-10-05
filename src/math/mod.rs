@@ -220,9 +220,9 @@
 //! - [ ] `asinh`
 //! - [ ] `atanh`
 //!
-//! <h4>Owen's T Function</h4>
+//! ### Owen's T Function
 //!
-//! - [ ] `owens_t`
+//! - [x] [`owens_t`]
 //!
 //! ### Constexpr CMath
 //!
@@ -253,6 +253,7 @@ pub use special_functions::lambert_w::*;
 pub use special_functions::legendre::*;
 pub use special_functions::log1p::*;
 pub use special_functions::logsumexp::*;
+pub use special_functions::owens_t::*;
 pub use special_functions::polygamma::*;
 pub use special_functions::powm1::*;
 pub use special_functions::prime::*;

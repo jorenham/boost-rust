@@ -42,6 +42,7 @@
 #include <boost/math/special_functions/legendre.hpp>
 #include <boost/math/special_functions/log1p.hpp>
 #include <boost/math/special_functions/logsumexp.hpp>
+#include <boost/math/special_functions/owens_t.hpp>
 #include <boost/math/special_functions/polygamma.hpp>
 #include <boost/math/special_functions/powm1.hpp>
 #include <boost/math/special_functions/prime.hpp>
@@ -244,6 +245,9 @@ double math_log1p(double x) { return boost::math::log1p(x); }
 // boost/math/special_functions/logsumexp.hpp
 double math_logaddexp(double x1, double x2) { return logaddexp(x1, x2); }
 double math_logsumexp(const double args[], size_t len) { return logsumexp(args, args + len); }
+
+// boost/math/special_functions/owens_t.hpp
+double math_owens_t(double h, double a) { return owens_t(h, a); }
 
 // boost/math/special_functions/polygamma.hpp
 double math_digamma(double x) { return ::detail::polygamma(0, x); }
