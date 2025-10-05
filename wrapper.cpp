@@ -19,6 +19,7 @@
 
 #include <boost/math/ccmath/sqrt.hpp>
 
+#include <boost/math/special_functions/airy.hpp>
 #include <boost/math/special_functions/bessel.hpp>
 #include <boost/math/special_functions/beta.hpp>
 #include <boost/math/special_functions/binomial.hpp>
@@ -115,6 +116,14 @@ double math_cyl_bessel_i(double nu, double x) { return cyl_bessel_i(nu, x); }
 double math_cyl_bessel_k(double nu, double x) { return cyl_bessel_k(nu, x); }
 double math_sph_bessel(unsigned n, double x) { return sph_bessel(n, x); }
 double math_sph_neumann(unsigned n, double x) { return sph_neumann(n, x); }
+
+// boost/math/special_functions/airy.hpp
+double math_airy_ai(double x) { return airy_ai(x); }
+double math_airy_ai_prime(double x) { return airy_ai_prime(x); }
+double math_airy_ai_zero(int m) { return airy_ai_zero<double>(m); }
+double math_airy_bi(double x) { return airy_bi(x); }
+double math_airy_bi_prime(double x) { return airy_bi_prime(x); }
+double math_airy_bi_zero(int m) { return airy_bi_zero<double>(m); }
 
 // boost/math/special_functions/beta.hpp
 double math_beta(double a, double b) { return beta(a, b); }

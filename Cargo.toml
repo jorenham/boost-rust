@@ -17,7 +17,6 @@ include = [
   "subprojects/boost_math/math/include/boost/math/policies",
   #
   "subprojects/boost_math/math/include/boost/math/special_functions",
-  "!subprojects/boost_math/math/include/boost/math/special_functions/detail/airy_ai_bi_zero.hpp",
   "!subprojects/boost_math/math/include/boost/math/special_functions/detail/bernoulli_details.hpp",
   "!subprojects/boost_math/math/include/boost/math/special_functions/detail/daubechies_scaling_integer_grid.hpp",
   "!subprojects/boost_math/math/include/boost/math/special_functions/detail/lanczos_sse2.hpp",

@@ -1,3 +1,4 @@
+pub mod airy;
 pub mod bessel;
 pub mod beta;
 pub mod binomial;

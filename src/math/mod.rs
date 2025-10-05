@@ -126,14 +126,19 @@
 //! - [ ] Cyclic Hankel Functions
 //! - [ ] Spherical Hankel Functions
 //!
-//! <h4>Airy Functions</h4>
+//! ### Airy Functions
 //!
-//! - [ ] Airy *Ai* Function
-//! - [ ] Airy *Bi* Function
-//! - [ ] Airy *Ai'* Function
-//! - [ ] Airy *Bi'* Function
-//! - [ ] Finding Zeros of Airy Functions
-//!
+//! - [x] Airy *Ai* Function
+//!   - [`airy_ai`]
+//! - [x] Airy *Bi* Function
+//!   - [`airy_bi`]
+//! - [x] Airy *Ai'* Function
+//!   - [`airy_ai_prime`]
+//! - [x] Airy *Bi'* Function
+//!   - [`airy_bi_prime`]
+//! - [x] Finding Zeros of Airy Functions
+//!   - [`airy_ai_zero`]
+//!   - [`airy_bi_zero`]
 //! <h4>Elliptic Integrals</h4>
 //!
 //! - [ ] Elliptic Integrals - Carlson Form
@@ -234,6 +239,7 @@
 pub mod ccmath;
 mod special_functions;
 
+pub use special_functions::airy::*;
 pub use special_functions::bessel::*;
 pub use special_functions::beta::*;
 pub use special_functions::binomial::*;
