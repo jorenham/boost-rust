@@ -19,6 +19,8 @@ pub mod powm1;
 pub mod prime;
 pub mod rsqrt;
 pub mod sin_pi;
+pub mod sinc;
+pub mod sinhc;
 pub mod sqrt1pm1;
 pub mod trigamma;
 pub mod zeta;

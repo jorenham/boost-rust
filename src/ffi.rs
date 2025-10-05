@@ -121,6 +121,12 @@ unsafe extern "C" {
     // boost/math/special_functions/sin_pi.hpp
     pub fn math_sin_pi(x: f64) -> f64;
 
+    // boost/math/special_functions/sinc.hpp
+    pub fn math_sinc_pi(x: f64) -> f64;
+
+    // boost/math/special_functions/sinhc.hpp
+    pub fn math_sinhc_pi(x: f64) -> f64;
+
     // boost/math/special_functions/sqrt1pm1.hpp
     pub fn math_sqrt1pm1(x: f64) -> f64;
 
