@@ -175,7 +175,13 @@ mod tests {
 
     #[test]
     fn test_gamma() {
-        assert!(gamma(0.0).is_infinite());
+        assert!(gamma(f64::NAN).is_nan());
+        assert!(gamma(0.0).is_nan());
+        assert!(gamma(-1.0).is_nan());
+        assert!(gamma(-2.0).is_nan());
+        assert!(gamma(f64::NEG_INFINITY).is_nan());
+        assert_eq!(gamma(f64::INFINITY), f64::INFINITY);
+
         assert_relative_eq!(gamma(-0.5), -2.0 * SQRT_PI, epsilon = RTOL);
         assert_relative_eq!(gamma(0.5), SQRT_PI, epsilon = RTOL);
         assert_relative_eq!(gamma(1.0), 1.0, epsilon = RTOL);
