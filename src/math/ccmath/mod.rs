@@ -3,7 +3,7 @@
 //! Corresponds to the Boost Math `boost::math::ccmath` C++ namespace.
 //! <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/ccmath.html>
 //!
-//! - [x] `sqrt(x)`
+//! - [x] [`sqrt(x)`][sqrt]
 //! - [ ] `logb(x)`
 //! - [ ] `frexp(x, *exp)`, `ldexp(x, exp)`, `scalbn(x, exp)`
 //! - [ ] `floor(x)`, `ceil(x)`, `trunc(x)`, `round(x)`
