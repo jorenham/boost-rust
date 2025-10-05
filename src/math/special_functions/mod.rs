@@ -6,6 +6,7 @@ pub mod chebyshev;
 pub mod cos_pi;
 pub mod digamma;
 pub mod erf;
+pub mod expint;
 pub mod expm1;
 pub mod factorials;
 pub mod gamma;

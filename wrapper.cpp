@@ -26,6 +26,7 @@
 #include <boost/math/special_functions/chebyshev.hpp>
 #include <boost/math/special_functions/cos_pi.hpp>
 #include <boost/math/special_functions/erf.hpp>
+#include <boost/math/special_functions/expint.hpp>
 #include <boost/math/special_functions/expm1.hpp>
 #include <boost/math/special_functions/factorials.hpp>
 #include <boost/math/special_functions/gamma.hpp>
@@ -150,6 +151,10 @@ double math_erf(double x) { return boost::math::erf(x); }
 double math_erf_inv(double p) { return erf_inv(p); }
 double math_erfc(double x) { return boost::math::erfc(x); }
 double math_erfc_inv(double q) { return erfc_inv(q); }
+
+// boost/math/special_functions/expint.hpp
+double math_expint_i(double x) { return expint(x); }
+double math_expint_n(unsigned n, double x) { return expint(n, x); }
 
 // boost/math/special_functions/expm1.hpp
 double math_expm1(double x) { return boost::math::expm1(x); }
