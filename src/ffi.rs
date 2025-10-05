@@ -23,13 +23,21 @@ unsafe extern "C" {
 
     // boost/math/special_functions/bessel.hpp
     pub fn math_cyl_bessel_j(nu: f64, x: f64) -> f64;
-    pub fn math_cyl_bessel_j_zero(nu: f64, k: c_int) -> f64;
     pub fn math_cyl_neumann(nu: f64, x: f64) -> f64;
-    pub fn math_cyl_neumann_zero(nu: f64, k: c_int) -> f64;
     pub fn math_cyl_bessel_i(nu: f64, x: f64) -> f64;
     pub fn math_cyl_bessel_k(nu: f64, x: f64) -> f64;
     pub fn math_sph_bessel(n: c_uint, x: f64) -> f64;
     pub fn math_sph_neumann(n: c_uint, x: f64) -> f64;
+    pub fn math_cyl_bessel_j_zero(nu: f64, k: c_int) -> f64;
+    pub fn math_cyl_neumann_zero(nu: f64, k: c_int) -> f64;
+
+    // boost/math/special_functions/bessel_prime.hpp
+    pub fn math_cyl_bessel_j_prime(nu: f64, x: f64) -> f64;
+    pub fn math_cyl_neumann_prime(nu: f64, x: f64) -> f64;
+    pub fn math_cyl_bessel_i_prime(nu: f64, x: f64) -> f64;
+    pub fn math_cyl_bessel_k_prime(nu: f64, x: f64) -> f64;
+    pub fn math_sph_bessel_prime(n: c_uint, x: f64) -> f64;
+    pub fn math_sph_neumann_prime(n: c_uint, x: f64) -> f64;
 
     // boost/math/special_functions/beta.hpp
     pub fn math_beta(a: f64, b: f64) -> f64;
