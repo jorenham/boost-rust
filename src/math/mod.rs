@@ -110,19 +110,26 @@
 //! - [ ] Cardinal B-splines
 //!
 //! ### Bessel Functions
-//! - [x] Bessel Functions
-//!   - [`cyl_bessel_j`]
-//!   - [`cyl_neumann`]
-//! - [x] Zeros of Bessel Functions
-//!   - [`cyl_bessel_j_zero`]
-//!   - [`cyl_neumann_zero`]
-//! - [x] Modified Bessel Functions
-//!   - [`cyl_bessel_i`]
-//!   - [`cyl_bessel_k`]
-//! - [x] Spherical Bessel Functions
-//!   - [`sph_bessel`]
-//!   - [`sph_neumann`]
-//! - [ ] Derivatives of Bessel Functions
+//!
+//! |                   Type | First Kind       | Second Kind      |
+//! | ---------------------: | ---------------- | ---------------- |
+//! |          Cyclic Bessel | [`cyl_bessel_j`] | [`cyl_neumann`]  |
+//! | Modified Cyclic Bessel | [`cyl_bessel_i`] | [`cyl_bessel_k`] |
+//! |       Spherical Bessel | [`sph_bessel`]   | [`sph_neumann`]  |
+//!
+//! #### Zeros
+//!
+//! |                   Type | First Kind            | Second Kind      |
+//! | ---------------------: | --------------------- | ---------------- |
+//! |          Cyclic Bessel | [`cyl_bessel_j_zero`] | [`cyl_neumann_zero`]  |
+//!
+//! #### Derivatives
+//!
+//! |                   Type | First Kind             | Second Kind            |
+//! | ---------------------: | ---------------------- | ---------------------- |
+//! |          Cyclic Bessel | [`cyl_bessel_j_prime`] | [`cyl_neumann_prime`]  |
+//! | Modified Cyclic Bessel | [`cyl_bessel_i_prime`] | [`cyl_bessel_k_prime`] |
+//! |       Spherical Bessel | [`sph_bessel_prime`]   | [`sph_neumann_prime`]  |
 //!
 //! <h4>Hankel Functions</h4>
 //!
@@ -248,6 +255,7 @@ pub use special_functions::airy::*;
 pub use special_functions::asinh::*;
 pub use special_functions::atanh::*;
 pub use special_functions::bessel::*;
+pub use special_functions::bessel_prime::*;
 pub use special_functions::beta::*;
 pub use special_functions::binomial::*;
 pub use special_functions::cbrt::*;

@@ -24,6 +24,7 @@
 #include <boost/math/special_functions/asinh.hpp>
 #include <boost/math/special_functions/atanh.hpp>
 #include <boost/math/special_functions/bessel.hpp>
+#include <boost/math/special_functions/bessel_prime.hpp>
 #include <boost/math/special_functions/beta.hpp>
 #include <boost/math/special_functions/binomial.hpp>
 #include <boost/math/special_functions/cbrt.hpp>
@@ -129,13 +130,21 @@ double math_airy_bi_zero(int m) { return airy_bi_zero<double>(m); }
 
 // boost/math/special_functions/bessel.hpp
 double math_cyl_bessel_j(double nu, double x) { return cyl_bessel_j(nu, x); }
-double math_cyl_bessel_j_zero(double nu, int k) { return cyl_bessel_j_zero(nu, k); }
 double math_cyl_neumann(double nu, double x) { return cyl_neumann(nu, x); }
-double math_cyl_neumann_zero(double nu, int k) { return cyl_neumann_zero(nu, k); }
 double math_cyl_bessel_i(double nu, double x) { return cyl_bessel_i(nu, x); }
 double math_cyl_bessel_k(double nu, double x) { return cyl_bessel_k(nu, x); }
 double math_sph_bessel(unsigned n, double x) { return sph_bessel(n, x); }
 double math_sph_neumann(unsigned n, double x) { return sph_neumann(n, x); }
+double math_cyl_bessel_j_zero(double nu, int k) { return cyl_bessel_j_zero(nu, k); }
+double math_cyl_neumann_zero(double nu, int k) { return cyl_neumann_zero(nu, k); }
+
+// boost/math/special_functions/bessel_prime.hpp
+double math_cyl_bessel_j_prime(double nu, double x) { return cyl_bessel_j_prime(nu, x); }
+double math_cyl_neumann_prime(double nu, double x) { return cyl_neumann_prime(nu, x); }
+double math_cyl_bessel_i_prime(double nu, double x) { return cyl_bessel_i_prime(nu, x); }
+double math_cyl_bessel_k_prime(double nu, double x) { return cyl_bessel_k_prime(nu, x); }
+double math_sph_bessel_prime(unsigned n, double x) { return sph_bessel_prime(n, x); }
+double math_sph_neumann_prime(unsigned n, double x) { return sph_neumann_prime(n, x); }
 
 // boost/math/special_functions/beta.hpp
 double math_beta(double a, double b) { return beta(a, b); }

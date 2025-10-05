@@ -3,6 +3,7 @@ pub mod airy;
 pub mod asinh;
 pub mod atanh;
 pub mod bessel;
+pub mod bessel_prime;
 pub mod beta;
 pub mod binomial;
 pub mod cbrt;
