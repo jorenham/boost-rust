@@ -34,7 +34,7 @@ pub fn laguerre_assoc(n: u32, m: u32, x: f64) -> f64 {
 /// let x = 0.42;
 /// let l0 = laguerre(0, x); // 1
 /// let l1 = laguerre(1, x); // -x + 1
-/// let l2 = laguerre(2, x); // (x² - -4x + 2) / 2
+/// let l2 = laguerre(2, x); // (x² - 4x + 2) / 2
 /// let l3 = laguerre(3, x); // (-x³ + 9x² - 18x + 6) / 6
 /// assert_eq!(laguerre_next(1, &x, &l1, &l0), l2);
 /// assert_eq!(laguerre_next(2, &x, &l2, &l1), l3);
