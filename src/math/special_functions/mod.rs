@@ -8,6 +8,7 @@ pub mod erf;
 pub mod expm1;
 pub mod factorials;
 pub mod gamma;
+pub mod gegenbauer;
 pub mod hermite;
 pub mod hypergeometric;
 pub mod hypot;
