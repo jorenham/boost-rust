@@ -108,6 +108,12 @@ unsafe extern "C" {
     pub fn math_laguerre(n: c_uint, x: f64) -> f64;
     pub fn math_laguerre_assoc(n: c_uint, m: c_uint, x: f64) -> f64;
 
+    // boost/math/special_functions/lambert_w.hpp
+    pub fn math_lambert_w0(x: f64) -> f64;
+    pub fn math_lambert_w0_prime(x: f64) -> f64;
+    pub fn math_lambert_wm1(x: f64) -> f64;
+    pub fn math_lambert_wm1_prime(x: f64) -> f64;
+
     // boost/math/special_functions/legendre.hpp
     pub fn math_legendre_p(l: c_int, x: f64) -> f64;
     pub fn math_legendre_p_assoc(l: c_int, m: c_int, x: f64) -> f64;

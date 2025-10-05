@@ -15,6 +15,7 @@ pub mod hypergeometric;
 pub mod hypot;
 pub mod jacobi;
 pub mod laguerre;
+pub mod lambert_w;
 pub mod legendre;
 pub mod log1p;
 pub mod logsumexp;

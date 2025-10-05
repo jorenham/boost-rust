@@ -167,12 +167,12 @@
 //! - [ ] Jacobi Theta Function *θ<sub>3</sub>*
 //! - [ ] Jacobi Theta Function *θ<sub>4</sub>*
 //!
-//! <h4>Lambert W Function</h4>
+//! ### Lambert W Function
 //!
-//! - [ ] `lambert_w0`
-//! - [ ] `lambert_wm1`
-//! - [ ] `lambert_w0_prime`
-//! - [ ] `lambert_wm1_prime`
+//! - [x] [`lambert_w0`]
+//! - [x] [`lambert_w0_prime`]
+//! - [x] [`lambert_wm1`]
+//! - [x] [`lambert_wm1_prime`]
 //!
 //! ### Zeta Functions
 //!
@@ -249,6 +249,7 @@ pub use special_functions::hypergeometric::*;
 pub use special_functions::hypot::*;
 pub use special_functions::jacobi::*;
 pub use special_functions::laguerre::*;
+pub use special_functions::lambert_w::*;
 pub use special_functions::legendre::*;
 pub use special_functions::log1p::*;
 pub use special_functions::logsumexp::*;

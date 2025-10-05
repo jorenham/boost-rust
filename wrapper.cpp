@@ -38,6 +38,7 @@
 #include <boost/math/special_functions/hypot.hpp>
 #include <boost/math/special_functions/jacobi.hpp>
 #include <boost/math/special_functions/laguerre.hpp>
+#include <boost/math/special_functions/lambert_w.hpp>
 #include <boost/math/special_functions/legendre.hpp>
 #include <boost/math/special_functions/log1p.hpp>
 #include <boost/math/special_functions/logsumexp.hpp>
@@ -217,6 +218,12 @@ double math_jacobi_derivative(unsigned n, double alpha, double beta, double x, u
 // boost/math/special_functions/laguerre.hpp
 double math_laguerre(unsigned n, double x) { return laguerre(n, x); }
 double math_laguerre_assoc(unsigned n, unsigned m, double x) { return laguerre(n, m, x); }
+
+// boost/math/special_functions/lambert_w.hpp
+double math_lambert_w0(double x) { return lambert_w0(x); }
+double math_lambert_w0_prime(double x) { return lambert_w0_prime(x); }
+double math_lambert_wm1(double x) { return lambert_wm1(x); }
+double math_lambert_wm1_prime(double x) { return lambert_wm1_prime(x); }
 
 // boost/math/special_functions/legendre.hpp
 double math_legendre_p(int l, double x) { return legendre_p(l, x); }
