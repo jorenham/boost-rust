@@ -96,7 +96,9 @@
 //! - [x] Hermite Polynomials
 //!   - [`hermite`]
 //! - [ ] Chebyshev Polynomials
-//! - [ ] Gegenbauer Polynomials
+//! - [x] Gegenbauer Polynomials
+//!   - [`gegenbauer`]
+//!   - [`gegenbauer_derivative`]
 //! - [ ] Spherical Harmonics
 //! - [ ] Cardinal B-splines
 //!
@@ -233,6 +235,7 @@ pub use special_functions::erf::*;
 pub use special_functions::expm1::*;
 pub use special_functions::factorials::*;
 pub use special_functions::gamma::*;
+pub use special_functions::gegenbauer::*;
 pub use special_functions::hermite::*;
 pub use special_functions::hypergeometric::*;
 pub use special_functions::hypot::*;
