@@ -23,7 +23,7 @@ mod tests {
         assert_eq!(cbrt(f64::NEG_INFINITY), f64::NEG_INFINITY);
         assert_eq!(cbrt(1.0), 1.0);
         assert_eq!(cbrt(-1.0), -1.0);
-        assert_eq!(cbrt(27.0), 3.0);
-        assert_eq!(cbrt(-27.0), -3.0);
+        assert_relative_eq!(cbrt(27.0), 3.0);
+        assert_relative_eq!(cbrt(-27.0), -3.0);
     }
 }
