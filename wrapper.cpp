@@ -145,8 +145,8 @@ double math_cos_pi(double x) { return boost::math::cos_pi(x); }
 
 // boost/math/special_functions/erf.hpp
 double math_erf(double x) { return boost::math::erf(x); }
-double math_erfc(double x) { return boost::math::erfc(x); }
 double math_erf_inv(double p) { return erf_inv(p); }
+double math_erfc(double x) { return boost::math::erfc(x); }
 double math_erfc_inv(double q) { return erfc_inv(q); }
 
 // boost/math/special_functions/expm1.hpp

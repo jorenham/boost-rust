@@ -83,6 +83,7 @@
 //!   - [`chebyshev_t`]
 //!   - [`chebyshev_t_prime`]
 //!   - [`chebyshev_u`]
+//!   - [`chebyshev_next`]
 //! - [x] Legendre (and associated) polynomials
 //!   - [`legendre_p`]
 //!   - [`legendre_p_prime`]
