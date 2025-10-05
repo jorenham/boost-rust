@@ -43,6 +43,9 @@ unsafe extern "C" {
     pub fn math_erf_inv(p: f64) -> f64;
     pub fn math_erfc_inv(q: f64) -> f64;
 
+    // boost/math/special_functions/expm1.hpp
+    pub fn math_expm1(x: f64) -> f64;
+
     // boost/math/special_functions/factorials.hpp
     pub fn math_factorial(i: c_uint) -> f64;
     pub fn math_double_factorial(i: c_uint) -> f64;
@@ -93,12 +96,18 @@ unsafe extern "C" {
     pub fn math_legendre_p_zeros(l: c_int, out: *mut f64);
     pub fn math_legendre_q(l: c_uint, x: f64) -> f64;
 
+    // boost/math/special_functions/log1p.hpp
+    pub fn math_log1p(x: f64) -> f64;
+
     // boost/math/special_functions/logsumexp.hpp
     pub fn math_logaddexp(x1: f64, x2: f64) -> f64;
     pub fn math_logsumexp(arr: *const f64, len: usize) -> f64;
 
     // boost/math/special_functions/polygamma.hpp
     pub fn math_polygamma(n: c_int, x: f64) -> f64;
+
+    // boost/math/special_functions/powm1.hpp
+    pub fn math_powm1(x: f64, y: f64) -> f64;
 
     // boost/math/special_functions/prime.hpp
     pub fn math_prime(n: c_uint) -> u32;
