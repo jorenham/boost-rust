@@ -93,7 +93,8 @@
 //! - [x] Laguerre (and Associated) Polynomials
 //!   - [`laguerre`]
 //!   - [`laguerre_assoc`]
-//! - [ ] Hermite Polynomials
+//! - [x] Hermite Polynomials
+//!   - [`hermite`]
 //! - [ ] Chebyshev Polynomials
 //! - [ ] Gegenbauer Polynomials
 //! - [ ] Spherical Harmonics
@@ -232,6 +233,7 @@ pub use special_functions::erf::*;
 pub use special_functions::expm1::*;
 pub use special_functions::factorials::*;
 pub use special_functions::gamma::*;
+pub use special_functions::hermite::*;
 pub use special_functions::hypergeometric::*;
 pub use special_functions::hypot::*;
 pub use special_functions::jacobi::*;
