@@ -43,7 +43,7 @@ mod tests {
 
         for &x in &[f64::INFINITY, f64::NEG_INFINITY, f64::NAN] {
             let result = sin_pi(x);
-            assert!(result.is_nan(), "cos_pi({}) = {}, expected NaN", x, result);
+            assert!(result.is_nan(), "sin_pi({}) = {}, expected NaN", x, result);
         }
     }
 }
