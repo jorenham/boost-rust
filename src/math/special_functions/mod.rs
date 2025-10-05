@@ -2,6 +2,7 @@ pub mod bessel;
 pub mod beta;
 pub mod binomial;
 pub mod cbrt;
+pub mod chebyshev;
 pub mod cos_pi;
 pub mod digamma;
 pub mod erf;
