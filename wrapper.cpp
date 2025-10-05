@@ -42,6 +42,8 @@
 #include <boost/math/special_functions/prime.hpp>
 #include <boost/math/special_functions/rsqrt.hpp>
 #include <boost/math/special_functions/sin_pi.hpp>
+#include <boost/math/special_functions/sinc.hpp>
+#include <boost/math/special_functions/sinhc.hpp>
 #include <boost/math/special_functions/sqrt1pm1.hpp>
 #include <boost/math/special_functions/zeta.hpp>
 
@@ -230,6 +232,12 @@ double math_rsqrt(double x) { return rsqrt(x); }
 
 // boost/math/special_functions/sin_pi.hpp
 double math_sin_pi(double x) { return sin_pi(x); }
+
+// boost/math/special_functions/sinc.hpp
+double math_sinc_pi(double x) { return sinc_pi(x); }
+
+// boost/math/special_functions/sinhc.hpp
+double math_sinhc_pi(double x) { return sinhc_pi(x); }
 
 // boost/math/special_functions/sqrt1pm1.hpp
 double math_sqrt1pm1(double x) { return sqrt1pm1(x); }

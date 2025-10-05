@@ -198,10 +198,10 @@
 //! - [x] [`hypot`]
 //! - [x] [`logaddexp`] and [`logsumexp`]
 //!
-//! <h4>Sinus Cardinal and Hyperbolic Sinus Cardinal Functions</h4>
+//! ### Sinus Cardinal and Hyperbolic Sinus Cardinal Functions
 //!
-//! - [ ] `sinc_pi`
-//! - [ ] `sinhc_pi`
+//! - [x] [`sinc_pi`]
+//! - [x] [`sinhc_pi`]
 //!
 //! <h4>Inverse Hyperbolic Functions</h4>
 //!
@@ -215,7 +215,7 @@
 //!
 //! ### Constexpr CMath
 //!
-//! [`ccmath`]
+//! See [`ccmath`]
 //!
 
 pub mod ccmath;
@@ -242,6 +242,8 @@ pub use special_functions::powm1::*;
 pub use special_functions::prime::*;
 pub use special_functions::rsqrt::*;
 pub use special_functions::sin_pi::*;
+pub use special_functions::sinc::*;
+pub use special_functions::sinhc::*;
 pub use special_functions::sqrt1pm1::*;
 pub use special_functions::trigamma::*;
 pub use special_functions::zeta::*;
