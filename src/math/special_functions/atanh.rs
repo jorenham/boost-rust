@@ -2,9 +2,9 @@
 
 use crate::ffi;
 
-/// Inverse hyperbolic sine function *tanh<sup>-1</sup>(x)*
+/// Inverse hyperbolic tangent function *tanh<sup>-1</sup>(x)*
 ///
-/// *tanh<sup>-1</sup>(x) = ln(x + (x<sup>2</sup> + 1)<sup>1/2</sup>)*
+/// *tanh<sup>-1</sup>(x) = ½ ln((1 + x) / (1 - x))*
 ///
 /// Corresponds to `boost::math::atanh` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/inv_hyper/atanh.html>
