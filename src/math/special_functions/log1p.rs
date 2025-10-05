@@ -6,7 +6,7 @@ use crate::ffi;
 ///
 /// See [`expm1`](crate::math::expm1) for the inverse function.
 ///
-/// Corresponds to `boost::math::log1p(x, y)` in C++.
+/// Corresponds to `boost::math::log1p(x)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/powers/log1p.html>
 pub fn log1p(x: f64) -> f64 {
     unsafe { ffi::math_log1p(x) }
