@@ -6,6 +6,13 @@ unsafe extern "C" {
     // boost/math/ccmath/sqrt.hpp
     pub fn math_ccmath_sqrt(x: f64) -> f64;
 
+    // boost/math/special_functions/acosh.hpp
+    pub fn math_acosh(x: f64) -> f64;
+    // boost/math/special_functions/asinh.hpp
+    pub fn math_asinh(x: f64) -> f64;
+    // boost/math/special_functions/atanh.hpp
+    pub fn math_atanh(x: f64) -> f64;
+
     // boost/math/special_functions/airy.hpp
     pub fn math_airy_ai(x: f64) -> f64;
     pub fn math_airy_ai_prime(x: f64) -> f64;
