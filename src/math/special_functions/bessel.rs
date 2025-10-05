@@ -6,7 +6,7 @@ use crate::ffi;
 
 /// Cylindrical Bessel function of the 1st kind *J<sub>ν</sub>(x)*
 ///
-/// Coorresponds to `boost::math::cyl_bessel_j` in C++.
+/// Corresponds to `boost::math::cyl_bessel_j` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/bessel/bessel_first.html>
 pub fn cyl_bessel_j(nu: f64, x: f64) -> f64 {
     unsafe { ffi::math_cyl_bessel_j(nu, x) }
@@ -16,7 +16,7 @@ pub fn cyl_bessel_j(nu: f64, x: f64) -> f64 {
 ///
 /// Zero-based indexing: `cyl_bessel_j_zero(nu, 0)` is the first zero.
 ///
-/// Coorresponds to `boost::math::cyl_bessel_j_zero` in C++.
+/// Corresponds to `boost::math::cyl_bessel_j_zero` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/bessel/bessel_root.html>
 pub fn cyl_bessel_j_zero(nu: f64, k: u32) -> f64 {
     // The +1 is because Boost uses 1-based indexing
@@ -25,7 +25,7 @@ pub fn cyl_bessel_j_zero(nu: f64, k: u32) -> f64 {
 
 /// Cylindrical Bessel function of the 2nd kind *Y<sub>ν</sub>(x)* (Neumann function)
 ///
-/// Coorresponds to `boost::math::cyl_neumann` in C++.
+/// Corresponds to `boost::math::cyl_neumann` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/bessel/bessel_first.html>
 #[doc(alias = "cyl_bessel_y")]
 pub fn cyl_neumann(nu: f64, x: f64) -> f64 {
@@ -36,7 +36,7 @@ pub fn cyl_neumann(nu: f64, x: f64) -> f64 {
 ///
 /// Zero-based indexing: `cyl_neumann_zero(nu, 0)` is the first zero.
 ///
-/// Coorresponds to `boost::math::cyl_neumann_zero` in C++.
+/// Corresponds to `boost::math::cyl_neumann_zero` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/bessel/bessel_root.html>
 pub fn cyl_neumann_zero(nu: f64, k: u32) -> f64 {
     // The +1 is because Boost uses 1-based indexing
