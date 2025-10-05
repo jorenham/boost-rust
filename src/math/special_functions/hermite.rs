@@ -11,6 +11,28 @@ pub fn hermite(n: u32, x: f64) -> f64 {
     unsafe { ffi::math_hermite(n as c_uint, x) }
 }
 
+/// Recurrence relation for [`hermite`]
+///
+/// *H<sub>n+1</sub>(x) = 2xH<sub>n</sub>(x) - 2nH<sub>n-1</sub>(x)*
+///
+/// # Examples
+///
+/// ```
+/// # use boost::math::{hermite, hermite_next};
+/// let x = 0.42;
+/// let h0 = hermite(0, x); // 1
+/// let h1 = hermite(1, x); // 2x
+/// let h2 = hermite(2, x); // 4x² - 2
+/// let h3 = hermite(3, x); // 8x³ - 12x
+/// assert_eq!(hermite_next(1, &x, &h1, &h0), h2);
+/// assert_eq!(hermite_next(2, &x, &h2, &h1), h3);
+/// ```
+#[allow(non_snake_case)]
+#[inline(always)]
+pub fn hermite_next(n: u32, x: &f64, Hn: &f64, Hn_1: &f64) -> f64 {
+    2.0 * (x * Hn - (n as f64) * Hn_1)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

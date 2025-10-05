@@ -99,6 +99,7 @@
 //!   - [`laguerre_assoc_next`]
 //! - [x] Hermite Polynomials
 //!   - [`hermite`]
+//!   - [`hermite_next`]
 //! - [x] Gegenbauer Polynomials
 //!   - [`gegenbauer`]
 //!   - [`gegenbauer_derivative`]
