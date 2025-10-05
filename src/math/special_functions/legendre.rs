@@ -8,56 +8,125 @@ use crate::ffi;
 use alloc::{vec, vec::Vec};
 use core::ffi::{c_int, c_uint};
 
-/// Legendre Polynomial of the 1st kind *P<sub>l</sub>(x)* on *[-1, 1]*
+/// Legendre Polynomial of the 1st kind *P<sub>n</sub>(x)* on *[-1, 1]*
 ///
-/// Corresponds to `boost::math::legendre_p(l, x)`.
-///
+/// Corresponds to `boost::math::legendre_p(n, x)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_poly/legendre.html>
-pub fn legendre_p(l: i32, x: f64) -> f64 {
-    unsafe { ffi::math_legendre_p(l as c_int, x) }
+pub fn legendre_p(n: i32, x: f64) -> f64 {
+    unsafe { ffi::math_legendre_p(n as c_int, x) }
 }
 
-/// Associated Legendre Polynomial of the 1st kind *P<sub>l</sub><sup>m</sup>(x)* on *[-1, 1]*
+/// Derivative of [`legendre_p`] with respect to `x`; *P'<sub>n</sub>(x)*
 ///
-/// Corresponds to `boost::math::legendre_p(l, m, x)`.
-///
+/// Corresponds to `boost::math::legendre_p_prime(n, x)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_poly/legendre.html>
-pub fn legendre_p_assoc(l: i32, m: i32, x: f64) -> f64 {
-    unsafe { ffi::math_legendre_p_assoc(l as c_int, m as c_int, x) }
+pub fn legendre_p_prime(n: i32, x: f64) -> f64 {
+    unsafe { ffi::math_legendre_p_prime(n as c_int, x) }
 }
 
-/// Derivative of [`legendre_p`] with respect to `x`; *P'<sub>l</sub>(x)*
+/// Associated Legendre Polynomial of the 1st kind *P<sub>n</sub><sup>m</sup>(x)* on *[-1, 1]*
 ///
-/// Corresponds to `boost::math::legendre_p_prime(l, x)`.
-///
+/// Corresponds to `boost::math::legendre_p(n, m, x)` in C++
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_poly/legendre.html>
-pub fn legendre_p_prime(l: i32, x: f64) -> f64 {
-    unsafe { ffi::math_legendre_p_prime(l as c_int, x) }
+pub fn legendre_p_assoc(n: i32, m: i32, x: f64) -> f64 {
+    unsafe { ffi::math_legendre_p_assoc(n as c_int, m as c_int, x) }
 }
 
 /// Zeros (roots) of [`legendre_p`] on *[0, 1]*.
 ///
-/// Note that only the non-negative zeros are returned, of which there are `l.div_ceil(2)`.
+/// Note that only the non-negative zeros are returned, of which there are `n.div_ceil(2)`.
 ///
-/// Corresponds to `boost::math::legendre_p_zeros<double>(l)`.
-///
+/// Corresponds to `boost::math::legendre_p_zeros<double>(n)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_poly/legendre.html>
-pub fn legendre_p_zeros(l: i32) -> Vec<f64> {
+pub fn legendre_p_zeros(n: i32) -> Vec<f64> {
     // total number of zeros
-    let k = (if l < 0 { -l - 1 } else { l }) as usize;
+    let k = (if n < 0 { -n - 1 } else { n }) as usize;
     // number of positive zeros
     let mut out = vec![f64::NAN; k.div_ceil(2)];
-    unsafe { ffi::math_legendre_p_zeros(l as c_int, out.as_mut_ptr()) };
+    unsafe { ffi::math_legendre_p_zeros(n as c_int, out.as_mut_ptr()) };
     out
 }
 
-/// Legendre Polynomial of the 2nd kind *Q<sub>l</sub>(x)* on *[-1, 1]*
+/// Legendre Polynomial of the 2nd kind *Q<sub>n</sub>(x)* on *[-1, 1]*
 ///
-/// Corresponds to `boost::math::legendre_q(l, x)`.
-///
+/// Corresponds to `boost::math::legendre_q(n, x)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_poly/legendre.html>
-pub fn legendre_q(l: u32, x: f64) -> f64 {
-    unsafe { ffi::math_legendre_q(l as c_uint, x) }
+pub fn legendre_q(n: u32, x: f64) -> f64 {
+    unsafe { ffi::math_legendre_q(n as c_uint, x) }
+}
+
+/// Recurrence relation for [`legendre_p`] and [`legendre_q`]
+///
+/// *(n+1)P<sub>n+1</sub>(x) = (2n+1)xP<sub>n</sub>(x) - nP<sub>n-1</sub>(x)*
+///
+/// # Examples
+///
+/// [`legendre_p`] recurrence:
+///
+/// ```
+/// # use boost::math::{legendre_p, legendre_next};
+/// let x = 0.42;
+/// let p0 = legendre_p(0, x); // 1
+/// let p1 = legendre_p(1, x); // x
+/// let p2 = legendre_p(2, x); // (3x² - 1) / 2
+/// let p3 = legendre_p(3, x); // (5x³ - 3x) / 2
+/// assert_eq!(legendre_next(1, &x, &p1, &p0), p2);
+/// assert_eq!(legendre_next(2, &x, &p2, &p1), p3);
+/// ```
+///
+/// [`legendre_q`] recurrence:
+///
+/// ```
+/// # use approx::assert_relative_eq;
+/// # use boost::math::{legendre_q, legendre_next};
+/// let x = 0.42;
+/// let q0 = legendre_q(0, x);
+/// let q1 = legendre_q(1, x);
+/// let q2 = legendre_q(2, x);
+/// let q3 = legendre_q(3, x);
+/// assert_relative_eq!(legendre_next(1, &x, &q1, &q0), q2);
+/// assert_relative_eq!(legendre_next(2, &x, &q2, &q1), q3);
+/// ```
+///
+/// # See also
+///
+/// - [`legendre_p`]
+/// - [`legendre_assoc_next`]
+#[allow(non_snake_case)]
+#[inline(always)]
+pub fn legendre_next(n: u32, x: &f64, Pn: &f64, Pn_1: &f64) -> f64 {
+    legendre_assoc_next(n, 0, x, Pn, Pn_1)
+}
+
+/// Recurrence relation for [`legendre_p_assoc`]
+///
+/// *(n-m+1)P<sub>n+1</sub><sup>m</sup>(x)
+/// = (2n+1)xP<sub>n</sub><sup>m</sup>(x) - (n+m)P<sub>n-1</sub><sup>m</sup>(x)*
+///
+/// # Examples
+///
+/// ```
+/// # use approx::assert_relative_eq;
+/// # use boost::math::{legendre_p_assoc, legendre_assoc_next};
+/// let m = 1;
+/// let x = 0.42;
+/// let p0 = legendre_p_assoc(0, m, x);
+/// let p1 = legendre_p_assoc(1, m, x);
+/// let p2 = legendre_p_assoc(2, m, x);
+/// let p3 = legendre_p_assoc(3, m, x);
+/// assert_relative_eq!(legendre_assoc_next(1, m, &x, &p1, &p0), p2);
+/// assert_relative_eq!(legendre_assoc_next(2, m, &x, &p2, &p1), p3);
+/// ```
+///
+/// # See also
+///
+/// - [`legendre_p_assoc`]
+/// - [`legendre_next`]
+#[allow(non_snake_case)]
+#[inline(always)]
+pub fn legendre_assoc_next(n: u32, m: i32, x: &f64, Pn: &f64, Pn_1: &f64) -> f64 {
+    let n = n as i32;
+    ((2 * n + 1) as f64 * x * Pn - (n + m) as f64 * Pn_1) / ((n - m + 1) as f64)
 }
 
 #[cfg(test)]
