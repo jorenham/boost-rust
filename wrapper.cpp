@@ -23,6 +23,7 @@
 #include <boost/math/special_functions/beta.hpp>
 #include <boost/math/special_functions/binomial.hpp>
 #include <boost/math/special_functions/cbrt.hpp>
+#include <boost/math/special_functions/chebyshev.hpp>
 #include <boost/math/special_functions/cos_pi.hpp>
 #include <boost/math/special_functions/erf.hpp>
 #include <boost/math/special_functions/expm1.hpp>
@@ -133,6 +134,11 @@ double math_binomial_coefficient(unsigned n, unsigned k) {
 
 // boost/math/special_functions/cbrt.hpp
 double math_cbrt(double x) { return boost::math::cbrt(x); }
+
+// boost/math/special_functions/chebyshev.hpp
+double math_chebyshev_t(unsigned n, double x) { return boost::math::chebyshev_t(n, x); }
+double math_chebyshev_t_prime(unsigned n, double x) { return boost::math::chebyshev_t_prime(n, x); }
+double math_chebyshev_u(unsigned n, double x) { return boost::math::chebyshev_u(n, x); }
 
 // boost/math/special_functions/cos_pi.hpp
 double math_cos_pi(double x) { return boost::math::cos_pi(x); }

@@ -79,26 +79,27 @@
 //!
 //! ### Polynomials
 //!
+//! - [x] Chebyshev Polynomials
+//!   - [`chebyshev_t`]
+//!   - [`chebyshev_t_prime`]
+//!   - [`chebyshev_u`]
 //! - [x] Legendre (and associated) polynomials
 //!   - [`legendre_p`]
 //!   - [`legendre_p_prime`]
 //!   - [`legendre_p_zeros`]
 //!   - [`legendre_p_assoc`]
 //!   - [`legendre_q`]
-//! - [x] Jacobi Polynomials
-//!   - [`jacobi`]
-//!   - [`jacobi_derivative`]
-//!   - ~`jacobi_prime`~
-//!   - ~`jacobi_double_prime`~
 //! - [x] Laguerre (and Associated) Polynomials
 //!   - [`laguerre`]
 //!   - [`laguerre_assoc`]
 //! - [x] Hermite Polynomials
 //!   - [`hermite`]
-//! - [ ] Chebyshev Polynomials
 //! - [x] Gegenbauer Polynomials
 //!   - [`gegenbauer`]
 //!   - [`gegenbauer_derivative`]
+//! - [x] Jacobi Polynomials
+//!   - [`jacobi`]
+//!   - [`jacobi_derivative`]
 //! - [ ] Spherical Harmonics
 //! - [ ] Cardinal B-splines
 //!
@@ -229,6 +230,7 @@ pub use special_functions::bessel::*;
 pub use special_functions::beta::*;
 pub use special_functions::binomial::*;
 pub use special_functions::cbrt::*;
+pub use special_functions::chebyshev::*;
 pub use special_functions::cos_pi::*;
 pub use special_functions::digamma::*;
 pub use special_functions::erf::*;
