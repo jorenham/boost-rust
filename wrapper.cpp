@@ -34,6 +34,7 @@
 #include <boost/math/special_functions/hypergeometric_2F0.hpp>
 #include <boost/math/special_functions/hypot.hpp>
 #include <boost/math/special_functions/jacobi.hpp>
+#include <boost/math/special_functions/laguerre.hpp>
 #include <boost/math/special_functions/legendre.hpp>
 #include <boost/math/special_functions/log1p.hpp>
 #include <boost/math/special_functions/logsumexp.hpp>
@@ -195,6 +196,10 @@ double math_jacobi(unsigned n, double alpha, double beta, double x) {
 double math_jacobi_derivative(unsigned n, double alpha, double beta, double x, unsigned k) {
     return jacobi_derivative(n, alpha, beta, x, k);
 }
+
+// boost/math/special_functions/laguerre.hpp
+double math_laguerre(unsigned n, double x) { return laguerre(n, x); }
+double math_laguerre_assoc(unsigned n, unsigned m, double x) { return laguerre(n, m, x); }
 
 // boost/math/special_functions/legendre.hpp
 double math_legendre_p(int l, double x) { return legendre_p(l, x); }
