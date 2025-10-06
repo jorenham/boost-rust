@@ -41,7 +41,7 @@ description = "Bindings for Boost Math"
 num-complex = ["dep:num-complex"]
 
 [build-dependencies]
-cc = "1.2.39"
+cc = "1.2.40"
 
 [dependencies]
 [dependencies.num-complex]
