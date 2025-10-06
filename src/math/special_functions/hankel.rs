@@ -8,7 +8,7 @@ use crate::ffi;
 ///
 /// *H<sub>ν</sub><sup>(1)</sup>(x) = J<sub>ν</sub>(x) + i Y<sub>ν</sub>(x)*
 ///
-/// where *J<sub>ν</sub>* and *y<sub>ν</sub>* are the cyclic Bessel functions of the first and
+/// where *J<sub>ν</sub>* and *Y<sub>ν</sub>* are the cyclic Bessel functions of the first and
 /// second kinds, [`cyl_bessel_j`](crate::math::cyl_bessel_j) and
 /// [`cyl_neumann`](crate::math::cyl_neumann), respectively, and *i* is the imaginary unit.
 ///
@@ -29,7 +29,7 @@ pub fn cyl_hankel_1(nu: f64, x: f64) -> num_complex::Complex<f64> {
 ///
 /// *H<sub>ν</sub><sup>(2)</sup>(x) = J<sub>ν</sub>(x) - i Y<sub>ν</sub>(x)*
 ///
-/// where *J<sub>ν</sub>* and *y<sub>ν</sub>* are the cyclic Bessel functions of the first and
+/// where *J<sub>ν</sub>* and *Y<sub>ν</sub>* are the cyclic Bessel functions of the first and
 /// second kinds, [`cyl_bessel_j`](crate::math::cyl_bessel_j) and
 /// [`cyl_neumann`](crate::math::cyl_neumann), respectively, and *i* is the imaginary unit.
 ///
