@@ -39,18 +39,27 @@ keywords = ["ffi", "bindings", "math", "boost"]
 license = "BSD-3-Clause AND BSL-1.0"
 repository = "https://github.com/jorenham/boost-rust"
 rust-version = "1.85.1"
-description = "Rust bindings for the Boost C++ Math Library"
+description = "Bindings for Boost Math"
+
+[package.metadata.docs.rs]
+5features = ["num-complex"]
+
+[profile]
+dev = { opt-level = 2 }
+release = { strip = true }
 
 [build-dependencies]
 cc = "1.2.39"
 
-[dev-dependencies]
-approx = "0.5.1"
-
 [dependencies]
+[dependencies.num-complex]
+version = "0.4.6"
+default-features = false
+optional = true
 
-[profile.dev]
-opt-level = 2
+[dev-dependencies]
+approx = { version = "0.5.1", features = ["num-complex"] }
+boost = { path = ".", features = ["num-complex"] }
 
-[profile.release]
-strip = true
+[features]
+num-complex = ["dep:num-complex"]
