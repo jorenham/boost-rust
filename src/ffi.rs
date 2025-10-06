@@ -184,6 +184,19 @@ unsafe extern "C" {
     // boost/math/special_functions/sinhc.hpp
     pub(crate) fn math_sinhc_pi(x: f64) -> f64;
 
+    // boost/math/special_functions/spherical_harmonic.hpp
+    #[cfg(feature = "num-complex")]
+    pub(crate) fn math_spherical_harmonic(
+        n: c_uint,
+        m: c_int,
+        theta: f64,
+        phi: f64,
+        out_re: *mut f64,
+        out_im: *mut f64,
+    );
+    pub(crate) fn math_spherical_harmonic_r(n: c_uint, m: c_int, theta: f64, phi: f64) -> f64;
+    pub(crate) fn math_spherical_harmonic_i(n: c_uint, m: c_int, theta: f64, phi: f64) -> f64;
+
     // boost/math/special_functions/sqrt1pm1.hpp
     pub(crate) fn math_sqrt1pm1(x: f64) -> f64;
 

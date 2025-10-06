@@ -35,6 +35,7 @@ pub(super) mod rsqrt;
 pub(super) mod sin_pi;
 pub(super) mod sinc;
 pub(super) mod sinhc;
+pub(super) mod spherical_harmonic;
 pub(super) mod sqrt1pm1;
 pub(super) mod trigamma;
 pub(super) mod zeta;
