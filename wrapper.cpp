@@ -30,6 +30,10 @@
 #include <boost/math/special_functions/cbrt.hpp>
 #include <boost/math/special_functions/chebyshev.hpp>
 #include <boost/math/special_functions/cos_pi.hpp>
+#include <boost/math/special_functions/ellint_1.hpp>
+#include <boost/math/special_functions/ellint_2.hpp>
+#include <boost/math/special_functions/ellint_3.hpp>
+#include <boost/math/special_functions/ellint_d.hpp>
 #include <boost/math/special_functions/ellint_rc.hpp>
 #include <boost/math/special_functions/ellint_rd.hpp>
 #include <boost/math/special_functions/ellint_rf.hpp>
@@ -184,6 +188,18 @@ double math_chebyshev_u(unsigned n, double x) { return chebyshev_u(n, x); }
 // boost/math/special_functions/cos_pi.hpp
 double math_cos_pi(double x) { return boost::math::cos_pi(x); }
 
+// boost/math/special_functions/ellint_1.hpp
+double math_ellint_1(double k) { return ellint_1(k); }
+double math_ellint_1_inc(double k, double phi) { return ellint_1(k, phi); }
+// boost/math/special_functions/ellint_2.hpp
+double math_ellint_2(double k) { return ellint_2(k); }
+double math_ellint_2_inc(double k, double phi) { return ellint_2(k, phi); }
+// boost/math/special_functions/ellint_3.hpp
+double math_ellint_3(double k, double v) { return ellint_3(k, v); }
+double math_ellint_3_inc(double k, double v, double phi) { return ellint_3(k, v, phi); }
+// boost/math/special_functions/ellint_d.hpp
+double math_ellint_d(double k) { return ellint_d(k); }
+double math_ellint_d_inc(double k, double phi) { return ellint_d(k, phi); }
 // boost/math/special_functions/ellint_rc.hpp
 double math_ellint_rc(double x, double y) { return ellint_rc(x, y); }
 // boost/math/special_functions/ellint_rd.hpp
