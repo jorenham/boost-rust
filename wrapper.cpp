@@ -56,6 +56,7 @@
 #include <boost/math/special_functions/sin_pi.hpp>
 #include <boost/math/special_functions/sinc.hpp>
 #include <boost/math/special_functions/sinhc.hpp>
+#include <boost/math/special_functions/spherical_harmonic.hpp>
 #include <boost/math/special_functions/sqrt1pm1.hpp>
 #include <boost/math/special_functions/zeta.hpp>
 #include <boost/math/tools/complex.hpp>
@@ -329,6 +330,26 @@ double math_sinc_pi(double x) { return sinc_pi(x); }
 
 // boost/math/special_functions/sinhc.hpp
 double math_sinhc_pi(double x) { return sinhc_pi(x); }
+
+// boost/math/special_functions/spherical_harmonic.hpp
+void math_spherical_harmonic(
+    unsigned n,
+    int m,
+    double theta,
+    double phi,
+    double* out_re,
+    double* out_im
+) {
+    cdouble out = spherical_harmonic(n, m, theta, phi);
+    *out_re = out.real();
+    *out_im = out.imag();
+}
+double math_spherical_harmonic_r(unsigned n, int m, double theta, double phi) {
+    return spherical_harmonic_r(n, m, theta, phi);
+}
+double math_spherical_harmonic_i(unsigned n, int m, double theta, double phi) {
+    return spherical_harmonic_i(n, m, theta, phi);
+}
 
 // boost/math/special_functions/sqrt1pm1.hpp
 double math_sqrt1pm1(double x) { return sqrt1pm1(x); }

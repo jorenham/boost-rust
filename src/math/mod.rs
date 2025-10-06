@@ -106,7 +106,10 @@
 //! - [x] Jacobi Polynomials
 //!   - [`jacobi`]
 //!   - [`jacobi_derivative`]
-//! - [ ] Spherical Harmonics
+//! - [x] Spherical Harmonics
+//!   - [`spherical_harmonic`]
+//!   - [`spherical_harmonic_r`]
+//!   - [`spherical_harmonic_i`]
 //! - [ ] Cardinal B-splines
 //!
 //! ### Bessel and Hankel Functions
@@ -286,6 +289,7 @@ pub use special_functions::rsqrt::*;
 pub use special_functions::sin_pi::*;
 pub use special_functions::sinc::*;
 pub use special_functions::sinhc::*;
+pub use special_functions::spherical_harmonic::*;
 pub use special_functions::sqrt1pm1::*;
 pub use special_functions::trigamma::*;
 pub use special_functions::zeta::*;
