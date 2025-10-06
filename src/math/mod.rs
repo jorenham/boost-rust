@@ -109,13 +109,17 @@
 //! - [ ] Spherical Harmonics
 //! - [ ] Cardinal B-splines
 //!
-//! ### Bessel Functions
+//! ### Bessel and Hankel Functions
 //!
 //! |                   Type | First Kind       | Second Kind      |
 //! | ---------------------: | ---------------- | ---------------- |
 //! |          Cyclic Bessel | [`cyl_bessel_j`] | [`cyl_neumann`]  |
 //! | Modified Cyclic Bessel | [`cyl_bessel_i`] | [`cyl_bessel_k`] |
 //! |       Spherical Bessel | [`sph_bessel`]   | [`sph_neumann`]  |
+//! |          Cyclic Hankel | [`cyl_hankel_1`] | [`cyl_hankel_2`] |
+//! |       Spherical Hankel | [`sph_hankel_1`] | [`sph_hankel_2`] |
+//!
+//! Note that the Hankel functions require the `num-complex` feature to be enabled.
 //!
 //! #### Zeros
 //!
@@ -130,11 +134,6 @@
 //! |          Cyclic Bessel | [`cyl_bessel_j_prime`] | [`cyl_neumann_prime`]  |
 //! | Modified Cyclic Bessel | [`cyl_bessel_i_prime`] | [`cyl_bessel_k_prime`] |
 //! |       Spherical Bessel | [`sph_bessel_prime`]   | [`sph_neumann_prime`]  |
-//!
-//! <h4>Hankel Functions</h4>
-//!
-//! - [ ] Cyclic Hankel Functions
-//! - [ ] Spherical Hankel Functions
 //!
 //! ### Airy Functions
 //!
@@ -268,6 +267,8 @@ pub use special_functions::expm1::*;
 pub use special_functions::factorials::*;
 pub use special_functions::gamma::*;
 pub use special_functions::gegenbauer::*;
+#[cfg(feature = "num-complex")]
+pub use special_functions::hankel::*;
 pub use special_functions::hermite::*;
 pub use special_functions::hypergeometric::*;
 pub use special_functions::hypot::*;

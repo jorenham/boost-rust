@@ -8,6 +8,7 @@ version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cab112f0a86d568ea0e627cc1d6be74a1e9cd55214684db5561995f6dad897c6"
 dependencies = [
+ "num-complex",
  "num-traits",
 ]
 
@@ -22,7 +23,9 @@ name = "boost"
 version = "0.0.3+1.89.0"
 dependencies = [
  "approx",
+ "boost",
  "cc",
+ "num-complex",
 ]
 
 [[package]]
@@ -40,6 +43,15 @@ name = "find-msvc-tools"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1ced73b1dacfc750a6db6c0a0c3a3853c8b41997e2e2c563dc90804ae6867959"
+
+[[package]]
+name = "num-complex"
+version = "0.4.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "73f88a1307638156682bada9d7604135552957b7818057dcef22705b4d509495"
+dependencies = [
+ "num-traits",
+]
 
 [[package]]
 name = "num-traits"

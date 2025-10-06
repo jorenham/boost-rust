@@ -1,3 +1,13 @@
+#![no_std]
+#![warn(
+    missing_debug_implementations,
+    missing_docs,
+    rust_2018_idioms,
+    unreachable_pub
+)]
+#![cfg_attr(docsrs, feature(doc_cfg))]
+#![cfg_attr(all(doc, not(doctest)), feature(doc_cfg))]
+
 //! Rust interface for the [Boost](https://github.com/boostorg/boost) C++ library.
 //!
 //! Currently, this crate only provides bindings for the Boost Math library
@@ -9,8 +19,6 @@
 //! [boost-math-repo]: https://github.com/boostorg/math
 //! [boost-math-docs]: https://www.boost.org/doc/libs/latest/libs/math/doc/html/index.html
 
-#![cfg_attr(not(test), no_std)]
-#![warn(missing_docs)]
 extern crate alloc;
 
 #[cfg(test)]
