@@ -30,6 +30,11 @@
 #include <boost/math/special_functions/cbrt.hpp>
 #include <boost/math/special_functions/chebyshev.hpp>
 #include <boost/math/special_functions/cos_pi.hpp>
+#include <boost/math/special_functions/ellint_rc.hpp>
+#include <boost/math/special_functions/ellint_rd.hpp>
+#include <boost/math/special_functions/ellint_rf.hpp>
+#include <boost/math/special_functions/ellint_rg.hpp>
+#include <boost/math/special_functions/ellint_rj.hpp>
 #include <boost/math/special_functions/erf.hpp>
 #include <boost/math/special_functions/expint.hpp>
 #include <boost/math/special_functions/expm1.hpp>
@@ -178,6 +183,17 @@ double math_chebyshev_u(unsigned n, double x) { return chebyshev_u(n, x); }
 
 // boost/math/special_functions/cos_pi.hpp
 double math_cos_pi(double x) { return boost::math::cos_pi(x); }
+
+// boost/math/special_functions/ellint_rc.hpp
+double math_ellint_rc(double x, double y) { return ellint_rc(x, y); }
+// boost/math/special_functions/ellint_rd.hpp
+double math_ellint_rd(double x, double y, double z) { return ellint_rd(x, y, z); }
+// boost/math/special_functions/ellint_rf.hpp
+double math_ellint_rf(double x, double y, double z) { return ellint_rf(x, y, z); }
+// boost/math/special_functions/ellint_rg.hpp
+double math_ellint_rg(double x, double y, double z) { return ellint_rg(x, y, z); }
+// boost/math/special_functions/ellint_rj.hpp
+double math_ellint_rj(double x, double y, double z, double p) { return ellint_rj(x, y, z, p); }
 
 // boost/math/special_functions/erf.hpp
 double math_erf(double x) { return boost::math::erf(x); }

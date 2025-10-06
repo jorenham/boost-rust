@@ -11,6 +11,7 @@ pub(super) mod cbrt;
 pub(super) mod chebyshev;
 pub(super) mod cos_pi;
 pub(super) mod digamma;
+pub(super) mod ellint_r;
 pub(super) mod erf;
 pub(super) mod expint;
 pub(super) mod expm1;

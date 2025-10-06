@@ -150,7 +150,12 @@
 //!
 //! <h4>Elliptic Integrals</h4>
 //!
-//! - [ ] Elliptic Integrals - Carlson Form
+//! - [x] Elliptic Integrals - Carlson Form
+//!   - [`ellint_rc`](ellint_rc) - *R<sub>C</sub>(x,y)*
+//!   - [`ellint_rd`](ellint_rd) - *R<sub>D</sub>(x,y,z)*
+//!   - [`ellint_rf`](ellint_rf) - *R<sub>F</sub>(x,y,z)*
+//!   - [`ellint_rg`](ellint_rg) - *R<sub>G</sub>(x,y,z)*
+//!   - [`ellint_rj`](ellint_rj) - *R<sub>J</sub>(x,y,z,p)*
 //! - [ ] Elliptic Integrals of the First Kind - Legendre Form
 //! - [ ] Elliptic Integrals of the Second Kind - Legendre Form
 //! - [ ] Elliptic Integrals of the Third Kind - Legendre Form
@@ -261,6 +266,7 @@ pub use special_functions::cbrt::*;
 pub use special_functions::chebyshev::*;
 pub use special_functions::cos_pi::*;
 pub use special_functions::digamma::*;
+pub use special_functions::ellint_r::*;
 pub use special_functions::erf::*;
 pub use special_functions::expint::*;
 pub use special_functions::expm1::*;
