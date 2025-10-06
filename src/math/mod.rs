@@ -97,8 +97,8 @@
 //!   - [`laguerre_assoc`]
 //!   - [`laguerre_assoc_next`]
 //! - Hermite Polynomials
-//!   - [`hermite`]
-//!   - [`hermite_next`]
+//!   - [`hermite_h`]
+//!   - [`hermite_h_next`]
 //! - Gegenbauer Polynomials
 //!   - [`gegenbauer`]
 //!   - [`gegenbauer_derivative`]

@@ -3,10 +3,9 @@
 use crate::ffi;
 use core::ffi::c_uint;
 
-/// Jacobi Polynomial *P<sub>n</sub><sup>(α, β)</sup>(x)*
+/// Jacobi Polynomial *P<sub>n</sub><sup>(α,β)</sup>(x)*
 ///
-/// Corresponds to `boost::math::jacobi(n, alpha, beta, x)`.
-///
+/// Corresponds to `boost::math::jacobi(n, alpha, beta, x)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_poly/jacobi.html>
 pub fn jacobi(n: u32, alpha: f64, beta: f64, x: f64) -> f64 {
     unsafe { ffi::math_jacobi(n as c_uint, alpha, beta, x) }
@@ -14,9 +13,10 @@ pub fn jacobi(n: u32, alpha: f64, beta: f64, x: f64) -> f64 {
 
 /// *k*-th derivative of [`jacobi`] with respect to `x`
 ///
-/// Corresponds to `boost::math::jacobi_derivative(n, alpha, beta, x, k)`.
-///
+/// Corresponds to `boost::math::jacobi_derivative(n, alpha, beta, x, k)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_poly/jacobi.html>
+#[doc(alias = "jacobi_prime")]
+#[doc(alias = "jacobi_double_prime")]
 pub fn jacobi_derivative(n: u32, alpha: f64, beta: f64, x: f64, k: u32) -> f64 {
     unsafe { ffi::math_jacobi_derivative(n as c_uint, alpha, beta, x, k as c_uint) }
 }
