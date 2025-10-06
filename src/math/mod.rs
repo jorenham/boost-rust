@@ -110,7 +110,11 @@
 //!   - [`spherical_harmonic`]
 //!   - [`spherical_harmonic_r`]
 //!   - [`spherical_harmonic_i`]
-//! - [ ] Cardinal B-splines
+//! - [x] Cardinal B-splines
+//!   - [`cardinal_b_spline`]
+//!   - [`cardinal_b_spline_prime`]
+//!   - [`cardinal_b_spline_double_prime`]
+//!   - [`forward_cardinal_b_spline`]
 //!
 //! ### Bessel and Hankel Functions
 //!
@@ -260,6 +264,7 @@ pub use special_functions::bessel::*;
 pub use special_functions::bessel_prime::*;
 pub use special_functions::beta::*;
 pub use special_functions::binomial::*;
+pub use special_functions::cardinal_b_spline::*;
 pub use special_functions::cbrt::*;
 pub use special_functions::chebyshev::*;
 pub use special_functions::cos_pi::*;

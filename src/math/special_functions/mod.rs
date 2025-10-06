@@ -6,6 +6,7 @@ pub(super) mod bessel;
 pub(super) mod bessel_prime;
 pub(super) mod beta;
 pub(super) mod binomial;
+pub(super) mod cardinal_b_spline;
 pub(super) mod cbrt;
 pub(super) mod chebyshev;
 pub(super) mod cos_pi;
