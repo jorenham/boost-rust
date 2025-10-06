@@ -181,6 +181,20 @@ unsafe extern "C" {
     pub(crate) fn math_jacobi_sd(k: f64, theta: f64) -> f64;
     pub(crate) fn math_jacobi_sn(k: f64, theta: f64) -> f64;
 
+    // boost/math/special_functions/jacobi_theta.hpp
+    pub(crate) fn math_jacobi_theta1(x: f64, q: f64) -> f64;
+    pub(crate) fn math_jacobi_theta1tau(x: f64, tau: f64) -> f64;
+    pub(crate) fn math_jacobi_theta2(x: f64, q: f64) -> f64;
+    pub(crate) fn math_jacobi_theta2tau(x: f64, tau: f64) -> f64;
+    pub(crate) fn math_jacobi_theta3(x: f64, q: f64) -> f64;
+    pub(crate) fn math_jacobi_theta3tau(x: f64, tau: f64) -> f64;
+    pub(crate) fn math_jacobi_theta3m1(x: f64, q: f64) -> f64;
+    pub(crate) fn math_jacobi_theta3m1tau(x: f64, tau: f64) -> f64;
+    pub(crate) fn math_jacobi_theta4(x: f64, q: f64) -> f64;
+    pub(crate) fn math_jacobi_theta4tau(x: f64, tau: f64) -> f64;
+    pub(crate) fn math_jacobi_theta4m1(x: f64, q: f64) -> f64;
+    pub(crate) fn math_jacobi_theta4m1tau(x: f64, tau: f64) -> f64;
+
     // boost/math/special_functions/jacobi_zeta.hpp
     pub(crate) fn math_jacobi_zeta(k: f64, phi: f64) -> f64;
 
