@@ -82,7 +82,7 @@ pub fn jacobi_theta_4_tau(x: f64, tau: f64) -> f64 {
     unsafe { ffi::math_jacobi_theta4tau(x, tau) }
 }
 
-/// Jacobi theta function *θ<sub>4</sub>(x, q) = 1*
+/// Jacobi theta function *θ<sub>4</sub>(x, q) - 1*
 ///
 /// Corresponds to `boost::math::jacobi_theta4m1(x, q)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/jacobi_theta/jacobi_theta4.html>
@@ -92,7 +92,7 @@ pub fn jacobi_theta_4m1(x: f64, q: f64) -> f64 {
 
 /// Jacobi theta function *θ<sub>4</sub>(x, τ) - 1*
 ///
-/// Corresponds to `boost::math::jacobi_theta4tau(x, τ)` in C++.
+/// Corresponds to `boost::math::jacobi_theta4m1tau(x, τ)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/jacobi_theta/jacobi_theta4.html>
 pub fn jacobi_theta_4m1_tau(x: f64, tau: f64) -> f64 {
     unsafe { ffi::math_jacobi_theta4m1tau(x, tau) }
