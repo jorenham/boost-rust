@@ -268,6 +268,8 @@ pub use special_functions::expm1::*;
 pub use special_functions::factorials::*;
 pub use special_functions::gamma::*;
 pub use special_functions::gegenbauer::*;
+#[cfg(feature = "num-complex")]
+pub use special_functions::hankel::*;
 pub use special_functions::hermite::*;
 pub use special_functions::hypergeometric::*;
 pub use special_functions::hypot::*;

@@ -18,7 +18,6 @@
 #endif
 
 #include <boost/math/ccmath/sqrt.hpp>
-
 #include <boost/math/special_functions/acosh.hpp>
 #include <boost/math/special_functions/airy.hpp>
 #include <boost/math/special_functions/asinh.hpp>
@@ -36,6 +35,7 @@
 #include <boost/math/special_functions/factorials.hpp>
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/math/special_functions/gegenbauer.hpp>
+#include <boost/math/special_functions/hankel.hpp>
 #include <boost/math/special_functions/hermite.hpp>
 #include <boost/math/special_functions/hypergeometric_0F1.hpp>
 #include <boost/math/special_functions/hypergeometric_1F0.hpp>
@@ -58,6 +58,7 @@
 #include <boost/math/special_functions/sinhc.hpp>
 #include <boost/math/special_functions/sqrt1pm1.hpp>
 #include <boost/math/special_functions/zeta.hpp>
+#include <boost/math/tools/complex.hpp>
 
 namespace detail {
 
@@ -107,9 +108,9 @@ inline double polygamma(const int n, double x) noexcept {
 } // namespace detail
 
 using namespace boost::math;
+using cdouble = boost::math::complex<double>;
 
 extern "C" {
-
 // boost/math/ccmath/sqrt.hpp
 double math_ccmath_sqrt(double x) { return ccmath::sqrt(x); }
 
@@ -215,6 +216,28 @@ double math_gamma_p_derivative(double a, double x) { return gamma_p_derivative(a
 double math_gegenbauer(unsigned n, double lambda, double x) { return gegenbauer(n, lambda, x); }
 double math_gegenbauer_derivative(unsigned n, double lambda, double x, unsigned k) {
     return gegenbauer_derivative(n, lambda, x, k);
+}
+
+// boost/math/special_functions/hankel.hpp
+void math_cyl_hankel_1(double nu, double x, double* out_re, double* out_im) {
+    cdouble out = cyl_hankel_1(nu, x);
+    *out_re = out.real();
+    *out_im = out.imag();
+}
+void math_cyl_hankel_2(double nu, double x, double* out_re, double* out_im) {
+    cdouble out = cyl_hankel_2(nu, x);
+    *out_re = out.real();
+    *out_im = out.imag();
+}
+void math_sph_hankel_1(double nu, double x, double* out_re, double* out_im) {
+    cdouble out = sph_hankel_1(nu, x);
+    *out_re = out.real();
+    *out_im = out.imag();
+}
+void math_sph_hankel_2(double nu, double x, double* out_re, double* out_im) {
+    cdouble out = sph_hankel_2(nu, x);
+    *out_re = out.real();
+    *out_im = out.imag();
 }
 
 // boost/math/special_functions/hermite.hpp
