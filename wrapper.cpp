@@ -47,12 +47,14 @@
 #include <boost/math/special_functions/gegenbauer.hpp>
 #include <boost/math/special_functions/hankel.hpp>
 #include <boost/math/special_functions/hermite.hpp>
+#include <boost/math/special_functions/heuman_lambda.hpp>
 #include <boost/math/special_functions/hypergeometric_0F1.hpp>
 #include <boost/math/special_functions/hypergeometric_1F0.hpp>
 #include <boost/math/special_functions/hypergeometric_1F1.hpp>
 #include <boost/math/special_functions/hypergeometric_2F0.hpp>
 #include <boost/math/special_functions/hypot.hpp>
 #include <boost/math/special_functions/jacobi.hpp>
+#include <boost/math/special_functions/jacobi_zeta.hpp>
 #include <boost/math/special_functions/laguerre.hpp>
 #include <boost/math/special_functions/lambert_w.hpp>
 #include <boost/math/special_functions/legendre.hpp>
@@ -277,6 +279,9 @@ void math_sph_hankel_2(double nu, double x, double* out_re, double* out_im) {
 // boost/math/special_functions/hermite.hpp
 double math_hermite(unsigned n, double x) { return hermite(n, x); }
 
+// boost/math/special_functions/heuman_lambda.hpp
+double math_heuman_lambda(double k, double phi) { return heuman_lambda(k, phi); }
+
 // boost/math/special_functions/hypergeometric_0F1.hpp
 double math_hypergeometric_0F1(double b, double x) { return hypergeometric_0F1(b, x); }
 
@@ -307,6 +312,9 @@ double math_jacobi(unsigned n, double alpha, double beta, double x) {
 double math_jacobi_derivative(unsigned n, double alpha, double beta, double x, unsigned k) {
     return jacobi_derivative(n, alpha, beta, x, k);
 }
+
+// boost/math/special_functions/jacobi_zeta.hpp
+double math_jacobi_zeta(double k, double phi) { return jacobi_zeta(k, phi); }
 
 // boost/math/special_functions/laguerre.hpp
 double math_laguerre(unsigned n, double x) { return laguerre(n, x); }
