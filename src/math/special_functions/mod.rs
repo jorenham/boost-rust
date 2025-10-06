@@ -29,6 +29,7 @@ pub(super) mod heuman_lambda;
 pub(super) mod hypergeometric;
 pub(super) mod hypot;
 pub(super) mod jacobi;
+pub(super) mod jacobi_elliptic;
 pub(super) mod jacobi_zeta;
 pub(super) mod laguerre;
 pub(super) mod lambert_w;

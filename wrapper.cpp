@@ -54,6 +54,7 @@
 #include <boost/math/special_functions/hypergeometric_2F0.hpp>
 #include <boost/math/special_functions/hypot.hpp>
 #include <boost/math/special_functions/jacobi.hpp>
+#include <boost/math/special_functions/jacobi_elliptic.hpp>
 #include <boost/math/special_functions/jacobi_zeta.hpp>
 #include <boost/math/special_functions/laguerre.hpp>
 #include <boost/math/special_functions/lambert_w.hpp>
@@ -312,6 +313,23 @@ double math_jacobi(unsigned n, double alpha, double beta, double x) {
 double math_jacobi_derivative(unsigned n, double alpha, double beta, double x, unsigned k) {
     return jacobi_derivative(n, alpha, beta, x, k);
 }
+
+// boost/math/special_functions/jacobi_elliptic.hpp
+double math_jacobi_elliptic(double k, double theta, double* pcn, double* pdn) {
+    return jacobi_elliptic(k, theta, pcn, pdn);
+}
+double math_jacobi_cd(double k, double theta) { return jacobi_cd(k, theta); }
+double math_jacobi_cn(double k, double theta) { return jacobi_cn(k, theta); }
+double math_jacobi_cs(double k, double theta) { return jacobi_cs(k, theta); }
+double math_jacobi_dc(double k, double theta) { return jacobi_dc(k, theta); }
+double math_jacobi_dn(double k, double theta) { return jacobi_dn(k, theta); }
+double math_jacobi_ds(double k, double theta) { return jacobi_ds(k, theta); }
+double math_jacobi_nc(double k, double theta) { return jacobi_nc(k, theta); }
+double math_jacobi_nd(double k, double theta) { return jacobi_nd(k, theta); }
+double math_jacobi_ns(double k, double theta) { return jacobi_ns(k, theta); }
+double math_jacobi_sc(double k, double theta) { return jacobi_sc(k, theta); }
+double math_jacobi_sd(double k, double theta) { return jacobi_sd(k, theta); }
+double math_jacobi_sn(double k, double theta) { return jacobi_sn(k, theta); }
 
 // boost/math/special_functions/jacobi_zeta.hpp
 double math_jacobi_zeta(double k, double phi) { return jacobi_zeta(k, phi); }

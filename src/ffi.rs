@@ -166,6 +166,21 @@ unsafe extern "C" {
         k: c_uint,
     ) -> f64;
 
+    // boost/math/special_functions/jacobi_elliptic.hpp
+    pub(crate) fn math_jacobi_elliptic(k: f64, theta: f64, pcn: *mut f64, pdn: *mut f64) -> f64;
+    pub(crate) fn math_jacobi_cd(k: f64, theta: f64) -> f64;
+    pub(crate) fn math_jacobi_cn(k: f64, theta: f64) -> f64;
+    pub(crate) fn math_jacobi_cs(k: f64, theta: f64) -> f64;
+    pub(crate) fn math_jacobi_dc(k: f64, theta: f64) -> f64;
+    pub(crate) fn math_jacobi_dn(k: f64, theta: f64) -> f64;
+    pub(crate) fn math_jacobi_ds(k: f64, theta: f64) -> f64;
+    pub(crate) fn math_jacobi_nc(k: f64, theta: f64) -> f64;
+    pub(crate) fn math_jacobi_nd(k: f64, theta: f64) -> f64;
+    pub(crate) fn math_jacobi_ns(k: f64, theta: f64) -> f64;
+    pub(crate) fn math_jacobi_sc(k: f64, theta: f64) -> f64;
+    pub(crate) fn math_jacobi_sd(k: f64, theta: f64) -> f64;
+    pub(crate) fn math_jacobi_sn(k: f64, theta: f64) -> f64;
+
     // boost/math/special_functions/jacobi_zeta.hpp
     pub(crate) fn math_jacobi_zeta(k: f64, phi: f64) -> f64;
 

@@ -173,21 +173,34 @@
 //! - Heuman Lambda Function
 //!   - [`heuman_lambda`] - *Λ<sub>0</sub>(φ,k)*
 //!
-//! <h4>Jacobi Elliptic Functions</h4>
+//! ### Jacobi Elliptic Functions
 //!
-//! - [ ] Jacobi Elliptic *SN*, *CN* and *DN*
-//! - [ ] Jacobi Elliptic Function *cd*
-//! - [ ] Jacobi Elliptic Function *cn*
-//! - [ ] Jacobi Elliptic Function *cs*
-//! - [ ] Jacobi Elliptic Function *dc*
-//! - [ ] Jacobi Elliptic Function *dn*
-//! - [ ] Jacobi Elliptic Function *ds*
-//! - [ ] Jacobi Elliptic Function *nc*
-//! - [ ] Jacobi Elliptic Function *nd*
-//! - [ ] Jacobi Elliptic Function *ns*
-//! - [ ] Jacobi Elliptic Function *sc*
-//! - [ ] Jacobi Elliptic Function *sd*
-//! - [ ] Jacobi Elliptic Function *sn*
+//! - Jacobi Elliptic *SN*, *CN* and *DN*
+//!   - [`jacobi_elliptic`]
+//! - Jacobi Elliptic Function *cd*
+//!   - [`jacobi_cd`]
+//! - Jacobi Elliptic Function *cn*
+//!   - [`jacobi_cn`]
+//! - Jacobi Elliptic Function *cs*
+//!   - [`jacobi_cs`]
+//! - Jacobi Elliptic Function *dc*
+//!   - [`jacobi_dc`]
+//! - Jacobi Elliptic Function *dn*
+//!   - [`jacobi_dn`]
+//! - Jacobi Elliptic Function *ds*
+//!   - [`jacobi_ds`]
+//! - Jacobi Elliptic Function *nc*
+//!   - [`jacobi_nc`]
+//! - Jacobi Elliptic Function *nd*
+//!   - [`jacobi_nd`]
+//! - Jacobi Elliptic Function *ns*
+//!   - [`jacobi_ns`]
+//! - Jacobi Elliptic Function *sc*
+//!   - [`jacobi_sc`]
+//! - Jacobi Elliptic Function *sd*
+//!   - [`jacobi_sd`]
+//! - Jacobi Elliptic Function *sn*
+//!   - [`jacobi_sn`]
 //!
 //! <h4>Jacobi Theta Functions</h4>
 //!
@@ -294,6 +307,7 @@ pub use special_functions::heuman_lambda::*;
 pub use special_functions::hypergeometric::*;
 pub use special_functions::hypot::*;
 pub use special_functions::jacobi::*;
+pub use special_functions::jacobi_elliptic::*;
 pub use special_functions::jacobi_zeta::*;
 pub use special_functions::laguerre::*;
 pub use special_functions::lambert_w::*;
