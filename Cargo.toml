@@ -8,12 +8,8 @@ include = [
   "*.rs",
   "wrapper.cpp",
   #
-  "subprojects/boost_math/math/include/boost/math/ccmath/detail",
-  "subprojects/boost_math/math/include/boost/math/ccmath/abs.hpp",
-  "subprojects/boost_math/math/include/boost/math/ccmath/isnan.hpp",
-  "subprojects/boost_math/math/include/boost/math/ccmath/isinf.hpp",
-  "subprojects/boost_math/math/include/boost/math/ccmath/sqrt.hpp",
-  #
+  "subprojects/boost_math/math/include/boost/math/ccmath",
+  "subprojects/boost_math/math/include/boost/math/constants",
   "subprojects/boost_math/math/include/boost/math/policies",
   #
   "subprojects/boost_math/math/include/boost/math/special_functions",
@@ -41,12 +37,8 @@ repository = "https://github.com/jorenham/boost-rust"
 rust-version = "1.85.1"
 description = "Bindings for Boost Math"
 
-[package.metadata.docs.rs]
-5features = ["num-complex"]
-
-[profile]
-dev = { opt-level = 2 }
-release = { strip = true }
+[features]
+num-complex = ["dep:num-complex"]
 
 [build-dependencies]
 cc = "1.2.39"
@@ -61,5 +53,11 @@ optional = true
 approx = { version = "0.5.1", features = ["num-complex"] }
 boost = { path = ".", features = ["num-complex"] }
 
-[features]
-num-complex = ["dep:num-complex"]
+[profile]
+dev = { opt-level = 2 }
+release = { strip = true }
+
+[package.metadata.docs.rs]
+# https://stackoverflow.com/a/61417700/1627479
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
