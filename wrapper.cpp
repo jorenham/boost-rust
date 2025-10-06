@@ -55,6 +55,7 @@
 #include <boost/math/special_functions/hypot.hpp>
 #include <boost/math/special_functions/jacobi.hpp>
 #include <boost/math/special_functions/jacobi_elliptic.hpp>
+#include <boost/math/special_functions/jacobi_theta.hpp>
 #include <boost/math/special_functions/jacobi_zeta.hpp>
 #include <boost/math/special_functions/laguerre.hpp>
 #include <boost/math/special_functions/lambert_w.hpp>
@@ -330,6 +331,20 @@ double math_jacobi_ns(double k, double theta) { return jacobi_ns(k, theta); }
 double math_jacobi_sc(double k, double theta) { return jacobi_sc(k, theta); }
 double math_jacobi_sd(double k, double theta) { return jacobi_sd(k, theta); }
 double math_jacobi_sn(double k, double theta) { return jacobi_sn(k, theta); }
+
+// boost/math/special_functions/jacobi_theta.hpp
+double math_jacobi_theta1(double x, double q) { return jacobi_theta1(x, q); }
+double math_jacobi_theta1tau(double x, double tau) { return jacobi_theta1tau(x, tau); }
+double math_jacobi_theta2(double x, double q) { return jacobi_theta2(x, q); }
+double math_jacobi_theta2tau(double x, double tau) { return jacobi_theta2tau(x, tau); }
+double math_jacobi_theta3(double x, double q) { return jacobi_theta3(x, q); }
+double math_jacobi_theta3tau(double x, double tau) { return jacobi_theta3tau(x, tau); }
+double math_jacobi_theta3m1(double x, double q) { return jacobi_theta3m1(x, q); }
+double math_jacobi_theta3m1tau(double x, double tau) { return jacobi_theta3m1tau(x, tau); }
+double math_jacobi_theta4(double x, double q) { return jacobi_theta4(x, q); }
+double math_jacobi_theta4m1(double x, double q) { return jacobi_theta4m1(x, q); }
+double math_jacobi_theta4tau(double x, double tau) { return jacobi_theta4tau(x, tau); }
+double math_jacobi_theta4m1tau(double x, double tau) { return jacobi_theta4m1tau(x, tau); }
 
 // boost/math/special_functions/jacobi_zeta.hpp
 double math_jacobi_zeta(double k, double phi) { return jacobi_zeta(k, phi); }

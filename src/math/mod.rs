@@ -202,12 +202,24 @@
 //! - Jacobi Elliptic Function *sn*
 //!   - [`jacobi_sn`]
 //!
-//! <h4>Jacobi Theta Functions</h4>
+//! ### Jacobi Theta Functions
 //!
-//! - [ ] Jacobi Theta Function *θ<sub>1</sub>*
-//! - [ ] Jacobi Theta Function *θ<sub>2</sub>*
-//! - [ ] Jacobi Theta Function *θ<sub>3</sub>*
-//! - [ ] Jacobi Theta Function *θ<sub>4</sub>*
+//! - Jacobi Theta Function *θ<sub>1</sub>*
+//!   - [`jacobi_theta_1`]
+//!   - [`jacobi_theta_1_tau`]
+//! - Jacobi Theta Function *θ<sub>2</sub>*
+//!   - [`jacobi_theta_2`]
+//!   - [`jacobi_theta_2_tau`]
+//! - Jacobi Theta Function *θ<sub>3</sub>*
+//!   - [`jacobi_theta_3`]
+//!   - [`jacobi_theta_3_tau`]
+//!   - [`jacobi_theta_3m1`]
+//!   - [`jacobi_theta_3m1_tau`]
+//! - Jacobi Theta Function *θ<sub>4</sub>*
+//!   - [`jacobi_theta_4`]
+//!   - [`jacobi_theta_4_tau`]
+//!   - [`jacobi_theta_4m1`]
+//!   - [`jacobi_theta_4m1_tau`]
 //!
 //! ### Lambert W Function
 //!
@@ -308,6 +320,7 @@ pub use special_functions::hypergeometric::*;
 pub use special_functions::hypot::*;
 pub use special_functions::jacobi::*;
 pub use special_functions::jacobi_elliptic::*;
+pub use special_functions::jacobi_theta::*;
 pub use special_functions::jacobi_zeta::*;
 pub use special_functions::laguerre::*;
 pub use special_functions::lambert_w::*;
