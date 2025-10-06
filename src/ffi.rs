@@ -70,6 +70,17 @@ unsafe extern "C" {
     // boost/math/special_functions/digamma.hpp
     pub(crate) fn math_digamma(x: f64) -> f64;
 
+    // boost/math/special_functions/ellint_rc.hpp
+    pub(crate) fn math_ellint_rc(x: f64, y: f64) -> f64;
+    // boost/math/special_functions/ellint_rd.hpp
+    pub(crate) fn math_ellint_rd(x: f64, y: f64, z: f64) -> f64;
+    // boost/math/special_functions/ellint_rf.hpp
+    pub(crate) fn math_ellint_rf(x: f64, y: f64, z: f64) -> f64;
+    // boost/math/special_functions/ellint_rg.hpp
+    pub(crate) fn math_ellint_rg(x: f64, y: f64, z: f64) -> f64;
+    // boost/math/special_functions/ellint_rj.hpp
+    pub(crate) fn math_ellint_rj(x: f64, y: f64, z: f64, p: f64) -> f64;
+
     // boost/math/special_functions/erf.hpp
     pub(crate) fn math_erf(x: f64) -> f64;
     pub(crate) fn math_erfc(x: f64) -> f64;
