@@ -99,6 +99,8 @@
 //! - Hermite Polynomials
 //!   - [`hermite_h`]
 //!   - [`hermite_h_next`]
+//!   - [`hermite_he`]
+//!   - [`hermite_he_next`]
 //! - Gegenbauer Polynomials
 //!   - [`gegenbauer`]
 //!   - [`gegenbauer_derivative`]
