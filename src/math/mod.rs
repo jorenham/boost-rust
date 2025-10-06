@@ -16,75 +16,74 @@
 //!
 //! ### Gamma Functions
 //!
-//! - [x] Gamma
+//! - Gamma
 //!   - [`gamma`]
 //!   - [`gamma1pm1`]
-//! - [x] Log Gamma
+//! - Log Gamma
 //!   - [`lgamma`]
-//! - [x] Polygamma
+//! - Polygamma
 //!   - [`digamma`]
 //!   - [`trigamma`]
 //!   - [`polygamma`]
-//! - [x] Ratios of Gamma Functions
+//! - Ratios of Gamma Functions
 //!   - [`gamma_ratio`]
 //!   - [`gamma_delta_ratio`]
-//! - [x] Incomplete Gamma Functions
+//! - Incomplete Gamma Functions
 //!   - [`gamma_q`]
 //!   - [`gamma_p`]
 //!   - [`gamma_upper`]
 //!   - [`gamma_lower`]
-//! - [x] Incomplete Gamma Function inverses
+//! - Incomplete Gamma Function inverses
 //!   - [`gamma_q_inv`]
 //!   - [`gamma_q_inva`]
 //!   - [`gamma_p_inv`]
 //!   - [`gamma_p_inva`]
-//! - [x] Derivative of the Incomplete Gamma Function
+//! - Derivative of the Incomplete Gamma Function
 //!   - [`gamma_p_derivative`]
 //!
 //! ### Factorials and Binomial Coefficients
 //!
-//! - [x] [`factorial`]
-//! - [x] [`double_factorial`]
-//! - [x] [`rising_factorial`]
-//! - [x] [`falling_factorial`]
-//! - [x] [`binomial_coefficient`]
+//! - [`factorial`]
+//! - [`double_factorial`]
+//! - [`rising_factorial`]
+//! - [`falling_factorial`]
+//! - [`binomial_coefficient`]
 //!
 //! ### Beta Functions
 //!
-//! - [x] Beta
+//! - Beta function
 //!   - [`beta`]
-//! - [x] Incomplete Beta Functions
-//!   - [`ibeta`]
-//!   - [`ibetac`]
+//! - Incomplete beta functions
 //!   - [`beta_`]
 //!   - [`betac`]
-//! - [x] The Incomplete Beta Function Inverses
+//! - Regularized incomplete beta functions
+//!   - [`ibeta`]
+//!   - [`ibetac`]
+//! - Regularized incomplete beta function inverses
 //!   - [`ibeta_inv`]
-//!   - [`ibetac_inv`]
 //!   - [`ibeta_inva`]
-//!   - [`ibetac_inva`]
 //!   - [`ibeta_invb`]
+//!   - [`ibetac_inv`]
+//!   - [`ibetac_inva`]
 //!   - [`ibetac_invb`]
-//! - [x] Derivative of the Incomplete Beta Function
+//! - Regularized incomplete beta function derivative
 //!   - [`ibeta_derivative`]
 //!
 //! ### Error Functions
 //!
-//! - [x] Error Function *erf* and complement *erfc*
-//!   - [`erf`]
-//!   - [`erfc`]
-//! - [x] Error Function Inverses
-//!   - [`erf_inv`]
-//!   - [`erfc_inv`]
+//! | Error function | Inverse function |
+//! | -------------- | ---------------- |
+//! | [`erf`]        | [`erf_inv`]      |
+//! | [`erfc`]       | [`erfc_inv`]     |
 //!
 //! ### Polynomials
 //!
-//! - [x] Chebyshev Polynomials
+//! - Chebyshev Polynomials
 //!   - [`chebyshev_t`]
 //!   - [`chebyshev_t_prime`]
 //!   - [`chebyshev_u`]
 //!   - [`chebyshev_next`]
-//! - [x] Legendre (and associated) polynomials
+//! - Legendre (and associated) polynomials
 //!   - [`legendre_p`]
 //!   - [`legendre_p_prime`]
 //!   - [`legendre_p_zeros`]
@@ -92,25 +91,25 @@
 //!   - [`legendre_next`]
 //!   - [`legendre_p_assoc`]
 //!   - [`legendre_assoc_next`]
-//! - [x] Laguerre (and Associated) Polynomials
+//! - Laguerre (and Associated) Polynomials
 //!   - [`laguerre`]
 //!   - [`laguerre_next`]
 //!   - [`laguerre_assoc`]
 //!   - [`laguerre_assoc_next`]
-//! - [x] Hermite Polynomials
+//! - Hermite Polynomials
 //!   - [`hermite`]
 //!   - [`hermite_next`]
-//! - [x] Gegenbauer Polynomials
+//! - Gegenbauer Polynomials
 //!   - [`gegenbauer`]
 //!   - [`gegenbauer_derivative`]
-//! - [x] Jacobi Polynomials
+//! - Jacobi Polynomials
 //!   - [`jacobi`]
 //!   - [`jacobi_derivative`]
-//! - [x] Spherical Harmonics
+//! - Spherical Harmonics
 //!   - [`spherical_harmonic`]
 //!   - [`spherical_harmonic_r`]
 //!   - [`spherical_harmonic_i`]
-//! - [x] Cardinal B-splines
+//! - Cardinal B-splines
 //!   - [`cardinal_b_spline`]
 //!   - [`cardinal_b_spline_prime`]
 //!   - [`cardinal_b_spline_double_prime`]
@@ -144,17 +143,10 @@
 //!
 //! ### Airy Functions
 //!
-//! - [x] Airy *Ai* Function
-//!   - [`airy_ai`]
-//! - [x] Airy *Bi* Function
-//!   - [`airy_bi`]
-//! - [x] Airy *Ai'* Function
-//!   - [`airy_ai_prime`]
-//! - [x] Airy *Bi'* Function
-//!   - [`airy_bi_prime`]
-//! - [x] Finding Zeros of Airy Functions
-//!   - [`airy_ai_zero`]
-//!   - [`airy_bi_zero`]
+//! | Notation | Function    | First derivative  | Zeros            |
+//! | -------- | ----------- | ----------------- | ---------------- |
+//! | *Ai*     | [`airy_ai`] | [`airy_ai_prime`] | [`airy_ai_zero`] |
+//! | *Bi*     | [`airy_bi`] | [`airy_bi_prime`] | [`airy_bi_zero`] |
 //!
 //! <h4>Elliptic Integrals</h4>
 //!
@@ -191,62 +183,62 @@
 //!
 //! ### Lambert W Function
 //!
-//! - [x] [`lambert_w0`]
-//! - [x] [`lambert_w0_prime`]
-//! - [x] [`lambert_wm1`]
-//! - [x] [`lambert_wm1_prime`]
+//! | Branch | Function        | First derivative      |
+//! | -----: | --------------- | --------------------- |
+//! |      0 | [`lambert_w0`]  | [`lambert_w0_prime`]  |
+//! |     -1 | [`lambert_wm1`] | [`lambert_wm1_prime`] |
 //!
 //! ### Zeta Functions
 //!
-//! - [x] Riemann zeta function
+//! - Riemann zeta function
 //!   - [`zeta`]
 //!
 //! ### Exponential Integrals
 //!
-//! - [x] Exponential Integral *Ei(x)*
+//! - Exponential Integral *Ei(x)*
 //!   - [`expint_i`]
-//! - [x] Exponential Integral *E<sub>n</sub>(x)*
+//! - Exponential Integral *E<sub>n</sub>(x)*
 //!   - [`expint_n`]
 //!
 //! ### Hypergeometric Functions
 //!
-//! - [x] Hypergeometric *<sub>1</sub>F<sub>0</sub>*
+//! - Hypergeometric *<sub>1</sub>F<sub>0</sub>*
 //!   - [`hypergeometric_1f0`]
-//! - [x] Hypergeometric *<sub>0</sub>F<sub>1</sub>*
+//! - Hypergeometric *<sub>0</sub>F<sub>1</sub>*
 //!   - [`hypergeometric_0f1`]
-//! - [x] Hypergeometric *<sub>2</sub>F<sub>0</sub>*
+//! - Hypergeometric *<sub>2</sub>F<sub>0</sub>*
 //!   - [`hypergeometric_2f0`]
-//! - [x] Hypergeometric *<sub>1</sub>F<sub>1</sub>*
+//! - Hypergeometric *<sub>1</sub>F<sub>1</sub>*
 //!   - [`hypergeometric_1f1`]
 //!   - [`hypergeometric_1f1_regularized`]
 //!   - [`log_hypergeometric_1f1`]
-//! - [ ] ~Hypergeometric *<sub>p</sub>F<sub>q</sub>*~ (not included due to bugs in Boost)
+//! - ~Hypergeometric *<sub>p</sub>F<sub>q</sub>*~ (not included due to bugs in Boost)
 //!
 //! ### Basic Functions
 //!
-//! - [x] [`sin_pi`] and [`cos_pi`]
-//! - [x] [`log1p`] and [`expm1`]
-//! - [x] [`powm1`]
-//! - [x] [`rsqrt`]
-//! - [x] [`sqrt1pm1`]
-//! - [x] [`cbrt`]
-//! - [x] [`hypot`]
-//! - [x] [`logaddexp`] and [`logsumexp`]
+//! - [`sin_pi`] and [`cos_pi`]
+//! - [`log1p`] and [`expm1`]
+//! - [`powm1`]
+//! - [`rsqrt`]
+//! - [`sqrt1pm1`]
+//! - [`cbrt`]
+//! - [`hypot`]
+//! - [`logaddexp`] and [`logsumexp`]
 //!
 //! ### Sinus Cardinal and Hyperbolic Sinus Cardinal Functions
 //!
-//! - [x] [`sinc_pi`]
-//! - [x] [`sinhc_pi`]
+//! - [`sinc_pi`]
+//! - [`sinhc_pi`]
 //!
 //! ### Inverse Hyperbolic Functions
 //!
-//! - [x] [`acosh`]
-//! - [x] [`asinh`]
-//! - [x] [`atanh`]
+//! - [`acosh`]
+//! - [`asinh`]
+//! - [`atanh`]
 //!
 //! ### Owen's T Function
 //!
-//! - [x] [`owens_t`]
+//! - [`owens_t`]
 //!
 //! ## Constexpr CMath
 //!
