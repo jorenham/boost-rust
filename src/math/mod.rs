@@ -148,7 +148,7 @@
 //! | *Ai*     | [`airy_ai`] | [`airy_ai_prime`] | [`airy_ai_zero`] |
 //! | *Bi*     | [`airy_bi`] | [`airy_bi_prime`] | [`airy_bi_zero`] |
 //!
-//! <h4>Elliptic Integrals</h4>
+//! ### Elliptic Integrals
 //!
 //! - [x] Elliptic Integrals - Carlson Form
 //!   - [`ellint_rc`](ellint_rc) - *R<sub>C</sub>(x,y)*
