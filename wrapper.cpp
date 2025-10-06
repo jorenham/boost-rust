@@ -316,7 +316,7 @@ double math_jacobi_derivative(unsigned n, double alpha, double beta, double x, u
 
 // boost/math/special_functions/jacobi_elliptic.hpp
 double math_jacobi_elliptic(double k, double theta, double* pcn, double* pdn) {
-    return jacobi_elliptic(theta, k, pcn, pdn);
+    return jacobi_elliptic(k, theta, pcn, pdn);
 }
 double math_jacobi_cd(double k, double theta) { return jacobi_cd(k, theta); }
 double math_jacobi_cn(double k, double theta) { return jacobi_cn(k, theta); }
