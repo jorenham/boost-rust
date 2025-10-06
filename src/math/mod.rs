@@ -151,15 +151,23 @@
 //! ### Elliptic Integrals
 //!
 //! - [x] Elliptic Integrals - Carlson Form
-//!   - [`ellint_rc`](ellint_rc) - *R<sub>C</sub>(x,y)*
-//!   - [`ellint_rd`](ellint_rd) - *R<sub>D</sub>(x,y,z)*
-//!   - [`ellint_rf`](ellint_rf) - *R<sub>F</sub>(x,y,z)*
-//!   - [`ellint_rg`](ellint_rg) - *R<sub>G</sub>(x,y,z)*
-//!   - [`ellint_rj`](ellint_rj) - *R<sub>J</sub>(x,y,z,p)*
-//! - [ ] Elliptic Integrals of the First Kind - Legendre Form
-//! - [ ] Elliptic Integrals of the Second Kind - Legendre Form
-//! - [ ] Elliptic Integrals of the Third Kind - Legendre Form
-//! - [ ] Elliptic Integral *D* - Legendre Form
+//!   - [`ellint_rc`] - *R<sub>C</sub>(x,y)*
+//!   - [`ellint_rd`] - *R<sub>D</sub>(x,y,z)*
+//!   - [`ellint_rf`] - *R<sub>F</sub>(x,y,z)*
+//!   - [`ellint_rg`] - *R<sub>G</sub>(x,y,z)*
+//!   - [`ellint_rj`] - *R<sub>J</sub>(x,y,z,p)*
+//! - [x] Elliptic Integrals of the First Kind - Legendre Form
+//!   - [`ellint_1`] - *K(k)*
+//!   - [`ellint_1_inc`] - *F(φ,k)*
+//! - [x] Elliptic Integrals of the Second Kind - Legendre Form
+//!   - [`ellint_2`] - *E(k)*
+//!   - [`ellint_2_inc`] - *E(φ,k)*
+//! - [x] Elliptic Integrals of the Third Kind - Legendre Form
+//!   - [`ellint_3`] - *Π(v,k)*
+//!   - [`ellint_3_inc`] - *Π(v,φ,k)*
+//! - [x] Elliptic Integral *D* - Legendre Form
+//!   - [`ellint_d`] - *D(k)*
+//!   - [`ellint_d_inc`] - *D(φ,k)*
 //! - [ ] Jacobi Zeta Function
 //! - [ ] Heuman Lambda Function
 //!
@@ -266,6 +274,10 @@ pub use special_functions::cbrt::*;
 pub use special_functions::chebyshev::*;
 pub use special_functions::cos_pi::*;
 pub use special_functions::digamma::*;
+pub use special_functions::ellint_1::*;
+pub use special_functions::ellint_2::*;
+pub use special_functions::ellint_3::*;
+pub use special_functions::ellint_d::*;
 pub use special_functions::ellint_r::*;
 pub use special_functions::erf::*;
 pub use special_functions::expint::*;
