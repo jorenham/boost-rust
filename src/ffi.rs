@@ -139,6 +139,9 @@ unsafe extern "C" {
     // boost/math/special_functions/hermite.hpp
     pub(crate) fn math_hermite(n: c_uint, x: f64) -> f64;
 
+    // boost/math/special_functions/heuman_lambda.hpp
+    pub(crate) fn math_heuman_lambda(k: f64, phi: f64) -> f64;
+
     // boost/math/special_functions/hypergeometric_0F1.hpp
     pub(crate) fn math_hypergeometric_0F1(b: f64, x: f64) -> f64;
     // boost/math/special_functions/hypergeometric_1F0.hpp
@@ -162,6 +165,9 @@ unsafe extern "C" {
         x: f64,
         k: c_uint,
     ) -> f64;
+
+    // boost/math/special_functions/jacobi_zeta.hpp
+    pub(crate) fn math_jacobi_zeta(k: f64, phi: f64) -> f64;
 
     // boost/math/special_functions/laguerre.hpp
     pub(crate) fn math_laguerre(n: c_uint, x: f64) -> f64;
