@@ -5,8 +5,7 @@
     rust_2018_idioms,
     unreachable_pub
 )]
-#![cfg_attr(docsrs, feature(doc_cfg))]
-#![cfg_attr(all(doc, not(doctest)), feature(doc_cfg))]
+#![cfg_attr(any(docsrs, all(doc, not(doctest))), feature(doc_cfg))]
 
 //! Rust interface for the [Boost](https://github.com/boostorg/boost) C++ library.
 //!
