@@ -2,10 +2,14 @@
 
 use core::ffi::{c_int, c_uint};
 
+// ccmath
 unsafe extern "C-unwind" {
     // boost/math/ccmath/sqrt.hpp
     pub(crate) fn math_ccmath_sqrt(x: f64) -> f64;
+}
 
+// special_functions
+unsafe extern "C-unwind" {
     // boost/math/special_functions/acosh.hpp
     pub(crate) fn math_acosh(x: f64) -> f64;
     // boost/math/special_functions/asinh.hpp

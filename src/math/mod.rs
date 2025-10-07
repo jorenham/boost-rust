@@ -2,6 +2,10 @@
 //!
 //! See [github.com/boostorg/math](https://github.com/boostorg/math) for more details.
 //!
+//! ## Constants
+//!
+//! See [`constants`] for common mathematical constants.
+//!
 //! ## Special Functions
 //!
 //! <https://boost.org/doc/libs/latest/libs/math/doc/html/special.html>
@@ -290,8 +294,9 @@
 //!
 
 pub mod ccmath;
-mod special_functions;
+pub mod constants;
 
+mod special_functions;
 pub use special_functions::acosh::*;
 pub use special_functions::airy::*;
 pub use special_functions::asinh::*;

@@ -125,10 +125,14 @@ inline double polygamma(const int n, double x) noexcept {
 using namespace boost::math;
 using cdouble = boost::math::complex<double>;
 
+// ccmath
 extern "C" {
 // boost/math/ccmath/sqrt.hpp
 double math_ccmath_sqrt(double x) { return ccmath::sqrt(x); }
+}
 
+// special_functions
+extern "C" {
 // boost/math/special_functions/acosh.hpp
 double math_acosh(double x) { return acosh(x); }
 // boost/math/special_functions/asinh.hpp
