@@ -66,9 +66,9 @@ pub fn hermite_h_derivative(n: u32, x: f64, k: u32) -> f64 {
 /// # use boost::math::{hermite_he, hermite_he_next};
 /// let x = 0.42;
 /// let p0 = hermite_he(0, x); // 1
-/// let p1 = hermite_he(1, x); // 2x
-/// let p2 = hermite_he(2, x); // 4x² - 2
-/// let p3 = hermite_he(3, x); // 8x³ - 12x
+/// let p1 = hermite_he(1, x); // x
+/// let p2 = hermite_he(2, x); // x² - 1
+/// let p3 = hermite_he(3, x); // x³ - 3x
 /// assert_eq!(hermite_he_next(1, x, p1, p0), p2);
 /// assert_eq!(hermite_he_next(2, x, p2, p1), p3);
 /// ```
