@@ -11,6 +11,8 @@ fn main() {
         .flag_if_supported(format!("/std:{CXX_STANDARD}"))
         // windows: enable C++ exception unwinding
         .flag_if_supported("/EHsc")
+        // windows: boost\math\special_functions\gamma.hpp (__forceinline function not inlined)
+        .flag_if_supported("/wd4714")
         // linux: boost/math/special_functions/detail/hypergeometric_series.hpp:244
         .flag_if_supported("-Wno-maybe-uninitialized")
         // macos: boost/math/special_functions/lambert_w.hpp:184
