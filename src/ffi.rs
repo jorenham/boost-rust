@@ -2,7 +2,7 @@
 
 use core::ffi::{c_int, c_uint};
 
-unsafe extern "C" {
+unsafe extern "C-unwind" {
     // boost/math/ccmath/sqrt.hpp
     pub(crate) fn math_ccmath_sqrt(x: f64) -> f64;
 
@@ -271,7 +271,7 @@ unsafe extern "C" {
 }
 
 #[cfg(feature = "num-complex")]
-unsafe extern "C" {
+unsafe extern "C-unwind" {
     // boost/math/special_functions/hankel.hpp
     pub(crate) fn math_cyl_hankel_1(nu: f64, x: f64, out_re: *mut f64, out_im: *mut f64);
     pub(crate) fn math_cyl_hankel_2(nu: f64, x: f64, out_re: *mut f64, out_im: *mut f64);
