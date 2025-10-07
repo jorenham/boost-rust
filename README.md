@@ -12,7 +12,8 @@ Rust interface for the [Boost](https://github.com/boostorg/boost) C++ library.
 ## Project goals
 
 Currently, this crate covers most of the Boost Math library's
-[special functions](https://boost.org/doc/libs/latest/libs/math/doc/html/special.html).
+[special functions](https://boost.org/doc/libs/latest/libs/math/doc/html/special.html) and
+[constants](https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/constants.html).
 In the long term, the aim is to include other Boost Math functionality, as well.
 There are no plans yet for including other Boost libraries.
 

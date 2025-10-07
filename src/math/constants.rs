@@ -1,0 +1,228 @@
+//! Mathematical constants
+//!
+//! All constants are taken from Boost.Math and exposed as plain `f64` values
+//! with no FFI overhead.
+//!
+//! <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/constants.html>
+//!
+//! # Example
+//!
+//! ```
+//! # use approx::assert_abs_diff_eq;
+//! use boost::math::constants::*;
+//!
+//! // Common mathematical constants
+//! assert_abs_diff_eq!(TAU, 6.283185307179586);
+//! assert_abs_diff_eq!(PI, 3.141592653589793);
+//! assert_abs_diff_eq!(HALF_PI, 1.5707963267948966);
+//!
+//! assert_abs_diff_eq!(ROOT_TWO, 1.4142135623730951);
+//! assert_abs_diff_eq!(LN_TWO, 0.6931471805599453);
+//!
+//! assert_abs_diff_eq!(E, 2.718281828459045);  // Euler's number
+//! assert_abs_diff_eq!(PHI, 1.618033988749895);  // Golden ratio
+//! assert_abs_diff_eq!(EULER, 0.5772156649015329);  // Euler-Mascheroni
+//! assert_abs_diff_eq!(CATALAN, 0.915965594177219);  // Catalan's constant
+//! ```
+
+#![allow(clippy::excessive_precision)]
+#![allow(clippy::approx_constant)]
+
+// Rational fractions
+
+/// 1/2
+pub const HALF: f64 = 5.000000000000000000000000000000000000e-1;
+/// 1/3
+pub const THIRD: f64 = 3.333333333333333333333333333333333333e-1;
+/// 1/6
+pub const SIXTH: f64 = 1.666666666666666666666666666666666666e-1;
+/// 2/3
+pub const TWO_THIRDS: f64 = 6.666666666666666666666666666666666666e-1;
+/// 3/4
+pub const THREE_QUARTERS: f64 = 7.500000000000000000000000000000000000e-1;
+
+// Two and related
+
+/// √2
+pub const ROOT_TWO: f64 = 1.414213562373095048801688724209698078;
+/// √3
+pub const ROOT_THREE: f64 = 1.732050807568877293527446341505872366;
+/// √2/2
+pub const HALF_ROOT_TWO: f64 = 7.071067811865475244008443621048490392e-1;
+/// ln 2
+pub const LN_TWO: f64 = 6.931471805599453094172321214581765680e-1;
+/// ln 10
+pub const LN_TEN: f64 = 2.302585092994045684017991454684364207;
+/// ln(ln 2)
+pub const LN_LN_TWO: f64 = -3.665129205816643270124391582326694694e-1;
+/// √ln 4
+pub const ROOT_LN_FOUR: f64 = 1.177410022515474691011569326459699637;
+/// 1/√2
+pub const ONE_DIV_ROOT_TWO: f64 = 7.071067811865475244008443621048490392e-1;
+
+// π and related
+
+/// π
+pub const PI: f64 = 3.141592653589793238462643383279502884;
+/// π/2
+pub const HALF_PI: f64 = 1.570796326794896619231321691639751442;
+/// π/3
+pub const THIRD_PI: f64 = 1.047197551196597746154214461093167628;
+/// π/4
+pub const QUARTER_PI: f64 = 0.785398163397448309615660845819875721049292;
+/// π/6
+pub const SIXTH_PI: f64 = 5.235987755982988730771072305465838140e-1;
+
+/// τ = 2π, see <https://tauday.com/tau-manifesto>
+pub const TAU: f64 = 6.283185307179586476925286766559005768;
+/// 2π
+pub const TWO_PI: f64 = TAU;
+/// 2/3 π
+pub const TWO_THIRDS_PI: f64 = 2.094395102393195492308428922186335256;
+/// 3/4 π
+pub const THREE_QUARTERS_PI: f64 = 2.356194490192344928846982537459627163;
+/// 4/3 π
+pub const FOUR_THIRDS_PI: f64 = 4.188790204786390984616857844372670512;
+/// 1/τ
+pub const ONE_DIV_TAU: f64 = 1.591549430918953357688837633725143620e-1;
+/// 1/(2π)
+pub const ONE_DIV_TWO_PI: f64 = ONE_DIV_TAU;
+/// 2/π
+pub const TWO_DIV_PI: f64 = 6.366197723675813430755350534900574481e-1;
+/// 1/π
+pub const ONE_DIV_PI: f64 = 0.3183098861837906715377675267450287240689192;
+/// 1/√τ
+pub const ONE_DIV_ROOT_TAU: f64 = 3.989422804014326779399460599343818684e-1;
+/// 1/√(2π)
+pub const ONE_DIV_ROOT_TWO_PI: f64 = ONE_DIV_ROOT_TAU;
+/// √π
+pub const ROOT_PI: f64 = 1.772453850905516027298167483341145182;
+/// √(π/2)
+pub const ROOT_HALF_PI: f64 = 1.253314137315500251207882642405522626;
+/// √τ
+pub const ROOT_TAU: f64 = 2.506628274631000502415765284811045253;
+/// √(2π)
+pub const ROOT_TWO_PI: f64 = ROOT_TAU;
+/// 2/√π
+pub const TWO_DIV_ROOT_PI: f64 = 1.12837916709551257389615890312154517168810125;
+/// √(2/π)
+pub const ROOT_TWO_DIV_PI: f64 = 7.978845608028653558798921198687637369e-1;
+/// ln √τ
+pub const LOG_ROOT_TAU: f64 = 9.189385332046727417803297364056176398e-1;
+/// ln √(2π)
+pub const LOG_ROOT_TWO_PI: f64 = LOG_ROOT_TAU;
+/// 1/√π
+pub const ONE_DIV_ROOT_PI: f64 = 5.641895835477562869480794515607725858e-1;
+/// √(1/π)
+pub const ROOT_ONE_DIV_PI: f64 = ONE_DIV_ROOT_PI;
+/// π - 3
+pub const PI_MINUS_THREE: f64 = 1.415926535897932384626433832795028841e-1;
+/// 4 - π
+pub const FOUR_MINUS_PI: f64 = 8.584073464102067615373566167204971158e-1;
+/// (4 - π)<sup>2/3</sup>
+pub const POW23_FOUR_MINUS_PI: f64 = 7.953167673715975443483953350568065807e-1;
+/// π<sup>e</sup>
+pub const PI_POW_E: f64 = 2.245915771836104547342715220454373502e+1;
+/// π²
+pub const PI_SQR: f64 = 9.869604401089358618834490999876151135;
+/// π²/6
+pub const PI_SQR_DIV_SIX: f64 = 1.644934066848226436472415166646025189;
+/// π³
+pub const PI_CUBED: f64 = 3.100627668029982017547631506710139520e+1;
+/// ∛π
+pub const CBRT_PI: f64 = 1.464591887561523263020142527263790391;
+/// 1/∛π
+pub const ONE_DIV_CBRT_PI: f64 = 6.827840632552956814670208331581645981e-1;
+
+// Euler's e and related
+
+/// e
+pub const E: f64 = 2.718281828459045235360287471352662497;
+/// e<sup>-1/2</sup>
+pub const EXP_MINUS_HALF: f64 = 6.065306597126334236037995349911804534e-1;
+/// e<sup>-1</sup>
+pub const EXP_MINUS_ONE: f64 = 3.678794411714423215955237701614608674e-1;
+/// e<sup>π</sup>
+pub const EXP_PI: f64 = 2.314069263277926900572908636794854738e+1;
+/// e<sup>π</sup>
+pub const E_POW_PI: f64 = EXP_PI;
+/// √e
+pub const ROOT_E: f64 = 1.648721270700128146848650787814163571;
+/// log<sub>2</sub>(e)
+pub const LOG2_E: f64 = 1.44269504088896340735992468100189213742664595415298;
+/// log<sub>10</sub>(e)
+pub const LOG10_E: f64 = 4.342944819032518276511289189166050822e-1;
+/// 1/log<sub>10</sub>(e)
+pub const ONE_DIV_LOG10_E: f64 = 2.302585092994045684017991454684364207;
+
+// Trigonometric
+
+/// π/180
+pub const DEGREE: f64 = 1.745329251994329576923690768488612713e-2;
+/// 180/π
+pub const RADIAN: f64 = 5.729577951308232087679815481410517033e+1;
+/// sin(1)
+pub const SIN_ONE: f64 = 8.414709848078965066525023216302989996e-1;
+/// cos(1)
+pub const COS_ONE: f64 = 5.403023058681397174009366074429766037e-1;
+/// sinh(1)
+pub const SINH_ONE: f64 = 1.175201193643801456882381850595600815;
+/// cosh(1)
+pub const COSH_ONE: f64 = 1.543080634815243778477905620757061682;
+
+// Phidias golden ratio
+
+/// (1 + √5)/2
+pub const PHI: f64 = 1.618033988749894848204586834365638117;
+/// ln φ
+pub const LN_PHI: f64 = 4.812118250596034474977589134243684231e-1;
+/// 1/ln φ
+pub const ONE_DIV_LN_PHI: f64 = 2.078086921235027537601322606117795767;
+
+// Euler's Gamma
+
+/// Euler-Mascheroni gamma constant γ
+pub const EULER: f64 = 5.772156649015328606065120900824024310e-1;
+/// 1/γ
+pub const ONE_DIV_EULER: f64 = 1.732454714600633473583025315860829681;
+/// γ<sup>2</sup>
+pub const EULER_SQR: f64 = 3.331779238077186743183761363552442266e-1;
+
+// Riemann zeta
+
+/// ζ(2)
+pub const ZETA_TWO: f64 = 1.644934066848226436472415166646025189;
+/// ζ(3)
+pub const ZETA_THREE: f64 = 1.202056903159594285399738161511449990;
+
+// Statistics
+
+/// 12√6 ζ(3)/π<sup>2</sup>
+pub const EXTREME_VALUE_SKEWNESS: f64 = 1.139547099404648657492793019389846112;
+/// 2√π(π - 3)/(4 - π)<sup>3/2</sup>
+pub const RAYLEIGH_SKEWNESS: f64 = 6.311106578189371381918993515442277798e-1;
+/// 3 + (6π<sup>2</sup> - 24π + 16)/(4 - π)<sup>2</sup>
+pub const RAYLEIGH_KURTOSIS: f64 = 3.245089300687638062848660410619754415;
+/// -(6π<sup>2</sup> - 24π + 16)/(4 - π)<sup>2</sup>
+pub const RAYLEIGH_KURTOSIS_EXCESS: f64 = 2.450893006876380628486604106197544154e-1;
+
+// Misc
+
+/// Catalan (or Glaisher) combinatorial constant K
+pub const CATALAN: f64 = 9.159655941772190150546035149323841107e-1;
+/// Glaisher-Kinkelin constant A
+pub const GLAISHER: f64 = 1.282427129100622636875342568869791727;
+/// Khinchin constant k
+pub const KHINCHIN: f64 = 2.685452001065306445309714835481795693;
+/// [First Feigenbaum constant](https://wikipedia.org/wiki/Feigenbaum_constants) δ
+pub const FIRST_FEIGENBAUM: f64 = 4.66920160910299067185320382046620161725818557747576863274;
+/// [Plastic constant](https://wikipedia.org/wiki/Plastic_ratio) ρ, s.t. ρ<sup>3</sup> = ρ + 1
+pub const PLASTIC: f64 = 1.324717957244746025960908854478097340734404056901733364534;
+/// [Gauss's constant](https://wikipedia.org/wiki/Gauss%27s_constant)
+pub const GAUSS: f64 = 0.834626841674073186281429732799046808993993013490347002449;
+/// [Dottie's number](https://wikipedia.org/wiki/Dottie_number), solution of cos(x) = x
+pub const DOTTIE: f64 = 0.739085133215160641655312087673873404013411758900757464965;
+/// [Reciprocal Fibonacci constant](https://wikipedia.org/wiki/Reciprocal_Fibonacci_constant) ψ
+pub const RECIPROCAL_FIBONACCI: f64 = 3.35988566624317755317201130291892717968890513;
+/// [Laplace limit](https://wikipedia.org/wiki/Laplace_limit) λ
+pub const LAPLACE_LIMIT: f64 = 0.662743419349181580974742097109252907056233549115022417;
