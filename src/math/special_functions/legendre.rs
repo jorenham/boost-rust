@@ -1,8 +1,4 @@
 //! boost/math/special_functions/legendre.hpp
-//!
-//! # TODO:
-//! - `double legendre_next(unsigned l, double x, double Pl, double Plm1)`
-//! - `double legendre_next(unsigned l, unsigned m, double x, double Pl, double Plm1)`
 
 use crate::ffi;
 use alloc::{vec, vec::Vec};
@@ -12,7 +8,7 @@ use core::ffi::{c_int, c_uint};
 ///
 /// Corresponds to `boost::math::legendre_p(n, x)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_poly/legendre.html>
-pub fn legendre_p(n: i32, x: f64) -> f64 {
+pub fn legendre_p(n: u32, x: f64) -> f64 {
     unsafe { ffi::math_legendre_p(n as c_int, x) }
 }
 
@@ -20,7 +16,8 @@ pub fn legendre_p(n: i32, x: f64) -> f64 {
 ///
 /// Corresponds to `boost::math::legendre_p_prime(n, x)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_poly/legendre.html>
-pub fn legendre_p_prime(n: i32, x: f64) -> f64 {
+#[doc(alias = "legendre_p_derivative")]
+pub fn legendre_p_prime(n: u32, x: f64) -> f64 {
     unsafe { ffi::math_legendre_p_prime(n as c_int, x) }
 }
 
@@ -28,7 +25,7 @@ pub fn legendre_p_prime(n: i32, x: f64) -> f64 {
 ///
 /// Corresponds to `boost::math::legendre_p(n, m, x)` in C++
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_poly/legendre.html>
-pub fn legendre_p_assoc(n: i32, m: i32, x: f64) -> f64 {
+pub fn legendre_p_assoc(n: u32, m: i32, x: f64) -> f64 {
     unsafe { ffi::math_legendre_p_assoc(n as c_int, m as c_int, x) }
 }
 
@@ -38,11 +35,9 @@ pub fn legendre_p_assoc(n: i32, m: i32, x: f64) -> f64 {
 ///
 /// Corresponds to `boost::math::legendre_p_zeros<double>(n)` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/sf_poly/legendre.html>
-pub fn legendre_p_zeros(n: i32) -> Vec<f64> {
-    // total number of zeros
-    let k = (if n < 0 { -n - 1 } else { n }) as usize;
+pub fn legendre_p_zeros(n: usize) -> Vec<f64> {
     // number of positive zeros
-    let mut out = vec![f64::NAN; k.div_ceil(2)];
+    let mut out = vec![f64::NAN; n.div_ceil(2)];
     unsafe { ffi::math_legendre_p_zeros(n as c_int, out.as_mut_ptr()) };
     out
 }
@@ -70,8 +65,8 @@ pub fn legendre_q(n: u32, x: f64) -> f64 {
 /// let p1 = legendre_p(1, x); // x
 /// let p2 = legendre_p(2, x); // (3x² - 1) / 2
 /// let p3 = legendre_p(3, x); // (5x³ - 3x) / 2
-/// assert_eq!(legendre_next(1, &x, &p1, &p0), p2);
-/// assert_eq!(legendre_next(2, &x, &p2, &p1), p3);
+/// assert_eq!(legendre_next(1, x, p1, p0), p2);
+/// assert_eq!(legendre_next(2, x, p2, p1), p3);
 /// ```
 ///
 /// [`legendre_q`] recurrence:
@@ -84,18 +79,20 @@ pub fn legendre_q(n: u32, x: f64) -> f64 {
 /// let q1 = legendre_q(1, x);
 /// let q2 = legendre_q(2, x);
 /// let q3 = legendre_q(3, x);
-/// assert_relative_eq!(legendre_next(1, &x, &q1, &q0), q2);
-/// assert_relative_eq!(legendre_next(2, &x, &q2, &q1), q3);
+/// assert_relative_eq!(legendre_next(1, x, q1, q0), q2);
+/// assert_relative_eq!(legendre_next(2, x, q2, q1), q3);
 /// ```
 ///
 /// # See also
 ///
 /// - [`legendre_p`]
 /// - [`legendre_assoc_next`]
-#[allow(non_snake_case)]
 #[inline(always)]
-pub fn legendre_next(n: u32, x: &f64, Pn: &f64, Pn_1: &f64) -> f64 {
-    legendre_assoc_next(n, 0, x, Pn, Pn_1)
+#[allow(non_snake_case)]
+#[doc(alias = "legendre_p_next")]
+#[doc(alias = "legendre_q_next")]
+pub fn legendre_next(n: u32, x: f64, Pn: f64, Pn_prev: f64) -> f64 {
+    legendre_assoc_next(n, 0, x, Pn, Pn_prev)
 }
 
 /// Recurrence relation for [`legendre_p_assoc`]
@@ -114,19 +111,20 @@ pub fn legendre_next(n: u32, x: &f64, Pn: &f64, Pn_1: &f64) -> f64 {
 /// let p1 = legendre_p_assoc(1, m, x);
 /// let p2 = legendre_p_assoc(2, m, x);
 /// let p3 = legendre_p_assoc(3, m, x);
-/// assert_relative_eq!(legendre_assoc_next(1, m, &x, &p1, &p0), p2);
-/// assert_relative_eq!(legendre_assoc_next(2, m, &x, &p2, &p1), p3);
+/// assert_relative_eq!(legendre_assoc_next(1, m, x, p1, p0), p2);
+/// assert_relative_eq!(legendre_assoc_next(2, m, x, p2, p1), p3);
 /// ```
 ///
 /// # See also
 ///
 /// - [`legendre_p_assoc`]
 /// - [`legendre_next`]
-#[allow(non_snake_case)]
 #[inline(always)]
-pub fn legendre_assoc_next(n: u32, m: i32, x: &f64, Pn: &f64, Pn_1: &f64) -> f64 {
+#[allow(non_snake_case)]
+#[doc(alias = "legendre_p_assoc_next")]
+pub fn legendre_assoc_next(n: u32, m: i32, x: f64, Pn: f64, Pn_prev: f64) -> f64 {
     let n = n as i32;
-    ((2 * n + 1) as f64 * x * Pn - (n + m) as f64 * Pn_1) / ((n - m + 1) as f64)
+    ((2 * n + 1) as f64 * x * Pn - (n + m) as f64 * Pn_prev) / ((n - m + 1) as f64)
 }
 
 #[cfg(test)]
@@ -143,11 +141,8 @@ mod tests {
     #[test]
     fn test_legendre_p() {
         assert_eq!(legendre_p(0, 0.5), 1.0);
-        assert_eq!(legendre_p(-1, 0.5), 1.0);
         assert_eq!(legendre_p(1, 0.5), 0.5);
-        assert_eq!(legendre_p(-2, 0.5), 0.5);
         assert_eq!(legendre_p(2, 0.5), -0.125);
-        assert_eq!(legendre_p(-3, 0.5), -0.125);
     }
 
     #[test]
@@ -163,23 +158,16 @@ mod tests {
     #[test]
     fn test_legendre_p_prime() {
         assert_eq!(legendre_p_prime(0, 0.5), 0.0);
-        assert_eq!(legendre_p_prime(-1, 0.5), 0.0);
         assert_eq!(legendre_p_prime(1, 0.5), 1.0);
-        assert_eq!(legendre_p_prime(-2, 0.5), 1.0);
         assert_eq!(legendre_p_prime(2, 0.5), 1.5);
-        assert_eq!(legendre_p_prime(-3, 0.5), 1.5);
     }
 
     #[test]
     fn test_legendre_p_zeros() {
         assert_eq!(legendre_p_zeros(0), vec![]);
-        assert_eq!(legendre_p_zeros(-1), vec![]);
         assert_eq!(legendre_p_zeros(1), vec![0.0]);
-        assert_eq!(legendre_p_zeros(-2), vec![0.0]);
         assert_eq!(legendre_p_zeros(2), vec![FRAC_1_SQRT_3]);
-        assert_eq!(legendre_p_zeros(-3), vec![FRAC_1_SQRT_3]);
         assert_eq!(legendre_p_zeros(3), vec![0.0, SQRT_FRAC_3_5]);
-        assert_eq!(legendre_p_zeros(-4), vec![0.0, SQRT_FRAC_3_5]);
     }
 
     #[test]

@@ -137,6 +137,7 @@ unsafe extern "C" {
     pub(crate) fn math_gegenbauer_derivative(n: c_uint, lambda: f64, x: f64, k: c_uint) -> f64;
 
     // boost/math/special_functions/hermite.hpp
+    #[cfg(test)]
     pub(crate) fn math_hermite(n: c_uint, x: f64) -> f64;
 
     // boost/math/special_functions/heuman_lambda.hpp

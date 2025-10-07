@@ -37,18 +37,18 @@ pub fn laguerre_assoc(n: u32, m: u32, x: f64) -> f64 {
 /// let l1 = laguerre(1, x); // -x + 1
 /// let l2 = laguerre(2, x); // (x² - 4x + 2) / 2
 /// let l3 = laguerre(3, x); // (-x³ + 9x² - 18x + 6) / 6
-/// assert_relative_eq!(laguerre_next(1, &x, &l1, &l0), l2);
-/// assert_relative_eq!(laguerre_next(2, &x, &l2, &l1), l3);
+/// assert_relative_eq!(laguerre_next(1, x, l1, l0), l2);
+/// assert_relative_eq!(laguerre_next(2, x, l2, l1), l3);
 /// ```
 ///
 /// # See also
 ///
 /// - [`laguerre`]
 /// - [`laguerre_assoc_next`]
-#[allow(non_snake_case)]
 #[inline(always)]
-pub fn laguerre_next(n: u32, x: &f64, Ln: &f64, Ln_1: &f64) -> f64 {
-    laguerre_assoc_next(n, 0, x, Ln, Ln_1)
+#[allow(non_snake_case)]
+pub fn laguerre_next(n: u32, x: f64, Ln: f64, Ln_prev: f64) -> f64 {
+    laguerre_assoc_next(n, 0, x, Ln, Ln_prev)
 }
 
 /// Recurrence relation for [`laguerre_assoc`]
@@ -67,18 +67,18 @@ pub fn laguerre_next(n: u32, x: &f64, Ln: &f64, Ln_1: &f64) -> f64 {
 /// let l1 = laguerre_assoc(1, m, x);
 /// let l2 = laguerre_assoc(2, m, x);
 /// let l3 = laguerre_assoc(3, m, x);
-/// assert_relative_eq!(laguerre_assoc_next(1, m, &x, &l1, &l0), l2);
-/// assert_relative_eq!(laguerre_assoc_next(2, m, &x, &l2, &l1), l3);
+/// assert_relative_eq!(laguerre_assoc_next(1, m, x, l1, l0), l2);
+/// assert_relative_eq!(laguerre_assoc_next(2, m, x, l2, l1), l3);
 /// ```
 ///
 /// # See also
 ///
 /// - [`laguerre_assoc`]
 /// - [`laguerre_next`]
-#[allow(non_snake_case)]
 #[inline(always)]
-pub fn laguerre_assoc_next(n: u32, m: u32, x: &f64, Ln: &f64, Ln_1: &f64) -> f64 {
-    (((2 * n + m + 1) as f64 - x) * Ln - (n + m) as f64 * Ln_1) / (n + 1) as f64
+#[allow(non_snake_case)]
+pub fn laguerre_assoc_next(n: u32, m: u32, x: f64, Ln: f64, Ln_prev: f64) -> f64 {
+    (((2 * n + m + 1) as f64 - x) * Ln - (n + m) as f64 * Ln_prev) / (n + 1) as f64
 }
 
 #[cfg(test)]
