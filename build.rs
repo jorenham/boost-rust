@@ -8,8 +8,10 @@ fn main() {
         .cpp(true)
         .std(CXX_STANDARD)
         .flag_if_supported(format!("/std:{CXX_STANDARD}"))
+        .warnings_into_errors(true)
         .include(format!("{BOOST_MATH_DIR}/include"))
-        .warnings(true)
+        // boost/math/special_functions/detail/hypergeometric_series.hpp:244:20
+        .flag_if_supported("-Wno-maybe-uninitialized")
         .file(WRAPPER_CPP)
         .compile("wrapper");
 
