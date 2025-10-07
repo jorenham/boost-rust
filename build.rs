@@ -7,13 +7,16 @@ fn main() {
     cc::Build::new()
         .cpp(true)
         .std(CXX_STANDARD)
+        // windows: use the specified C++ standard
         .flag_if_supported(format!("/std:{CXX_STANDARD}"))
+        // windows: enable C++ exception unwinding
+        .flag_if_supported("/EHsc")
+        // linux: boost/math/special_functions/detail/hypergeometric_series.hpp:244
+        .flag_if_supported("-Wno-maybe-uninitialized")
+        // macos: boost/math/special_functions/lambert_w.hpp:184
+        .flag_if_supported("-Wno-unused-parameter")
         .warnings_into_errors(true)
         .include(format!("{BOOST_MATH_DIR}/include"))
-        // boost/math/special_functions/detail/hypergeometric_series.hpp:244:20
-        .flag_if_supported("-Wno-maybe-uninitialized")
-        // boost/math/special_functions/lambert_w.hpp:184:46
-        .flag_if_supported("-Wno-unused-parameter")
         .file(WRAPPER_CPP)
         .compile("wrapper");
 
