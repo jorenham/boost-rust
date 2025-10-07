@@ -7,19 +7,19 @@
 Rust interface for the [Boost](https://github.com/boostorg/boost) C++ library.
 
 > [!NOTE]
-> This project is in the early development stage, and should probably not be used in production.
+> This project is in early development and probably shouldn't be used in production.
 
 ## Project goals
 
-Currently, only a (small) subset of the [`boost::math`](https://github.com/boostorg/math/) API is
-covered.
-In the long term, the aim is to fully cover the Boost Math library, starting with the special
-functions.
+Currently, this crate covers most of the Boost Math library's
+[special functions](https://boost.org/doc/libs/latest/libs/math/doc/html/special.html).
+In the long term, the aim is to include other Boost Math functionality, as well.
+There are no plans yet for including other Boost libraries.
 
 ## Requirements
 
-- Rust 1.85.1+
-- Modern C++ compiler with C++20 support
+- Rust 1.85.1 or later
+- C++20-compatible compiler (GCC 9+, Clang 14+, MSVC 2019+)
 
 ## Contributing
 
