@@ -98,8 +98,10 @@
 //!   - [`laguerre_assoc_next`]
 //! - Hermite Polynomials
 //!   - [`hermite_h`]
+//!   - [`hermite_h_derivative`]
 //!   - [`hermite_h_next`]
 //!   - [`hermite_he`]
+//!   - [`hermite_he_derivative`]
 //!   - [`hermite_he_next`]
 //! - Gegenbauer Polynomials
 //!   - [`gegenbauer`]
