@@ -16,7 +16,8 @@
 //! - [ ] Tangent numbers
 //! - [x] Prime numbers
 //!   - [`prime`]
-//! - [ ] Fibonacci numbers
+//! - [x] Fibonacci numbers
+//!   - [`fibonacci`]
 //!
 //! ### Gamma Functions
 //!
@@ -319,6 +320,7 @@ pub use special_functions::erf::*;
 pub use special_functions::expint::*;
 pub use special_functions::expm1::*;
 pub use special_functions::factorials::*;
+pub use special_functions::fibonacci::*;
 pub use special_functions::gamma::*;
 pub use special_functions::gegenbauer::*;
 #[cfg(feature = "num-complex")]

@@ -20,6 +20,7 @@ pub(super) mod erf;
 pub(super) mod expint;
 pub(super) mod expm1;
 pub(super) mod factorials;
+pub(super) mod fibonacci;
 pub(super) mod gamma;
 pub(super) mod gegenbauer;
 #[cfg(feature = "num-complex")]
