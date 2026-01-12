@@ -41,7 +41,7 @@ description = "Rust wrapper for Boost Math"
 num-complex = ["dep:num-complex"]
 
 [build-dependencies]
-cc = "1.2.51"
+cc = "1.2.52"
 
 [dependencies]
 [dependencies.num-complex]
