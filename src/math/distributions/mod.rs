@@ -81,10 +81,26 @@ pub trait Distribution {
     /// Cumulative distribution function.
     fn cdf(&self, x: f64) -> f64;
 
+    /// Survival function (complement of the CDF).
+    ///
+    /// Computes `1 - cdf(x)` but with greater accuracy than computing
+    /// `1.0 - self.cdf(x)` directly, especially when the result is close to zero.
+    ///
+    /// This calls Boost's `cdf(complement(dist, x))` internally.
+    fn sf(&self, x: f64) -> f64;
+
     /// Quantile function (inverse CDF).
     ///
     /// Returns the value `x` such that `cdf(x) == p`.
     fn quantile(&self, p: f64) -> f64;
+
+    /// Inverse survival function.
+    ///
+    /// Returns the value `x` such that `sf(x) == q`, i.e. `cdf(x) == 1 - q`.
+    /// More accurate than `quantile(1.0 - q)` when `q` is small.
+    ///
+    /// This calls Boost's `quantile(complement(dist, q))` internally.
+    fn isf(&self, q: f64) -> f64;
 
     /// Mean (expected value) of the distribution.
     fn mean(&self) -> f64;
@@ -117,7 +133,7 @@ macro_rules! define_distribution {
     (
         $(#[$meta:meta])*
         $Name:ident { $($(#[$field_meta:meta])* $field:ident),+ }
-        ffi: $pdf:ident, $cdf:ident, $quantile:ident,
+        ffi: $pdf:ident, $cdf:ident, $sf:ident, $quantile:ident, $isf:ident,
              $mean:ident, $variance:ident, $std_dev:ident,
              $skewness:ident, $kurtosis:ident, $kurtosis_excess:ident,
              $median:ident, $mode:ident
@@ -145,8 +161,14 @@ macro_rules! define_distribution {
             fn cdf(&self, x: f64) -> f64 {
                 unsafe { ffi::$cdf($(self.$field),+, x) }
             }
+            fn sf(&self, x: f64) -> f64 {
+                unsafe { ffi::$sf($(self.$field),+, x) }
+            }
             fn quantile(&self, p: f64) -> f64 {
                 unsafe { ffi::$quantile($(self.$field),+, p) }
+            }
+            fn isf(&self, q: f64) -> f64 {
+                unsafe { ffi::$isf($(self.$field),+, q) }
             }
             fn mean(&self) -> f64 {
                 unsafe { ffi::$mean($(self.$field),+) }
@@ -185,7 +207,7 @@ define_distribution! {
     /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/bernoulli_dist.html>
     Bernoulli { /// Success probability (0 <= p <= 1).
                 p }
-    ffi: math_dist_bernoulli_pdf, math_dist_bernoulli_cdf, math_dist_bernoulli_quantile,
+    ffi: math_dist_bernoulli_pdf, math_dist_bernoulli_cdf, math_dist_bernoulli_cdf_c, math_dist_bernoulli_quantile, math_dist_bernoulli_quantile_c,
          math_dist_bernoulli_mean, math_dist_bernoulli_variance, math_dist_bernoulli_std_dev,
          math_dist_bernoulli_skewness, math_dist_bernoulli_kurtosis, math_dist_bernoulli_kurtosis_excess,
          math_dist_bernoulli_median, math_dist_bernoulli_mode
@@ -198,7 +220,7 @@ define_distribution! {
     /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/chi_squared_dist.html>
     ChiSquared { /// Degrees of freedom.
                  df }
-    ffi: math_dist_chi_squared_pdf, math_dist_chi_squared_cdf, math_dist_chi_squared_quantile,
+    ffi: math_dist_chi_squared_pdf, math_dist_chi_squared_cdf, math_dist_chi_squared_cdf_c, math_dist_chi_squared_quantile, math_dist_chi_squared_quantile_c,
          math_dist_chi_squared_mean, math_dist_chi_squared_variance, math_dist_chi_squared_std_dev,
          math_dist_chi_squared_skewness, math_dist_chi_squared_kurtosis, math_dist_chi_squared_kurtosis_excess,
          math_dist_chi_squared_median, math_dist_chi_squared_mode
@@ -211,7 +233,7 @@ define_distribution! {
     /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/exp_dist.html>
     Exponential { /// Rate parameter (lambda > 0).
                   lambda }
-    ffi: math_dist_exponential_pdf, math_dist_exponential_cdf, math_dist_exponential_quantile,
+    ffi: math_dist_exponential_pdf, math_dist_exponential_cdf, math_dist_exponential_cdf_c, math_dist_exponential_quantile, math_dist_exponential_quantile_c,
          math_dist_exponential_mean, math_dist_exponential_variance, math_dist_exponential_std_dev,
          math_dist_exponential_skewness, math_dist_exponential_kurtosis, math_dist_exponential_kurtosis_excess,
          math_dist_exponential_median, math_dist_exponential_mode
@@ -224,7 +246,7 @@ define_distribution! {
     /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/geometric_dist.html>
     Geometric { /// Success probability (0 < p <= 1).
                 p }
-    ffi: math_dist_geometric_pdf, math_dist_geometric_cdf, math_dist_geometric_quantile,
+    ffi: math_dist_geometric_pdf, math_dist_geometric_cdf, math_dist_geometric_cdf_c, math_dist_geometric_quantile, math_dist_geometric_quantile_c,
          math_dist_geometric_mean, math_dist_geometric_variance, math_dist_geometric_std_dev,
          math_dist_geometric_skewness, math_dist_geometric_kurtosis, math_dist_geometric_kurtosis_excess,
          math_dist_geometric_median, math_dist_geometric_mode
@@ -237,7 +259,7 @@ define_distribution! {
     /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/inverse_chi_squared_dist.html>
     InverseChiSquared { /// Degrees of freedom.
                         df }
-    ffi: math_dist_inverse_chi_squared_pdf, math_dist_inverse_chi_squared_cdf, math_dist_inverse_chi_squared_quantile,
+    ffi: math_dist_inverse_chi_squared_pdf, math_dist_inverse_chi_squared_cdf, math_dist_inverse_chi_squared_cdf_c, math_dist_inverse_chi_squared_quantile, math_dist_inverse_chi_squared_quantile_c,
          math_dist_inverse_chi_squared_mean, math_dist_inverse_chi_squared_variance, math_dist_inverse_chi_squared_std_dev,
          math_dist_inverse_chi_squared_skewness, math_dist_inverse_chi_squared_kurtosis, math_dist_inverse_chi_squared_kurtosis_excess,
          math_dist_inverse_chi_squared_median, math_dist_inverse_chi_squared_mode
@@ -250,7 +272,7 @@ define_distribution! {
     /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/kolmogorov_smirnov_dist.html>
     KolmogorovSmirnov { /// Sample size.
                         n }
-    ffi: math_dist_kolmogorov_smirnov_pdf, math_dist_kolmogorov_smirnov_cdf, math_dist_kolmogorov_smirnov_quantile,
+    ffi: math_dist_kolmogorov_smirnov_pdf, math_dist_kolmogorov_smirnov_cdf, math_dist_kolmogorov_smirnov_cdf_c, math_dist_kolmogorov_smirnov_quantile, math_dist_kolmogorov_smirnov_quantile_c,
          math_dist_kolmogorov_smirnov_mean, math_dist_kolmogorov_smirnov_variance, math_dist_kolmogorov_smirnov_std_dev,
          math_dist_kolmogorov_smirnov_skewness, math_dist_kolmogorov_smirnov_kurtosis, math_dist_kolmogorov_smirnov_kurtosis_excess,
          math_dist_kolmogorov_smirnov_median, math_dist_kolmogorov_smirnov_mode
@@ -263,7 +285,7 @@ define_distribution! {
     /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/poisson_dist.html>
     Poisson { /// Mean (expected value, lambda > 0).
               mean }
-    ffi: math_dist_poisson_pdf, math_dist_poisson_cdf, math_dist_poisson_quantile,
+    ffi: math_dist_poisson_pdf, math_dist_poisson_cdf, math_dist_poisson_cdf_c, math_dist_poisson_quantile, math_dist_poisson_quantile_c,
          math_dist_poisson_mean, math_dist_poisson_variance, math_dist_poisson_std_dev,
          math_dist_poisson_skewness, math_dist_poisson_kurtosis, math_dist_poisson_kurtosis_excess,
          math_dist_poisson_median, math_dist_poisson_mode
@@ -276,7 +298,7 @@ define_distribution! {
     /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/rayleigh.html>
     Rayleigh { /// Scale parameter (sigma > 0).
                sigma }
-    ffi: math_dist_rayleigh_pdf, math_dist_rayleigh_cdf, math_dist_rayleigh_quantile,
+    ffi: math_dist_rayleigh_pdf, math_dist_rayleigh_cdf, math_dist_rayleigh_cdf_c, math_dist_rayleigh_quantile, math_dist_rayleigh_quantile_c,
          math_dist_rayleigh_mean, math_dist_rayleigh_variance, math_dist_rayleigh_std_dev,
          math_dist_rayleigh_skewness, math_dist_rayleigh_kurtosis, math_dist_rayleigh_kurtosis_excess,
          math_dist_rayleigh_median, math_dist_rayleigh_mode
@@ -289,7 +311,7 @@ define_distribution! {
     /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/students_t_dist.html>
     StudentsT { /// Degrees of freedom.
                 df }
-    ffi: math_dist_students_t_pdf, math_dist_students_t_cdf, math_dist_students_t_quantile,
+    ffi: math_dist_students_t_pdf, math_dist_students_t_cdf, math_dist_students_t_cdf_c, math_dist_students_t_quantile, math_dist_students_t_quantile_c,
          math_dist_students_t_mean, math_dist_students_t_variance, math_dist_students_t_std_dev,
          math_dist_students_t_skewness, math_dist_students_t_kurtosis, math_dist_students_t_kurtosis_excess,
          math_dist_students_t_median, math_dist_students_t_mode
@@ -306,7 +328,7 @@ define_distribution! {
               a,
               /// Upper bound.
               b }
-    ffi: math_dist_arcsine_pdf, math_dist_arcsine_cdf, math_dist_arcsine_quantile,
+    ffi: math_dist_arcsine_pdf, math_dist_arcsine_cdf, math_dist_arcsine_cdf_c, math_dist_arcsine_quantile, math_dist_arcsine_quantile_c,
          math_dist_arcsine_mean, math_dist_arcsine_variance, math_dist_arcsine_std_dev,
          math_dist_arcsine_skewness, math_dist_arcsine_kurtosis, math_dist_arcsine_kurtosis_excess,
          math_dist_arcsine_median, math_dist_arcsine_mode
@@ -321,7 +343,7 @@ define_distribution! {
                alpha,
                /// Second shape parameter (beta > 0).
                beta }
-    ffi: math_dist_beta_pdf, math_dist_beta_cdf, math_dist_beta_quantile,
+    ffi: math_dist_beta_pdf, math_dist_beta_cdf, math_dist_beta_cdf_c, math_dist_beta_quantile, math_dist_beta_quantile_c,
          math_dist_beta_mean, math_dist_beta_variance, math_dist_beta_std_dev,
          math_dist_beta_skewness, math_dist_beta_kurtosis, math_dist_beta_kurtosis_excess,
          math_dist_beta_median, math_dist_beta_mode
@@ -336,7 +358,7 @@ define_distribution! {
                n,
                /// Success probability (0 <= p <= 1).
                p }
-    ffi: math_dist_binomial_pdf, math_dist_binomial_cdf, math_dist_binomial_quantile,
+    ffi: math_dist_binomial_pdf, math_dist_binomial_cdf, math_dist_binomial_cdf_c, math_dist_binomial_quantile, math_dist_binomial_quantile_c,
          math_dist_binomial_mean, math_dist_binomial_variance, math_dist_binomial_std_dev,
          math_dist_binomial_skewness, math_dist_binomial_kurtosis, math_dist_binomial_kurtosis_excess,
          math_dist_binomial_median, math_dist_binomial_mode
@@ -351,7 +373,7 @@ define_distribution! {
              location,
              /// Scale parameter (scale > 0).
              scale }
-    ffi: math_dist_cauchy_pdf, math_dist_cauchy_cdf, math_dist_cauchy_quantile,
+    ffi: math_dist_cauchy_pdf, math_dist_cauchy_cdf, math_dist_cauchy_cdf_c, math_dist_cauchy_quantile, math_dist_cauchy_quantile_c,
          math_dist_cauchy_mean, math_dist_cauchy_variance, math_dist_cauchy_std_dev,
          math_dist_cauchy_skewness, math_dist_cauchy_kurtosis, math_dist_cauchy_kurtosis_excess,
          math_dist_cauchy_median, math_dist_cauchy_mode
@@ -366,7 +388,7 @@ define_distribution! {
                    location,
                    /// Scale parameter (scale > 0).
                    scale }
-    ffi: math_dist_extreme_value_pdf, math_dist_extreme_value_cdf, math_dist_extreme_value_quantile,
+    ffi: math_dist_extreme_value_pdf, math_dist_extreme_value_cdf, math_dist_extreme_value_cdf_c, math_dist_extreme_value_quantile, math_dist_extreme_value_quantile_c,
          math_dist_extreme_value_mean, math_dist_extreme_value_variance, math_dist_extreme_value_std_dev,
          math_dist_extreme_value_skewness, math_dist_extreme_value_kurtosis, math_dist_extreme_value_kurtosis_excess,
          math_dist_extreme_value_median, math_dist_extreme_value_mode
@@ -381,7 +403,7 @@ define_distribution! {
               df1,
               /// Second degrees of freedom.
               df2 }
-    ffi: math_dist_fisher_f_pdf, math_dist_fisher_f_cdf, math_dist_fisher_f_quantile,
+    ffi: math_dist_fisher_f_pdf, math_dist_fisher_f_cdf, math_dist_fisher_f_cdf_c, math_dist_fisher_f_quantile, math_dist_fisher_f_quantile_c,
          math_dist_fisher_f_mean, math_dist_fisher_f_variance, math_dist_fisher_f_std_dev,
          math_dist_fisher_f_skewness, math_dist_fisher_f_kurtosis, math_dist_fisher_f_kurtosis_excess,
          math_dist_fisher_f_median, math_dist_fisher_f_mode
@@ -398,7 +420,7 @@ define_distribution! {
                 shape,
                 /// Scale parameter (scale > 0).
                 scale }
-    ffi: math_dist_gamma_pdf, math_dist_gamma_cdf, math_dist_gamma_quantile,
+    ffi: math_dist_gamma_pdf, math_dist_gamma_cdf, math_dist_gamma_cdf_c, math_dist_gamma_quantile, math_dist_gamma_quantile_c,
          math_dist_gamma_mean, math_dist_gamma_variance, math_dist_gamma_std_dev,
          math_dist_gamma_skewness, math_dist_gamma_kurtosis, math_dist_gamma_kurtosis_excess,
          math_dist_gamma_median, math_dist_gamma_mode
@@ -413,7 +435,7 @@ define_distribution! {
                    shape,
                    /// Scale parameter (scale > 0).
                    scale }
-    ffi: math_dist_inverse_gamma_pdf, math_dist_inverse_gamma_cdf, math_dist_inverse_gamma_quantile,
+    ffi: math_dist_inverse_gamma_pdf, math_dist_inverse_gamma_cdf, math_dist_inverse_gamma_cdf_c, math_dist_inverse_gamma_quantile, math_dist_inverse_gamma_quantile_c,
          math_dist_inverse_gamma_mean, math_dist_inverse_gamma_variance, math_dist_inverse_gamma_std_dev,
          math_dist_inverse_gamma_skewness, math_dist_inverse_gamma_kurtosis, math_dist_inverse_gamma_kurtosis_excess,
          math_dist_inverse_gamma_median, math_dist_inverse_gamma_mode
@@ -428,7 +450,7 @@ define_distribution! {
                       mean,
                       /// Scale (shape) parameter (scale > 0).
                       scale }
-    ffi: math_dist_inverse_gaussian_pdf, math_dist_inverse_gaussian_cdf, math_dist_inverse_gaussian_quantile,
+    ffi: math_dist_inverse_gaussian_pdf, math_dist_inverse_gaussian_cdf, math_dist_inverse_gaussian_cdf_c, math_dist_inverse_gaussian_quantile, math_dist_inverse_gaussian_quantile_c,
          math_dist_inverse_gaussian_mean, math_dist_inverse_gaussian_variance, math_dist_inverse_gaussian_std_dev,
          math_dist_inverse_gaussian_skewness, math_dist_inverse_gaussian_kurtosis, math_dist_inverse_gaussian_kurtosis_excess,
          math_dist_inverse_gaussian_median, math_dist_inverse_gaussian_mode
@@ -443,7 +465,7 @@ define_distribution! {
               location,
               /// Scale parameter (scale > 0).
               scale }
-    ffi: math_dist_laplace_pdf, math_dist_laplace_cdf, math_dist_laplace_quantile,
+    ffi: math_dist_laplace_pdf, math_dist_laplace_cdf, math_dist_laplace_cdf_c, math_dist_laplace_quantile, math_dist_laplace_quantile_c,
          math_dist_laplace_mean, math_dist_laplace_variance, math_dist_laplace_std_dev,
          math_dist_laplace_skewness, math_dist_laplace_kurtosis, math_dist_laplace_kurtosis_excess,
          math_dist_laplace_median, math_dist_laplace_mode
@@ -458,7 +480,7 @@ define_distribution! {
                location,
                /// Scale parameter (scale > 0).
                scale }
-    ffi: math_dist_logistic_pdf, math_dist_logistic_cdf, math_dist_logistic_quantile,
+    ffi: math_dist_logistic_pdf, math_dist_logistic_cdf, math_dist_logistic_cdf_c, math_dist_logistic_quantile, math_dist_logistic_quantile_c,
          math_dist_logistic_mean, math_dist_logistic_variance, math_dist_logistic_std_dev,
          math_dist_logistic_skewness, math_dist_logistic_kurtosis, math_dist_logistic_kurtosis_excess,
          math_dist_logistic_median, math_dist_logistic_mode
@@ -473,7 +495,7 @@ define_distribution! {
                 location,
                 /// Scale parameter (std dev of log, scale > 0).
                 scale }
-    ffi: math_dist_lognormal_pdf, math_dist_lognormal_cdf, math_dist_lognormal_quantile,
+    ffi: math_dist_lognormal_pdf, math_dist_lognormal_cdf, math_dist_lognormal_cdf_c, math_dist_lognormal_quantile, math_dist_lognormal_quantile_c,
          math_dist_lognormal_mean, math_dist_lognormal_variance, math_dist_lognormal_std_dev,
          math_dist_lognormal_skewness, math_dist_lognormal_kurtosis, math_dist_lognormal_kurtosis_excess,
          math_dist_lognormal_median, math_dist_lognormal_mode
@@ -488,7 +510,7 @@ define_distribution! {
                        successes,
                        /// Success probability (0 < p <= 1).
                        p }
-    ffi: math_dist_negative_binomial_pdf, math_dist_negative_binomial_cdf, math_dist_negative_binomial_quantile,
+    ffi: math_dist_negative_binomial_pdf, math_dist_negative_binomial_cdf, math_dist_negative_binomial_cdf_c, math_dist_negative_binomial_quantile, math_dist_negative_binomial_quantile_c,
          math_dist_negative_binomial_mean, math_dist_negative_binomial_variance, math_dist_negative_binomial_std_dev,
          math_dist_negative_binomial_skewness, math_dist_negative_binomial_kurtosis, math_dist_negative_binomial_kurtosis_excess,
          math_dist_negative_binomial_median, math_dist_negative_binomial_mode
@@ -504,7 +526,7 @@ define_distribution! {
                            df,
                            /// Non-centrality parameter (lambda >= 0).
                            lambda }
-    ffi: math_dist_non_central_chi_squared_pdf, math_dist_non_central_chi_squared_cdf, math_dist_non_central_chi_squared_quantile,
+    ffi: math_dist_non_central_chi_squared_pdf, math_dist_non_central_chi_squared_cdf, math_dist_non_central_chi_squared_cdf_c, math_dist_non_central_chi_squared_quantile, math_dist_non_central_chi_squared_quantile_c,
          math_dist_non_central_chi_squared_mean, math_dist_non_central_chi_squared_variance, math_dist_non_central_chi_squared_std_dev,
          math_dist_non_central_chi_squared_skewness, math_dist_non_central_chi_squared_kurtosis, math_dist_non_central_chi_squared_kurtosis_excess,
          math_dist_non_central_chi_squared_median, math_dist_non_central_chi_squared_mode
@@ -520,7 +542,7 @@ define_distribution! {
                   df,
                   /// Non-centrality parameter.
                   delta }
-    ffi: math_dist_non_central_t_pdf, math_dist_non_central_t_cdf, math_dist_non_central_t_quantile,
+    ffi: math_dist_non_central_t_pdf, math_dist_non_central_t_cdf, math_dist_non_central_t_cdf_c, math_dist_non_central_t_quantile, math_dist_non_central_t_quantile_c,
          math_dist_non_central_t_mean, math_dist_non_central_t_variance, math_dist_non_central_t_std_dev,
          math_dist_non_central_t_skewness, math_dist_non_central_t_kurtosis, math_dist_non_central_t_kurtosis_excess,
          math_dist_non_central_t_median, math_dist_non_central_t_mode
@@ -535,7 +557,7 @@ define_distribution! {
              location,
              /// Scale parameter (standard deviation, scale > 0).
              scale }
-    ffi: math_dist_normal_pdf, math_dist_normal_cdf, math_dist_normal_quantile,
+    ffi: math_dist_normal_pdf, math_dist_normal_cdf, math_dist_normal_cdf_c, math_dist_normal_quantile, math_dist_normal_quantile_c,
          math_dist_normal_mean, math_dist_normal_variance, math_dist_normal_std_dev,
          math_dist_normal_skewness, math_dist_normal_kurtosis, math_dist_normal_kurtosis_excess,
          math_dist_normal_median, math_dist_normal_mode
@@ -550,7 +572,7 @@ define_distribution! {
              scale,
              /// Shape parameter (shape > 0).
              shape }
-    ffi: math_dist_pareto_pdf, math_dist_pareto_cdf, math_dist_pareto_quantile,
+    ffi: math_dist_pareto_pdf, math_dist_pareto_cdf, math_dist_pareto_cdf_c, math_dist_pareto_quantile, math_dist_pareto_quantile_c,
          math_dist_pareto_mean, math_dist_pareto_variance, math_dist_pareto_std_dev,
          math_dist_pareto_skewness, math_dist_pareto_kurtosis, math_dist_pareto_kurtosis_excess,
          math_dist_pareto_median, math_dist_pareto_mode
@@ -565,7 +587,7 @@ define_distribution! {
               lower,
               /// Upper bound.
               upper }
-    ffi: math_dist_uniform_pdf, math_dist_uniform_cdf, math_dist_uniform_quantile,
+    ffi: math_dist_uniform_pdf, math_dist_uniform_cdf, math_dist_uniform_cdf_c, math_dist_uniform_quantile, math_dist_uniform_quantile_c,
          math_dist_uniform_mean, math_dist_uniform_variance, math_dist_uniform_std_dev,
          math_dist_uniform_skewness, math_dist_uniform_kurtosis, math_dist_uniform_kurtosis_excess,
          math_dist_uniform_median, math_dist_uniform_mode
@@ -580,7 +602,7 @@ define_distribution! {
               shape,
               /// Scale parameter (scale > 0).
               scale }
-    ffi: math_dist_weibull_pdf, math_dist_weibull_cdf, math_dist_weibull_quantile,
+    ffi: math_dist_weibull_pdf, math_dist_weibull_cdf, math_dist_weibull_cdf_c, math_dist_weibull_quantile, math_dist_weibull_quantile_c,
          math_dist_weibull_mean, math_dist_weibull_variance, math_dist_weibull_std_dev,
          math_dist_weibull_skewness, math_dist_weibull_kurtosis, math_dist_weibull_kurtosis_excess,
          math_dist_weibull_median, math_dist_weibull_mode
@@ -600,7 +622,7 @@ define_distribution! {
                      beta,
                      /// Non-centrality parameter (lambda >= 0).
                      lambda }
-    ffi: math_dist_non_central_beta_pdf, math_dist_non_central_beta_cdf, math_dist_non_central_beta_quantile,
+    ffi: math_dist_non_central_beta_pdf, math_dist_non_central_beta_cdf, math_dist_non_central_beta_cdf_c, math_dist_non_central_beta_quantile, math_dist_non_central_beta_quantile_c,
          math_dist_non_central_beta_mean, math_dist_non_central_beta_variance, math_dist_non_central_beta_std_dev,
          math_dist_non_central_beta_skewness, math_dist_non_central_beta_kurtosis, math_dist_non_central_beta_kurtosis_excess,
          math_dist_non_central_beta_median, math_dist_non_central_beta_mode
@@ -618,7 +640,7 @@ define_distribution! {
                   df2,
                   /// Non-centrality parameter (lambda >= 0).
                   lambda }
-    ffi: math_dist_non_central_f_pdf, math_dist_non_central_f_cdf, math_dist_non_central_f_quantile,
+    ffi: math_dist_non_central_f_pdf, math_dist_non_central_f_cdf, math_dist_non_central_f_cdf_c, math_dist_non_central_f_quantile, math_dist_non_central_f_quantile_c,
          math_dist_non_central_f_mean, math_dist_non_central_f_variance, math_dist_non_central_f_std_dev,
          math_dist_non_central_f_skewness, math_dist_non_central_f_kurtosis, math_dist_non_central_f_kurtosis_excess,
          math_dist_non_central_f_median, math_dist_non_central_f_mode
@@ -635,7 +657,7 @@ define_distribution! {
                  scale,
                  /// Shape (skewness) parameter.
                  shape }
-    ffi: math_dist_skew_normal_pdf, math_dist_skew_normal_cdf, math_dist_skew_normal_quantile,
+    ffi: math_dist_skew_normal_pdf, math_dist_skew_normal_cdf, math_dist_skew_normal_cdf_c, math_dist_skew_normal_quantile, math_dist_skew_normal_quantile_c,
          math_dist_skew_normal_mean, math_dist_skew_normal_variance, math_dist_skew_normal_std_dev,
          math_dist_skew_normal_skewness, math_dist_skew_normal_kurtosis, math_dist_skew_normal_kurtosis_excess,
          math_dist_skew_normal_median, math_dist_skew_normal_mode
@@ -652,7 +674,7 @@ define_distribution! {
                  mode,
                  /// Upper bound.
                  upper }
-    ffi: math_dist_triangular_pdf, math_dist_triangular_cdf, math_dist_triangular_quantile,
+    ffi: math_dist_triangular_pdf, math_dist_triangular_cdf, math_dist_triangular_cdf_c, math_dist_triangular_quantile, math_dist_triangular_quantile_c,
          math_dist_triangular_mean, math_dist_triangular_variance, math_dist_triangular_std_dev,
          math_dist_triangular_skewness, math_dist_triangular_kurtosis, math_dist_triangular_kurtosis_excess,
          math_dist_triangular_median, math_dist_triangular_mode
@@ -702,6 +724,16 @@ impl Distribution for Hypergeometric {
             )
         }
     }
+    fn sf(&self, x: f64) -> f64 {
+        unsafe {
+            ffi::math_dist_hypergeometric_cdf_c(
+                self.r as c_uint,
+                self.n as c_uint,
+                self.total as c_uint,
+                x,
+            )
+        }
+    }
     fn quantile(&self, p: f64) -> f64 {
         unsafe {
             ffi::math_dist_hypergeometric_quantile(
@@ -709,6 +741,16 @@ impl Distribution for Hypergeometric {
                 self.n as c_uint,
                 self.total as c_uint,
                 p,
+            )
+        }
+    }
+    fn isf(&self, q: f64) -> f64 {
+        unsafe {
+            ffi::math_dist_hypergeometric_quantile_c(
+                self.r as c_uint,
+                self.n as c_uint,
+                self.total as c_uint,
+                q,
             )
         }
     }
@@ -807,6 +849,12 @@ mod tests {
         assert_relative_eq!(d.cdf(0.0), 0.5, epsilon = EPS);
         assert_relative_eq!(d.cdf(1.0), 0.8413447460685429, epsilon = EPS);
         assert_relative_eq!(d.quantile(0.975), 1.959963984540054, epsilon = EPS);
+        // sf(x) = 1 - cdf(x)
+        assert_relative_eq!(d.sf(0.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(1.0), 1.0 - 0.8413447460685429, epsilon = EPS);
+        // isf is inverse of sf
+        assert_relative_eq!(d.isf(0.025), 1.959963984540054, epsilon = EPS);
+        assert_relative_eq!(d.isf(0.5), 0.0, epsilon = EPS);
 
         // Non-standard normal
         let d2 = Normal::new(5.0, 2.0);
@@ -824,6 +872,7 @@ mod tests {
         assert_relative_eq!(d.median(), 0.0, epsilon = EPS);
         assert_relative_eq!(d.mode(), 0.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 0.5, epsilon = EPS);
         // kurtosis_excess = 6 / (df - 4)
         assert_relative_eq!(d.kurtosis_excess(), 1.0, epsilon = EPS);
     }
@@ -839,6 +888,7 @@ mod tests {
         // kurtosis_excess = 12/df
         assert_relative_eq!(d.kurtosis_excess(), 2.4, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
     }
 
     #[test]
@@ -855,8 +905,12 @@ mod tests {
         assert_relative_eq!(d.median(), 2.0_f64.ln() / 2.0, epsilon = EPS);
         // cdf(x) = 1 - exp(-lambda*x)
         assert_relative_eq!(d.cdf(1.0), 1.0 - (-2.0_f64).exp(), epsilon = EPS);
+        // sf(x) = exp(-lambda*x)
+        assert_relative_eq!(d.sf(1.0), (-2.0_f64).exp(), epsilon = EPS);
         // pdf(x) = lambda * exp(-lambda*x)
         assert_relative_eq!(d.pdf(0.5), 2.0 * (-1.0_f64).exp(), epsilon = EPS);
+        // isf(q) = -ln(q) / lambda
+        assert_relative_eq!(d.isf(0.5), 2.0_f64.ln() / 2.0, epsilon = EPS);
     }
 
     #[test]
@@ -873,6 +927,7 @@ mod tests {
         // mode = (shape-1)*scale
         assert_relative_eq!(d.mode(), 3.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
     }
 
     #[test]
@@ -886,6 +941,8 @@ mod tests {
         assert_relative_eq!(d.mode(), 0.2, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(1.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(1.0), 0.0, epsilon = EPS);
         // skewness = 2*(b-a)*sqrt(a+b+1) / ((a+b+2)*sqrt(a*b))
         let (a, b): (f64, f64) = (2.0, 5.0);
         let expected_skew = 2.0 * (b - a) * (a + b + 1.0).sqrt() / ((a + b + 2.0) * (a * b).sqrt());
@@ -905,8 +962,11 @@ mod tests {
         // pdf = 1/(b-a) = 1/6
         assert_relative_eq!(d.pdf(5.0), 1.0 / 6.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(5.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(5.0), 0.5, epsilon = EPS);
         assert_relative_eq!(d.quantile(0.25), 3.5, epsilon = EPS);
         assert_relative_eq!(d.quantile(0.75), 6.5, epsilon = EPS);
+        assert_relative_eq!(d.isf(0.75), 3.5, epsilon = EPS);
+        assert_relative_eq!(d.isf(0.25), 6.5, epsilon = EPS);
     }
 
     #[test]
@@ -923,6 +983,9 @@ mod tests {
         assert_relative_eq!(d.pdf(0.0), (-4.0_f64).exp(), epsilon = EPS);
         // pmf(4) = e^(-4) * 4^4 / 4!
         assert_relative_eq!(d.pdf(4.0), (-4.0_f64).exp() * 256.0 / 24.0, epsilon = EPS);
+        // sf + cdf = 1
+        let cdf_3 = d.cdf(3.0);
+        assert_relative_eq!(d.sf(3.0), 1.0 - cdf_3, epsilon = EPS);
     }
 
     #[test]
@@ -937,6 +1000,9 @@ mod tests {
         assert_relative_eq!(d.pdf(0.0), 0.7_f64.powi(10), epsilon = EPS);
         // pmf(n) = p^n
         assert_relative_eq!(d.pdf(10.0), 0.3_f64.powi(10), epsilon = EPS);
+        // sf + cdf = 1
+        let cdf_3 = d.cdf(3.0);
+        assert_relative_eq!(d.sf(3.0), 1.0 - cdf_3, epsilon = EPS);
     }
 
     #[test]
@@ -952,6 +1018,8 @@ mod tests {
         assert_relative_eq!(d.pdf(1.0), 0.7, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.3, epsilon = EPS);
         assert_relative_eq!(d.cdf(1.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 0.7, epsilon = EPS);
+        assert_relative_eq!(d.sf(1.0), 0.0, epsilon = EPS);
     }
 
     #[test]
@@ -968,6 +1036,9 @@ mod tests {
         assert_relative_eq!(d.pdf(0.0), 0.25, epsilon = EPS);
         // pmf(1) = p*(1-p)
         assert_relative_eq!(d.pdf(1.0), 0.1875, epsilon = EPS);
+        // sf + cdf = 1
+        let cdf_2 = d.cdf(2.0);
+        assert_relative_eq!(d.sf(2.0), 1.0 - cdf_2, epsilon = EPS);
     }
 
     #[test]
@@ -984,6 +1055,7 @@ mod tests {
         // pdf(location) = 1/(pi*scale)
         assert_relative_eq!(d.pdf(2.0), 1.0 / (PI * 3.0), epsilon = EPS);
         assert_relative_eq!(d.cdf(2.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(2.0), 0.5, epsilon = EPS);
         // cdf(x) = 0.5 + arctan((x-loc)/scale)/pi
         assert_relative_eq!(
             d.cdf(5.0),
@@ -991,6 +1063,7 @@ mod tests {
             epsilon = EPS
         );
         assert_relative_eq!(d.quantile(0.75), 5.0, epsilon = EPS);
+        assert_relative_eq!(d.isf(0.25), 5.0, epsilon = EPS);
     }
 
     #[test]
@@ -1001,6 +1074,8 @@ mod tests {
         assert_relative_eq!(d.mode(), 0.0, epsilon = EPS);
         // cdf(x) = 1 - exp(-(x/scale)^shape)
         assert_relative_eq!(d.cdf(2.0), 1.0 - (-1.0_f64).exp(), epsilon = EPS);
+        // sf(x) = exp(-(x/scale)^shape)
+        assert_relative_eq!(d.sf(2.0), (-1.0_f64).exp(), epsilon = EPS);
         // pdf(x) = (shape/scale) * (x/scale)^(shape-1) * exp(-(x/scale)^shape)
         assert_relative_eq!(d.pdf(1.0), 0.5 * (-0.5_f64).exp(), epsilon = EPS);
         // median = scale * (ln 2)^(1/shape)
@@ -1023,6 +1098,7 @@ mod tests {
         // mode = exp(mu - sigma^2) = exp(-1)
         assert_relative_eq!(d.mode(), (-1.0_f64).exp(), epsilon = EPS);
         assert_relative_eq!(d.cdf(1.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(1.0), 0.5, epsilon = EPS);
     }
 
     #[test]
@@ -1035,6 +1111,7 @@ mod tests {
         // mode = ((d1-2)/d1) * (d2/(d2+2)) = 5/9
         assert_relative_eq!(d.mode(), 5.0 / 9.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
     }
 
     #[test]
@@ -1047,6 +1124,9 @@ mod tests {
         assert_relative_eq!(d.mode(), 5.0, epsilon = EPS);
         // skewness = (2-p)/sqrt(r*(1-p))
         assert_relative_eq!(d.skewness(), 1.6 / (5.0 * 0.6_f64).sqrt(), epsilon = EPS);
+        // sf + cdf = 1
+        let cdf_5 = d.cdf(5.0);
+        assert_relative_eq!(d.sf(5.0), 1.0 - cdf_5, epsilon = EPS);
     }
 
     #[test]
@@ -1060,6 +1140,9 @@ mod tests {
         // CDF monotonicity
         assert!(d.cdf(2.0) < d.cdf(3.0));
         assert!(d.cdf(3.0) < d.cdf(4.0));
+        // sf monotonicity (reverse of cdf)
+        assert!(d.sf(2.0) > d.sf(3.0));
+        assert!(d.sf(3.0) > d.sf(4.0));
     }
 
     #[test]
@@ -1076,6 +1159,8 @@ mod tests {
         assert_relative_eq!(d.pdf(2.0), 0.5 * (-0.5_f64).exp(), epsilon = EPS);
         // cdf(x) = 1 - exp(-x^2/(2*sigma^2))
         assert_relative_eq!(d.cdf(2.0), 1.0 - (-0.5_f64).exp(), epsilon = EPS);
+        // sf(x) = exp(-x^2/(2*sigma^2))
+        assert_relative_eq!(d.sf(2.0), (-0.5_f64).exp(), epsilon = EPS);
     }
 
     #[test]
@@ -1092,6 +1177,8 @@ mod tests {
         assert_relative_eq!(d.pdf(3.0), 0.25, epsilon = EPS);
         // cdf(x) for x < mu = 0.5*exp((x-mu)/b)
         assert_relative_eq!(d.cdf(1.0), 0.5 * (-1.0_f64).exp(), epsilon = EPS);
+        // sf(x) for x < mu = 1 - 0.5*exp((x-mu)/b)
+        assert_relative_eq!(d.sf(1.0), 1.0 - 0.5 * (-1.0_f64).exp(), epsilon = EPS);
     }
 
     #[test]
@@ -1107,6 +1194,9 @@ mod tests {
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(3.0), 0.5, epsilon = EPS);
         assert_relative_eq!(d.cdf(6.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(3.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(6.0), 0.0, epsilon = EPS);
     }
 
     #[test]
@@ -1121,6 +1211,8 @@ mod tests {
         assert_relative_eq!(d.skewness(), 1.1395470994046488, epsilon = EPS);
         // cdf(0) = exp(-1)
         assert_relative_eq!(d.cdf(0.0), (-1.0_f64).exp(), epsilon = EPS);
+        // sf(0) = 1 - exp(-1)
+        assert_relative_eq!(d.sf(0.0), 1.0 - (-1.0_f64).exp(), epsilon = EPS);
         // pdf(0) = exp(-1)
         assert_relative_eq!(d.pdf(0.0), (-1.0_f64).exp(), epsilon = EPS);
     }
@@ -1138,6 +1230,7 @@ mod tests {
         // pdf(mu) = 1/(4*s)
         assert_relative_eq!(d.pdf(2.0), 1.0 / 12.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(2.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(2.0), 0.5, epsilon = EPS);
     }
 
     #[test]
@@ -1153,6 +1246,8 @@ mod tests {
         assert_relative_eq!(d.pdf(2.0), 3.0 / 16.0, epsilon = EPS);
         // cdf(2) = 1 - (1/2)^3 = 7/8
         assert_relative_eq!(d.cdf(2.0), 0.875, epsilon = EPS);
+        // sf(2) = (1/2)^3 = 1/8
+        assert_relative_eq!(d.sf(2.0), 0.125, epsilon = EPS);
 
         // alpha=5 for skewness check (requires alpha > 3)
         let d2 = Pareto::new(1.0, 5.0);
@@ -1170,6 +1265,9 @@ mod tests {
         assert_relative_eq!(d.skewness(), 3.0 * (2.0 / 3.0_f64).sqrt(), epsilon = EPS);
         // kurtosis_excess = 15*mu/lambda
         assert_relative_eq!(d.kurtosis_excess(), 10.0, epsilon = EPS);
+        // sf + cdf = 1
+        let cdf_2 = d.cdf(2.0);
+        assert_relative_eq!(d.sf(2.0), 1.0 - cdf_2, epsilon = EPS);
     }
 
     #[test]
@@ -1181,6 +1279,9 @@ mod tests {
         assert_relative_eq!(d.variance(), 1.0 / 16.0, epsilon = EPS);
         // mode = 1/(df+2)
         assert_relative_eq!(d.mode(), 0.125, epsilon = EPS);
+        // sf + cdf = 1
+        let cdf_02 = d.cdf(0.2);
+        assert_relative_eq!(d.sf(0.2), 1.0 - cdf_02, epsilon = EPS);
     }
 
     #[test]
@@ -1194,6 +1295,9 @@ mod tests {
         assert_relative_eq!(d.mode(), 0.4, epsilon = EPS);
         // skewness = 4*sqrt(alpha-2)/(alpha-3)
         assert_relative_eq!(d.skewness(), 4.0 * 2.0_f64.sqrt(), epsilon = EPS);
+        // sf + cdf = 1
+        let cdf_05 = d.cdf(0.5);
+        assert_relative_eq!(d.sf(0.5), 1.0 - cdf_05, epsilon = EPS);
     }
 
     #[test]
@@ -1207,6 +1311,8 @@ mod tests {
         assert_relative_eq!(d.kurtosis_excess(), -1.5, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(1.0), 1.0, epsilon = EPS);
+        // sf(0.5) = 1 - cdf(0.5) = 0.5 (by symmetry)
+        assert_relative_eq!(d.sf(0.5), 0.5, epsilon = EPS);
     }
 
     #[test]
@@ -1217,6 +1323,7 @@ mod tests {
         assert_relative_eq!(d.variance(), 1.0, epsilon = EPS);
         assert_relative_eq!(d.skewness(), 0.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 0.5, epsilon = EPS);
         assert_relative_eq!(d.pdf(0.0), 1.0 / (2.0 * PI).sqrt(), epsilon = EPS);
 
         // Positive shape shifts mean right and adds positive skew
@@ -1235,6 +1342,9 @@ mod tests {
         // skewness = 2^(3/2) * (df + 3*lambda) / (df + 2*lambda)^(3/2)
         let expected_skew = 2.0_f64.sqrt() * 2.0 * 10.0 / 8.0_f64.powf(1.5);
         assert_relative_eq!(d.skewness(), expected_skew, epsilon = EPS);
+        // sf + cdf = 1
+        let cdf_5 = d.cdf(5.0);
+        assert_relative_eq!(d.sf(5.0), 1.0 - cdf_5, epsilon = EPS);
     }
 
     #[test]
@@ -1244,6 +1354,7 @@ mod tests {
         assert_relative_eq!(d.mean(), 0.0, epsilon = EPS);
         assert_relative_eq!(d.variance(), 1.25, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 0.5, epsilon = EPS);
 
         // Positive delta shifts distribution right
         let d2 = NonCentralT::new(10.0, 2.0);
@@ -1257,6 +1368,8 @@ mod tests {
         assert_relative_eq!(d.mean(), 2.0 / 7.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(1.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(1.0), 0.0, epsilon = EPS);
         // Skewness/kurtosis are undefined (returns NaN)
         assert!(d.skewness().is_nan());
         assert!(d.kurtosis_excess().is_nan());
@@ -1275,15 +1388,22 @@ mod tests {
         // mean = d2*(d1+lambda) / (d1*(d2-2))
         let d2 = NonCentralF::new(6.0, 10.0, 2.0);
         assert_relative_eq!(d2.mean(), 10.0 * 8.0 / (6.0 * 8.0), epsilon = EPS);
+        // sf + cdf = 1
+        let cdf_1 = d2.cdf(1.0);
+        assert_relative_eq!(d2.sf(1.0), 1.0 - cdf_1, epsilon = EPS);
     }
 
     #[test]
     fn test_kolmogorov_smirnov() {
         let d = KolmogorovSmirnov::new(100.0);
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
         // CDF is monotonically increasing
         assert!(d.cdf(0.1) < d.cdf(0.2));
         assert!(d.cdf(0.2) < d.cdf(0.3));
+        // sf is monotonically decreasing
+        assert!(d.sf(0.1) > d.sf(0.2));
+        assert!(d.sf(0.2) > d.sf(0.3));
         // pdf is positive in the interior
         assert!(d.pdf(0.1) > 0.0);
     }

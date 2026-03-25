@@ -478,8 +478,14 @@ extern "C" {
 #define DIST_FNS_1(name, DistType) \
     double math_dist_##name##_pdf(double p1, double x) { return pdf(DistType<double>(p1), x); } \
     double math_dist_##name##_cdf(double p1, double x) { return cdf(DistType<double>(p1), x); } \
+    double math_dist_##name##_cdf_c(double p1, double x) { \
+        return cdf(complement(DistType<double>(p1), x)); \
+    } \
     double math_dist_##name##_quantile(double p1, double p) { \
         return quantile(DistType<double>(p1), p); \
+    } \
+    double math_dist_##name##_quantile_c(double p1, double q) { \
+        return quantile(complement(DistType<double>(p1), q)); \
     } \
     double math_dist_##name##_mean(double p1) { return mean(DistType<double>(p1)); } \
     double math_dist_##name##_variance(double p1) { return variance(DistType<double>(p1)); } \
@@ -502,8 +508,14 @@ extern "C" {
     double math_dist_##name##_cdf(double p1, double p2, double x) { \
         return cdf(DistType<double>(p1, p2), x); \
     } \
+    double math_dist_##name##_cdf_c(double p1, double p2, double x) { \
+        return cdf(complement(DistType<double>(p1, p2), x)); \
+    } \
     double math_dist_##name##_quantile(double p1, double p2, double p) { \
         return quantile(DistType<double>(p1, p2), p); \
+    } \
+    double math_dist_##name##_quantile_c(double p1, double p2, double q) { \
+        return quantile(complement(DistType<double>(p1, p2), q)); \
     } \
     double math_dist_##name##_mean(double p1, double p2) { \
         return mean(DistType<double>(p1, p2)); \
@@ -536,8 +548,14 @@ extern "C" {
     double math_dist_##name##_cdf(double p1, double p2, double p3, double x) { \
         return cdf(DistType<double>(p1, p2, p3), x); \
     } \
+    double math_dist_##name##_cdf_c(double p1, double p2, double p3, double x) { \
+        return cdf(complement(DistType<double>(p1, p2, p3), x)); \
+    } \
     double math_dist_##name##_quantile(double p1, double p2, double p3, double p) { \
         return quantile(DistType<double>(p1, p2, p3), p); \
+    } \
+    double math_dist_##name##_quantile_c(double p1, double p2, double p3, double q) { \
+        return quantile(complement(DistType<double>(p1, p2, p3), q)); \
     } \
     double math_dist_##name##_mean(double p1, double p2, double p3) { \
         return mean(DistType<double>(p1, p2, p3)); \
@@ -589,6 +607,12 @@ double math_dist_cauchy_cdf(double p1, double p2, double x) {
 double math_dist_cauchy_quantile(double p1, double p2, double p) {
     return quantile(cauchy_distribution<double>(p1, p2), p);
 }
+double math_dist_cauchy_cdf_c(double p1, double p2, double x) {
+    return cdf(complement(cauchy_distribution<double>(p1, p2), x));
+}
+double math_dist_cauchy_quantile_c(double p1, double p2, double q) {
+    return quantile(complement(cauchy_distribution<double>(p1, p2), q));
+}
 double math_dist_cauchy_mean(double, double) { return std::numeric_limits<double>::quiet_NaN(); }
 double math_dist_cauchy_variance(double, double) {
     return std::numeric_limits<double>::quiet_NaN();
@@ -636,6 +660,12 @@ double math_dist_non_central_beta_cdf(double p1, double p2, double p3, double x)
 double math_dist_non_central_beta_quantile(double p1, double p2, double p3, double p) {
     return quantile(non_central_beta_distribution<double>(p1, p2, p3), p);
 }
+double math_dist_non_central_beta_cdf_c(double p1, double p2, double p3, double x) {
+    return cdf(complement(non_central_beta_distribution<double>(p1, p2, p3), x));
+}
+double math_dist_non_central_beta_quantile_c(double p1, double p2, double p3, double q) {
+    return quantile(complement(non_central_beta_distribution<double>(p1, p2, p3), q));
+}
 double math_dist_non_central_beta_mean(double p1, double p2, double p3) {
     return mean(non_central_beta_distribution<double>(p1, p2, p3));
 }
@@ -673,6 +703,12 @@ double math_dist_hypergeometric_cdf(unsigned r, unsigned n, unsigned N, double x
 }
 double math_dist_hypergeometric_quantile(unsigned r, unsigned n, unsigned N, double p) {
     return quantile(hypergeometric_distribution<double>(r, n, N), p);
+}
+double math_dist_hypergeometric_cdf_c(unsigned r, unsigned n, unsigned N, double x) {
+    return cdf(complement(hypergeometric_distribution<double>(r, n, N), x));
+}
+double math_dist_hypergeometric_quantile_c(unsigned r, unsigned n, unsigned N, double q) {
+    return quantile(complement(hypergeometric_distribution<double>(r, n, N), q));
 }
 double math_dist_hypergeometric_mean(unsigned r, unsigned n, unsigned N) {
     return mean(hypergeometric_distribution<double>(r, n, N));
