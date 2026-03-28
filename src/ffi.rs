@@ -772,46 +772,23 @@ unsafe extern "C-unwind" {
     pub(crate) fn math_dist_triangular_mode(p1: f64, p2: f64, p3: f64) -> f64;
 
     // boost/math/distributions/hypergeometric.hpp (unsigned parameters)
-    pub(crate) fn math_dist_hypergeometric_pdf(
-        r: c_uint,
-        n: c_uint,
-        upper_n: c_uint,
-        x: f64,
-    ) -> f64;
-    pub(crate) fn math_dist_hypergeometric_cdf(
-        r: c_uint,
-        n: c_uint,
-        upper_n: c_uint,
-        x: f64,
-    ) -> f64;
-    pub(crate) fn math_dist_hypergeometric_quantile(
-        r: c_uint,
-        n: c_uint,
-        upper_n: c_uint,
-        p: f64,
-    ) -> f64;
-    pub(crate) fn math_dist_hypergeometric_cdf_c(
-        r: c_uint,
-        n: c_uint,
-        upper_n: c_uint,
-        x: f64,
-    ) -> f64;
+    pub(crate) fn math_dist_hypergeometric_pdf(r: c_uint, n: c_uint, N: c_uint, x: f64) -> f64;
+    pub(crate) fn math_dist_hypergeometric_cdf(r: c_uint, n: c_uint, N: c_uint, x: f64) -> f64;
+    pub(crate) fn math_dist_hypergeometric_quantile(r: c_uint, n: c_uint, N: c_uint, p: f64)
+    -> f64;
+    pub(crate) fn math_dist_hypergeometric_cdf_c(r: c_uint, n: c_uint, N: c_uint, x: f64) -> f64;
     pub(crate) fn math_dist_hypergeometric_quantile_c(
         r: c_uint,
         n: c_uint,
-        upper_n: c_uint,
+        N: c_uint,
         q: f64,
     ) -> f64;
-    pub(crate) fn math_dist_hypergeometric_mean(r: c_uint, n: c_uint, upper_n: c_uint) -> f64;
-    pub(crate) fn math_dist_hypergeometric_variance(r: c_uint, n: c_uint, upper_n: c_uint) -> f64;
-    pub(crate) fn math_dist_hypergeometric_std_dev(r: c_uint, n: c_uint, upper_n: c_uint) -> f64;
-    pub(crate) fn math_dist_hypergeometric_skewness(r: c_uint, n: c_uint, upper_n: c_uint) -> f64;
-    pub(crate) fn math_dist_hypergeometric_kurtosis(r: c_uint, n: c_uint, upper_n: c_uint) -> f64;
-    pub(crate) fn math_dist_hypergeometric_kurtosis_excess(
-        r: c_uint,
-        n: c_uint,
-        upper_n: c_uint,
-    ) -> f64;
-    pub(crate) fn math_dist_hypergeometric_median(r: c_uint, n: c_uint, upper_n: c_uint) -> f64;
-    pub(crate) fn math_dist_hypergeometric_mode(r: c_uint, n: c_uint, upper_n: c_uint) -> f64;
+    pub(crate) fn math_dist_hypergeometric_mean(r: c_uint, n: c_uint, N: c_uint) -> f64;
+    pub(crate) fn math_dist_hypergeometric_variance(r: c_uint, n: c_uint, N: c_uint) -> f64;
+    pub(crate) fn math_dist_hypergeometric_std_dev(r: c_uint, n: c_uint, N: c_uint) -> f64;
+    pub(crate) fn math_dist_hypergeometric_skewness(r: c_uint, n: c_uint, N: c_uint) -> f64;
+    pub(crate) fn math_dist_hypergeometric_kurtosis(r: c_uint, n: c_uint, N: c_uint) -> f64;
+    pub(crate) fn math_dist_hypergeometric_kurtosis_excess(r: c_uint, n: c_uint, N: c_uint) -> f64;
+    pub(crate) fn math_dist_hypergeometric_median(r: c_uint, n: c_uint, N: c_uint) -> f64;
+    pub(crate) fn math_dist_hypergeometric_mode(r: c_uint, n: c_uint, N: c_uint) -> f64;
 }

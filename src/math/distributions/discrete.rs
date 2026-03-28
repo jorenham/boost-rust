@@ -50,6 +50,7 @@ define_distribution! {
 ///
 /// Corresponds to `boost::math::hypergeometric_distribution` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/hypergeometric_dist.html>
+#[allow(non_snake_case)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Hypergeometric {
     /// Number of defective items in the population.
@@ -57,13 +58,14 @@ pub struct Hypergeometric {
     /// Number of items sampled.
     pub n: u32,
     /// Total population size (N).
-    pub total: u32,
+    pub N: u32,
 }
 
 impl Hypergeometric {
     /// Creates a new hypergeometric distribution.
-    pub fn new(r: u32, n: u32, total: u32) -> Self {
-        Self { r, n, total }
+    #[allow(non_snake_case)]
+    pub fn new(r: u32, n: u32, N: u32) -> Self {
+        Self { r, n, N }
     }
 }
 
@@ -73,7 +75,7 @@ impl Distribution for Hypergeometric {
             ffi::math_dist_hypergeometric_pdf(
                 self.r as c_uint,
                 self.n as c_uint,
-                self.total as c_uint,
+                self.N as c_uint,
                 x,
             )
         }
@@ -83,7 +85,7 @@ impl Distribution for Hypergeometric {
             ffi::math_dist_hypergeometric_cdf(
                 self.r as c_uint,
                 self.n as c_uint,
-                self.total as c_uint,
+                self.N as c_uint,
                 x,
             )
         }
@@ -93,7 +95,7 @@ impl Distribution for Hypergeometric {
             ffi::math_dist_hypergeometric_cdf_c(
                 self.r as c_uint,
                 self.n as c_uint,
-                self.total as c_uint,
+                self.N as c_uint,
                 x,
             )
         }
@@ -103,7 +105,7 @@ impl Distribution for Hypergeometric {
             ffi::math_dist_hypergeometric_quantile(
                 self.r as c_uint,
                 self.n as c_uint,
-                self.total as c_uint,
+                self.N as c_uint,
                 p,
             )
         }
@@ -113,18 +115,14 @@ impl Distribution for Hypergeometric {
             ffi::math_dist_hypergeometric_quantile_c(
                 self.r as c_uint,
                 self.n as c_uint,
-                self.total as c_uint,
+                self.N as c_uint,
                 q,
             )
         }
     }
     fn mean(&self) -> f64 {
         unsafe {
-            ffi::math_dist_hypergeometric_mean(
-                self.r as c_uint,
-                self.n as c_uint,
-                self.total as c_uint,
-            )
+            ffi::math_dist_hypergeometric_mean(self.r as c_uint, self.n as c_uint, self.N as c_uint)
         }
     }
     fn variance(&self) -> f64 {
@@ -132,7 +130,7 @@ impl Distribution for Hypergeometric {
             ffi::math_dist_hypergeometric_variance(
                 self.r as c_uint,
                 self.n as c_uint,
-                self.total as c_uint,
+                self.N as c_uint,
             )
         }
     }
@@ -141,7 +139,7 @@ impl Distribution for Hypergeometric {
             ffi::math_dist_hypergeometric_std_dev(
                 self.r as c_uint,
                 self.n as c_uint,
-                self.total as c_uint,
+                self.N as c_uint,
             )
         }
     }
@@ -150,7 +148,7 @@ impl Distribution for Hypergeometric {
             ffi::math_dist_hypergeometric_skewness(
                 self.r as c_uint,
                 self.n as c_uint,
-                self.total as c_uint,
+                self.N as c_uint,
             )
         }
     }
@@ -159,7 +157,7 @@ impl Distribution for Hypergeometric {
             ffi::math_dist_hypergeometric_kurtosis(
                 self.r as c_uint,
                 self.n as c_uint,
-                self.total as c_uint,
+                self.N as c_uint,
             )
         }
     }
@@ -168,7 +166,7 @@ impl Distribution for Hypergeometric {
             ffi::math_dist_hypergeometric_kurtosis_excess(
                 self.r as c_uint,
                 self.n as c_uint,
-                self.total as c_uint,
+                self.N as c_uint,
             )
         }
     }
@@ -177,17 +175,13 @@ impl Distribution for Hypergeometric {
             ffi::math_dist_hypergeometric_median(
                 self.r as c_uint,
                 self.n as c_uint,
-                self.total as c_uint,
+                self.N as c_uint,
             )
         }
     }
     fn mode(&self) -> f64 {
         unsafe {
-            ffi::math_dist_hypergeometric_mode(
-                self.r as c_uint,
-                self.n as c_uint,
-                self.total as c_uint,
-            )
+            ffi::math_dist_hypergeometric_mode(self.r as c_uint, self.n as c_uint, self.N as c_uint)
         }
     }
 }
