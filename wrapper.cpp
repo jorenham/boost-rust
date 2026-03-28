@@ -650,7 +650,7 @@ DIST_FNS_2(uniform, uniform_distribution)
 DIST_FNS_2(weibull, weibull_distribution)
 
 // 3-parameter distributions
-// Non-central beta: skewness and kurtosis_excess are undefined
+// Non-central beta: skewness, kurtosis, and kurtosis_excess are undefined
 double math_dist_non_central_beta_pdf(double p1, double p2, double p3, double x) {
     return pdf(non_central_beta_distribution<double>(p1, p2, p3), x);
 }
