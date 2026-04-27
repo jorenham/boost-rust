@@ -289,6 +289,10 @@
 //!
 //! - [`owens_t`]
 //!
+//! ## Statistical Distributions
+//!
+//! See [`distributions`] for continuous, discrete, and non-central distribution bindings.
+//!
 //! ## Constexpr CMath
 //!
 //! See [`ccmath`]
@@ -296,6 +300,7 @@
 
 pub mod ccmath;
 pub mod constants;
+pub mod distributions;
 
 mod special_functions;
 pub use special_functions::acosh::*;

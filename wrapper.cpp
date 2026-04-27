@@ -436,3 +436,303 @@ double math_sqrt1pm1(double x) { return sqrt1pm1(x); }
 double math_zeta(double s) { return zeta(s); }
 
 } // extern "C"
+
+// distributions
+#include <boost/math/distributions/arcsine.hpp>
+#include <boost/math/distributions/bernoulli.hpp>
+#include <boost/math/distributions/beta.hpp>
+#include <boost/math/distributions/binomial.hpp>
+#include <boost/math/distributions/cauchy.hpp>
+#include <boost/math/distributions/chi_squared.hpp>
+#include <boost/math/distributions/exponential.hpp>
+#include <boost/math/distributions/extreme_value.hpp>
+#include <boost/math/distributions/fisher_f.hpp>
+#include <boost/math/distributions/gamma.hpp>
+#include <boost/math/distributions/geometric.hpp>
+#include <boost/math/distributions/hypergeometric.hpp>
+#include <boost/math/distributions/inverse_chi_squared.hpp>
+#include <boost/math/distributions/inverse_gamma.hpp>
+#include <boost/math/distributions/inverse_gaussian.hpp>
+#include <boost/math/distributions/kolmogorov_smirnov.hpp>
+#include <boost/math/distributions/laplace.hpp>
+#include <boost/math/distributions/logistic.hpp>
+#include <boost/math/distributions/lognormal.hpp>
+#include <boost/math/distributions/negative_binomial.hpp>
+#include <boost/math/distributions/non_central_beta.hpp>
+#include <boost/math/distributions/non_central_chi_squared.hpp>
+#include <boost/math/distributions/non_central_f.hpp>
+#include <boost/math/distributions/non_central_t.hpp>
+#include <boost/math/distributions/normal.hpp>
+#include <boost/math/distributions/pareto.hpp>
+#include <boost/math/distributions/poisson.hpp>
+#include <boost/math/distributions/rayleigh.hpp>
+#include <boost/math/distributions/skew_normal.hpp>
+#include <boost/math/distributions/students_t.hpp>
+#include <boost/math/distributions/triangular.hpp>
+#include <boost/math/distributions/uniform.hpp>
+#include <boost/math/distributions/weibull.hpp>
+
+extern "C" {
+
+// Macro for distributions with 1 parameter
+#define DIST_FNS_1(name, DistType) \
+    double math_dist_##name##_pdf(double p1, double x) { return pdf(DistType<double>(p1), x); } \
+    double math_dist_##name##_cdf(double p1, double x) { return cdf(DistType<double>(p1), x); } \
+    double math_dist_##name##_cdf_c(double p1, double x) { \
+        return cdf(complement(DistType<double>(p1), x)); \
+    } \
+    double math_dist_##name##_quantile(double p1, double p) { \
+        return quantile(DistType<double>(p1), p); \
+    } \
+    double math_dist_##name##_quantile_c(double p1, double q) { \
+        return quantile(complement(DistType<double>(p1), q)); \
+    } \
+    double math_dist_##name##_mean(double p1) { return mean(DistType<double>(p1)); } \
+    double math_dist_##name##_variance(double p1) { return variance(DistType<double>(p1)); } \
+    double math_dist_##name##_std_dev(double p1) { \
+        return standard_deviation(DistType<double>(p1)); \
+    } \
+    double math_dist_##name##_skewness(double p1) { return skewness(DistType<double>(p1)); } \
+    double math_dist_##name##_kurtosis(double p1) { return kurtosis(DistType<double>(p1)); } \
+    double math_dist_##name##_kurtosis_excess(double p1) { \
+        return kurtosis_excess(DistType<double>(p1)); \
+    } \
+    double math_dist_##name##_median(double p1) { return median(DistType<double>(p1)); } \
+    double math_dist_##name##_mode(double p1) { return mode(DistType<double>(p1)); }
+
+// Macro for distributions with 2 parameters
+#define DIST_FNS_2(name, DistType) \
+    double math_dist_##name##_pdf(double p1, double p2, double x) { \
+        return pdf(DistType<double>(p1, p2), x); \
+    } \
+    double math_dist_##name##_cdf(double p1, double p2, double x) { \
+        return cdf(DistType<double>(p1, p2), x); \
+    } \
+    double math_dist_##name##_cdf_c(double p1, double p2, double x) { \
+        return cdf(complement(DistType<double>(p1, p2), x)); \
+    } \
+    double math_dist_##name##_quantile(double p1, double p2, double p) { \
+        return quantile(DistType<double>(p1, p2), p); \
+    } \
+    double math_dist_##name##_quantile_c(double p1, double p2, double q) { \
+        return quantile(complement(DistType<double>(p1, p2), q)); \
+    } \
+    double math_dist_##name##_mean(double p1, double p2) { \
+        return mean(DistType<double>(p1, p2)); \
+    } \
+    double math_dist_##name##_variance(double p1, double p2) { \
+        return variance(DistType<double>(p1, p2)); \
+    } \
+    double math_dist_##name##_std_dev(double p1, double p2) { \
+        return standard_deviation(DistType<double>(p1, p2)); \
+    } \
+    double math_dist_##name##_skewness(double p1, double p2) { \
+        return skewness(DistType<double>(p1, p2)); \
+    } \
+    double math_dist_##name##_kurtosis(double p1, double p2) { \
+        return kurtosis(DistType<double>(p1, p2)); \
+    } \
+    double math_dist_##name##_kurtosis_excess(double p1, double p2) { \
+        return kurtosis_excess(DistType<double>(p1, p2)); \
+    } \
+    double math_dist_##name##_median(double p1, double p2) { \
+        return median(DistType<double>(p1, p2)); \
+    } \
+    double math_dist_##name##_mode(double p1, double p2) { return mode(DistType<double>(p1, p2)); }
+
+// Macro for distributions with 3 parameters
+#define DIST_FNS_3(name, DistType) \
+    double math_dist_##name##_pdf(double p1, double p2, double p3, double x) { \
+        return pdf(DistType<double>(p1, p2, p3), x); \
+    } \
+    double math_dist_##name##_cdf(double p1, double p2, double p3, double x) { \
+        return cdf(DistType<double>(p1, p2, p3), x); \
+    } \
+    double math_dist_##name##_cdf_c(double p1, double p2, double p3, double x) { \
+        return cdf(complement(DistType<double>(p1, p2, p3), x)); \
+    } \
+    double math_dist_##name##_quantile(double p1, double p2, double p3, double p) { \
+        return quantile(DistType<double>(p1, p2, p3), p); \
+    } \
+    double math_dist_##name##_quantile_c(double p1, double p2, double p3, double q) { \
+        return quantile(complement(DistType<double>(p1, p2, p3), q)); \
+    } \
+    double math_dist_##name##_mean(double p1, double p2, double p3) { \
+        return mean(DistType<double>(p1, p2, p3)); \
+    } \
+    double math_dist_##name##_variance(double p1, double p2, double p3) { \
+        return variance(DistType<double>(p1, p2, p3)); \
+    } \
+    double math_dist_##name##_std_dev(double p1, double p2, double p3) { \
+        return standard_deviation(DistType<double>(p1, p2, p3)); \
+    } \
+    double math_dist_##name##_skewness(double p1, double p2, double p3) { \
+        return skewness(DistType<double>(p1, p2, p3)); \
+    } \
+    double math_dist_##name##_kurtosis(double p1, double p2, double p3) { \
+        return kurtosis(DistType<double>(p1, p2, p3)); \
+    } \
+    double math_dist_##name##_kurtosis_excess(double p1, double p2, double p3) { \
+        return kurtosis_excess(DistType<double>(p1, p2, p3)); \
+    } \
+    double math_dist_##name##_median(double p1, double p2, double p3) { \
+        return median(DistType<double>(p1, p2, p3)); \
+    } \
+    double math_dist_##name##_mode(double p1, double p2, double p3) { \
+        return mode(DistType<double>(p1, p2, p3)); \
+    }
+
+// 1-parameter distributions
+DIST_FNS_1(bernoulli, bernoulli_distribution)
+DIST_FNS_1(chi_squared, chi_squared_distribution)
+DIST_FNS_1(exponential, exponential_distribution)
+DIST_FNS_1(geometric, geometric_distribution)
+DIST_FNS_1(inverse_chi_squared, inverse_chi_squared_distribution)
+DIST_FNS_1(kolmogorov_smirnov, kolmogorov_smirnov_distribution)
+DIST_FNS_1(poisson, poisson_distribution)
+DIST_FNS_1(rayleigh, rayleigh_distribution)
+DIST_FNS_1(students_t, students_t_distribution)
+
+// 2-parameter distributions
+DIST_FNS_2(arcsine, arcsine_distribution)
+DIST_FNS_2(beta, beta_distribution)
+DIST_FNS_2(binomial, binomial_distribution)
+// Cauchy: mean, variance, std_dev, skewness, kurtosis, kurtosis_excess are undefined
+double math_dist_cauchy_pdf(double p1, double p2, double x) {
+    return pdf(cauchy_distribution<double>(p1, p2), x);
+}
+double math_dist_cauchy_cdf(double p1, double p2, double x) {
+    return cdf(cauchy_distribution<double>(p1, p2), x);
+}
+double math_dist_cauchy_quantile(double p1, double p2, double p) {
+    return quantile(cauchy_distribution<double>(p1, p2), p);
+}
+double math_dist_cauchy_cdf_c(double p1, double p2, double x) {
+    return cdf(complement(cauchy_distribution<double>(p1, p2), x));
+}
+double math_dist_cauchy_quantile_c(double p1, double p2, double q) {
+    return quantile(complement(cauchy_distribution<double>(p1, p2), q));
+}
+double math_dist_cauchy_mean(double, double) { return std::numeric_limits<double>::quiet_NaN(); }
+double math_dist_cauchy_variance(double, double) {
+    return std::numeric_limits<double>::quiet_NaN();
+}
+double math_dist_cauchy_std_dev(double, double) { return std::numeric_limits<double>::quiet_NaN(); }
+double math_dist_cauchy_skewness(double, double) {
+    return std::numeric_limits<double>::quiet_NaN();
+}
+double math_dist_cauchy_kurtosis(double, double) {
+    return std::numeric_limits<double>::quiet_NaN();
+}
+double math_dist_cauchy_kurtosis_excess(double, double) {
+    return std::numeric_limits<double>::quiet_NaN();
+}
+double math_dist_cauchy_median(double p1, double p2) {
+    return median(cauchy_distribution<double>(p1, p2));
+}
+double math_dist_cauchy_mode(double p1, double p2) {
+    return mode(cauchy_distribution<double>(p1, p2));
+}
+DIST_FNS_2(extreme_value, extreme_value_distribution)
+DIST_FNS_2(fisher_f, fisher_f_distribution)
+DIST_FNS_2(gamma, gamma_distribution)
+DIST_FNS_2(inverse_gamma, inverse_gamma_distribution)
+DIST_FNS_2(inverse_gaussian, inverse_gaussian_distribution)
+DIST_FNS_2(laplace, laplace_distribution)
+DIST_FNS_2(logistic, logistic_distribution)
+DIST_FNS_2(lognormal, lognormal_distribution)
+DIST_FNS_2(negative_binomial, negative_binomial_distribution)
+DIST_FNS_2(non_central_chi_squared, non_central_chi_squared_distribution)
+DIST_FNS_2(non_central_t, non_central_t_distribution)
+DIST_FNS_2(normal, normal_distribution)
+DIST_FNS_2(pareto, pareto_distribution)
+DIST_FNS_2(uniform, uniform_distribution)
+DIST_FNS_2(weibull, weibull_distribution)
+
+// 3-parameter distributions
+// Non-central beta: skewness, kurtosis, and kurtosis_excess are undefined
+double math_dist_non_central_beta_pdf(double p1, double p2, double p3, double x) {
+    return pdf(non_central_beta_distribution<double>(p1, p2, p3), x);
+}
+double math_dist_non_central_beta_cdf(double p1, double p2, double p3, double x) {
+    return cdf(non_central_beta_distribution<double>(p1, p2, p3), x);
+}
+double math_dist_non_central_beta_quantile(double p1, double p2, double p3, double p) {
+    return quantile(non_central_beta_distribution<double>(p1, p2, p3), p);
+}
+double math_dist_non_central_beta_cdf_c(double p1, double p2, double p3, double x) {
+    return cdf(complement(non_central_beta_distribution<double>(p1, p2, p3), x));
+}
+double math_dist_non_central_beta_quantile_c(double p1, double p2, double p3, double q) {
+    return quantile(complement(non_central_beta_distribution<double>(p1, p2, p3), q));
+}
+double math_dist_non_central_beta_mean(double p1, double p2, double p3) {
+    return mean(non_central_beta_distribution<double>(p1, p2, p3));
+}
+double math_dist_non_central_beta_variance(double p1, double p2, double p3) {
+    return variance(non_central_beta_distribution<double>(p1, p2, p3));
+}
+double math_dist_non_central_beta_std_dev(double p1, double p2, double p3) {
+    return standard_deviation(non_central_beta_distribution<double>(p1, p2, p3));
+}
+double math_dist_non_central_beta_skewness(double, double, double) {
+    return std::numeric_limits<double>::quiet_NaN();
+}
+double math_dist_non_central_beta_kurtosis(double, double, double) {
+    return std::numeric_limits<double>::quiet_NaN();
+}
+double math_dist_non_central_beta_kurtosis_excess(double, double, double) {
+    return std::numeric_limits<double>::quiet_NaN();
+}
+double math_dist_non_central_beta_median(double p1, double p2, double p3) {
+    return median(non_central_beta_distribution<double>(p1, p2, p3));
+}
+double math_dist_non_central_beta_mode(double p1, double p2, double p3) {
+    return mode(non_central_beta_distribution<double>(p1, p2, p3));
+}
+DIST_FNS_3(non_central_f, non_central_f_distribution)
+DIST_FNS_3(skew_normal, skew_normal_distribution)
+DIST_FNS_3(triangular, triangular_distribution)
+
+// Hypergeometric distribution (unsigned parameters)
+double math_dist_hypergeometric_pdf(unsigned r, unsigned n, unsigned N, double x) {
+    return pdf(hypergeometric_distribution<double>(r, n, N), x);
+}
+double math_dist_hypergeometric_cdf(unsigned r, unsigned n, unsigned N, double x) {
+    return cdf(hypergeometric_distribution<double>(r, n, N), x);
+}
+double math_dist_hypergeometric_quantile(unsigned r, unsigned n, unsigned N, double p) {
+    return quantile(hypergeometric_distribution<double>(r, n, N), p);
+}
+double math_dist_hypergeometric_cdf_c(unsigned r, unsigned n, unsigned N, double x) {
+    return cdf(complement(hypergeometric_distribution<double>(r, n, N), x));
+}
+double math_dist_hypergeometric_quantile_c(unsigned r, unsigned n, unsigned N, double q) {
+    return quantile(complement(hypergeometric_distribution<double>(r, n, N), q));
+}
+double math_dist_hypergeometric_mean(unsigned r, unsigned n, unsigned N) {
+    return mean(hypergeometric_distribution<double>(r, n, N));
+}
+double math_dist_hypergeometric_variance(unsigned r, unsigned n, unsigned N) {
+    return variance(hypergeometric_distribution<double>(r, n, N));
+}
+double math_dist_hypergeometric_std_dev(unsigned r, unsigned n, unsigned N) {
+    return standard_deviation(hypergeometric_distribution<double>(r, n, N));
+}
+double math_dist_hypergeometric_skewness(unsigned r, unsigned n, unsigned N) {
+    return skewness(hypergeometric_distribution<double>(r, n, N));
+}
+double math_dist_hypergeometric_kurtosis(unsigned r, unsigned n, unsigned N) {
+    return kurtosis(hypergeometric_distribution<double>(r, n, N));
+}
+double math_dist_hypergeometric_kurtosis_excess(unsigned r, unsigned n, unsigned N) {
+    return kurtosis_excess(hypergeometric_distribution<double>(r, n, N));
+}
+double math_dist_hypergeometric_median(unsigned r, unsigned n, unsigned N) {
+    return median(hypergeometric_distribution<double>(r, n, N));
+}
+double math_dist_hypergeometric_mode(unsigned r, unsigned n, unsigned N) {
+    return mode(hypergeometric_distribution<double>(r, n, N));
+}
+
+} // extern "C" distributions

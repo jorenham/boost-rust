@@ -1,0 +1,798 @@
+use super::Distribution;
+use crate::ffi;
+
+define_distribution! {
+    /// Arcsine distribution on the interval `[a, b]`.
+    ///
+    /// Corresponds to `boost::math::arcsine_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/arcsine_dist.html>
+    Arcsine { /// Lower bound.
+              a,
+              /// Upper bound.
+              b }
+    ffi: math_dist_arcsine_pdf, math_dist_arcsine_cdf, math_dist_arcsine_cdf_c,
+         math_dist_arcsine_quantile, math_dist_arcsine_quantile_c, math_dist_arcsine_mean,
+         math_dist_arcsine_variance, math_dist_arcsine_std_dev, math_dist_arcsine_skewness,
+         math_dist_arcsine_kurtosis, math_dist_arcsine_kurtosis_excess, math_dist_arcsine_median,
+         math_dist_arcsine_mode
+}
+
+define_distribution! {
+    /// Beta distribution with shape parameters `alpha` and `beta`.
+    ///
+    /// Corresponds to `boost::math::beta_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/beta_dist.html>
+    BetaDist { /// First shape parameter (alpha > 0).
+               alpha,
+               /// Second shape parameter (beta > 0).
+               beta }
+    ffi: math_dist_beta_pdf, math_dist_beta_cdf, math_dist_beta_cdf_c, math_dist_beta_quantile,
+         math_dist_beta_quantile_c, math_dist_beta_mean, math_dist_beta_variance,
+         math_dist_beta_std_dev, math_dist_beta_skewness, math_dist_beta_kurtosis,
+         math_dist_beta_kurtosis_excess, math_dist_beta_median, math_dist_beta_mode
+}
+
+define_distribution! {
+    /// Cauchy (Lorentz) distribution with `location` and `scale` parameters.
+    ///
+    /// The Cauchy distribution has no defined moments: [`mean`](Distribution::mean),
+    /// [`variance`](Distribution::variance), [`standard_deviation`](Distribution::standard_deviation),
+    /// [`skewness`](Distribution::skewness), [`kurtosis`](Distribution::kurtosis), and
+    /// [`kurtosis_excess`](Distribution::kurtosis_excess) all return [`f64::NAN`].
+    /// Use [`median`](Distribution::median) and [`mode`](Distribution::mode) (both equal to
+    /// `location`) for measures of central tendency.
+    ///
+    /// Corresponds to `boost::math::cauchy_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/cauchy_dist.html>
+    Cauchy { /// Location parameter.
+             location,
+             /// Scale parameter (scale > 0).
+             scale }
+    ffi: math_dist_cauchy_pdf, math_dist_cauchy_cdf, math_dist_cauchy_cdf_c,
+         math_dist_cauchy_quantile, math_dist_cauchy_quantile_c, math_dist_cauchy_mean,
+         math_dist_cauchy_variance, math_dist_cauchy_std_dev, math_dist_cauchy_skewness,
+         math_dist_cauchy_kurtosis, math_dist_cauchy_kurtosis_excess, math_dist_cauchy_median,
+         math_dist_cauchy_mode
+}
+
+define_distribution! {
+    /// Chi-squared distribution with `df` degrees of freedom.
+    ///
+    /// Corresponds to `boost::math::chi_squared_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/chi_squared_dist.html>
+    ChiSquared { /// Degrees of freedom.
+                 df }
+    ffi: math_dist_chi_squared_pdf, math_dist_chi_squared_cdf, math_dist_chi_squared_cdf_c,
+         math_dist_chi_squared_quantile, math_dist_chi_squared_quantile_c,
+         math_dist_chi_squared_mean, math_dist_chi_squared_variance, math_dist_chi_squared_std_dev,
+         math_dist_chi_squared_skewness, math_dist_chi_squared_kurtosis,
+         math_dist_chi_squared_kurtosis_excess, math_dist_chi_squared_median,
+         math_dist_chi_squared_mode
+}
+
+define_distribution! {
+    /// Exponential distribution with rate parameter `lambda`.
+    ///
+    /// Corresponds to `boost::math::exponential_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/exp_dist.html>
+    Exponential { /// Rate parameter (lambda > 0).
+                  lambda }
+    ffi: math_dist_exponential_pdf, math_dist_exponential_cdf, math_dist_exponential_cdf_c,
+         math_dist_exponential_quantile, math_dist_exponential_quantile_c,
+         math_dist_exponential_mean, math_dist_exponential_variance, math_dist_exponential_std_dev,
+         math_dist_exponential_skewness, math_dist_exponential_kurtosis,
+         math_dist_exponential_kurtosis_excess, math_dist_exponential_median,
+         math_dist_exponential_mode
+}
+
+define_distribution! {
+    /// Extreme value (Gumbel type I) distribution with `location` and `scale` parameters.
+    ///
+    /// Corresponds to `boost::math::extreme_value_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/extreme_dist.html>
+    ExtremeValue { /// Location parameter.
+                   location,
+                   /// Scale parameter (scale > 0).
+                   scale }
+    ffi: math_dist_extreme_value_pdf, math_dist_extreme_value_cdf, math_dist_extreme_value_cdf_c,
+         math_dist_extreme_value_quantile, math_dist_extreme_value_quantile_c,
+         math_dist_extreme_value_mean, math_dist_extreme_value_variance,
+         math_dist_extreme_value_std_dev, math_dist_extreme_value_skewness,
+         math_dist_extreme_value_kurtosis, math_dist_extreme_value_kurtosis_excess,
+         math_dist_extreme_value_median, math_dist_extreme_value_mode
+}
+
+define_distribution! {
+    /// Fisher F-distribution with `df1` and `df2` degrees of freedom.
+    ///
+    /// Corresponds to `boost::math::fisher_f_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/f_dist.html>
+    FisherF { /// First degrees of freedom.
+              df1,
+              /// Second degrees of freedom.
+              df2 }
+    ffi: math_dist_fisher_f_pdf, math_dist_fisher_f_cdf, math_dist_fisher_f_cdf_c,
+         math_dist_fisher_f_quantile, math_dist_fisher_f_quantile_c, math_dist_fisher_f_mean,
+         math_dist_fisher_f_variance, math_dist_fisher_f_std_dev, math_dist_fisher_f_skewness,
+         math_dist_fisher_f_kurtosis, math_dist_fisher_f_kurtosis_excess, math_dist_fisher_f_median,
+         math_dist_fisher_f_mode
+}
+
+define_distribution! {
+    /// Gamma distribution with `shape` and `scale` parameters.
+    ///
+    /// Named `GammaDist` to avoid conflict with the gamma special function.
+    ///
+    /// Corresponds to `boost::math::gamma_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/gamma_dist.html>
+    GammaDist { /// Shape parameter (shape > 0).
+                shape,
+                /// Scale parameter (scale > 0).
+                scale }
+    ffi: math_dist_gamma_pdf, math_dist_gamma_cdf, math_dist_gamma_cdf_c, math_dist_gamma_quantile,
+         math_dist_gamma_quantile_c, math_dist_gamma_mean, math_dist_gamma_variance,
+         math_dist_gamma_std_dev, math_dist_gamma_skewness, math_dist_gamma_kurtosis,
+         math_dist_gamma_kurtosis_excess, math_dist_gamma_median, math_dist_gamma_mode
+}
+
+define_distribution! {
+    /// Inverse chi-squared distribution with `df` degrees of freedom.
+    ///
+    /// Corresponds to `boost::math::inverse_chi_squared_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/inverse_chi_squared_dist.html>
+    InverseChiSquared { /// Degrees of freedom.
+                        df }
+    ffi: math_dist_inverse_chi_squared_pdf, math_dist_inverse_chi_squared_cdf,
+         math_dist_inverse_chi_squared_cdf_c, math_dist_inverse_chi_squared_quantile,
+         math_dist_inverse_chi_squared_quantile_c, math_dist_inverse_chi_squared_mean,
+         math_dist_inverse_chi_squared_variance, math_dist_inverse_chi_squared_std_dev,
+         math_dist_inverse_chi_squared_skewness, math_dist_inverse_chi_squared_kurtosis,
+         math_dist_inverse_chi_squared_kurtosis_excess, math_dist_inverse_chi_squared_median,
+         math_dist_inverse_chi_squared_mode
+}
+
+define_distribution! {
+    /// Inverse gamma distribution with `shape` and `scale` parameters.
+    ///
+    /// Corresponds to `boost::math::inverse_gamma_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/inverse_gamma_dist.html>
+    InverseGamma { /// Shape parameter (shape > 0).
+                   shape,
+                   /// Scale parameter (scale > 0).
+                   scale }
+    ffi: math_dist_inverse_gamma_pdf, math_dist_inverse_gamma_cdf, math_dist_inverse_gamma_cdf_c,
+         math_dist_inverse_gamma_quantile, math_dist_inverse_gamma_quantile_c,
+         math_dist_inverse_gamma_mean, math_dist_inverse_gamma_variance,
+         math_dist_inverse_gamma_std_dev, math_dist_inverse_gamma_skewness,
+         math_dist_inverse_gamma_kurtosis, math_dist_inverse_gamma_kurtosis_excess,
+         math_dist_inverse_gamma_median, math_dist_inverse_gamma_mode
+}
+
+define_distribution! {
+    /// Inverse Gaussian (Wald) distribution with `mean` and `scale` parameters.
+    ///
+    /// Corresponds to `boost::math::inverse_gaussian_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/inverse_gaussian_dist.html>
+    InverseGaussian { /// Mean parameter (mean > 0).
+                      mean,
+                      /// Scale (shape) parameter (scale > 0).
+                      scale }
+    ffi: math_dist_inverse_gaussian_pdf, math_dist_inverse_gaussian_cdf,
+         math_dist_inverse_gaussian_cdf_c, math_dist_inverse_gaussian_quantile,
+         math_dist_inverse_gaussian_quantile_c, math_dist_inverse_gaussian_mean,
+         math_dist_inverse_gaussian_variance, math_dist_inverse_gaussian_std_dev,
+         math_dist_inverse_gaussian_skewness, math_dist_inverse_gaussian_kurtosis,
+         math_dist_inverse_gaussian_kurtosis_excess, math_dist_inverse_gaussian_median,
+         math_dist_inverse_gaussian_mode
+}
+
+define_distribution! {
+    /// Kolmogorov-Smirnov distribution with sample size `n`.
+    ///
+    /// Corresponds to `boost::math::kolmogorov_smirnov_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/kolmogorov_smirnov_dist.html>
+    KolmogorovSmirnov { /// Sample size.
+                        n: u32 }
+    ffi: math_dist_kolmogorov_smirnov_pdf, math_dist_kolmogorov_smirnov_cdf,
+         math_dist_kolmogorov_smirnov_cdf_c, math_dist_kolmogorov_smirnov_quantile,
+         math_dist_kolmogorov_smirnov_quantile_c, math_dist_kolmogorov_smirnov_mean,
+         math_dist_kolmogorov_smirnov_variance, math_dist_kolmogorov_smirnov_std_dev,
+         math_dist_kolmogorov_smirnov_skewness, math_dist_kolmogorov_smirnov_kurtosis,
+         math_dist_kolmogorov_smirnov_kurtosis_excess, math_dist_kolmogorov_smirnov_median,
+         math_dist_kolmogorov_smirnov_mode
+}
+
+define_distribution! {
+    /// Laplace (double exponential) distribution with `location` and `scale` parameters.
+    ///
+    /// Corresponds to `boost::math::laplace_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/laplace_dist.html>
+    Laplace { /// Location parameter.
+              location,
+              /// Scale parameter (scale > 0).
+              scale }
+    ffi: math_dist_laplace_pdf, math_dist_laplace_cdf, math_dist_laplace_cdf_c,
+         math_dist_laplace_quantile, math_dist_laplace_quantile_c, math_dist_laplace_mean,
+         math_dist_laplace_variance, math_dist_laplace_std_dev, math_dist_laplace_skewness,
+         math_dist_laplace_kurtosis, math_dist_laplace_kurtosis_excess, math_dist_laplace_median,
+         math_dist_laplace_mode
+}
+
+define_distribution! {
+    /// Logistic distribution with `location` and `scale` parameters.
+    ///
+    /// Corresponds to `boost::math::logistic_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/logistic_dist.html>
+    Logistic { /// Location parameter.
+               location,
+               /// Scale parameter (scale > 0).
+               scale }
+    ffi: math_dist_logistic_pdf, math_dist_logistic_cdf, math_dist_logistic_cdf_c,
+         math_dist_logistic_quantile, math_dist_logistic_quantile_c, math_dist_logistic_mean,
+         math_dist_logistic_variance, math_dist_logistic_std_dev, math_dist_logistic_skewness,
+         math_dist_logistic_kurtosis, math_dist_logistic_kurtosis_excess, math_dist_logistic_median,
+         math_dist_logistic_mode
+}
+
+define_distribution! {
+    /// Log-normal distribution with `location` and `scale` parameters.
+    ///
+    /// Corresponds to `boost::math::lognormal_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/lognormal_dist.html>
+    Lognormal { /// Location parameter (mean of log).
+                location,
+                /// Scale parameter (std dev of log, scale > 0).
+                scale }
+    ffi: math_dist_lognormal_pdf, math_dist_lognormal_cdf, math_dist_lognormal_cdf_c,
+         math_dist_lognormal_quantile, math_dist_lognormal_quantile_c, math_dist_lognormal_mean,
+         math_dist_lognormal_variance, math_dist_lognormal_std_dev, math_dist_lognormal_skewness,
+         math_dist_lognormal_kurtosis, math_dist_lognormal_kurtosis_excess,
+         math_dist_lognormal_median, math_dist_lognormal_mode
+}
+
+define_distribution! {
+    /// Normal (Gaussian) distribution with `location` (mean) and `scale` (standard deviation).
+    ///
+    /// Corresponds to `boost::math::normal_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/normal_dist.html>
+    Normal { /// Location parameter (mean).
+             location,
+             /// Scale parameter (standard deviation, scale > 0).
+             scale }
+    ffi: math_dist_normal_pdf, math_dist_normal_cdf, math_dist_normal_cdf_c,
+         math_dist_normal_quantile, math_dist_normal_quantile_c, math_dist_normal_mean,
+         math_dist_normal_variance, math_dist_normal_std_dev, math_dist_normal_skewness,
+         math_dist_normal_kurtosis, math_dist_normal_kurtosis_excess, math_dist_normal_median,
+         math_dist_normal_mode
+}
+
+define_distribution! {
+    /// Pareto distribution with `scale` and `shape` parameters.
+    ///
+    /// Corresponds to `boost::math::pareto_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/pareto.html>
+    Pareto { /// Scale parameter (scale > 0).
+             scale,
+             /// Shape parameter (shape > 0).
+             shape }
+    ffi: math_dist_pareto_pdf, math_dist_pareto_cdf, math_dist_pareto_cdf_c,
+         math_dist_pareto_quantile, math_dist_pareto_quantile_c, math_dist_pareto_mean,
+         math_dist_pareto_variance, math_dist_pareto_std_dev, math_dist_pareto_skewness,
+         math_dist_pareto_kurtosis, math_dist_pareto_kurtosis_excess, math_dist_pareto_median,
+         math_dist_pareto_mode
+}
+
+define_distribution! {
+    /// Rayleigh distribution with scale parameter `sigma`.
+    ///
+    /// Corresponds to `boost::math::rayleigh_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/rayleigh.html>
+    Rayleigh { /// Scale parameter (sigma > 0).
+               sigma }
+    ffi: math_dist_rayleigh_pdf, math_dist_rayleigh_cdf, math_dist_rayleigh_cdf_c,
+         math_dist_rayleigh_quantile, math_dist_rayleigh_quantile_c, math_dist_rayleigh_mean,
+         math_dist_rayleigh_variance, math_dist_rayleigh_std_dev, math_dist_rayleigh_skewness,
+         math_dist_rayleigh_kurtosis, math_dist_rayleigh_kurtosis_excess, math_dist_rayleigh_median,
+         math_dist_rayleigh_mode
+}
+
+define_distribution! {
+    /// Skew normal distribution with `location`, `scale`, and `shape` parameters.
+    ///
+    /// Corresponds to `boost::math::skew_normal_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/skew_normal_dist.html>
+    SkewNormal { /// Location parameter.
+                 location,
+                 /// Scale parameter (scale > 0).
+                 scale,
+                 /// Shape (skewness) parameter.
+                 shape }
+    ffi: math_dist_skew_normal_pdf, math_dist_skew_normal_cdf, math_dist_skew_normal_cdf_c,
+         math_dist_skew_normal_quantile, math_dist_skew_normal_quantile_c,
+         math_dist_skew_normal_mean, math_dist_skew_normal_variance, math_dist_skew_normal_std_dev,
+         math_dist_skew_normal_skewness, math_dist_skew_normal_kurtosis,
+         math_dist_skew_normal_kurtosis_excess, math_dist_skew_normal_median,
+         math_dist_skew_normal_mode
+}
+
+define_distribution! {
+    /// Student's t-distribution with `df` degrees of freedom.
+    ///
+    /// Corresponds to `boost::math::students_t_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/students_t_dist.html>
+    StudentsT { /// Degrees of freedom.
+                df }
+    ffi: math_dist_students_t_pdf, math_dist_students_t_cdf, math_dist_students_t_cdf_c,
+         math_dist_students_t_quantile, math_dist_students_t_quantile_c, math_dist_students_t_mean,
+         math_dist_students_t_variance, math_dist_students_t_std_dev, math_dist_students_t_skewness,
+         math_dist_students_t_kurtosis, math_dist_students_t_kurtosis_excess,
+         math_dist_students_t_median, math_dist_students_t_mode
+}
+
+define_distribution! {
+    /// Triangular distribution on `[lower, upper]` with given `mode`.
+    ///
+    /// Corresponds to `boost::math::triangular_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/triangular_dist.html>
+    Triangular { /// Lower bound.
+                 lower,
+                 /// Mode (peak).
+                 mode,
+                 /// Upper bound.
+                 upper }
+    ffi: math_dist_triangular_pdf, math_dist_triangular_cdf, math_dist_triangular_cdf_c,
+         math_dist_triangular_quantile, math_dist_triangular_quantile_c, math_dist_triangular_mean,
+         math_dist_triangular_variance, math_dist_triangular_std_dev, math_dist_triangular_skewness,
+         math_dist_triangular_kurtosis, math_dist_triangular_kurtosis_excess,
+         math_dist_triangular_median, math_dist_triangular_mode
+}
+
+define_distribution! {
+    /// Continuous uniform distribution on the interval `[lower, upper]`.
+    ///
+    /// Corresponds to `boost::math::uniform_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/uniform_dist.html>
+    Uniform { /// Lower bound.
+              lower,
+              /// Upper bound.
+              upper }
+    ffi: math_dist_uniform_pdf, math_dist_uniform_cdf, math_dist_uniform_cdf_c,
+         math_dist_uniform_quantile, math_dist_uniform_quantile_c, math_dist_uniform_mean,
+         math_dist_uniform_variance, math_dist_uniform_std_dev, math_dist_uniform_skewness,
+         math_dist_uniform_kurtosis, math_dist_uniform_kurtosis_excess, math_dist_uniform_median,
+         math_dist_uniform_mode
+}
+
+define_distribution! {
+    /// Weibull distribution with `shape` and `scale` parameters.
+    ///
+    /// Corresponds to `boost::math::weibull_distribution` in C++.
+    /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/weibull_dist.html>
+    Weibull { /// Shape parameter (shape > 0).
+              shape,
+              /// Scale parameter (scale > 0).
+              scale }
+    ffi: math_dist_weibull_pdf, math_dist_weibull_cdf, math_dist_weibull_cdf_c,
+         math_dist_weibull_quantile, math_dist_weibull_quantile_c, math_dist_weibull_mean,
+         math_dist_weibull_variance, math_dist_weibull_std_dev, math_dist_weibull_skewness,
+         math_dist_weibull_kurtosis, math_dist_weibull_kurtosis_excess, math_dist_weibull_median,
+         math_dist_weibull_mode
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::math::distributions::Distribution;
+    use core::f64::consts::{E, FRAC_1_PI, PI};
+
+    const EPS: f64 = 1e-12;
+
+    #[test]
+    fn test_normal() {
+        let d = Normal::new(0.0, 1.0);
+        assert_relative_eq!(d.mean(), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.variance(), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.skewness(), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.kurtosis_excess(), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.median(), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.mode(), 0.0, epsilon = EPS);
+        // pdf(0) = 1/sqrt(2*pi)
+        assert_relative_eq!(d.pdf(0.0), 1.0 / (2.0 * PI).sqrt(), epsilon = EPS);
+        assert_relative_eq!(d.cdf(0.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.cdf(1.0), 0.8413447460685429, epsilon = EPS);
+        assert_relative_eq!(d.quantile(0.975), 1.959963984540054, epsilon = EPS);
+        // sf(x) = 1 - cdf(x)
+        assert_relative_eq!(d.sf(0.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(1.0), 1.0 - 0.8413447460685429, epsilon = EPS);
+        // isf is inverse of sf
+        assert_relative_eq!(d.isf(0.025), 1.959963984540054, epsilon = EPS);
+        assert_relative_eq!(d.isf(0.5), 0.0, epsilon = EPS);
+
+        // Non-standard normal
+        let d2 = Normal::new(5.0, 2.0);
+        assert_relative_eq!(d2.mean(), 5.0, epsilon = EPS);
+        assert_relative_eq!(d2.standard_deviation(), 2.0, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_students_t() {
+        let d = StudentsT::new(10.0);
+        assert_relative_eq!(d.mean(), 0.0, epsilon = EPS);
+        // variance = df / (df - 2) = 10/8
+        assert_relative_eq!(d.variance(), 1.25, epsilon = EPS);
+        assert_relative_eq!(d.skewness(), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.median(), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.mode(), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf(0.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 0.5, epsilon = EPS);
+        // kurtosis_excess = 6 / (df - 4)
+        assert_relative_eq!(d.kurtosis_excess(), 1.0, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_chi_squared() {
+        let d = ChiSquared::new(5.0);
+        assert_relative_eq!(d.mean(), 5.0, epsilon = EPS);
+        assert_relative_eq!(d.variance(), 10.0, epsilon = EPS);
+        // skewness = sqrt(8/df)
+        assert_relative_eq!(d.skewness(), (8.0 / 5.0_f64).sqrt(), epsilon = EPS);
+        assert_relative_eq!(d.mode(), 3.0, epsilon = EPS);
+        // kurtosis_excess = 12/df
+        assert_relative_eq!(d.kurtosis_excess(), 2.4, epsilon = EPS);
+        assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_exponential() {
+        let d = Exponential::new(2.0);
+        // mean = 1/lambda
+        assert_relative_eq!(d.mean(), 0.5, epsilon = EPS);
+        // variance = 1/lambda^2
+        assert_relative_eq!(d.variance(), 0.25, epsilon = EPS);
+        assert_relative_eq!(d.skewness(), 2.0, epsilon = EPS);
+        assert_relative_eq!(d.kurtosis_excess(), 6.0, epsilon = EPS);
+        assert_relative_eq!(d.mode(), 0.0, epsilon = EPS);
+        // median = ln(2)/lambda
+        assert_relative_eq!(d.median(), 2.0_f64.ln() / 2.0, epsilon = EPS);
+        // cdf(x) = 1 - exp(-lambda*x)
+        assert_relative_eq!(d.cdf(1.0), 1.0 - (-2.0_f64).exp(), epsilon = EPS);
+        // sf(x) = exp(-lambda*x)
+        assert_relative_eq!(d.sf(1.0), (-2.0_f64).exp(), epsilon = EPS);
+        // pdf(x) = lambda * exp(-lambda*x)
+        assert_relative_eq!(d.pdf(0.5), 2.0 * (-1.0_f64).exp(), epsilon = EPS);
+        // isf(q) = -ln(q) / lambda
+        assert_relative_eq!(d.isf(0.5), 2.0_f64.ln() / 2.0, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_gamma_dist() {
+        let d = GammaDist::new(2.0, 3.0);
+        // mean = shape * scale
+        assert_relative_eq!(d.mean(), 6.0, epsilon = EPS);
+        // variance = shape * scale^2
+        assert_relative_eq!(d.variance(), 18.0, epsilon = EPS);
+        // skewness = 2/sqrt(shape)
+        assert_relative_eq!(d.skewness(), 2.0_f64.sqrt(), epsilon = EPS);
+        // kurtosis_excess = 6/shape
+        assert_relative_eq!(d.kurtosis_excess(), 3.0, epsilon = EPS);
+        // mode = (shape-1)*scale
+        assert_relative_eq!(d.mode(), 3.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_beta_dist() {
+        let d = BetaDist::new(2.0, 5.0);
+        // mean = alpha / (alpha + beta) = 2/7
+        assert_relative_eq!(d.mean(), 2.0 / 7.0, epsilon = EPS);
+        // variance = alpha*beta / ((a+b)^2 * (a+b+1))
+        assert_relative_eq!(d.variance(), 10.0 / 392.0, epsilon = EPS);
+        // mode = (alpha-1)/(alpha+beta-2) = 1/5
+        assert_relative_eq!(d.mode(), 0.2, epsilon = EPS);
+        assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf(1.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(1.0), 0.0, epsilon = EPS);
+        // skewness = 2*(b-a)*sqrt(a+b+1) / ((a+b+2)*sqrt(a*b))
+        let (a, b): (f64, f64) = (2.0, 5.0);
+        let expected_skew = 2.0 * (b - a) * (a + b + 1.0).sqrt() / ((a + b + 2.0) * (a * b).sqrt());
+        assert_relative_eq!(d.skewness(), expected_skew, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_uniform() {
+        let d = Uniform::new(2.0, 8.0);
+        assert_relative_eq!(d.mean(), 5.0, epsilon = EPS);
+        assert_relative_eq!(d.median(), 5.0, epsilon = EPS);
+        // variance = (b-a)^2 / 12
+        assert_relative_eq!(d.variance(), 3.0, epsilon = EPS);
+        assert_relative_eq!(d.skewness(), 0.0, epsilon = EPS);
+        // kurtosis_excess = -6/5
+        assert_relative_eq!(d.kurtosis_excess(), -1.2, epsilon = EPS);
+        // pdf = 1/(b-a) = 1/6
+        assert_relative_eq!(d.pdf(5.0), 1.0 / 6.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf(5.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(5.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.quantile(0.25), 3.5, epsilon = EPS);
+        assert_relative_eq!(d.quantile(0.75), 6.5, epsilon = EPS);
+        assert_relative_eq!(d.isf(0.75), 3.5, epsilon = EPS);
+        assert_relative_eq!(d.isf(0.25), 6.5, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_cauchy() {
+        let d = Cauchy::new(2.0, 3.0);
+        // Cauchy has no mean/variance/skewness/kurtosis
+        assert!(d.mean().is_nan());
+        assert!(d.variance().is_nan());
+        assert!(d.skewness().is_nan());
+        assert!(d.kurtosis().is_nan());
+        assert!(d.kurtosis_excess().is_nan());
+        assert_relative_eq!(d.median(), 2.0, epsilon = EPS);
+        assert_relative_eq!(d.mode(), 2.0, epsilon = EPS);
+        // pdf(location) = 1/(pi*scale)
+        assert_relative_eq!(d.pdf(2.0), 1.0 / (PI * 3.0), epsilon = EPS);
+        assert_relative_eq!(d.cdf(2.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(2.0), 0.5, epsilon = EPS);
+        // cdf(x) = 0.5 + arctan((x-loc)/scale)/pi
+        assert_relative_eq!(
+            d.cdf(5.0),
+            0.5 + ((5.0 - 2.0) / 3.0_f64).atan() * FRAC_1_PI,
+            epsilon = EPS
+        );
+        assert_relative_eq!(d.quantile(0.75), 5.0, epsilon = EPS);
+        assert_relative_eq!(d.isf(0.25), 5.0, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_weibull() {
+        // shape=1, scale=2 => exponential(1/2)
+        let d = Weibull::new(1.0, 2.0);
+        assert_relative_eq!(d.mean(), 2.0, epsilon = EPS);
+        assert_relative_eq!(d.mode(), 0.0, epsilon = EPS);
+        // cdf(x) = 1 - exp(-(x/scale)^shape)
+        assert_relative_eq!(d.cdf(2.0), 1.0 - (-1.0_f64).exp(), epsilon = EPS);
+        // sf(x) = exp(-(x/scale)^shape)
+        assert_relative_eq!(d.sf(2.0), (-1.0_f64).exp(), epsilon = EPS);
+        // pdf(x) = (shape/scale) * (x/scale)^(shape-1) * exp(-(x/scale)^shape)
+        assert_relative_eq!(d.pdf(1.0), 0.5 * (-0.5_f64).exp(), epsilon = EPS);
+        // median = scale * (ln 2)^(1/shape)
+        assert_relative_eq!(d.median(), 2.0 * 2.0_f64.ln(), epsilon = EPS);
+
+        // shape=2, scale=1: variance = Gamma(2) - Gamma(1.5)^2 = 1 - pi/4
+        let d2 = Weibull::new(2.0, 1.0);
+        assert_relative_eq!(d2.variance(), 1.0 - PI / 4.0, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_lognormal() {
+        let d = Lognormal::new(0.0, 1.0);
+        // mean = exp(mu + sigma^2/2)
+        assert_relative_eq!(d.mean(), (0.5_f64).exp(), epsilon = EPS);
+        // variance = (exp(sigma^2) - 1) * exp(2*mu + sigma^2)
+        assert_relative_eq!(d.variance(), (E - 1.0) * E, epsilon = EPS);
+        // median = exp(mu) = 1
+        assert_relative_eq!(d.median(), 1.0, epsilon = EPS);
+        // mode = exp(mu - sigma^2) = exp(-1)
+        assert_relative_eq!(d.mode(), (-1.0_f64).exp(), epsilon = EPS);
+        assert_relative_eq!(d.cdf(1.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(1.0), 0.5, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_fisher_f() {
+        let d = FisherF::new(6.0, 10.0);
+        // mean = d2/(d2-2)
+        assert_relative_eq!(d.mean(), 1.25, epsilon = EPS);
+        // variance = 2*d2^2*(d1+d2-2) / (d1*(d2-2)^2*(d2-4))
+        assert_relative_eq!(d.variance(), 2800.0 / 2304.0, epsilon = EPS);
+        // mode = ((d1-2)/d1) * (d2/(d2+2)) = 5/9
+        assert_relative_eq!(d.mode(), 5.0 / 9.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_rayleigh() {
+        let d = Rayleigh::new(2.0);
+        // mean = sigma * sqrt(pi/2)
+        assert_relative_eq!(d.mean(), 2.0 * (PI / 2.0).sqrt(), epsilon = EPS);
+        // variance = (4 - pi)/2 * sigma^2
+        assert_relative_eq!(d.variance(), (4.0 - PI) / 2.0 * 4.0, epsilon = EPS);
+        assert_relative_eq!(d.mode(), 2.0, epsilon = EPS);
+        // median = sigma * sqrt(2*ln2)
+        assert_relative_eq!(d.median(), 2.0 * (2.0 * 2.0_f64.ln()).sqrt(), epsilon = EPS);
+        // pdf(x) = (x/sigma^2) * exp(-x^2/(2*sigma^2))
+        assert_relative_eq!(d.pdf(2.0), 0.5 * (-0.5_f64).exp(), epsilon = EPS);
+        // cdf(x) = 1 - exp(-x^2/(2*sigma^2))
+        assert_relative_eq!(d.cdf(2.0), 1.0 - (-0.5_f64).exp(), epsilon = EPS);
+        // sf(x) = exp(-x^2/(2*sigma^2))
+        assert_relative_eq!(d.sf(2.0), (-0.5_f64).exp(), epsilon = EPS);
+    }
+
+    #[test]
+    fn test_laplace() {
+        let d = Laplace::new(3.0, 2.0);
+        assert_relative_eq!(d.mean(), 3.0, epsilon = EPS);
+        assert_relative_eq!(d.median(), 3.0, epsilon = EPS);
+        assert_relative_eq!(d.mode(), 3.0, epsilon = EPS);
+        // variance = 2*b^2
+        assert_relative_eq!(d.variance(), 8.0, epsilon = EPS);
+        assert_relative_eq!(d.skewness(), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.kurtosis_excess(), 3.0, epsilon = EPS);
+        // pdf(location) = 1/(2*b)
+        assert_relative_eq!(d.pdf(3.0), 0.25, epsilon = EPS);
+        // cdf(x) for x < mu = 0.5*exp((x-mu)/b)
+        assert_relative_eq!(d.cdf(1.0), 0.5 * (-1.0_f64).exp(), epsilon = EPS);
+        // sf(x) for x < mu = 1 - 0.5*exp((x-mu)/b)
+        assert_relative_eq!(d.sf(1.0), 1.0 - 0.5 * (-1.0_f64).exp(), epsilon = EPS);
+    }
+
+    #[test]
+    fn test_triangular() {
+        let d = Triangular::new(0.0, 3.0, 6.0);
+        // mean = (a+b+c)/3
+        assert_relative_eq!(d.mean(), 3.0, epsilon = EPS);
+        // variance = (a^2+b^2+c^2-ab-ac-bc)/18
+        assert_relative_eq!(d.variance(), 1.5, epsilon = EPS);
+        assert_relative_eq!(d.mode(), 3.0, epsilon = EPS);
+        // pdf at mode = 2/(c-a)
+        assert_relative_eq!(d.pdf(3.0), 1.0 / 3.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf(3.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.cdf(6.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(3.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(6.0), 0.0, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_extreme_value() {
+        let d = ExtremeValue::new(0.0, 1.0);
+        let euler = 0.5772156649015329;
+        assert_relative_eq!(d.mean(), euler, epsilon = EPS);
+        // variance = pi^2/6
+        assert_relative_eq!(d.variance(), PI * PI / 6.0, epsilon = EPS);
+        assert_relative_eq!(d.mode(), 0.0, epsilon = EPS);
+        // skewness ≈ 1.13955
+        assert_relative_eq!(d.skewness(), 1.1395470994046488, epsilon = EPS);
+        // cdf(0) = exp(-1)
+        assert_relative_eq!(d.cdf(0.0), (-1.0_f64).exp(), epsilon = EPS);
+        // sf(0) = 1 - exp(-1)
+        assert_relative_eq!(d.sf(0.0), 1.0 - (-1.0_f64).exp(), epsilon = EPS);
+        // pdf(0) = exp(-1)
+        assert_relative_eq!(d.pdf(0.0), (-1.0_f64).exp(), epsilon = EPS);
+    }
+
+    #[test]
+    fn test_logistic() {
+        let d = Logistic::new(2.0, 3.0);
+        assert_relative_eq!(d.mean(), 2.0, epsilon = EPS);
+        assert_relative_eq!(d.median(), 2.0, epsilon = EPS);
+        assert_relative_eq!(d.mode(), 2.0, epsilon = EPS);
+        assert_relative_eq!(d.skewness(), 0.0, epsilon = EPS);
+        // variance = pi^2 * s^2 / 3
+        assert_relative_eq!(d.variance(), PI * PI * 9.0 / 3.0, epsilon = EPS);
+        assert_relative_eq!(d.kurtosis_excess(), 1.2, epsilon = EPS);
+        // pdf(mu) = 1/(4*s)
+        assert_relative_eq!(d.pdf(2.0), 1.0 / 12.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf(2.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(2.0), 0.5, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_pareto() {
+        let d = Pareto::new(1.0, 3.0);
+        // mean = alpha*x_m / (alpha-1)
+        assert_relative_eq!(d.mean(), 1.5, epsilon = EPS);
+        assert_relative_eq!(d.variance(), 0.75, epsilon = EPS);
+        assert_relative_eq!(d.mode(), 1.0, epsilon = EPS);
+        // median = x_m * 2^(1/alpha)
+        assert_relative_eq!(d.median(), 2.0_f64.powf(1.0 / 3.0), epsilon = EPS);
+        // pdf(2) = alpha / x^(alpha+1) = 3/16
+        assert_relative_eq!(d.pdf(2.0), 3.0 / 16.0, epsilon = EPS);
+        // cdf(2) = 1 - (1/2)^3 = 7/8
+        assert_relative_eq!(d.cdf(2.0), 0.875, epsilon = EPS);
+        // sf(2) = (1/2)^3 = 1/8
+        assert_relative_eq!(d.sf(2.0), 0.125, epsilon = EPS);
+
+        // alpha=5 for skewness check (requires alpha > 3)
+        let d2 = Pareto::new(1.0, 5.0);
+        let expected_skew = 2.0 * 6.0 / (2.0 * (5.0 / 3.0_f64).sqrt());
+        assert_relative_eq!(d2.skewness(), expected_skew, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_inverse_gaussian() {
+        let d = InverseGaussian::new(2.0, 3.0);
+        assert_relative_eq!(d.mean(), 2.0, epsilon = EPS);
+        // variance = mu^3 / lambda
+        assert_relative_eq!(d.variance(), 8.0 / 3.0, epsilon = EPS);
+        // skewness = 3*sqrt(mu/lambda)
+        assert_relative_eq!(d.skewness(), 3.0 * (2.0 / 3.0_f64).sqrt(), epsilon = EPS);
+        // kurtosis_excess = 15*mu/lambda
+        assert_relative_eq!(d.kurtosis_excess(), 10.0, epsilon = EPS);
+        // sf + cdf = 1
+        let cdf_2 = d.cdf(2.0);
+        assert_relative_eq!(d.sf(2.0), 1.0 - cdf_2, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_inverse_chi_squared() {
+        let d = InverseChiSquared::new(6.0);
+        // mean = 1/(df-2)
+        assert_relative_eq!(d.mean(), 0.25, epsilon = EPS);
+        // variance = 2 / ((df-2)^2 * (df-4))
+        assert_relative_eq!(d.variance(), 1.0 / 16.0, epsilon = EPS);
+        // mode = 1/(df+2)
+        assert_relative_eq!(d.mode(), 0.125, epsilon = EPS);
+        // sf + cdf = 1
+        let cdf_02 = d.cdf(0.2);
+        assert_relative_eq!(d.sf(0.2), 1.0 - cdf_02, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_inverse_gamma() {
+        let d = InverseGamma::new(4.0, 2.0);
+        // mean = beta/(alpha-1)
+        assert_relative_eq!(d.mean(), 2.0 / 3.0, epsilon = EPS);
+        // variance = beta^2 / ((alpha-1)^2 * (alpha-2))
+        assert_relative_eq!(d.variance(), 2.0 / 9.0, epsilon = EPS);
+        // mode = beta/(alpha+1)
+        assert_relative_eq!(d.mode(), 0.4, epsilon = EPS);
+        // skewness = 4*sqrt(alpha-2)/(alpha-3)
+        assert_relative_eq!(d.skewness(), 4.0 * 2.0_f64.sqrt(), epsilon = EPS);
+        // sf + cdf = 1
+        let cdf_05 = d.cdf(0.5);
+        assert_relative_eq!(d.sf(0.5), 1.0 - cdf_05, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_arcsine() {
+        let d = Arcsine::new(0.0, 1.0);
+        assert_relative_eq!(d.mean(), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.median(), 0.5, epsilon = EPS);
+        // variance = (b-a)^2 / 8
+        assert_relative_eq!(d.variance(), 0.125, epsilon = EPS);
+        assert_relative_eq!(d.skewness(), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.kurtosis_excess(), -1.5, epsilon = EPS);
+        assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf(1.0), 1.0, epsilon = EPS);
+        // sf(0.5) = 1 - cdf(0.5) = 0.5 (by symmetry)
+        assert_relative_eq!(d.sf(0.5), 0.5, epsilon = EPS);
+    }
+
+    #[test]
+    fn test_skew_normal() {
+        // shape=0 reduces to standard normal
+        let d = SkewNormal::new(0.0, 1.0, 0.0);
+        assert_relative_eq!(d.mean(), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.variance(), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.skewness(), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf(0.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.pdf(0.0), 1.0 / (2.0 * PI).sqrt(), epsilon = EPS);
+
+        // Positive shape shifts mean right and adds positive skew
+        let d2 = SkewNormal::new(0.0, 1.0, 5.0);
+        assert!(d2.mean() > 0.0);
+        assert!(d2.skewness() > 0.0);
+    }
+
+    #[test]
+    fn test_kolmogorov_smirnov() {
+        let d = KolmogorovSmirnov::new(100);
+        assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
+        // CDF is monotonically increasing
+        assert!(d.cdf(0.1) < d.cdf(0.2));
+        assert!(d.cdf(0.2) < d.cdf(0.3));
+        // sf is monotonically decreasing
+        assert!(d.sf(0.1) > d.sf(0.2));
+        assert!(d.sf(0.2) > d.sf(0.3));
+        // pdf is positive in the interior
+        assert!(d.pdf(0.1) > 0.0);
+    }
+}
