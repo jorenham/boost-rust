@@ -53,7 +53,7 @@
 //! | [`Bernoulli`] | `p` |
 //! | [`Binomial`] | `n`, `p` |
 //! | [`Geometric`] | `p` |
-//! | [`Hypergeometric`] | `r`, `n`, `total` |
+//! | [`Hypergeometric`] | `r`, `n`, `N` |
 //! | [`NegativeBinomial`] | `successes`, `p` |
 //! | [`Poisson`] | `mean` |
 //!

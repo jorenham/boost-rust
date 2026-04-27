@@ -46,7 +46,7 @@ define_distribution! {
          math_dist_geometric_median, math_dist_geometric_mode
 }
 
-/// Hypergeometric distribution with parameters `r`, `n`, and `total` (N).
+/// Hypergeometric distribution with parameters `r`, `n`, and `N`.
 ///
 /// Corresponds to `boost::math::hypergeometric_distribution` in C++.
 /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/hypergeometric_dist.html>

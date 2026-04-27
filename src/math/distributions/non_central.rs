@@ -5,6 +5,10 @@ define_distribution! {
     /// Non-central beta distribution with shape parameters `alpha`, `beta` and
     /// non-centrality parameter `lambda`.
     ///
+    /// [`skewness`](Distribution::skewness), [`kurtosis`](Distribution::kurtosis), and
+    /// [`kurtosis_excess`](Distribution::kurtosis_excess) are not implemented in Boost
+    /// for this distribution and return [`f64::NAN`].
+    ///
     /// Corresponds to `boost::math::non_central_beta_distribution` in C++.
     /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/nc_beta_dist.html>
     NonCentralBeta { /// First shape parameter (alpha > 0).

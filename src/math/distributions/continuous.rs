@@ -35,6 +35,13 @@ define_distribution! {
 define_distribution! {
     /// Cauchy (Lorentz) distribution with `location` and `scale` parameters.
     ///
+    /// The Cauchy distribution has no defined moments: [`mean`](Distribution::mean),
+    /// [`variance`](Distribution::variance), [`standard_deviation`](Distribution::standard_deviation),
+    /// [`skewness`](Distribution::skewness), [`kurtosis`](Distribution::kurtosis), and
+    /// [`kurtosis_excess`](Distribution::kurtosis_excess) all return [`f64::NAN`].
+    /// Use [`median`](Distribution::median) and [`mode`](Distribution::mode) (both equal to
+    /// `location`) for measures of central tendency.
+    ///
     /// Corresponds to `boost::math::cauchy_distribution` in C++.
     /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/cauchy_dist.html>
     Cauchy { /// Location parameter.
