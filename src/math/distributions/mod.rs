@@ -124,12 +124,16 @@ pub trait Distribution {
     fn mode(&self) -> f64;
 }
 
-/// Macro for defining distribution structs with all-f64 parameters and their
-/// [`Distribution`] trait implementations.
+/// Macro for defining distribution structs and their [`Distribution`] trait
+/// implementations.
+///
+/// Each field defaults to `f64`, but a per-field type may be specified
+/// (e.g. `n: u32`) for parameters that are conceptually integer-valued. The
+/// FFI shims still take `f64`, so values are cast at the call site.
 macro_rules! define_distribution {
     (
         $(#[$meta:meta])*
-        $Name:ident { $($(#[$field_meta:meta])* $field:ident),+ }
+        $Name:ident { $($(#[$field_meta:meta])* $field:ident $(: $ty:ty)?),+ }
         ffi: $pdf:ident, $cdf:ident, $sf:ident, $quantile:ident, $isf:ident,
              $mean:ident, $variance:ident, $std_dev:ident,
              $skewness:ident, $kurtosis:ident, $kurtosis_excess:ident,
@@ -140,59 +144,61 @@ macro_rules! define_distribution {
         pub struct $Name {
             $(
                 $(#[$field_meta])*
-                pub $field: f64,
+                pub $field: define_distribution!(@ty $($ty)?),
             )+
         }
 
         impl $Name {
             /// Creates a new distribution instance.
-            pub fn new($($field: f64),+) -> Self {
+            pub fn new($($field: define_distribution!(@ty $($ty)?)),+) -> Self {
                 Self { $($field),+ }
             }
         }
 
         impl Distribution for $Name {
             fn pdf(&self, x: f64) -> f64 {
-                unsafe { ffi::$pdf($(self.$field),+, x) }
+                unsafe { ffi::$pdf($(self.$field as f64),+, x) }
             }
             fn cdf(&self, x: f64) -> f64 {
-                unsafe { ffi::$cdf($(self.$field),+, x) }
+                unsafe { ffi::$cdf($(self.$field as f64),+, x) }
             }
             fn sf(&self, x: f64) -> f64 {
-                unsafe { ffi::$sf($(self.$field),+, x) }
+                unsafe { ffi::$sf($(self.$field as f64),+, x) }
             }
             fn quantile(&self, p: f64) -> f64 {
-                unsafe { ffi::$quantile($(self.$field),+, p) }
+                unsafe { ffi::$quantile($(self.$field as f64),+, p) }
             }
             fn isf(&self, q: f64) -> f64 {
-                unsafe { ffi::$isf($(self.$field),+, q) }
+                unsafe { ffi::$isf($(self.$field as f64),+, q) }
             }
             fn mean(&self) -> f64 {
-                unsafe { ffi::$mean($(self.$field),+) }
+                unsafe { ffi::$mean($(self.$field as f64),+) }
             }
             fn variance(&self) -> f64 {
-                unsafe { ffi::$variance($(self.$field),+) }
+                unsafe { ffi::$variance($(self.$field as f64),+) }
             }
             fn standard_deviation(&self) -> f64 {
-                unsafe { ffi::$std_dev($(self.$field),+) }
+                unsafe { ffi::$std_dev($(self.$field as f64),+) }
             }
             fn skewness(&self) -> f64 {
-                unsafe { ffi::$skewness($(self.$field),+) }
+                unsafe { ffi::$skewness($(self.$field as f64),+) }
             }
             fn kurtosis(&self) -> f64 {
-                unsafe { ffi::$kurtosis($(self.$field),+) }
+                unsafe { ffi::$kurtosis($(self.$field as f64),+) }
             }
             fn kurtosis_excess(&self) -> f64 {
-                unsafe { ffi::$kurtosis_excess($(self.$field),+) }
+                unsafe { ffi::$kurtosis_excess($(self.$field as f64),+) }
             }
             fn median(&self) -> f64 {
-                unsafe { ffi::$median($(self.$field),+) }
+                unsafe { ffi::$median($(self.$field as f64),+) }
             }
             fn mode(&self) -> f64 {
-                unsafe { ffi::$mode($(self.$field),+) }
+                unsafe { ffi::$mode($(self.$field as f64),+) }
             }
         }
     };
+    (@ty) => { f64 };
+    (@ty $ty:ty) => { $ty };
 }
 
 mod continuous;

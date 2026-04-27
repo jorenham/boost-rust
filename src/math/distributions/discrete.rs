@@ -22,7 +22,7 @@ define_distribution! {
     /// Corresponds to `boost::math::binomial_distribution` in C++.
     /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/binomial_dist.html>
     Binomial { /// Number of trials.
-               n,
+               n: u32,
                /// Success probability (0 <= p <= 1).
                p }
     ffi: math_dist_binomial_pdf, math_dist_binomial_cdf, math_dist_binomial_cdf_c,
@@ -192,7 +192,7 @@ define_distribution! {
     /// Corresponds to `boost::math::negative_binomial_distribution` in C++.
     /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/negative_binomial_dist.html>
     NegativeBinomial { /// Number of successes.
-                       successes,
+                       successes: u32,
                        /// Success probability (0 < p <= 1).
                        p }
     ffi: math_dist_negative_binomial_pdf, math_dist_negative_binomial_cdf,
@@ -246,7 +246,7 @@ mod tests {
 
     #[test]
     fn test_binomial() {
-        let d = Binomial::new(10.0, 0.3);
+        let d = Binomial::new(10, 0.3);
         assert_relative_eq!(d.mean(), 3.0, epsilon = EPS);
         assert_relative_eq!(d.variance(), 2.1, epsilon = EPS);
         // skewness = (1 - 2p) / sqrt(n*p*(1-p))
@@ -299,7 +299,7 @@ mod tests {
 
     #[test]
     fn test_negative_binomial() {
-        let d = NegativeBinomial::new(5.0, 0.4);
+        let d = NegativeBinomial::new(5, 0.4);
         // mean = r*(1-p)/p
         assert_relative_eq!(d.mean(), 7.5, epsilon = EPS);
         // variance = r*(1-p)/p^2

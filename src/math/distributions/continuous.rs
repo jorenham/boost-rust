@@ -185,7 +185,7 @@ define_distribution! {
     /// Corresponds to `boost::math::kolmogorov_smirnov_distribution` in C++.
     /// <https://boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/dist_ref/dists/kolmogorov_smirnov_dist.html>
     KolmogorovSmirnov { /// Sample size.
-                        n }
+                        n: u32 }
     ffi: math_dist_kolmogorov_smirnov_pdf, math_dist_kolmogorov_smirnov_cdf,
          math_dist_kolmogorov_smirnov_cdf_c, math_dist_kolmogorov_smirnov_quantile,
          math_dist_kolmogorov_smirnov_quantile_c, math_dist_kolmogorov_smirnov_mean,
@@ -776,7 +776,7 @@ mod tests {
 
     #[test]
     fn test_kolmogorov_smirnov() {
-        let d = KolmogorovSmirnov::new(100.0);
+        let d = KolmogorovSmirnov::new(100);
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
         assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
         // CDF is monotonically increasing
