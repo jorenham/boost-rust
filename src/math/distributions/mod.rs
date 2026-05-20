@@ -20,51 +20,47 @@
 //!
 //! ## Continuous Distributions
 //!
-//! | Distribution | Parameters |
-//! | ------------ | ---------- |
-//! | [`Arcsine`] | `a`, `b` |
-//! | [`BetaDist`] | `alpha`, `beta` |
-//! | [`Cauchy`] | `location`, `scale` |
-//! | [`ChiSquared`] | `df` |
-//! | [`Exponential`] | `lambda` |
-//! | [`ExtremeValue`] | `location`, `scale` |
-//! | [`FisherF`] | `df1`, `df2` |
-//! | [`GammaDist`] | `shape`, `scale` |
-//! | [`InverseChiSquared`] | `df` |
-//! | [`InverseGamma`] | `shape`, `scale` |
-//! | [`InverseGaussian`] | `mean`, `scale` |
-//! | [`KolmogorovSmirnov`] | `n` |
-//! | [`Laplace`] | `location`, `scale` |
-//! | [`Logistic`] | `location`, `scale` |
-//! | [`Lognormal`] | `location`, `scale` |
-//! | [`Normal`] | `location`, `scale` |
-//! | [`Pareto`] | `scale`, `shape` |
-//! | [`Rayleigh`] | `sigma` |
-//! | [`SkewNormal`] | `location`, `scale`, `shape` |
-//! | [`StudentsT`] | `df` |
-//! | [`Triangular`] | `lower`, `mode`, `upper` |
-//! | [`Uniform`] | `lower`, `upper` |
-//! | [`Weibull`] | `shape`, `scale` |
+//! | Distribution             | Parameters                    |
+//! | ------------------------ | ----------------------------- |
+//! | [`Arcsine`]              | `a`, `b`                      |
+//! | [`BetaDist`]             | `alpha`, `beta`               |
+//! | [`Cauchy`]               | `location`, `scale`           |
+//! | [`ChiSquared`]           | `df`                          |
+//! | [`Exponential`]          | `lambda`                      |
+//! | [`ExtremeValue`]         | `location`, `scale`           |
+//! | [`FisherF`]              | `df1`, `df2`                  |
+//! | [`GammaDist`]            | `shape`, `scale`              |
+//! | [`InverseChiSquared`]    | `df`                          |
+//! | [`InverseGamma`]         | `shape`, `scale`              |
+//! | [`InverseGaussian`]      | `mean`, `scale`               |
+//! | [`KolmogorovSmirnov`]    | `n`                           |
+//! | [`Laplace`]              | `location`, `scale`           |
+//! | [`Logistic`]             | `location`, `scale`           |
+//! | [`Lognormal`]            | `location`, `scale`           |
+//! | [`Normal`]               | `location`, `scale`           |
+//! | [`Pareto`]               | `scale`, `shape`              |
+//! | [`Rayleigh`]             | `sigma`                       |
+//! | [`SkewNormal`]           | `location`, `scale`, `shape`  |
+//! | [`StudentsT`]            | `df`                          |
+//! | [`Triangular`]           | `lower`, `mode`, `upper`      |
+//! | [`Uniform`]              | `lower`, `upper`              |
+//! | [`Weibull`]              | `shape`, `scale`              |
+//! | [`NonCentralBeta`]       | `alpha`, `beta`, `lambda`     |
+//! | [`NonCentralChiSquared`] | `df`, `lambda`                |
+//! | [`NonCentralF`]          | `df1`, `df2`, `lambda`        |
+//! | [`NonCentralT`]          | `df`, `delta`                 |
 //!
 //! ## Discrete Distributions
 //!
-//! | Distribution | Parameters |
-//! | ------------ | ---------- |
-//! | [`Bernoulli`] | `p` |
-//! | [`Binomial`] | `n`, `p` |
-//! | [`Geometric`] | `p` |
-//! | [`Hypergeometric`] | `r`, `n`, `N` |
-//! | [`NegativeBinomial`] | `successes`, `p` |
-//! | [`Poisson`] | `mean` |
-//!
-//! ## Non-Central Distributions
-//!
-//! | Distribution | Parameters |
-//! | ------------ | ---------- |
-//! | [`NonCentralBeta`] | `alpha`, `beta`, `lambda` |
-//! | [`NonCentralChiSquared`] | `df`, `lambda` |
-//! | [`NonCentralF`] | `df1`, `df2`, `lambda` |
-//! | [`NonCentralT`] | `df`, `delta` |
+//! | Distribution         | Parameters         |
+//! | -------------------- | ------------------ |
+//! | [`Bernoulli`]        | `p`                |
+//! | [`Binomial`]         | `n`, `p`           |
+//! | [`Geometric`]        | `p`                |
+//! | [`Hypergeometric`]   | `r`, `n`, `N`      |
+//! | [`NegativeBinomial`] | `successes`, `p`   |
+//! | [`Poisson`]          | `mean`             |
+
 
 /// Common interface for statistical distributions.
 ///
@@ -203,8 +199,6 @@ macro_rules! define_distribution {
 
 mod continuous;
 mod discrete;
-mod non_central;
 
 pub use continuous::*;
 pub use discrete::*;
-pub use non_central::*;
