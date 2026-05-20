@@ -61,7 +61,6 @@
 //! | [`NegativeBinomial`] | `successes`, `p`   |
 //! | [`Poisson`]          | `mean`             |
 
-
 /// Common interface for statistical distributions.
 ///
 /// All distributions in the Boost Math library implement this trait, providing
@@ -80,7 +79,7 @@ pub trait Distribution {
     /// `1.0 - self.cdf(x)` directly, especially when the result is close to zero.
     ///
     /// This calls Boost's `cdf(complement(dist, x))` internally.
-    fn sf(&self, x: f64) -> f64;
+    fn cdf_c(&self, x: f64) -> f64;
 
     /// Quantile function (inverse CDF).
     ///
@@ -89,11 +88,11 @@ pub trait Distribution {
 
     /// Inverse survival function.
     ///
-    /// Returns the value `x` such that `sf(x) == q`, i.e. `cdf(x) == 1 - q`.
+    /// Returns the value `x` such that `cdf_c(x) == q`, i.e. `cdf(x) == 1 - q`.
     /// More accurate than `quantile(1.0 - q)` when `q` is small.
     ///
     /// This calls Boost's `quantile(complement(dist, q))` internally.
-    fn isf(&self, q: f64) -> f64;
+    fn quantile_c(&self, q: f64) -> f64;
 
     /// Mean (expected value) of the distribution.
     fn mean(&self) -> f64;
@@ -130,7 +129,7 @@ macro_rules! define_distribution {
     (
         $(#[$meta:meta])*
         $Name:ident { $($(#[$field_meta:meta])* $field:ident $(: $ty:ty)?),+ }
-        ffi: $pdf:ident, $cdf:ident, $sf:ident, $quantile:ident, $isf:ident,
+        ffi: $pdf:ident, $cdf:ident, $cdf_c:ident, $quantile:ident, $quantile_c:ident,
              $mean:ident, $variance:ident, $std_dev:ident,
              $skewness:ident, $kurtosis:ident, $kurtosis_excess:ident,
              $median:ident, $mode:ident
@@ -158,14 +157,14 @@ macro_rules! define_distribution {
             fn cdf(&self, x: f64) -> f64 {
                 unsafe { ffi::$cdf($(self.$field as f64),+, x) }
             }
-            fn sf(&self, x: f64) -> f64 {
-                unsafe { ffi::$sf($(self.$field as f64),+, x) }
+            fn cdf_c(&self, x: f64) -> f64 {
+                unsafe { ffi::$cdf_c($(self.$field as f64),+, x) }
             }
             fn quantile(&self, p: f64) -> f64 {
                 unsafe { ffi::$quantile($(self.$field as f64),+, p) }
             }
-            fn isf(&self, q: f64) -> f64 {
-                unsafe { ffi::$isf($(self.$field as f64),+, q) }
+            fn quantile_c(&self, q: f64) -> f64 {
+                unsafe { ffi::$quantile_c($(self.$field as f64),+, q) }
             }
             fn mean(&self) -> f64 {
                 unsafe { ffi::$mean($(self.$field as f64),+) }

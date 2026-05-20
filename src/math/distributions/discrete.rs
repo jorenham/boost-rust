@@ -90,7 +90,7 @@ impl Distribution for Hypergeometric {
             )
         }
     }
-    fn sf(&self, x: f64) -> f64 {
+    fn cdf_c(&self, x: f64) -> f64 {
         unsafe {
             ffi::math_dist_hypergeometric_cdf_c(
                 self.r as c_uint,
@@ -110,7 +110,7 @@ impl Distribution for Hypergeometric {
             )
         }
     }
-    fn isf(&self, q: f64) -> f64 {
+    fn quantile_c(&self, q: f64) -> f64 {
         unsafe {
             ffi::math_dist_hypergeometric_quantile_c(
                 self.r as c_uint,
@@ -241,7 +241,7 @@ mod tests {
         assert_relative_eq!(d.pdf(4.0), (-4.0_f64).exp() * 256.0 / 24.0, epsilon = EPS);
         // sf + cdf = 1
         let cdf_3 = d.cdf(3.0);
-        assert_relative_eq!(d.sf(3.0), 1.0 - cdf_3, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(3.0), 1.0 - cdf_3, epsilon = EPS);
     }
 
     #[test]
@@ -256,9 +256,9 @@ mod tests {
         assert_relative_eq!(d.pdf(0.0), 0.7_f64.powi(10), epsilon = EPS);
         // pmf(n) = p^n
         assert_relative_eq!(d.pdf(10.0), 0.3_f64.powi(10), epsilon = EPS);
-        // sf + cdf = 1
+        // cdf_c + cdf = 1
         let cdf_3 = d.cdf(3.0);
-        assert_relative_eq!(d.sf(3.0), 1.0 - cdf_3, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(3.0), 1.0 - cdf_3, epsilon = EPS);
     }
 
     #[test]
@@ -274,8 +274,8 @@ mod tests {
         assert_relative_eq!(d.pdf(1.0), 0.7, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.3, epsilon = EPS);
         assert_relative_eq!(d.cdf(1.0), 1.0, epsilon = EPS);
-        assert_relative_eq!(d.sf(0.0), 0.7, epsilon = EPS);
-        assert_relative_eq!(d.sf(1.0), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(0.0), 0.7, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(1.0), 0.0, epsilon = EPS);
     }
 
     #[test]
@@ -292,9 +292,9 @@ mod tests {
         assert_relative_eq!(d.pdf(0.0), 0.25, epsilon = EPS);
         // pmf(1) = p*(1-p)
         assert_relative_eq!(d.pdf(1.0), 0.1875, epsilon = EPS);
-        // sf + cdf = 1
+        // cdf_c + cdf = 1
         let cdf_2 = d.cdf(2.0);
-        assert_relative_eq!(d.sf(2.0), 1.0 - cdf_2, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(2.0), 1.0 - cdf_2, epsilon = EPS);
     }
 
     #[test]
@@ -307,9 +307,9 @@ mod tests {
         assert_relative_eq!(d.mode(), 5.0, epsilon = EPS);
         // skewness = (2-p)/sqrt(r*(1-p))
         assert_relative_eq!(d.skewness(), 1.6 / (5.0 * 0.6_f64).sqrt(), epsilon = EPS);
-        // sf + cdf = 1
+        // cdf_c + cdf = 1
         let cdf_5 = d.cdf(5.0);
-        assert_relative_eq!(d.sf(5.0), 1.0 - cdf_5, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(5.0), 1.0 - cdf_5, epsilon = EPS);
     }
 
     #[test]
@@ -323,8 +323,8 @@ mod tests {
         // CDF monotonicity
         assert!(d.cdf(2.0) < d.cdf(3.0));
         assert!(d.cdf(3.0) < d.cdf(4.0));
-        // sf monotonicity (reverse of cdf)
-        assert!(d.sf(2.0) > d.sf(3.0));
-        assert!(d.sf(3.0) > d.sf(4.0));
+        // cdf_c monotonicity (reverse of cdf)
+        assert!(d.cdf_c(2.0) > d.cdf_c(3.0));
+        assert!(d.cdf_c(3.0) > d.cdf_c(4.0));
     }
 }

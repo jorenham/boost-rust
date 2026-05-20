@@ -483,12 +483,12 @@ mod tests {
         assert_relative_eq!(d.cdf(0.0), 0.5, epsilon = EPS);
         assert_relative_eq!(d.cdf(1.0), 0.8413447460685429, epsilon = EPS);
         assert_relative_eq!(d.quantile(0.975), 1.959963984540054, epsilon = EPS);
-        // sf(x) = 1 - cdf(x)
-        assert_relative_eq!(d.sf(0.0), 0.5, epsilon = EPS);
-        assert_relative_eq!(d.sf(1.0), 1.0 - 0.8413447460685429, epsilon = EPS);
-        // isf is inverse of sf
-        assert_relative_eq!(d.isf(0.025), 1.959963984540054, epsilon = EPS);
-        assert_relative_eq!(d.isf(0.5), 0.0, epsilon = EPS);
+        // cdf_c(x) = 1 - cdf(x)
+        assert_relative_eq!(d.cdf_c(0.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(1.0), 1.0 - 0.8413447460685429, epsilon = EPS);
+        // quantile_c is inverse of cdf_c
+        assert_relative_eq!(d.quantile_c(0.025), 1.959963984540054, epsilon = EPS);
+        assert_relative_eq!(d.quantile_c(0.5), 0.0, epsilon = EPS);
 
         // Non-standard normal
         let d2 = Normal::new(5.0, 2.0);
@@ -506,7 +506,7 @@ mod tests {
         assert_relative_eq!(d.median(), 0.0, epsilon = EPS);
         assert_relative_eq!(d.mode(), 0.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.5, epsilon = EPS);
-        assert_relative_eq!(d.sf(0.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(0.0), 0.5, epsilon = EPS);
         // kurtosis_excess = 6 / (df - 4)
         assert_relative_eq!(d.kurtosis_excess(), 1.0, epsilon = EPS);
     }
@@ -522,7 +522,7 @@ mod tests {
         // kurtosis_excess = 12/df
         assert_relative_eq!(d.kurtosis_excess(), 2.4, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
-        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(0.0), 1.0, epsilon = EPS);
     }
 
     #[test]
@@ -539,12 +539,12 @@ mod tests {
         assert_relative_eq!(d.median(), 2.0_f64.ln() / 2.0, epsilon = EPS);
         // cdf(x) = 1 - exp(-lambda*x)
         assert_relative_eq!(d.cdf(1.0), 1.0 - (-2.0_f64).exp(), epsilon = EPS);
-        // sf(x) = exp(-lambda*x)
-        assert_relative_eq!(d.sf(1.0), (-2.0_f64).exp(), epsilon = EPS);
+        // cdf_c(x) = exp(-lambda*x)
+        assert_relative_eq!(d.cdf_c(1.0), (-2.0_f64).exp(), epsilon = EPS);
         // pdf(x) = lambda * exp(-lambda*x)
         assert_relative_eq!(d.pdf(0.5), 2.0 * (-1.0_f64).exp(), epsilon = EPS);
-        // isf(q) = -ln(q) / lambda
-        assert_relative_eq!(d.isf(0.5), 2.0_f64.ln() / 2.0, epsilon = EPS);
+        // quantile_c(q) = -ln(q) / lambda
+        assert_relative_eq!(d.quantile_c(0.5), 2.0_f64.ln() / 2.0, epsilon = EPS);
     }
 
     #[test]
@@ -561,7 +561,7 @@ mod tests {
         // mode = (shape-1)*scale
         assert_relative_eq!(d.mode(), 3.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
-        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(0.0), 1.0, epsilon = EPS);
     }
 
     #[test]
@@ -575,8 +575,8 @@ mod tests {
         assert_relative_eq!(d.mode(), 0.2, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(1.0), 1.0, epsilon = EPS);
-        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
-        assert_relative_eq!(d.sf(1.0), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(0.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(1.0), 0.0, epsilon = EPS);
         // skewness = 2*(b-a)*sqrt(a+b+1) / ((a+b+2)*sqrt(a*b))
         let (a, b): (f64, f64) = (2.0, 5.0);
         let expected_skew = 2.0 * (b - a) * (a + b + 1.0).sqrt() / ((a + b + 2.0) * (a * b).sqrt());
@@ -596,11 +596,11 @@ mod tests {
         // pdf = 1/(b-a) = 1/6
         assert_relative_eq!(d.pdf(5.0), 1.0 / 6.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(5.0), 0.5, epsilon = EPS);
-        assert_relative_eq!(d.sf(5.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(5.0), 0.5, epsilon = EPS);
         assert_relative_eq!(d.quantile(0.25), 3.5, epsilon = EPS);
         assert_relative_eq!(d.quantile(0.75), 6.5, epsilon = EPS);
-        assert_relative_eq!(d.isf(0.75), 3.5, epsilon = EPS);
-        assert_relative_eq!(d.isf(0.25), 6.5, epsilon = EPS);
+        assert_relative_eq!(d.quantile_c(0.75), 3.5, epsilon = EPS);
+        assert_relative_eq!(d.quantile_c(0.25), 6.5, epsilon = EPS);
     }
 
     #[test]
@@ -617,7 +617,7 @@ mod tests {
         // pdf(location) = 1/(pi*scale)
         assert_relative_eq!(d.pdf(2.0), 1.0 / (PI * 3.0), epsilon = EPS);
         assert_relative_eq!(d.cdf(2.0), 0.5, epsilon = EPS);
-        assert_relative_eq!(d.sf(2.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(2.0), 0.5, epsilon = EPS);
         // cdf(x) = 0.5 + arctan((x-loc)/scale)/pi
         assert_relative_eq!(
             d.cdf(5.0),
@@ -625,7 +625,7 @@ mod tests {
             epsilon = EPS
         );
         assert_relative_eq!(d.quantile(0.75), 5.0, epsilon = EPS);
-        assert_relative_eq!(d.isf(0.25), 5.0, epsilon = EPS);
+        assert_relative_eq!(d.quantile_c(0.25), 5.0, epsilon = EPS);
     }
 
     #[test]
@@ -636,8 +636,8 @@ mod tests {
         assert_relative_eq!(d.mode(), 0.0, epsilon = EPS);
         // cdf(x) = 1 - exp(-(x/scale)^shape)
         assert_relative_eq!(d.cdf(2.0), 1.0 - (-1.0_f64).exp(), epsilon = EPS);
-        // sf(x) = exp(-(x/scale)^shape)
-        assert_relative_eq!(d.sf(2.0), (-1.0_f64).exp(), epsilon = EPS);
+        // cdf_c(x) = exp(-(x/scale)^shape)
+        assert_relative_eq!(d.cdf_c(2.0), (-1.0_f64).exp(), epsilon = EPS);
         // pdf(x) = (shape/scale) * (x/scale)^(shape-1) * exp(-(x/scale)^shape)
         assert_relative_eq!(d.pdf(1.0), 0.5 * (-0.5_f64).exp(), epsilon = EPS);
         // median = scale * (ln 2)^(1/shape)
@@ -660,7 +660,7 @@ mod tests {
         // mode = exp(mu - sigma^2) = exp(-1)
         assert_relative_eq!(d.mode(), (-1.0_f64).exp(), epsilon = EPS);
         assert_relative_eq!(d.cdf(1.0), 0.5, epsilon = EPS);
-        assert_relative_eq!(d.sf(1.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(1.0), 0.5, epsilon = EPS);
     }
 
     #[test]
@@ -673,7 +673,7 @@ mod tests {
         // mode = ((d1-2)/d1) * (d2/(d2+2)) = 5/9
         assert_relative_eq!(d.mode(), 5.0 / 9.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
-        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(0.0), 1.0, epsilon = EPS);
     }
 
     #[test]
@@ -690,8 +690,8 @@ mod tests {
         assert_relative_eq!(d.pdf(2.0), 0.5 * (-0.5_f64).exp(), epsilon = EPS);
         // cdf(x) = 1 - exp(-x^2/(2*sigma^2))
         assert_relative_eq!(d.cdf(2.0), 1.0 - (-0.5_f64).exp(), epsilon = EPS);
-        // sf(x) = exp(-x^2/(2*sigma^2))
-        assert_relative_eq!(d.sf(2.0), (-0.5_f64).exp(), epsilon = EPS);
+        // cdf_c(x) = exp(-x^2/(2*sigma^2))
+        assert_relative_eq!(d.cdf_c(2.0), (-0.5_f64).exp(), epsilon = EPS);
     }
 
     #[test]
@@ -708,8 +708,8 @@ mod tests {
         assert_relative_eq!(d.pdf(3.0), 0.25, epsilon = EPS);
         // cdf(x) for x < mu = 0.5*exp((x-mu)/b)
         assert_relative_eq!(d.cdf(1.0), 0.5 * (-1.0_f64).exp(), epsilon = EPS);
-        // sf(x) for x < mu = 1 - 0.5*exp((x-mu)/b)
-        assert_relative_eq!(d.sf(1.0), 1.0 - 0.5 * (-1.0_f64).exp(), epsilon = EPS);
+        // cdf_c(x) for x < mu = 1 - 0.5*exp((x-mu)/b)
+        assert_relative_eq!(d.cdf_c(1.0), 1.0 - 0.5 * (-1.0_f64).exp(), epsilon = EPS);
     }
 
     #[test]
@@ -725,9 +725,9 @@ mod tests {
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(3.0), 0.5, epsilon = EPS);
         assert_relative_eq!(d.cdf(6.0), 1.0, epsilon = EPS);
-        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
-        assert_relative_eq!(d.sf(3.0), 0.5, epsilon = EPS);
-        assert_relative_eq!(d.sf(6.0), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(0.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(3.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(6.0), 0.0, epsilon = EPS);
     }
 
     #[test]
@@ -742,8 +742,8 @@ mod tests {
         assert_relative_eq!(d.skewness(), 1.1395470994046488, epsilon = EPS);
         // cdf(0) = exp(-1)
         assert_relative_eq!(d.cdf(0.0), (-1.0_f64).exp(), epsilon = EPS);
-        // sf(0) = 1 - exp(-1)
-        assert_relative_eq!(d.sf(0.0), 1.0 - (-1.0_f64).exp(), epsilon = EPS);
+        // cdf_c(0) = 1 - exp(-1)
+        assert_relative_eq!(d.cdf_c(0.0), 1.0 - (-1.0_f64).exp(), epsilon = EPS);
         // pdf(0) = exp(-1)
         assert_relative_eq!(d.pdf(0.0), (-1.0_f64).exp(), epsilon = EPS);
     }
@@ -761,7 +761,7 @@ mod tests {
         // pdf(mu) = 1/(4*s)
         assert_relative_eq!(d.pdf(2.0), 1.0 / 12.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(2.0), 0.5, epsilon = EPS);
-        assert_relative_eq!(d.sf(2.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(2.0), 0.5, epsilon = EPS);
     }
 
     #[test]
@@ -777,8 +777,8 @@ mod tests {
         assert_relative_eq!(d.pdf(2.0), 3.0 / 16.0, epsilon = EPS);
         // cdf(2) = 1 - (1/2)^3 = 7/8
         assert_relative_eq!(d.cdf(2.0), 0.875, epsilon = EPS);
-        // sf(2) = (1/2)^3 = 1/8
-        assert_relative_eq!(d.sf(2.0), 0.125, epsilon = EPS);
+        // cdf_c(2) = (1/2)^3 = 1/8
+        assert_relative_eq!(d.cdf_c(2.0), 0.125, epsilon = EPS);
 
         // alpha=5 for skewness check (requires alpha > 3)
         let d2 = Pareto::new(1.0, 5.0);
@@ -796,9 +796,9 @@ mod tests {
         assert_relative_eq!(d.skewness(), 3.0 * (2.0 / 3.0_f64).sqrt(), epsilon = EPS);
         // kurtosis_excess = 15*mu/lambda
         assert_relative_eq!(d.kurtosis_excess(), 10.0, epsilon = EPS);
-        // sf + cdf = 1
+        // cdf_c + cdf = 1
         let cdf_2 = d.cdf(2.0);
-        assert_relative_eq!(d.sf(2.0), 1.0 - cdf_2, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(2.0), 1.0 - cdf_2, epsilon = EPS);
     }
 
     #[test]
@@ -810,9 +810,9 @@ mod tests {
         assert_relative_eq!(d.variance(), 1.0 / 16.0, epsilon = EPS);
         // mode = 1/(df+2)
         assert_relative_eq!(d.mode(), 0.125, epsilon = EPS);
-        // sf + cdf = 1
+        // cdf_c + cdf = 1
         let cdf_02 = d.cdf(0.2);
-        assert_relative_eq!(d.sf(0.2), 1.0 - cdf_02, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(0.2), 1.0 - cdf_02, epsilon = EPS);
     }
 
     #[test]
@@ -826,9 +826,9 @@ mod tests {
         assert_relative_eq!(d.mode(), 0.4, epsilon = EPS);
         // skewness = 4*sqrt(alpha-2)/(alpha-3)
         assert_relative_eq!(d.skewness(), 4.0 * 2.0_f64.sqrt(), epsilon = EPS);
-        // sf + cdf = 1
+        // cdf_c + cdf = 1
         let cdf_05 = d.cdf(0.5);
-        assert_relative_eq!(d.sf(0.5), 1.0 - cdf_05, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(0.5), 1.0 - cdf_05, epsilon = EPS);
     }
 
     #[test]
@@ -842,8 +842,8 @@ mod tests {
         assert_relative_eq!(d.kurtosis_excess(), -1.5, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(1.0), 1.0, epsilon = EPS);
-        // sf(0.5) = 1 - cdf(0.5) = 0.5 (by symmetry)
-        assert_relative_eq!(d.sf(0.5), 0.5, epsilon = EPS);
+        // cdf_c(0.5) = 1 - cdf(0.5) = 0.5 (by symmetry)
+        assert_relative_eq!(d.cdf_c(0.5), 0.5, epsilon = EPS);
     }
 
     #[test]
@@ -854,7 +854,7 @@ mod tests {
         assert_relative_eq!(d.variance(), 1.0, epsilon = EPS);
         assert_relative_eq!(d.skewness(), 0.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.5, epsilon = EPS);
-        assert_relative_eq!(d.sf(0.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(0.0), 0.5, epsilon = EPS);
         assert_relative_eq!(d.pdf(0.0), 1.0 / (2.0 * PI).sqrt(), epsilon = EPS);
 
         // Positive shape shifts mean right and adds positive skew
@@ -867,13 +867,13 @@ mod tests {
     fn test_kolmogorov_smirnov() {
         let d = KolmogorovSmirnov::new(100);
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
-        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(0.0), 1.0, epsilon = EPS);
         // CDF is monotonically increasing
         assert!(d.cdf(0.1) < d.cdf(0.2));
         assert!(d.cdf(0.2) < d.cdf(0.3));
-        // sf is monotonically decreasing
-        assert!(d.sf(0.1) > d.sf(0.2));
-        assert!(d.sf(0.2) > d.sf(0.3));
+        // cdf_c is monotonically decreasing
+        assert!(d.cdf_c(0.1) > d.cdf_c(0.2));
+        assert!(d.cdf_c(0.2) > d.cdf_c(0.3));
         // pdf is positive in the interior
         assert!(d.pdf(0.1) > 0.0);
     }
@@ -888,9 +888,9 @@ mod tests {
         // skewness = 2^(3/2) * (df + 3*lambda) / (df + 2*lambda)^(3/2)
         let expected_skew = 2.0_f64.sqrt() * 2.0 * 10.0 / 8.0_f64.powf(1.5);
         assert_relative_eq!(d.skewness(), expected_skew, epsilon = EPS);
-        // sf + cdf = 1
+        // cdf_c + cdf = 1
         let cdf_5 = d.cdf(5.0);
-        assert_relative_eq!(d.sf(5.0), 1.0 - cdf_5, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(5.0), 1.0 - cdf_5, epsilon = EPS);
     }
 
     #[test]
@@ -900,7 +900,7 @@ mod tests {
         assert_relative_eq!(d.mean(), 0.0, epsilon = EPS);
         assert_relative_eq!(d.variance(), 1.25, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.5, epsilon = EPS);
-        assert_relative_eq!(d.sf(0.0), 0.5, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(0.0), 0.5, epsilon = EPS);
 
         // Positive delta shifts distribution right
         let d2 = NonCentralT::new(10.0, 2.0);
@@ -914,8 +914,8 @@ mod tests {
         assert_relative_eq!(d.mean(), 2.0 / 7.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(0.0), 0.0, epsilon = EPS);
         assert_relative_eq!(d.cdf(1.0), 1.0, epsilon = EPS);
-        assert_relative_eq!(d.sf(0.0), 1.0, epsilon = EPS);
-        assert_relative_eq!(d.sf(1.0), 0.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(0.0), 1.0, epsilon = EPS);
+        assert_relative_eq!(d.cdf_c(1.0), 0.0, epsilon = EPS);
         // Skewness/kurtosis are undefined (returns NaN)
         assert!(d.skewness().is_nan());
         assert!(d.kurtosis_excess().is_nan());
@@ -934,8 +934,8 @@ mod tests {
         // mean = d2*(d1+lambda) / (d1*(d2-2))
         let d2 = NonCentralF::new(6.0, 10.0, 2.0);
         assert_relative_eq!(d2.mean(), 10.0 * 8.0 / (6.0 * 8.0), epsilon = EPS);
-        // sf + cdf = 1
+        // cdf_c + cdf = 1
         let cdf_1 = d2.cdf(1.0);
-        assert_relative_eq!(d2.sf(1.0), 1.0 - cdf_1, epsilon = EPS);
+        assert_relative_eq!(d2.cdf_c(1.0), 1.0 - cdf_1, epsilon = EPS);
     }
 }
