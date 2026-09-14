@@ -38,7 +38,7 @@ jobs:
           submodules: recursive
 
       - name: dprint
-        uses: dprint/check@v2.3
+        uses: dprint/check@v2.5
 
       - name: rustfmt
         run: cargo fmt -v --check --all
