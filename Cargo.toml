@@ -1,6 +1,6 @@
 [package]
 name = "boost"
-version = "0.0.5+1.90.0"
+version = "0.0.6+1.90.0"
 authors = ["Joren Hammudoglu <jhammudoglu@gmail.com>"]
 categories = ["api-bindings", "mathematics", "science", "no-std"]
 edition = "2024"
@@ -11,6 +11,9 @@ include = [
   "subprojects/boost_math/math/include/boost/math/ccmath",
   "subprojects/boost_math/math/include/boost/math/constants",
   "subprojects/boost_math/math/include/boost/math/policies",
+  #
+  "subprojects/boost_math/math/include/boost/math/distributions",
+  "!subprojects/boost_math/math/include/boost/math/distributions/detail",
   #
   "subprojects/boost_math/math/include/boost/math/special_functions",
   "!subprojects/boost_math/math/include/boost/math/special_functions/detail/bernoulli_details.hpp",
